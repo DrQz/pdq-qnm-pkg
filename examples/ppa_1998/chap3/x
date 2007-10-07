@@ -1,0 +1,165 @@
+
+
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Fri Feb  9 19:06:38 2007  ***
+                ***  for: Multiclass Test           ***
+                ***  Ver: PDQ Analyzer v4.2 20070101                         ***
+                ***************************************
+                ***************************************
+
+
+
+                ***************************************
+                ******    PDQ Model INPUTS      *******
+                ***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  node1      term1      TERML     0.5000
+CEN  FCFS  node2      term1      TERML     0.4000
+CEN  FCFS  node3      term1      TERML     1.2000
+
+CEN  FCFS  node1      term2      TERML     0.0400
+CEN  FCFS  node2      term2      TERML     0.2000
+CEN  FCFS  node3      term2      TERML     0.0500
+
+CEN  FCFS  node1      batch      BATCH     0.0600
+CEN  FCFS  node2      batch      BATCH     0.3000
+CEN  FCFS  node3      batch      BATCH     0.0600
+
+
+
+Queueing Circuit Totals:
+
+        Clients:    5.00
+        Clients:    15.00
+        Jobs:       5.00
+        Streams:      3
+        Nodes:        3
+
+
+
+WORKLOAD Parameters
+
+
+Client       Number        Demand   Thinktime
+------       ------        ------   ---------
+term1          5.00        2.1000    20.00
+term2         15.00        0.2900    30.00
+
+Job             MPL        Demand
+---             ---        ------
+batch          5.00        0.4200
+
+
+
+
+
+                ***************************************
+                ******   PDQ Model OUTPUTS      *******
+                ***************************************
+
+
+Solution Method: EXACT
+
+                ******   SYSTEM Performance     *******
+
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "term1"
+Mean Throughput           0.1984    Job/Sec
+Response Time             5.2051    Sec
+Mean Concurrency          1.0325    Job
+Stretch Factor            2.4786
+
+Bounds Analysis:
+Max Throughput            0.8333    Job/Sec
+Min Response              2.1000    Sec
+Max Demand                1.2000    Sec
+Tot Demand                2.1000    Sec
+Think time               20.0000    Sec
+Optimal Clients          18.4167    Clients
+
+Workload: "term2"
+Mean Throughput           0.4768    Job/Sec
+Response Time             1.4570    Sec
+Mean Concurrency          0.6948    Job
+Stretch Factor            5.0241
+
+Bounds Analysis:
+Max Throughput            5.0000    Job/Sec
+Min Response              0.2900    Sec
+Max Demand                0.2000    Sec
+Tot Demand                0.2900    Sec
+Think time               30.0000    Sec
+Optimal Clients         151.4500    Clients
+
+Workload: "batch"
+Mean Throughput           2.7472    Job/Sec
+Response Time             1.8200    Sec
+Mean Concurrency          5.0000    Job
+Stretch Factor            4.3333
+
+Bounds Analysis:
+Max Throughput            3.3333    Job/Sec
+Min Response              0.4200    Sec
+Max Demand                0.3000    Sec
+Tot Demand                0.4200    Sec
+Optimal Jobs              1.4000    Jobs
+
+
+                ******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      node1        term1            0.1984   Job/Sec
+Utilization     node1        term1            9.9186   Percent
+Queue Length    node1        term1            0.1350   Job
+Residence Time  node1        term1            0.6804   Sec
+
+Throughput      node2        term1            0.1984   Job/Sec
+Utilization     node2        term1            7.9349   Percent
+Queue Length    node2        term1            0.5184   Job
+Residence Time  node2        term1            2.6132   Sec
+
+Throughput      node3        term1            0.1984   Job/Sec
+Utilization     node3        term1           23.8047   Percent
+Queue Length    node3        term1            0.3792   Job
+Residence Time  node3        term1            1.9114   Sec
+
+Throughput      node1        term2            0.4768   Job/Sec
+Utilization     node1        term2            1.9074   Percent
+Queue Length    node1        term2            0.0265   Job
+Residence Time  node1        term2            0.0556   Sec
+
+Throughput      node2        term2            0.4768   Job/Sec
+Utilization     node2        term2            9.5368   Percent
+Queue Length    node2        term2            0.6277   Job
+Residence Time  node2        term2            1.3163   Sec
+
+Throughput      node3        term2            0.4768   Job/Sec
+Utilization     node3        term2            2.3842   Percent
+Queue Length    node3        term2            0.0405   Job
+Residence Time  node3        term2            0.0850   Sec
+
+Throughput      node1        batch            2.7472   Job/Sec
+Utilization     node1        batch           16.4835   Percent
+Queue Length    node1        batch            0.2293   Job
+Residence Time  node1        batch            0.0835   Sec
+
+Throughput      node2        batch            2.7472   Job/Sec
+Utilization     node2        batch           82.4174   Percent
+Queue Length    node2        batch            4.4894   Job
+Residence Time  node2        batch            1.6341   Sec
+
+Throughput      node3        batch            2.7472   Job/Sec
+Utilization     node3        batch           16.4835   Percent
+Queue Length    node3        batch            0.2814   Job
+Residence Time  node3        batch            0.1024   Sec
+
+

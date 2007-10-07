@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<!-- build.xml - Ant buildfile for Java examples -->
+<!-- $Id$ -->
+
+<project name="PDQ Program Buildfile" default="compile" basedir=".">
+
+<!-- Project directories -->
+
+<property name="src.dir" value="."/>
+<property name="lib.dir" value="../lib"/>
+<property name="classes.dir" value="."/>
+
+<!-- Temporary build directories -->
+
+<path id="classpath">
+   <fileset dir="${lib.dir}">
+      <include name="braju.jar"/>
+      <include name="pdq.jar"/>
+   </fileset>
+</path>
+
+<!-- Target to create the build directories prior to the -->
+<!-- compile target. -->
+
+<target name="compile" description="Compiles all source code.">
+   <javac srcdir="${src.dir}" destdir=".">
+      <classpath refid="classpath"/>
+   </javac>
+</target>
+
+<!-- run target. -->
+
+<target name="run" description="Runs all programs.">
+   <fileset dir="." includes="*.class"/>
+</target>
+
+<!-- test target. -->
+
+<target name="test" description="Runs all tests.">
+   <java classdir=".">
+      <classpath refid="classpath"/>
+   </java>
+</target>
+
+<!-- clean target. -->
+
+<target name="clean" description="Cleans build directories.">
+   <delete>
+      <fileset dir="." includes="*.class"/>
+   </delete>
+   <tstamp/>
+   <echo message="${TSTAMP}"/>
+</target>
+
+<target name="all" depends="clean,compile" description="Cleans and then compiles"/>
+
+</project>

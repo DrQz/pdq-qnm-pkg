@@ -1,0 +1,14 @@
+#
+#  $Id$
+#
+#---------------------------------------------------------------------
+
+Problem with Ch7_abcache - am looking for job streams which don't
+exist and this caused and exeption.  I have put special case
+handling in getjob_index() and GetUtilization() to return zero
+values if a job is not found (jobIdx = -1).  Is this the best way
+to handle this?
+
+Need to do more analysis of this problem!  2004-02-20
+
+

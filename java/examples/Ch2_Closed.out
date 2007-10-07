@@ -1,0 +1,86 @@
+
+
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Sun Feb 22 19:14:46 2004  ***
+                ***  for: Time Share Computer       ***
+                ***  Ver: PDQ Analyzer v2.7 080202  ***
+                ***************************************
+                ***************************************
+
+
+
+                ******        Comments          *******
+
+        This is just a simple M/M/1 queue.
+
+
+                ***************************************
+                ******    PDQ Model INPUTS      *******
+                ***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  CPU        compile    TERML     0.6300
+
+
+
+Queueing Circuit Totals:
+
+        Clients:    100.00
+        Streams:      1
+        Nodes:        1
+
+
+
+WORKLOAD Parameters
+
+
+Client       Number        Demand   Thinktime
+------       ------        ------   ---------
+compile      100.00        0.6300   300.00
+
+
+
+
+
+                ***************************************
+                ******   PDQ Model OUTPUTS      *******
+                ***************************************
+
+
+Solution Method: EXACT
+
+                ******   SYSTEM Performance     *******
+
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "compile"
+Mean Throughput           0.3325    Job/Sec
+Response Time             0.7943    Sec
+Mean Concurrency          0.2641    Job
+Stretch Factor            1.2607
+
+Bounds Analysis:
+Max Throughput            1.5873    Job/Sec
+Min Response              0.6300    Sec
+Max Demand                0.6300    Sec
+Tot Demand                0.6300    Sec
+Think time              300.0000    Sec
+Optimal Clients         477.1905    Clients
+
+
+                ******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      CPU          compile          0.3325   Job/Sec
+Utilization     CPU          compile         20.9445   Percent
+Queue Length    CPU          compile          0.2641   Job
+Residence Time  CPU          compile          0.7943   Sec
+
+

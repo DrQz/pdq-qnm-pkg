@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# Created by NJG on Thu May  9 11:43:50  2002
+#
+#  $Id$
+#
+
+cat lib/PDQ_Lib.h | awk '
+/version/ && /PDQ/ && /Analyzer/ { print $5 " " $7 " " $8} '
+
+ls -l lib | awk '
+/libpdq/ { print "Last compiled on " $6 " " $7 " " $8} '
+
+exit 0

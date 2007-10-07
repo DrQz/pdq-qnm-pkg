@@ -1,0 +1,74 @@
+
+
+		***************************************
+		****** Pretty Damn Quick REPORT *******
+		***************************************
+		***  of : Tue Apr 04 12:17:08 2006  ***
+		***  for: Open Feedback             ***
+		***  Ver: PDQ Analyzer v3.0 111904  ***
+		***************************************
+		***************************************
+
+
+
+		***************************************
+		******    PDQ Model INPUTS      *******
+		***************************************
+
+
+Node Sched Resource   Workload   Class     Visits    Service     Demand
+---- ----- --------   --------   -----     ------    -------     ------
+CEN  FCFS channel    message    TRANS     1.4286     0.7500     1.0714
+
+
+
+Queueing Circuit Totals:
+
+	Streams:      1
+	Nodes:        1
+
+
+
+WORKLOAD Parameters
+
+Source       per Sec       Demand
+--------     -------       ------
+message      0.5000        1.0714
+
+
+
+
+
+		***************************************
+		******   PDQ Model OUTPUTS      *******
+		***************************************
+
+
+Solution Method: CANON
+
+		******   SYSTEM Performance     *******
+
+
+Metric              	     Value	Unit      
+-----------------   	     -----	----      
+Workload: "message"
+Mean Throughput  	    0.5000	Job/Sec
+Response Time    	    2.3077	Sec
+
+Bounds Analysis:
+Max Demand      	    0.9333   	Job/Sec
+Max Throughput  	    0.9333   	Job/Sec
+
+
+		******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit   
+---------       ------       ----              -----   ----   
+Throughput      channel      message          0.7143   Visits/Sec
+Utilization     channel      message         53.5714   Percent
+Queue Length    channel      message          1.1538   Job    
+Residence Time  channel      message          2.3077   Sec    
+Waiting Time    channel      message          1.2363   Sec    
+
+

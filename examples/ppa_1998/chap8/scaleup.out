@@ -1,0 +1,4 @@
+ERROR in procedure 'canonical()': 
+Total utilization of node GATWAY is 120.83% (>100%)
+debug off
+

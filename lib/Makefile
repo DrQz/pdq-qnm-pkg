@@ -1,0 +1,31 @@
+#
+#  $Id$
+#
+#-----------------------------------------------------------
+
+CFLAGS = -ggdb
+
+OBJ     = \
+	MVA_Approx.o \
+	MVA_Canon.o \
+	MVA_Solve.o \
+	PDQ_Build.o \
+	PDQ_Exact.o \
+	PDQ_Globals.o \
+	PDQ_Report.o \
+	PDQ_Utils.o
+
+#-----------------------------------------------------------
+
+all:	$(OBJ)
+	-ar -rv libpdq.a $(OBJ)
+	# -ranlib -sc libpdq.a      # MacOS X
+	-ranlib libpdq.a          # Cygwin
+
+#-----------------------------------------------------------
+
+clean:
+	-/bin/rm *.o libpdq.a *~
+
+#-----------------------------------------------------------
+

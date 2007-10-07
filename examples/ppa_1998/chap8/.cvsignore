@@ -1,0 +1,9 @@
+*~
+*.o
+*.exe
+*.log
+*.tst
+baseline
+scaleup
+upgrade1
+upgrade2

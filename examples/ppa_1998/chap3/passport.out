@@ -1,0 +1,91 @@
+
+
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Wed Dec 27 13:34:32 2006  ***
+                ***  for: Passport Office           ***
+                ***  Ver: PDQ Analyzer v4.0 040906  ***
+                ***************************************
+                ***************************************
+
+
+
+                ***************************************
+                ******    PDQ Model INPUTS      *******
+                ***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  Window1    Applicant  TRANS    20.0000
+CEN  FCFS  Window2    Applicant  TRANS   226.5306
+CEN  FCFS  Window3    Applicant  TRANS   232.6531
+CEN  FCFS  Window4    Applicant  TRANS    60.0000
+
+
+
+Queueing Circuit Totals:
+
+        Streams:      1
+        Nodes:        4
+
+
+
+WORKLOAD Parameters
+
+Source        per Sec        Demand
+------        -------        ------
+Applicant      0.0043      539.1837
+
+
+
+
+
+                ***************************************
+                ******   PDQ Model OUTPUTS      *******
+                ***************************************
+
+
+Solution Method: CANON
+
+                ******   SYSTEM Performance     *******
+
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "Applicant"
+Mean Throughput           0.0043    Job/Sec
+Response Time         42430.7776    Sec
+
+Bounds Analysis:
+Max Demand                0.0043    Job/Sec
+Max Throughput            0.0043    Job/Sec
+
+
+                ******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      Window1      Applicant        0.0043   Job/Sec
+Utilization     Window1      Applicant        8.5400   Percent
+Queue Length    Window1      Applicant        0.0934   Job
+Residence Time  Window1      Applicant       21.8675   Sec
+
+Throughput      Window2      Applicant        0.0043   Job/Sec
+Utilization     Window2      Applicant       96.7286   Percent
+Queue Length    Window2      Applicant       29.5677   Job
+Residence Time  Window2      Applicant     6924.5165   Sec
+
+Throughput      Window3      Applicant        0.0043   Job/Sec
+Utilization     Window3      Applicant       99.3429   Percent
+Queue Length    Window3      Applicant      151.1739   Job
+Residence Time  Window3      Applicant    35403.7267   Sec
+
+Throughput      Window4      Applicant        0.0043   Job/Sec
+Utilization     Window4      Applicant       25.6200   Percent
+Queue Length    Window4      Applicant        0.3444   Job
+Residence Time  Window4      Applicant       80.6668   Sec
+
+

@@ -1,0 +1,140 @@
+/*
+ * MVA_Canon.c
+ * 
+ * Copyright (c) 1995-2006 Performance Dynamics Company. All Rights Reserved.
+ * 
+ * Updated by NJG on Sat May 13 10:01:19 PDT 2006
+ * 
+ *  $Id$
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "PDQ_Lib.h"
+
+//-------------------------------------------------------------------------
+
+void canonical(void)
+{
+	extern int        DEBUG, streams, nodes;
+	extern char       s1[], s2[], s3[], s4[];
+	extern JOB_TYPE  *job;
+	extern NODE_TYPE *node;
+
+
+	int               k;
+	int               c = 0;
+	double            X;
+	double            Xsat;
+	double            Dsat = 0.0;
+	double            sumR[MAXSTREAMS];
+	double            sumU();
+	double            devU;
+	char              jobname[MAXBUF];
+	char             *p = "canonical()";
+
+	if (DEBUG)
+		debug(p, "Entering");
+
+	for (c = 0; c < streams; c++) {
+		sumR[c] = 0.0;
+
+		X = job[c].trans->arrival_rate;
+
+		/* find saturation device */
+
+		for (k = 0; k < nodes; k++) {
+	 		if (node[k].demand[c] > Dsat)
+		 		Dsat = node[k].demand[c];
+		}
+
+		if (Dsat == 0) {
+	 		sprintf(s1, "Dsat = %3.3f", Dsat);
+	 		errmsg(p, s1);
+		}
+
+		job[c].trans->saturation_rate = Xsat = 1.0 / Dsat;
+
+		if (X > job[c].trans->saturation_rate) {
+	 		sprintf(s1,
+	 			"\nArrival rate %3.3f exceeds system saturation %3.3f = 1/%3.3f",
+		 		X, Xsat, Dsat);
+	 		errmsg(p, s1);
+		}
+
+		for (k = 0; k < nodes; k++) {
+	 		node[k].utiliz[c] = X * node[k].demand[c];
+
+	 		devU = sumU(k);
+
+	 		if (devU > 1.0) {
+		 		sprintf(s1, "\nTotal utilization of node %s is %2.2f%% (>100%%)",
+			 		node[k].devname,
+			 		devU * 100.0
+			 		);
+		 		errmsg(p, s1);
+	 		}
+
+	 		if (DEBUG)
+		 		printf("Tot Util: %3.4f for %s\n", devU, node[k].devname);
+
+	 		switch (node[k].sched) {
+	 			case FCFS:
+	 			case PSHR:
+	 			case LCFS:
+		 			node[k].resit[c] = node[k].demand[c] / (1.0 - devU);
+		 			node[k].qsize[c] = X * node[k].resit[c];
+		 			break;
+	 			case ISRV:
+		 			node[k].resit[c] = node[k].demand[c];
+		 			node[k].qsize[c] = node[k].utiliz[c];
+		 			break;
+	 			default:
+		 			typetostr(s1, node[k].sched);
+		 			sprintf(s2, "Unknown queue type: %s", s1);
+		 			errmsg("canonical()", s2);
+		 			break;
+	 		}
+	 		sumR[c] += node[k].resit[c];
+		}  /* loop over k */
+
+		job[c].trans->sys->thruput = X;
+		job[c].trans->sys->response = sumR[c];
+		job[c].trans->sys->residency = X * sumR[c];
+
+		if (DEBUG) {
+	 		getjob_name(jobname, c);
+	 		printf("\tX[%s]: %3.4f\n", jobname, job[c].trans->sys->thruput);
+	 		printf("\tR[%s]: %3.4f\n", jobname, job[c].trans->sys->response);
+	 		printf("\tN[%s]: %3.4f\n", jobname, job[c].trans->sys->residency);
+		}
+	}  /* loop over c */
+
+	if (DEBUG)
+		debug(p, "Exiting");
+
+}  /* canonical */
+
+//-------------------------------------------------------------------------
+
+double sumU(int k)
+{
+	extern int        DEBUG, streams, nodes;
+	extern JOB_TYPE  *job;
+	extern NODE_TYPE *node;
+
+
+	int               c;
+	double            sum = 0.0;
+	char             *p = "sumU()";
+
+	for (c = 0; c < streams; c++) {
+		sum += (job[c].trans->arrival_rate * node[k].demand[c]);
+	}
+
+	return (sum);
+}				/* sumU */
+
+//-------------------------------------------------------------------------

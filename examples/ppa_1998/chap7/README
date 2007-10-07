@@ -1,0 +1,10 @@
+
+Fri Oct  1 10:26:48 AUSEST 2004
+===============================
+
+
+1)   Added 'make test' to Makefile.
+
+2)   Added return values to main() in both
+     programs so that make behaved correctly.
+
