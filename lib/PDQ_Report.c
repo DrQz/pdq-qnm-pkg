@@ -1,10 +1,12 @@
 /*
  * PDQ_Report.c
  * 
- * Copyright (c) 1995-2005 Performance Dynamics Company
+ * Copyright (c) 1995-2007 Performance Dynamics Company
  * 
  * Last revised by NJG on Fri Aug  2 10:29:48  2002
  * Last revised by NJG on Thu Oct  7 20:02:27 PDT 2004
+ * Last updated by NJG on Mon, Apr 2, 2007
+ * Last updated by NJG on Wed, Apr 4, 2007 (NJG added Waiting line and time)
  * 
  *  $Id$
  */
@@ -37,6 +39,7 @@ void print_dev_head(void);
 void print_system_stats(int c, int should_be_class);
 void print_node_stats(int c, int should_be_class);
 void banner_stars(void);
+void banner_dash(void);		// Added by NJG on Mon, Apr 2, 2007
 void banner_chars(char *s);
 
 //-------------------------------------------------------------------------
@@ -64,7 +67,7 @@ void PDQ_Report(void)
 	int             fill;
 	char           *pad = "                       ";
 	FILE           *fp;
-	double           allusers = 0.0;
+	double          allusers = 0.0;
 	char           *p = "PDQ_Report()";
 
 	if (DEBUG == 1)
@@ -97,7 +100,6 @@ void PDQ_Report(void)
 	strcpy(s3, version);
 	strncat(s3, pad, fill);
 
-	printf("\n\n");
 	banner_stars();
 	banner_chars(" Pretty Damn Quick REPORT");
 	banner_stars();
@@ -106,28 +108,25 @@ void PDQ_Report(void)
 	printf("                ***  Ver: %s  ***\n", s3);
 	banner_stars();
 	banner_stars();
-	printf("\n");
 
 	resets(s1);
 	resets(s2);
 	resets(s3);
 
+	printf("\n");
+	
 	// Append comments
-
-	printf("\n\n");
-
-        if (strlen(Comment)) {
-		banner_chars("        Comments");
-		printf("\n");
-		printf("        %s\n\n\n", Comment);  // Is defined as a global!
+    if (strlen(Comment)) {
+		printf("COMMENT: ");
+		printf("%s\n\n", Comment);  // Is defined as a global!
 	}
 
 	/* Show INPUT Parameters */
 
-	banner_stars();
+	banner_dash();
 	banner_chars("    PDQ Model INPUTS");
-	banner_stars();
-	printf("\n\n");
+	banner_dash();
+	printf("\n");
 	print_nodes();
 
 	/* OUTPUT Statistics */
@@ -151,26 +150,11 @@ void PDQ_Report(void)
 		}
 	}  /* loop over c */
 
-	printf("\nQueueing Circuit Totals:\n\n");
-
-	for (c = 0; c < streams; c++) {
-		switch (job[c].should_be_class) {
-			case TERM:
-				printf("        Clients:    %3.2f\n", job[c].term->pop);
-				break;
-			case BATCH:
-				printf("        Jobs:       %3.2f\n", job[c].batch->pop);
-				break;
-			default:
-				break;
-		}
-	}
-
+	printf("Queueing Circuit Totals:\n");
 	printf("        Streams:    %3d\n", streams);
-	printf("        Nodes:      %3d\n", nodes);
-	printf("\n");
+	printf("        Nodes:      %3d\n\n", nodes);
 
-	printf("\n\nWORKLOAD Parameters\n\n");
+	printf("WORKLOAD Parameters:\n");
 
 	for (c = 0; c < streams; c++) {
 		switch (job[c].should_be_class) {
@@ -191,7 +175,6 @@ void PDQ_Report(void)
 		}
 	}  /* loop over c */
 
-	printf("\n");
 
 	for (c = 0; c < streams; c++) {
 		switch (job[c].should_be_class) {
@@ -275,7 +258,7 @@ void print_node_head(void)
 	}
 
 	nodhdr = TRUE;
-}  /* print_node_head */
+}  // print_node_head 
 
 //-------------------------------------------------------------------------
 
@@ -303,8 +286,12 @@ void print_nodes(void)
 			resets(s3);
 			resets(s4);
 
-			typetostr(s1, node[k].devtype);
 			typetostr(s3, node[k].sched);
+			if (node[k].sched == MSQ) {
+				sprintf(s1, "%3d", node[k].devtype); // number of MSQ servers
+			} else {
+				typetostr(s1, node[k].devtype);
+			}
 
 			getjob_name(s2, c);
 
@@ -324,7 +311,7 @@ void print_nodes(void)
 
 			switch (demand_ext) {
 				case DEMAND:
-					printf("%-4s %-5s %-10s %-10s %-5s %10.4f\n",
+					printf("%-4s %-5s %-10s %-10s %-5s %10.4lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -334,7 +321,7 @@ void print_nodes(void)
 					);
 					break;
 				case VISITS:
-					printf("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4f %10.4f\n",
+					printf("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %10.4lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -354,7 +341,6 @@ void print_nodes(void)
 		printf("\n");
 	}  /* over c */
 
-	printf("\n");
 
 	if (DEBUG)
 		debug(p, "Exiting");
@@ -376,7 +362,7 @@ void print_job(int c, int should_be_class)
 	switch (should_be_class) {
 		case TERM:
 			print_job_head(TERM);
-			printf("%-10s   %6.2f    %10.4f   %6.2f\n",
+			printf("%-10s   %6.2f    %10.4lf   %6.2f\n",
 		  	job[c].term->name,
 		  	job[c].term->pop,
 		  	job[c].term->sys->minRT,
@@ -385,7 +371,7 @@ void print_job(int c, int should_be_class)
 			break;
 		case BATCH:
 			print_job_head(BATCH);
-			printf("%-10s   %6.2f    %10.4f\n",
+			printf("%-10s   %6.2f    %10.4lf\n",
 		  	job[c].batch->name,
 		  	job[c].batch->pop,
 		  	job[c].batch->sys->minRT
@@ -393,7 +379,7 @@ void print_job(int c, int should_be_class)
 			break;
 		case TRANS:
 			print_job_head(TRANS);
-			printf("%-10s   %8.4f    %10.4f\n",
+			printf("%-10s   %8.4f    %10.4lf\n",
 		  	job[c].trans->name,
 		  	job[c].trans->arrival_rate,
 		  	job[c].trans->sys->minRT
@@ -408,6 +394,10 @@ void print_job(int c, int should_be_class)
 }  /* print_job */
 
 //-------------------------------------------------------------------------
+//
+// The following stats appear in the section labeled
+//
+//               ******   PDQ Model OUTPUTS   *******
 
 void print_sys_head(void)
 {
@@ -419,11 +409,11 @@ void print_sys_head(void)
 	if (DEBUG)
 		debug(p, "Entering");
 
-	printf("\n\n\n\n");
-	banner_stars();
-	banner_chars("   PDQ Model OUTPUTS");
-	banner_stars();
 	printf("\n\n");
+	banner_dash();
+	banner_chars("   PDQ Model OUTPUTS");
+	banner_dash();
+	printf("\n");
 	typetostr(s1, method);
 	printf("Solution Method: %s", s1);
 
@@ -435,7 +425,7 @@ void print_sys_head(void)
 
 	printf("\n\n");
 	banner_chars("   SYSTEM Performance");
-	printf("\n\n");
+	printf("\n");
 
 	printf("Metric                     Value    Unit\n");
 	printf("------                     -----    ----\n");
@@ -456,6 +446,8 @@ int             trxhdr = FALSE;
 
 void print_job_head(int should_be_class)
 {
+	extern char      wUnit[];
+
 	switch (should_be_class) {
 		case TERM:
 			if (!trmhdr) {
@@ -477,7 +469,7 @@ void print_job_head(int should_be_class)
 			break;
 		case TRANS:
 			if (!trxhdr) {
-				printf("Source        per Sec        Demand\n");
+				printf("Source        per %s        Demand\n", wUnit);
 				printf("------        -------        ------\n");
 				trxhdr = TRUE;
 				trmhdr = bathdr = FALSE;
@@ -493,7 +485,7 @@ void print_job_head(int should_be_class)
 void print_dev_head(void)
 {
 	banner_chars("   RESOURCE Performance");
-	printf("\n\n");
+	printf("\n");
 	printf("Metric          Resource     Work              Value   Unit\n");
 	printf("------          --------     ----              -----   ----\n");
 
@@ -501,6 +493,10 @@ void print_dev_head(void)
 }  /* print_dev_head */
 
 //-------------------------------------------------------------------------
+//
+// The following stats appear in the section labeled
+//
+//               ******   SYSTEM Performance   *******
 
 void print_system_stats(int c, int should_be_class)
 {
@@ -525,13 +521,15 @@ void print_system_stats(int c, int should_be_class)
 				errmsg(p, s1);
 			}
 			printf("Workload: \"%s\"\n", job[c].term->name);
-			printf("Mean Throughput       %10.4f    %s/%s\n",
-		  		job[c].term->sys->thruput, wUnit, tUnit);
-			printf("Response Time         %10.4f    %s\n",
-		  		job[c].term->sys->response, tUnit);
-			printf("Mean Concurrency      %10.4f    %s\n",
+			printf("Mean concurrency      %10.4lf    %s\n",
 		  		job[c].term->sys->residency, wUnit);
-			printf("Stretch Factor        %10.4f\n",
+			printf("Mean throughput       %10.4lf    %s/%s\n",
+		  		job[c].term->sys->thruput, wUnit, tUnit);
+			printf("Response time         %10.4lf    %s\n",
+		  		job[c].term->sys->response, tUnit);
+			printf("Round trip time       %10.4lf    %s\n",
+		  		job[c].term->sys->response + job[c].term->think, tUnit);
+		  	printf("Stretch factor        %10.4lf\n",
 		  		job[c].term->sys->response / job[c].term->sys->minRT);
 			break;
 		case BATCH:
@@ -541,13 +539,13 @@ void print_system_stats(int c, int should_be_class)
 				errmsg(p, s1);
 			}
 			printf("Workload: \"%s\"\n", job[c].batch->name);
-			printf("Mean Throughput       %10.4f    %s/%s\n",
-		  		job[c].batch->sys->thruput, wUnit, tUnit);
-			printf("Response Time         %10.4f    %s\n",
-		  		job[c].batch->sys->response, tUnit);
-			printf("Mean Concurrency      %10.4f    %s\n",
+			printf("Mean concurrency      %10.4lf    %s\n",
 		  		job[c].batch->sys->residency, wUnit);
-			printf("Stretch Factor        %10.4f\n",
+			printf("Mean throughput       %10.4lf    %s/%s\n",
+		  		job[c].batch->sys->thruput, wUnit, tUnit);
+			printf("Response time         %10.4lf    %s\n",
+		  		job[c].batch->sys->response, tUnit);
+			printf("Stretch factor        %10.4lf\n",
 		  		job[c].batch->sys->response / job[c].batch->sys->minRT);
 			break;
 		case TRANS:
@@ -556,11 +554,15 @@ void print_system_stats(int c, int should_be_class)
 				errmsg(p, s1);
 			}
 			printf("Workload: \"%s\"\n", job[c].trans->name);
-			printf("Mean Throughput       %10.4f    %s/%s\n",
+			printf("Number in system      %10.4lf    %s\n",
+		  		job[c].term->sys->residency, wUnit);
+			printf("Mean throughput       %10.4lf    %s/%s\n",
 		  		job[c].trans->sys->thruput, wUnit, tUnit);
-			printf("Response Time         %10.4f    %s\n",
+			printf("Response time         %10.4lf    %s\n",
 		  		job[c].trans->sys->response, tUnit);
-			break;
+			printf("Stretch factor        %10.4lf\n",
+		  		job[c].term->sys->response / job[c].term->sys->minRT);
+		  		break;
 		default:
 			break;
 	}
@@ -573,17 +575,17 @@ void print_system_stats(int c, int should_be_class)
 				sprintf(s1, "X = %10.4f at N = %d", job[c].term->sys->thruput, c);
 				errmsg(p, s1);
 			}
-			printf("Max Throughput        %10.4f    %s/%s\n",
+			printf("Max throughput        %10.4lf    %s/%s\n",
 		  		job[c].term->sys->maxTP, wUnit, tUnit);
-			printf("Min Response          %10.4f    %s\n",
+			printf("Min response          %10.4lf    %s\n",
 		  		job[c].term->sys->minRT, tUnit);
-			printf("Max Demand            %10.4f    %s\n",
+			printf("Max Demand            %10.4lf    %s\n",
 		  		1 / job[c].term->sys->maxTP,  tUnit);
-			printf("Tot Demand            %10.4f    %s\n",
+			printf("Tot demand            %10.4lf    %s\n",
 		  		job[c].term->sys->minRT, tUnit);
-			printf("Think time            %10.4f    %s\n",
+			printf("Think time            %10.4lf    %s\n",
 		  		job[c].term->think, tUnit);
-			printf("Optimal Clients       %10.4f    %s\n",
+			printf("Optimal clients       %10.4lf    %s\n",
 		  		(job[c].term->think + job[c].term->sys->minRT) * 
 		  		job[c].term->sys->maxTP, "Clients");
 			break;
@@ -593,25 +595,25 @@ void print_system_stats(int c, int should_be_class)
 		 			job[c].batch->sys->thruput, c);
 				errmsg(p, s1);
 			}
-			printf("Max Throughput        %10.4f    %s/%s\n",
+			printf("Max throughput        %10.4lf    %s/%s\n",
 		  		job[c].batch->sys->maxTP, wUnit, tUnit);
-			printf("Min Response          %10.4f    %s\n",
+			printf("Min response          %10.4lf    %s\n",
 		  		job[c].batch->sys->minRT, tUnit);
 	
-			printf("Max Demand            %10.4f    %s\n",
+			printf("Max demand            %10.4lf    %s\n",
 		  		1 / job[c].batch->sys->maxTP,  tUnit);
-			printf("Tot Demand            %10.4f    %s\n",
+			printf("Tot demand            %10.4lf    %s\n",
 		  		job[c].batch->sys->minRT, tUnit);
-			printf("Optimal Jobs          %10.4f    %s\n",
+			printf("Optimal jobs          %10.4f    %s\n",
 				job[c].batch->sys->minRT * 
 				job[c].batch->sys->maxTP, "Jobs");
 			break;
 		case TRANS:
-			printf("Max Demand            %10.4f    %s/%s\n",
+			printf("Max throughput        %10.4lf    %s/%s\n",
 		  		job[c].trans->sys->maxTP, wUnit, tUnit);
-			printf("Max Throughput        %10.4f    %s/%s\n",
-		  		job[c].trans->sys->maxTP, wUnit, tUnit);
-			break;
+			printf("Min response          %10.4lf    %s\n",
+		  		job[c].trans->sys->minRT, tUnit);
+		  	break;
 		default:
 			break;
 	}
@@ -623,11 +625,15 @@ void print_system_stats(int c, int should_be_class)
 }  /* print_system_stats */
 
 //-------------------------------------------------------------------------
+//
+// The following stats appear in the section labeled
+//
+//               ******   RESOURCE Performance   *******
+
 
 void print_node_stats(int c, int should_be_class)
 {
-	int               k;
-	double            X, devR, devD;
+
 	extern char       s1[];
 	extern char       tUnit[];
 	extern char       wUnit[];
@@ -635,7 +641,17 @@ void print_node_stats(int c, int should_be_class)
 	extern JOB_TYPE  *job;
 	extern NODE_TYPE *node;
 	extern char       s4[];
-	char             *p = "print_node_stats()";
+
+	double            	X;
+	double            	devR;
+	double            	devD;
+	double          	devU;
+	double          	devQ;
+	double          	devW;
+	double          	devL;
+	int               	k;
+	int               	m;
+	char             	*p = "print_node_stats()";
 
 	if (DEBUG)
 		debug(p, "Entering");
@@ -675,7 +691,7 @@ void print_node_stats(int c, int should_be_class)
 			strcat(s4, tUnit);
 		}
 
-		printf("%-14s  %-10s   %-10s   %10.4f   %s\n",
+		printf("%-14s  %-10s   %-10s   %10.4lf   %s\n",
 		  "Throughput",
 		  node[k].devname,
 		  s1,
@@ -684,42 +700,80 @@ void print_node_stats(int c, int should_be_class)
 		);
 
 
-		/* calculate other stats */
-
-		printf("%-14s  %-10s   %-10s   %10.4f   %s\n",
+		// calculate other stats
+		switch (node[k].sched) {
+			case ISRV:
+				devU = 100.0;
+				devQ = 0.0;
+				devW = node[k].demand[c];
+				devL = 0.0;
+				break;
+			case MSQ:
+				devU = node[k].utiliz[c];
+				devQ = X * node[k].resit[c];
+				m = node[k].devtype;
+				devW = node[k].resit[c] - node[k].demand[c];
+				devL = X * devW;
+				break;
+			default:
+				devU = node[k].utiliz[c];
+				devQ = X * node[k].resit[c];
+				devW = node[k].resit[c] - node[k].demand[c];
+				devL = X * devW;
+                break;
+		}
+		
+		printf("%-14s  %-10s   %-10s   %10.4lf   %s\n",
 		  "Utilization",
 		  node[k].devname,
 		  s1,
-		  (node[k].sched == ISRV) ? 100 : node[k].demand[c] * X * 100,
+		  devU * 100,
 		  "Percent"
 		);
 
-		printf("%-14s  %-10s   %-10s   %10.4f   %s\n",
-		  "Queue Length",
+		printf("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		  "Queue length",
 		  node[k].devname,
 		  s1,
-		  (node[k].sched == ISRV) ? 0 : node[k].resit[c] * X,
+		  devQ,
 		  wUnit
 		);
-
-		printf("%-14s  %-10s   %-10s   %10.4f   %s\n",
-			"Residence Time",
+		
+		printf("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+			"Waiting line",
+			node[k].devname,
+			s1,
+			devL,
+			wUnit
+		);
+		
+		printf("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+			"Waiting time",
+			node[k].devname,
+			s1,
+			devW,
+			tUnit
+		);
+		
+		printf("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+			"Residence time",
 			node[k].devname,
 			s1,
 			(node[k].sched == ISRV) ? node[k].demand[c] : node[k].resit[c],
 			tUnit
 		);
 
+		// Only if visits are used ...
 		if (demand_ext == VISITS) {
 			/* don't do this if service-time is unspecified */
 			devD = node[k].demand[c];
 			devR = node[k].resit[c];
 
-			printf("%-14s  %-10s   %-10s   %10.4f   %s\n",
-				"Waiting Time",
+			printf("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+				"Waiting time",
 				node[k].devname,
 				s1,
-		      		(node[k].sched == ISRV) ? devD : devR - devD,
+		        (node[k].sched == ISRV) ? devD : devR - devD,
 				tUnit
 			);
 		}
@@ -728,7 +782,8 @@ void print_node_stats(int c, int should_be_class)
 
 	if (DEBUG)
 		debug(p, "Exiting");
-}  /* print_node_stats */
+		
+}  // print_node_stats
 
 //-------------------------------------------------------------------------
 
@@ -740,6 +795,16 @@ void banner_stars(void)
 
 //-------------------------------------------------------------------------
 
+void banner_dash(void)
+{
+	printf("                =======================================\n");
+
+}  // banner_dash
+
+
+
+
+//-------------------------------------------------------------------------
 void banner_chars(char *s)
 {
 

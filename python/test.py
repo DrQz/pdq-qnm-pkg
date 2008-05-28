@@ -16,16 +16,19 @@ service_time = 1.0
 pdq.Init("OpenCenter")
 pdq.SetComment("A simple M/M/1 queue")
 
-pdq.SetWUnit("Customers")
-pdq.SetTUnit("Seconds")
 
-#---- Define the queueing center -------------------------------------
-
-pdq.nodes = pdq.CreateNode("server", pdq.CEN, pdq.FCFS)
 
 #---- Define the workload and circuit type ---------------------------
 
 pdq.streams = pdq.CreateOpen("work", arrivRate)
+
+pdq.SetWUnit("Customers")
+pdq.SetTUnit("Seconds")
+
+
+#---- Define the queueing center -------------------------------------
+
+pdq.nodes = pdq.CreateNode("server", pdq.CEN, pdq.FCFS)
 
 #---- Define service demand due to workload on the queueing center ---
 
@@ -47,3 +50,4 @@ comment = pdq.GetComment()
 print 'pdq.GetComment -> \"%s\"' % comment
 
 #---------------------------------------------------------------------
+

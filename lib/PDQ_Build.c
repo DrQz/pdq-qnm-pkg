@@ -5,6 +5,10 @@
  * 
  * Created by NJG on 18:19:02  04-28-95 
  * Revised by NJG on 09:33:05  31-03-99
+ * Updated by NJG on Mon, Apr 2, 2007 (for MSQ multiserver node)
+ * Updated by NJG on Tue, Apr 3, 2007 (remove nested loops in Init)
+ * Updated by NJG on Wed, Apr 4, 2007 (change MSQ to devtype and m to sched)
+ * Updated by NJG on Fri, Apr 6, 2007 (Error if SetUnit before calling Create circuit)
  * 
  *  $Id$
  */
@@ -36,9 +40,9 @@ void create_transaction(int net, char* label, double lambda);
 void PDQ_Init(char *name)
 {
 	extern char             model[];
-	extern char             tUnit[];
-	extern char             wUnit[];
 	extern char             s1[];
+	extern char     		tUnit[];
+	extern char     		wUnit[];
 	extern int              demand_ext;
 	extern int              method;
 	extern double           tolerance;
@@ -118,18 +122,25 @@ void PDQ_Init(char *name)
 
 	// Copy user-supplied name string into PDQ global model[]
 	strcpy(model, name);
-        Comment[0] = '\0';  // NULL string
-
-	// Set default units 
-	strcpy(wUnit, "Job");
-	strcpy(tUnit, "Sec");
+    Comment[0] = '\0';  // NULL string
 
 	demand_ext = VOID;
-	tolerance = TOL;
 	method = VOID;
+	tolerance = TOL;
 
 	allocate_nodes(MAXNODES+1);
 	allocate_jobs(MAXSTREAMS+1);
+
+/********************************************************************************** 
+	On 12/6/06 John Strunk (Carnegie Mellon Univ.) sent the following comment:
+		"My code analyzes a large number of models within a single
+		invocation, so I call PDQ::Init to re-init the state before each
+		model is analyzed. Unfortunately, a large portion of execution time
+		(of my whole program) is spent in PDQ_Init, and I've tracked it
+		down to the nested loop at PDQ_Build.c:130.  Perhaps it would be
+		possible to remove this set of loops entirely since calloc in
+		allocate_*() right above that inits the memory to zero.  These
+		changes can provide a 6x speedup in my application."
 
 	for (cc = 0; cc < MAXSTREAMS; cc++) {
 		for (kk = 0; kk < MAXNODES; kk++) {
@@ -143,15 +154,24 @@ void PDQ_Init(char *name)
 		job[cc].network = VOID;
 	}
 
-	/* reset circuit counters */
-
+	NJG on Tue, Apr 3, 2007
+	Since the speedup would be nearly an order of magnitude, it's worth a
+	try. I was probably being overly defensive when I originally zeroed out
+	every array element. After commenting out the above loops, a simple PDQ
+	test (no re-Init calls), does not reveal any integrity problems.
+	
+	The VOID constant in PDQ_Lib.h also set to zero instead of -1.
+**********************************************************************************/
+	
+	// reset circuit counters 
 	nodes = streams = 0;
 	c = k = 0;
-
 	prev_init = TRUE;
 
-	if (DEBUG)
+	if (DEBUG) {
 		debug(p, "Exiting");
+	}
+	
 }  /* PDQ_Init */
 
 //-------------------------------------------------------------------------
@@ -177,7 +197,7 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	extern int      nodes;
 	extern int      DEBUG;
 	char           *p = "PDQ_CreateNode";
-	FILE*	out_fd;
+	FILE*			out_fd;
 
 	if (DEBUG)
 	{
@@ -196,11 +216,19 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	if (strlen(name) >= MAXCHARS) {
 		sprintf(s1, "Nodename \"%s\" is longer than %d characters",
 			name, MAXCHARS);
-		errmsg("create_node()", s1);
+		errmsg(p, s1);
 	}
 
 	strcpy(node[k].devname, name);
 
+	
+	if (sched == MSQ && device < 0) { 
+		// interpret node as multiserver and
+		// number of servers must be positive integer
+		sprintf(s1, "Must specify MSQ node with CEN equal to positive number of servers");
+		errmsg(p, s1);
+	} 
+	
 	node[k].devtype = device;
 	node[k].sched = sched;
 
@@ -234,6 +262,8 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 {
 	extern char     s1[];
 	extern int      streams;
+	extern char     tUnit[];
+	extern char     wUnit[];
 	extern int      DEBUG;
 	char           *p = "PDQ_CreateClosed()";
 	FILE           *out_fd;
@@ -267,6 +297,9 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 				errmsg(p, s1);
 			}
 			create_term_stream(CLOSED, name, *pop, *think);
+			// Set default units 
+			strcpy(wUnit, "Users");
+			strcpy(tUnit, "Sec");
 			break;
 		case BATCH:
 			if (*pop == 0.0) {
@@ -275,6 +308,9 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 				errmsg(p, s1);
 			}
 			create_batch_stream(CLOSED, name, *pop);
+			// Set default units 
+			strcpy(wUnit, "Jobs");
+			strcpy(tUnit, "Sec");
 			break;
 		default:
 			sprintf(s1, "Unknown stream: %d", should_be_class);
@@ -303,6 +339,8 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 {
 	extern char     s1[];
 	extern int      streams;
+	extern char     tUnit[];
+	extern char     wUnit[];
 	extern int	    DEBUG;
 	FILE           *out_fd;
 
@@ -320,6 +358,10 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 	}
 
 	create_transaction(OPEN, name, *lambda);
+	
+	// Set default units 
+	strcpy(wUnit, "Trans");
+	strcpy(tUnit, "Sec");
 
 	c =  ++streams;
 
@@ -397,6 +439,7 @@ void PDQ_SetVisits_p(char *nodename, char *workname, double *visits, double *ser
 	extern NODE_TYPE *node;
 	extern int demand_ext;
 	extern int DEBUG;
+	char           *p = "PDQ_SetVisits()";
 
 	if (DEBUG)
 	{
@@ -409,7 +452,7 @@ void PDQ_SetVisits_p(char *nodename, char *workname, double *visits, double *ser
 		node[getnode_index(nodename)].demand[getjob_index(workname)] = (*visits) * (*service);
 		demand_ext = VISITS;
 	} else
-		errmsg("PDQ_SetVisits()", "Extension conflict");
+		errmsg(p, "Extension conflict");
 }  /* PDQ_SetVisits */
 
 //-------------------------------------------------------------------------
@@ -417,9 +460,17 @@ void PDQ_SetVisits_p(char *nodename, char *workname, double *visits, double *ser
 void PDQ_SetWUnit(char* unitName)
 {
 	extern char     wUnit[];
-
-	if (strlen(unitName) > 10)
-		errmsg("PDQ_SetWUnit()", "Name > 10 characters");
+	extern int      streams;
+	char           *p = "PDQ_SetWUnit()";
+	
+	// Flag this, otherwise a user may not know why their units don't show up
+	// in the PDQ report.
+	if (streams == 0) {
+		errmsg(p, "Must call CreateOpen or CreateClosed first\n");
+	}
+	if (strlen(unitName) > 10) {
+		errmsg(p, "Name > 10 characters");
+	}
 
 	resets(wUnit);
 	strcpy(wUnit, unitName);
@@ -430,9 +481,16 @@ void PDQ_SetWUnit(char* unitName)
 void PDQ_SetTUnit(char* unitName)
 {
 	extern char     tUnit[];
+	extern int      streams;
+	char           *p = "PDQ_SetTUnit()";
 
+	// Flag this, otherwise a user may not know why their units don't show up
+	// in the PDQ report.
+	if (streams == 0) {
+		errmsg(p, "Must call CreateOpen or CreateClosed first\n");
+	}
 	if (strlen(unitName) > 10)
-		errmsg("PDQ_SetTUnit()", "Name > 10 characters");
+		errmsg(p, "Name > 10 characters");
 
 	resets(tUnit);
 	strcpy(tUnit, unitName);
@@ -503,7 +561,8 @@ void create_batch_stream(int net, char* label, double number)
 }  /* create_batch_stream */
 
 //-------------------------------------------------------------------------
-
+// Subroutines
+//-------------------------------------------------------------------------
 void create_transaction(int net, char* label, double lambda)
 {
 	extern JOB_TYPE *job;

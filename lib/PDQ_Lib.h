@@ -21,7 +21,8 @@
 
 // This string gets read by GetVersion script amongst others
 // Do not modify order of fields
-static char *version = "PDQ Analyzer v4.2 20070228";
+// Must not contain more than 24 characters
+static char *version = "PDQ Analyzer v4.B 041807";
 
 //---- TYPES --------------------------------------------------------------
 
@@ -39,46 +40,46 @@ static char *version = "PDQ Analyzer v4.2 20070228";
 
 /* Queueing Network Type */
 
-#define VOID   -1
-#define OPEN    0
-#define CLOSED  1
+#define VOID    0				// Changed per PDQ_Init code (NJG: Wed, Apr 4, 2007)
+#define OPEN    1
+#define CLOSED  2
 
 /* Nodes */
 
-#define MEM     2
-#define CEN     3                /* unspecified queueing center */
-#define DLY     4                /* unspecified delay center */
-#define MSQ     5                /* unspecified multi-server queue */
+#define MEM     3
+#define CEN     4                /* unspecified queueing center */
+#define DLY     5                /* unspecified delay center */
+#define MSQ     6                /* unspecified multi-server queue */
 
 /* Queueing Disciplines */
 
-#define ISRV    6                /* infinite server */
-#define FCFS    7                /* first-come first-serve */
-#define PSHR    8                /* processor sharing */
-#define LCFS    9                /* last-come first-serve */
+#define ISRV    7                /* infinite server */
+#define FCFS    8                /* first-come first-serve */
+#define PSHR    9                /* processor sharing */
+#define LCFS    10                /* last-come first-serve */
 
 
 /* Job Types */
 
-#define TERM   10
-#define TRANS  11
-#define BATCH  12
+#define TERM   11
+#define TRANS  12
+#define BATCH  13
 
 /* Solution Methods */
 
-#define EXACT  13
-#define APPROX 14
-#define CANON  15
+#define EXACT  14
+#define APPROX 15
+#define CANON  16
 
 /* Service-demand Types */
 
-#define VISITS 16
-#define DEMAND 17
+#define VISITS 17
+#define DEMAND 18
 
 /* MP scalability */
 
-#define PDQ_SP 18        /* uniprocessor */
-#define PDQ_MP 19        /* multiprocessor */
+#define PDQ_SP 19        /* uniprocessor */
+#define PDQ_MP 20        /* multiprocessor */
 
 #define TOL 0.0010
 
@@ -140,7 +141,7 @@ typedef struct {
 } NODE_TYPE;
 
 
-//---- FUNCION PROTOTYPES -------------------------------------------------
+//---- FUNCTION PROTOTYPES -------------------------------------------------
 
 
 int     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
@@ -154,6 +155,18 @@ int     PDQ_CreateOpen_p(char *name, double *lambda);
 int     PDQ_CreateNode(char *name, int device, int sched); 
 // Define a single queueing center in either a closed or open circuit
 
+//------------------------------------------------------
+// Next 2 functions will be used when current PDQ Create functions become procedures
+// Probably in PDQ v5.0
+
+int 	PDQ_GetSteamsCount();
+// New function to determine number of created streams.
+
+int		PDQ_GetNodesCount();
+// New function to determine number of created streams.
+//------------------------------------------------------
+
+
 double  PDQ_GetResponse(int should_be_class, char *wname);
 // Returns the system response time for the specified workload
 
@@ -162,6 +175,7 @@ double  PDQ_GetResidenceTime(char *device, char *work, int should_be_class);
 
 double  PDQ_GetThruput(int should_be_class, char *wname);
 // Returns the system throughput for the specified workload
+
 double  PDQ_GetLoadOpt(int should_be_class, char *wname);
 // Returns the optimal user load for the specified workload
 

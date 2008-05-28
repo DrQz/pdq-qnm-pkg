@@ -4,8 +4,8 @@
  * Copyright (c) 1995-2006 Performance Dynamics Company. All Rights Reserved.
  * 
  * Revised by NJG on Tue Aug 11 17:31:02 PDT 1998
- * 
  * Updated by NJG on Fri May 12 13:09:28 PDT 2006
+ * Updated by NJG on Sat, Apr 7, 2007 (add GetNodesCount and GetSteamsCount)
  *
  *  $Id$
  */
@@ -75,6 +75,37 @@ char            prevproc[MAXBUF];
 //*********************************************************************
 //         Public Utilities
 //*********************************************************************
+
+int 
+PDQ_GetSteamsCount()
+{
+	char           *p = "PDQ_GetSteamsCount()";
+
+	if (streams == 0) {
+		errmsg(p, "No streams created.");
+	}
+	
+	return (streams);
+	
+}  // PDQ_GetSteamsCount
+
+//-------------------------------------------------------------------------
+
+int
+PDQ_GetNodesCount()
+{
+	char           *p = "PDQ_GetNodesCount()";
+
+	if (nodes == 0) {
+		errmsg(p, "No nodes created.");
+	}
+	
+	return (nodes);
+	
+}  // PDQ_GetNodesCount
+
+//-------------------------------------------------------------------------
+
 
 double
 PDQ_GetResponse(int should_be_class, char *wname)
@@ -347,6 +378,8 @@ PDQ_SetDebug(int flag)
 	}
 }  /* PDQ_SetDebug */
 
+//-------------------------------------------------------------------------
+// Local subroutines
 //-------------------------------------------------------------------------
 
 void
