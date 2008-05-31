@@ -1,0 +1,60 @@
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Thu May 31 09:23:51 2007  ***
+                ***  for: Spam Farm Model           ***
+                ***  Ver: PDQ Analyzer v4.B 041807  ***
+                ***************************************
+                ***************************************
+
+                =======================================
+                ******    PDQ Model INPUTS      *******
+                =======================================
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+  4  MSQ   spamCan    Email      TRANS     6.0000
+
+Queueing Circuit Totals:
+        Streams:      1
+        Nodes:        1
+
+WORKLOAD Parameters:
+Source        per Trans        Demand
+------        -------        ------
+Email          0.6600        6.0000
+
+
+                =======================================
+                ******   PDQ Model OUTPUTS      *******
+                =======================================
+
+Solution Method: CANON
+
+                ******   SYSTEM Performance     *******
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "Email"
+Number in system        100.7726    Trans
+Mean throughput           0.6600    Trans/Sec
+Response time           152.6858    Sec
+Stretch factor           25.4476
+
+Bounds Analysis:
+Max throughput            0.6667    Trans/Sec
+Min response              6.0000    Sec
+
+
+                ******   RESOURCE Performance   *******
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      spamCan      Email            0.6600   Trans/Sec
+Utilization     spamCan      Email           99.0000   Percent
+Queue length    spamCan      Email          100.7726   Trans
+Waiting line    spamCan      Email           96.8126   Trans
+Waiting time    spamCan      Email          146.6858   Sec
+Residence time  spamCan      Email          152.6858   Sec
+
+

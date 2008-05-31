@@ -1,0 +1,60 @@
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Thu May 31 09:25:10 2007  ***
+                ***  for: ORCA LA Model             ***
+                ***  Ver: PDQ Analyzer v4.B 041807  ***
+                ***************************************
+                ***************************************
+
+                =======================================
+                ******    PDQ Model INPUTS      *******
+                =======================================
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+  4  MSQ   HPCnode    Crunch     TRANS    10.0000
+
+Queueing Circuit Totals:
+        Streams:      1
+        Nodes:        1
+
+WORKLOAD Parameters:
+Source        per Jobs        Demand
+------        -------        ------
+Crunch         0.0990       10.0000
+
+
+                =======================================
+                ******   PDQ Model OUTPUTS      *******
+                =======================================
+
+Solution Method: CANON
+
+                ******   SYSTEM Performance     *******
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "Crunch"
+Number in system          0.9965    Jobs
+Mean throughput           0.0990    Jobs/Hour
+Response time            10.0656    Hour
+Stretch factor            1.0066
+
+Bounds Analysis:
+Max throughput            0.4000    Jobs/Hour
+Min response             10.0000    Hour
+
+
+                ******   RESOURCE Performance   *******
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      HPCnode      Crunch           0.0990   Jobs/Hour
+Utilization     HPCnode      Crunch          24.7500   Percent
+Queue length    HPCnode      Crunch           0.9965   Jobs
+Waiting line    HPCnode      Crunch           0.0065   Jobs
+Waiting time    HPCnode      Crunch           0.0656   Hour
+Residence time  HPCnode      Crunch          10.0656   Hour
+
+

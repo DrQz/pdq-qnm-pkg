@@ -1,0 +1,67 @@
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Wed Apr  4 16:06:31 2007  ***
+                ***  for: Big Book Store Model      ***
+                ***  Ver: PDQ Analyzer v4.B 040207  ***
+                ***************************************
+                ***************************************
+
+                =======================================
+                ******    PDQ Model INPUTS      *******
+                =======================================
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+3000 MSQ   Browsing   Customers  TRANS    45.0000
+  3  MSQ   Checkout   Customers  TRANS     4.0000
+
+Queueing Circuit Totals:
+        Streams:      1
+        Nodes:        2
+
+WORKLOAD Parameters:
+Source        per Sec        Demand
+------        -------        ------
+Customers      0.6667       49.0000
+
+
+                =======================================
+                ******   PDQ Model OUTPUTS      *******
+                =======================================
+
+Solution Method: CANON
+
+                ******   SYSTEM Performance     *******
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "Customers"
+Number in system         39.0467    Cust
+Mean throughput           0.6667    Cust/Min
+Response time            58.5701    Min
+Stretch factor            1.1953
+
+Bounds Analysis:
+Max throughput            0.7500    Cust/Min
+Min response             49.0000    Min
+
+
+                ******   RESOURCE Performance   *******
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      Browsing     Customers        0.6667   Cust/Min
+Utilization     Browsing     Customers        1.0000   Percent
+Queue length    Browsing     Customers       30.0000   Cust
+Waiting line    Browsing     Customers        0.0000   Cust
+Waiting time    Browsing     Customers        0.0000   Min
+Residence time  Browsing     Customers       45.0000   Min
+
+Throughput      Checkout     Customers        0.6667   Cust/Min
+Utilization     Checkout     Customers       88.8889   Percent
+Queue length    Checkout     Customers        9.0467   Cust
+Waiting line    Checkout     Customers        6.3801   Cust
+Waiting time    Checkout     Customers        9.5701   Min
+Residence time  Checkout     Customers       13.5701   Min
+
