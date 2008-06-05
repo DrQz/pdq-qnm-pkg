@@ -7,7 +7,7 @@ make clean
 
 ar xv ../lib/libpdq.a
 
-# swig -perl5 pdq.i
+cp ../lib/*.o .
 
 perl Makefile.PL
 
