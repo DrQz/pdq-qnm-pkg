@@ -37,6 +37,8 @@
 %rename (GetComment)       PDQ_GetComment;
 %rename (PrintNodes)       print_nodes;
 %rename (GetNode)          getnode;
+%rename (GetSteamsCount)   PDQ_GetSteamsCount;
+%rename (GetNodesCount)    PDQ_GetNodesCount;
 
 %include "../lib/PDQ_Lib.h"
 %include "../lib/PDQ_Global.h"
