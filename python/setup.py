@@ -16,8 +16,8 @@ setup(name='pdq',
   url='http://www.prettydamnquick.net',
   ext_modules=[
       Extension(
-         "pdq",
-         ["pdq_wrapper.c"],
+         "_pdq",
+         ["pdq_wrap.c"],
          include_dirs  = ["../include"],
          define_macros = [('DEBUG',1),('HOME',1)],
          undef_macros  = ['XXX', 'YYY'],

@@ -15,7 +15,8 @@ python:
 #---------------------------------------------------------------------
 
 swig:
-	-(cd perl5; swig -perl5 pdq.i)
+	-(cd perl5; swig -perl5 -o pdq_wrap.c ../pdq.i)
+	-(cd python; swig -python -o pdq_wrap.c ../pdq.i)
 
 #---------------------------------------------------------------------
 

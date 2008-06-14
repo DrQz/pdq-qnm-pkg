@@ -3,7 +3,16 @@
 #
 #-----------------------------------------------------------
 
-CFLAGS = -ggdb
+OSTYPE = $(shell uname)
+
+ifeq ($(OSTYPE),CYGWIN_NT-5.1)
+OSTYPE = cygwin
+endif
+
+ifeq ($(OSTYPE),solaris)
+CC     = gcc
+LIB    = libpdq.so
+endif
 
 OBJ     = \
 	MVA_Approx.o \
@@ -19,9 +28,14 @@ OBJ     = \
 #-----------------------------------------------------------
 
 all:	$(OBJ)
+ifeq ($(OSTYPE),solaris)
+	-$(CC) -G *.o -o ${LIB} -lm
+else
 	-ar -rv libpdq.a $(OBJ)
-	-ranlib -sc libpdq.a      # MacOS X
-	# -ranlib libpdq.a          # Cygwin
+endif
+ifeq ($(OSTYPE),cygwin)
+	-ranlib libpdq.a          # Cygwin
+endif
 
 #-----------------------------------------------------------
 

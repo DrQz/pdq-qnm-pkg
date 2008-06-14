@@ -12,6 +12,7 @@ OBJ     = \
 	PDQ_Build.o \
 	PDQ_Exact.o \
 	PDQ_Globals.o \
+	PDQ_MServer.o \
 	PDQ_Report.o \
 	PDQ_Utils.o
 
@@ -19,8 +20,7 @@ OBJ     = \
 
 all:	$(OBJ)
 	-ar -rv libpdq.a $(OBJ)
-#	 -ranlib -sc libpdq.a      # MacOS X
- 	-ranlib libpdq.a          # Cygwin
+	-ranlib libpdq.a          # Cygwin
 
 #-----------------------------------------------------------
 
