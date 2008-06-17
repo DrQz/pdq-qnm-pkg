@@ -28,16 +28,16 @@ $WorkName = "Work";
 
 # Initialize PDQ internal variables
 pdq::Init("FIFO Example");
-  
-# Change the units used by PDQ::Report()
-pdq::SetWUnit("Requests");
-pdq::SetTUnit("Seconds");
 
 # Define the FIFO queue 
 $pdq::nodes = pdq::CreateNode($NodeName, $pdq::CEN, $pdq::FCFS);
 
 # Define the queueing circuit type and workload 
 $pdq::streams = pdq::CreateOpen($WorkName, $ArrivalRate);
+  
+# Change the units used by PDQ::Report()
+pdq::SetWUnit("Requests");
+pdq::SetTUnit("Seconds");
 
 # Define service demand due to the workload at FIFO 
 pdq::SetDemand($NodeName, $WorkName, $ServiceDemand);

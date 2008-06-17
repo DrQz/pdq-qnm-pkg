@@ -26,16 +26,13 @@ print "Solving: $modelName ...\n";
 
 while($fastFraction < 0.86) {
     pdq::Init($modelName);
-      
-    pdq::SetWUnit("IOs");
-    pdq::SetTUnit("sec");
     
     $pdq::nodes = pdq::CreateNode($FastDk, $pdq::CEN, $pdq::FCFS);
     $pdq::nodes = pdq::CreateNode($SlowDk, $pdq::CEN, $pdq::FCFS);
     
     $pdq::streams = pdq::CreateOpen($IOReqsF, $IOrate * $fastFraction);
     $pdq::streams = pdq::CreateOpen($IOReqsS, $IOrate * (1 - $fastFraction));
-    
+      
     pdq::SetDemand($FastDk, $IOReqsF, $fastService);
     pdq::SetDemand($FastDk, $IOReqsS, 0.0);
     

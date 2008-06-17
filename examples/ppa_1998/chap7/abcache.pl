@@ -150,9 +150,6 @@ $Ucin  = 0.0;
 
 pdq::Init($model);
 
-pdq::SetWUnit("Reqs");
-pdq::SetTUnit("Cycs");
-
 #----- Create single bus queueing center -----------------------------
 
 $noNodes = pdq::CreateNode($BUS, $pdq::CEN, $pdq::FCFS);
