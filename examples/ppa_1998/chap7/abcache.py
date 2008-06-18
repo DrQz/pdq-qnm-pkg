@@ -144,9 +144,6 @@ Ucin = 0.0
 
 pdq.Init("ABC Model")
 
-pdq.SetWUnit("Reqs")
-pdq.SetTUnit("Cycs")
-
 #----- Create single bus queueing center -----------------------------
 
 nodes = pdq.CreateNode(BUS, pdq.CEN, pdq.FCFS)
