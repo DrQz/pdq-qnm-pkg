@@ -5,7 +5,7 @@
  * 
  * Revised by NJG on Tue Aug 11 17:31:02 PDT 1998
  * Updated by NJG on Fri May 12 13:09:28 PDT 2006
- * Updated by NJG on Sat, Apr 7, 2007 (add GetNodesCount and GetSteamsCount)
+ * Updated by NJG on Sat, Apr 7, 2007 (add GetNodesCount and GetStreamsCount)
  *
  *  $Id$
  */
@@ -77,9 +77,9 @@ char            prevproc[MAXBUF];
 //*********************************************************************
 
 int 
-PDQ_GetSteamsCount()
+PDQ_GetStreamsCount()
 {
-	char           *p = "PDQ_GetSteamsCount()";
+	char           *p = "PDQ_GetStreamsCount()";
 
 	if (streams == 0) {
 		errmsg(p, "No streams created.");
@@ -87,7 +87,7 @@ PDQ_GetSteamsCount()
 	
 	return (streams);
 	
-}  // PDQ_GetSteamsCount
+}  // PDQ_GetStreamsCount
 
 //-------------------------------------------------------------------------
 

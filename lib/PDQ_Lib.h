@@ -159,7 +159,7 @@ int     PDQ_CreateNode(char *name, int device, int sched);
 // Next 2 functions will be used when current PDQ Create functions become procedures
 // Probably in PDQ v5.0
 
-int 	PDQ_GetSteamsCount();
+int 	PDQ_GetStreamsCount();
 // New function to determine number of created streams.
 
 int		PDQ_GetNodesCount();

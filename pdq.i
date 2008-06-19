@@ -37,9 +37,19 @@
 %rename (GetComment)       PDQ_GetComment;
 %rename (PrintNodes)       print_nodes;
 %rename (GetNode)          getnode;
-%rename (GetSteamsCount)   PDQ_GetSteamsCount;
+%rename (GetStreamsCount)  PDQ_GetStreamsCount;
 %rename (GetNodesCount)    PDQ_GetNodesCount;
 
 %include "../lib/PDQ_Lib.h"
 %include "../lib/PDQ_Global.h"
 
+%pragma(java) jniclasscode=%{
+  static {
+    try {
+        System.loadLibrary("pdq");
+    } catch (UnsatisfiedLinkError e) {
+      System.err.println("Native code library failed to load. \n" + e);
+      System.exit(1);
+    }
+  }
+%}
