@@ -9,7 +9,7 @@ ifeq ($(OSTYPE),CYGWIN_NT-5.1)
 OSTYPE = cygwin
 endif
 
-ifeq ($(OSTYPE),solaris)
+ifeq ($(OSTYPE),SunOS)
 CC     = gcc
 LIB    = libpdq.so
 endif
@@ -28,13 +28,16 @@ OBJ     = \
 #-----------------------------------------------------------
 
 all:	$(OBJ)
-ifeq ($(OSTYPE),solaris)
+ifeq ($(OSTYPE),SunOS)
 	-$(CC) -G *.o -o ${LIB} -lm
 else
 	-ar -rv libpdq.a $(OBJ)
 endif
 ifeq ($(OSTYPE),cygwin)
 	-ranlib libpdq.a          # Cygwin
+endif
+ifeq ($(OSTYPE),Darwin)
+	-ranlib -sc libpdq.a      # MacOS X
 endif
 
 #-----------------------------------------------------------
