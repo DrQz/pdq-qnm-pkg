@@ -5,7 +5,8 @@
  * 
  * Revised by NJG on Tue Aug 11 17:31:02 PDT 1998
  * Updated by NJG on Fri May 12 13:09:28 PDT 2006
- * Updated by NJG on Sat, Apr 7, 2007 (add GetNodesCount and GetStreamsCount)
+ * Updated by NJG on Sat, Apr 7, 2007 Added GetNodesCount and GetStreamsCount
+ * Updated by NJG on Mon, Sep 29, 2008 Removed resets() in debug()
  *
  *  $Id$
  */
@@ -694,8 +695,8 @@ debug(char *proc, char *info)
 		printf("DEBUG: %s\n        %s\n", proc, info);
 		strcpy(prevproc, proc);
 	}
-
-	resets(info);
+	
+	//resets(info); NJG: Unnecessary and can cause seg fault.
 }  /* debug */
 
 //-------------------------------------------------------------------------
