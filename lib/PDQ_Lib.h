@@ -22,7 +22,8 @@
 // This string gets read by GetVersion script amongst others
 // Do not modify order of fields
 // Must not contain more than 24 characters
-static char *version = "PDQ Analyzer v4.B 041807";
+//static char *version = "PDQ Analyzer v4.B 041807";
+static char *version = "PDQ Analyzer v5.0 022509";
 
 //---- TYPES --------------------------------------------------------------
 
@@ -154,6 +155,11 @@ int     PDQ_CreateOpen_p(char *name, double *lambda);
 
 int     PDQ_CreateNode(char *name, int device, int sched); 
 // Define a single queueing center in either a closed or open circuit
+
+// New in PDQ v5.0. Added by NJG on Wed Feb 25, 2009
+int     PDQ_CreateMultiNode(int servers, char *name, int device, int sched); 
+// Define multiserver queueing center in either a closed or open circuit
+// Prototype as defined in Chapter 6 of the "Perl::PDQ" book
 
 //------------------------------------------------------
 // Next 2 functions will be used when current PDQ Create functions become procedures

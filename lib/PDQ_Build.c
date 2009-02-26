@@ -9,7 +9,8 @@
  * Updated by NJG on Tue, Apr 3, 2007 (remove nested loops in Init)
  * Updated by NJG on Wed, Apr 4, 2007 (change MSQ to devtype and m to sched)
  * Updated by NJG on Fri, Apr 6, 2007 (Error if SetUnit before calling Create circuit)
- * 
+ * Updated by NJG on Wed Feb 25, 2009 (added PDQ_CreateMultiNode)
+ *
  *  $Id$
  */
 
@@ -249,7 +250,77 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	return nodes;
 }  /* PDQ_CreateNode */
 
+
 //-------------------------------------------------------------------------
+// Prototype as defined in Chapter 6 of the "Perl::PDQ" book
+
+int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
+{
+	extern NODE_TYPE *node;
+	extern char     s1[], s2[];
+	extern int      nodes;
+	extern int      DEBUG;
+	char           *p = "PDQ_CreateMultiNode";
+	FILE*			out_fd;
+
+    // hack to force MSQ (Multi Server Queue) node type
+	sched = MSQ; 
+	device = servers;
+
+	if (DEBUG)
+	{
+		debug(p, "Entering");
+		out_fd = fopen("PDQ.out", "a");
+		fprintf(out_fd, "name : %s  device : %d  sched : %d\n", name, device, sched);
+		close(out_fd);
+	}
+
+	if (k > MAXNODES) {
+		sprintf(s1, "Allocating \"%s\" exceeds %d max nodes",
+			name, MAXNODES);
+		errmsg(p, s1);
+	}
+
+	if (strlen(name) >= MAXCHARS) {
+		sprintf(s1, "Nodename \"%s\" is longer than %d characters",
+			name, MAXCHARS);
+		errmsg(p, s1);
+	}
+
+	strcpy(node[k].devname, name);
+
+	
+	if (servers <= 0) { 
+		// number of servers must be positive integer
+		sprintf(s1, "Must specify a positive number of servers");
+		errmsg(p, s1);
+	} 
+	
+	
+	node[k].devtype = device;
+	node[k].sched = sched;
+
+	if (DEBUG) {
+		typetostr(s1, node[k].devtype);
+		typetostr(s2, node[k].sched);
+		printf("\tNode[%d]: %s %s \"%s\"\n",
+		  k, s1, s2, node[k].devname);
+		resets(s1);
+		resets(s2);
+	};
+
+	if (DEBUG)
+		debug(p, "Exiting");
+
+	k =  ++nodes;
+
+	return nodes;
+	
+}  /* PDQ_CreateMultiNode */
+
+//-------------------------------------------------------------------------
+
+
 
 int PDQ_CreateClosed(char *name, int should_be_class, double pop, double think)
 {
@@ -257,7 +328,6 @@ int PDQ_CreateClosed(char *name, int should_be_class, double pop, double think)
 }
 
 //-------------------------------------------------------------------------
-
 int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *think)
 {
 	extern char     s1[];

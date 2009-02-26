@@ -31,8 +31,8 @@ triple_msq: triple_msq.c $(LIB)/libpdq.a
 mm1_test: mm1_test.c $(LIB)/libpdq.a
 	${CC} -o mm1_test mm1_test.c -I$(INCL) -L$(LIB) -lpdq -lm
 
-gross42: gross42.c $(LIB)/libpdq.a
-	${CC} -o gross42 gross42.c -I$(INCL) -L$(LIB) -lpdq -lm
+gross42: gross_pdq42.c $(LIB)/libpdq.a
+	${CC} -o gross_pdq42 gross_pdq42.c -I$(INCL) -L$(LIB) -lpdq -lm
 	
 #--------------------------------------------------------------------------
 

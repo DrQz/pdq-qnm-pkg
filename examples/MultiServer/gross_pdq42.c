@@ -1,11 +1,11 @@
 /*
 	 
-	 gross42.c
+	 gross_pdq42.c
 	 
-	 Created by NJG on Fri, Apr 6, 2007
-
+	 Created by NJG on Fri, Apr  6, 2007
+	 Updated by NJG on Wed, Feb 25, 2009 for PDQ v5.0
 	  
-	 Example 4.2 in Gross and Harris (p. 181 in 3rd edn).
+	 Example 4.2 in Gross and Harris (p. 181, 3rd edn).
 	 
 	 Circuit contains 3 nodes:
 		1. M/M/1 with service time 30 sec 
@@ -94,15 +94,15 @@ int main(void) {
 	
 	streams = PDQ_CreateOpen("Customers", callRateIncoming);	
 	PDQ_SetWUnit("Calls");
-	PDQ_SetTUnit("Min");	// timebase for PDQ report
+	PDQ_SetTUnit("Mins");	// timebase for PDQ report
 	
 
 	// Use a standard PDQ node as a test case
 	nodes = PDQ_CreateNode("Select", CEN, FCFS); 
 	
 	// Multiserver nodes
-	nodes = PDQ_CreateNode("Claims", 3, MSQ); 
-	nodes = PDQ_CreateNode("Policy", 7, MSQ);
+	nodes = PDQ_CreateMultiNode(3, "Claims", CEN, FCFS); 
+	nodes = PDQ_CreateMultiNode(7, "Policy", CEN, FCFS);
 	
 	// In PDQ the computed visit ratios multiply the service times
 	PDQ_SetDemand("Select", "Customers", vSelect * stimeSelect);
