@@ -17,6 +17,7 @@
 %rename (CreateClosed)     PDQ_CreateClosed;
 %rename (CreateClosed_p)   PDQ_CreateClosed_p;
 %rename (CreateNode)       PDQ_CreateNode;
+%rename (CreateMultiNode)  PDQ_CreateMultiNode;
 %rename (CreateOpen)       PDQ_CreateOpen;
 %rename (CreateOpen_p)     PDQ_CreateOpen_p;
 %rename (GetResponse)      PDQ_GetResponse;
