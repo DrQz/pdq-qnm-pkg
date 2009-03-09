@@ -1,0 +1,32 @@
+MAXNODES = 1024
+MAXBUF = 128
+MAXSTREAMS = 64
+MAXCHARS = 64
+VOID = 0
+OPEN = 1
+CLOSED = 2
+MEM = 3
+
+# Nodes
+CEN = 4
+DLY = 5
+# Service disciplines
+MSQ = 6
+ISRV = 7
+FCFS = 8
+PSHR = 9
+LCFS = 10
+# Workload streams
+TERM = 11
+TRANS = 12
+BATCH = 13
+# Solution methods
+EXACT = 14
+APPROX = 15
+CANON = 16
+
+VISITS = 17
+DEMAND = 18
+PDQ_SP = 19
+PDQ_MP = 20
+TOL = 0.0010

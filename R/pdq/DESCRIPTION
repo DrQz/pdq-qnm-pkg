@@ -1,0 +1,13 @@
+Package: pdq
+Version: 5.0-0
+Date: 2009-03-01
+Title: PDQ
+Author: Neil Gunther <njgunther@perfdynamics.com, with
+ contributions from Phil Feller <phil@philfeller.com>.
+Maintainer: Neil Gunther <njgunther@perfdynamics.com>
+Description: The PDQ performance analyzer uses queue-theoretic paradigms to
+ represent computer systems.
+License: MIT
+URL: http://www.perfdynamics.com/Tools/PDQ.html,
+ http://sourceforge.net/projects/pdq-qnm-pkg/
+
