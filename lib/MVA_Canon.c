@@ -19,7 +19,7 @@
 
 void canonical(void)
 {
-    extern int        DEBUG, streams, nodes;
+    extern int        PDQ_DEBUG, streams, nodes;
     extern char       s1[], s2[], s3[], s4[];
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
@@ -38,7 +38,7 @@ void canonical(void)
     char              jobname[MAXBUF];
     char             *p = "canonical()";
 
-    if (DEBUG)
+    if (PDQ_DEBUG)
         debug(p, "Entering");
 
     for (c = 0; c < streams; c++) {
@@ -94,7 +94,7 @@ void canonical(void)
                 errmsg(p, s1);
             }
 
-            if (DEBUG)
+            if (PDQ_DEBUG)
                 printf("Tot Util: %3.4f for %s\n", devU, node[k].devname);
 
             switch (node[k].sched) {
@@ -127,7 +127,7 @@ void canonical(void)
         job[c].trans->sys->response = sumR[c];      // system response time 
         job[c].trans->sys->residency = X * sumR[c]; // total number in system
 
-        if (DEBUG) {
+        if (PDQ_DEBUG) {
             getjob_name(jobname, c);
             printf("\tX[%s]: %3.4f\n", jobname, job[c].trans->sys->thruput);
             printf("\tR[%s]: %3.4f\n", jobname, job[c].trans->sys->response);
@@ -136,7 +136,7 @@ void canonical(void)
         
     }  // loop over c
 
-    if (DEBUG)
+    if (PDQ_DEBUG)
         debug(p, "Exiting");
 
 }  // canonical
@@ -145,7 +145,7 @@ void canonical(void)
 
 double sumU(int k)
 {
-    extern int        DEBUG, streams, nodes;
+    extern int        PDQ_DEBUG, streams, nodes;
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
 

@@ -29,7 +29,7 @@ extern NODE_TYPE *node;
 extern JOB_TYPE  *job;
 extern int        nodes;
 extern int        streams;
-extern int        DEBUG;
+extern int        PDQ_DEBUG;
 
 //-------------------------------------------------------------------------
 
@@ -369,9 +369,9 @@ PDQ_GetQueueLength(char *device, char *work, int should_be_class)
 void
 PDQ_SetDebug(int flag)
 {
-	DEBUG = flag;
+	PDQ_DEBUG = flag;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		printf("debug on\n");
 	}
 	else {
@@ -496,7 +496,7 @@ getjob_index(char *wname)
 
 	int             n;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	// g_debugf("=====>  wname -> \"%s\"\n", wname);
@@ -523,7 +523,7 @@ getjob_index(char *wname)
 			if ((strcmp(job_term_name, wname) == 0) ||
 				   (strcmp(job[n].batch->name, wname) == 0) ||
 				   (strcmp(job[n].trans->name, wname) == 0)) {
-				if (DEBUG) {
+				if (PDQ_DEBUG) {
 				   resets(s1);
 				   sprintf(s1, "stream:\"%s\"  index: %d", wname, n);
 				   debug(p, s1);
@@ -551,12 +551,12 @@ getnode_index(char *name)
 
 	int               k;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	for (k = 0; k < nodes; k++) {
 		if (strcmp(node[k].devname, name) == 0) {
-			if (DEBUG) {
+			if (PDQ_DEBUG) {
 				resets(s1);
 				sprintf(s1, "node:\"%s\"  index: %d", name, k);
 				debug(p, s1);
@@ -595,7 +595,7 @@ getjob_name(char *str, int c)
 {
 	char *p = "getjob_name()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	switch (job[c].should_be_class) {
@@ -612,7 +612,7 @@ getjob_name(char *str, int c)
 			break;
 	}
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* getjob_name */
 
@@ -625,17 +625,17 @@ getjob_pop(int c)
 
 	char           *p = "getjob_pop()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	switch (job[c].should_be_class) {
 		case TERM:
-			if (DEBUG)
+			if (PDQ_DEBUG)
 				debug(p, "Exiting");
 			return (job[c].term->pop);
 			break;
 		case BATCH:
-			if (DEBUG)
+			if (PDQ_DEBUG)
 				debug(p, "Exiting");
 			return (job[c].batch->pop);
 			break;

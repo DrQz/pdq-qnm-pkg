@@ -20,7 +20,7 @@
 double 
 ErlangR(double arrivrate, double servtime, int servers) {
 
-	extern int        DEBUG;
+	extern int        PDQ_DEBUG;
 	extern char       s1[];
 	extern JOB_TYPE  *job;
 
@@ -54,7 +54,7 @@ ErlangR(double arrivrate, double servtime, int servers) {
 	wtE = servtime * erlangC / (servers * (1.0 - rho));
 	rtE = servtime + wtE;
 	
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		sprintf(s1, "Erlang R: %6.4lf", rtE);
 		errmsg(p, s1);
 	}

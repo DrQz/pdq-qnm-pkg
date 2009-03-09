@@ -16,7 +16,7 @@ char                model[MAXCHARS];  /* Model name */
 char                wUnit[10];        /* Work unit string */
 char                tUnit[10];        /* Time unit string */
 
-int                 DEBUG              = FALSE;
+int                 PDQ_DEBUG          = FALSE;
 int                 prev_init          = FALSE;
 int                 demand_ext;
 int                 nodes;

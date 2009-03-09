@@ -55,7 +55,7 @@ void PDQ_Report(void)
 {
 	extern char     model[];
 	extern char     s1[], s2[], s3[], s4[];
-	extern int      streams, nodes, DEBUG;
+	extern int      streams, nodes, PDQ_DEBUG;
 	extern JOB_TYPE *job;
 
 	int             c;
@@ -70,7 +70,7 @@ void PDQ_Report(void)
 	double          allusers = 0.0;
 	char           *p = "PDQ_Report()";
 
-	if (DEBUG == 1)
+	if (PDQ_DEBUG == 1)
 	{
 		/*debug(p, "Entering");*/
 		printf("Entering PDQ_Report()\n");
@@ -218,7 +218,7 @@ void PDQ_Report(void)
 
 	printf("\n");
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* PDQ_Report */
 
@@ -226,7 +226,7 @@ void PDQ_Report(void)
 
 void print_node_head(void)
 {
-	extern int      demand_ext, DEBUG;
+	extern int      demand_ext, PDQ_DEBUG;
 	extern char     model[];
 	extern char     s1[];
 	extern JOB_TYPE *job;
@@ -234,7 +234,7 @@ void print_node_head(void)
 	char           *dmdfmt = "%-4s %-5s %-10s %-10s %-5s %10s\n";
 	char           *visfmt = "%-4s %-5s %-10s %-10s %-5s %10s %10s %10s\n";
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		typetostr(s1, job[0].network);
 		printf("%s Network: \"%s\"\n", s1, model);
 		resets(s1);
@@ -265,7 +265,7 @@ void print_node_head(void)
 void print_nodes(void)
 {
 	extern char       s1[], s2[], s3[], s4[];
-	extern int        demand_ext, DEBUG;
+	extern int        demand_ext, PDQ_DEBUG;
 	extern int        streams, nodes;
 	extern NODE_TYPE *node;
 	extern JOB_TYPE  *job;
@@ -273,7 +273,7 @@ void print_nodes(void)
 	int               c, k;
 	char             *p = "print_nodes()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	if (!nodhdr)
@@ -342,7 +342,7 @@ void print_nodes(void)
 	}  /* over c */
 
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 
 	nodhdr = FALSE;
@@ -352,11 +352,11 @@ void print_nodes(void)
 
 void print_job(int c, int should_be_class)
 {
-	extern int      DEBUG;
+	extern int      PDQ_DEBUG;
 	extern JOB_TYPE *job;
 	char           *p = "print_job()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	switch (should_be_class) {
@@ -389,7 +389,7 @@ void print_job(int c, int should_be_class)
 			break;
 	}
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* print_job */
 
@@ -403,10 +403,10 @@ void print_sys_head(void)
 {
 	extern double   tolerance;
 	extern char     s1[];
-	extern int      DEBUG, method, iterations;
+	extern int      PDQ_DEBUG, method, iterations;
 	char           *p = "print_sys_head()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	printf("\n\n");
@@ -432,7 +432,7 @@ void print_sys_head(void)
 
 	syshdr = TRUE;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* print_sys_head */
 
@@ -502,12 +502,12 @@ void print_system_stats(int c, int should_be_class)
 {
 	extern char      tUnit[];
 	extern char      wUnit[];
-	extern int       DEBUG;
+	extern int       PDQ_DEBUG;
 	extern char      s1[];
 	extern JOB_TYPE *job;
 	char            *p = "print_system_stats()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	if (!syshdr)
@@ -620,7 +620,7 @@ void print_system_stats(int c, int should_be_class)
 
 	printf("\n");
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* print_system_stats */
 
@@ -637,7 +637,7 @@ void print_node_stats(int c, int should_be_class)
 	extern char       s1[];
 	extern char       tUnit[];
 	extern char       wUnit[];
-	extern int        DEBUG, demand_ext, nodes;
+	extern int        PDQ_DEBUG, demand_ext, nodes;
 	extern JOB_TYPE  *job;
 	extern NODE_TYPE *node;
 	extern char       s4[];
@@ -653,7 +653,7 @@ void print_node_stats(int c, int should_be_class)
 	int               	m;
 	char             	*p = "print_node_stats()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	if (!devhdr)
@@ -780,7 +780,7 @@ void print_node_stats(int c, int should_be_class)
 		printf("\n");
 	}
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 		
 }  // print_node_stats

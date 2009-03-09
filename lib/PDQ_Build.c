@@ -56,14 +56,14 @@ void PDQ_Init(char *name)
 	extern BATCH_TYPE       *bt;
 	extern TRANSACTION_TYPE *tx;
 	extern SYSTAT_TYPE      *sys;
-	extern int               DEBUG;
+	extern int               PDQ_DEBUG;
 	extern void              allocate_nodes();
 	extern void              allocate_jobs();
 	char                    *p = "PDQ_Init()";
 
 	int             cc, kk;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	if (strlen(name) > MAXCHARS) {
@@ -169,7 +169,7 @@ void PDQ_Init(char *name)
 	c = k = 0;
 	prev_init = TRUE;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		debug(p, "Exiting");
 	}
 	
@@ -196,11 +196,11 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	extern NODE_TYPE *node;
 	extern char     s1[], s2[];
 	extern int      nodes;
-	extern int      DEBUG;
+	extern int      PDQ_DEBUG;
 	char           *p = "PDQ_CreateNode";
 	FILE*			out_fd;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 	{
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
@@ -233,7 +233,7 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	node[k].devtype = device;
 	node[k].sched = sched;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		typetostr(s1, node[k].devtype);
 		typetostr(s2, node[k].sched);
 		printf("\tNode[%d]: %s %s \"%s\"\n",
@@ -242,7 +242,7 @@ int PDQ_CreateNode(char *name, int device, int sched)
 		resets(s2);
 	};
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 
 	k =  ++nodes;
@@ -259,7 +259,7 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 	extern NODE_TYPE *node;
 	extern char     s1[], s2[];
 	extern int      nodes;
-	extern int      DEBUG;
+	extern int      PDQ_DEBUG;
 	char           *p = "PDQ_CreateMultiNode";
 	FILE*			out_fd;
 
@@ -267,7 +267,7 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 	sched = MSQ; 
 	device = servers;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 	{
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
@@ -300,7 +300,7 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 	node[k].devtype = device;
 	node[k].sched = sched;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		typetostr(s1, node[k].devtype);
 		typetostr(s2, node[k].sched);
 		printf("\tNode[%d]: %s %s \"%s\"\n",
@@ -309,7 +309,7 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 		resets(s2);
 	};
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 
 	k =  ++nodes;
@@ -334,11 +334,11 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 	extern int      streams;
 	extern char     tUnit[];
 	extern char     wUnit[];
-	extern int      DEBUG;
+	extern int      PDQ_DEBUG;
 	char           *p = "PDQ_CreateClosed()";
 	FILE           *out_fd;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 	{
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
@@ -388,7 +388,7 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 			break;
 	}
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 
 	c =  ++streams;
@@ -411,10 +411,10 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 	extern int      streams;
 	extern char     tUnit[];
 	extern char     wUnit[];
-	extern int	    DEBUG;
+	extern int	    PDQ_DEBUG;
 	FILE           *out_fd;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 	{
 		  out_fd = fopen("PDQ.out", "a");
 	fprintf(out_fd, "name : %s  lambda : %f\n", name, *lambda);
@@ -455,14 +455,14 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 	extern int        nodes;
 	extern int        streams;
 	extern int        demand_ext;
-	extern int        DEBUG;
+	extern int        PDQ_DEBUG;
 
 	int               node_index;
 	int               job_index;
 
 	FILE             *out_fd;
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 	{
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
@@ -491,7 +491,7 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 	} else
 		errmsg(p, "Extension conflict");
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* PDQ_SetDemand */
 
@@ -508,10 +508,10 @@ void PDQ_SetVisits_p(char *nodename, char *workname, double *visits, double *ser
 {
 	extern NODE_TYPE *node;
 	extern int demand_ext;
-	extern int DEBUG;
+	extern int PDQ_DEBUG;
 	char           *p = "PDQ_SetVisits()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 	{
 		printf("nodename : %s  workname : %s  visits : %f  service : %f\n", nodename, workname, *visits, *service);
 	}
@@ -572,10 +572,10 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 {
 	extern JOB_TYPE *job;
 	extern char     s1[];
-	extern int      DEBUG;
+	extern int      PDQ_DEBUG;
 	char           *p = "create_term_stream()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	strcpy(job[c].term->name, label);
@@ -584,7 +584,7 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 	job[c].term->think = think;
 	job[c].term->pop = pop;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		typetostr(s1, job[c].should_be_class);
 		printf("\tStream[%d]: %s \"%s\"; N: %3.1f, Z: %3.2f\n",
 		  c, s1,
@@ -595,7 +595,7 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 		resets(s1);
 	}
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* create_term_stream */
 
@@ -605,10 +605,10 @@ void create_batch_stream(int net, char* label, double number)
 {
 	extern JOB_TYPE *job;
 	extern char     s1[];
-	extern int      DEBUG;
+	extern int      PDQ_DEBUG;
 	char           *p = "create_batch_stream()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	/***** using global value of n *****/
@@ -619,14 +619,14 @@ void create_batch_stream(int net, char* label, double number)
 	job[c].network = net;
 	job[c].batch->pop = number;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		typetostr(s1, job[c].should_be_class);
 		printf("\tStream[%d]: %s \"%s\"; N: %3.1f\n",
 		  c, s1, job[c].batch->name, job[c].batch->pop);
 		resets(s1);
 	}
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* create_batch_stream */
 
@@ -637,7 +637,7 @@ void create_transaction(int net, char* label, double lambda)
 {
 	extern JOB_TYPE *job;
 	extern char     s1[];
-	extern int DEBUG;
+	extern int PDQ_DEBUG;
 
 	strcpy(job[c].trans->name, label);
 
@@ -645,7 +645,7 @@ void create_transaction(int net, char* label, double lambda)
 	job[c].network = net;
 	job[c].trans->arrival_rate = lambda;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		typetostr(s1, job[c].should_be_class);
 		printf("\tStream[%d]:  %s\t\"%s\";\tLambda: %3.1f\n",
 		  c, s1, job[c].trans->name, job[c].trans->arrival_rate);

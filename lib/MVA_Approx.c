@@ -19,7 +19,7 @@
 
 void approx(void)
 {
-	extern int        DEBUG, iterations, streams, nodes;
+	extern int        PDQ_DEBUG, iterations, streams, nodes;
 	extern char       s1[], s2[], s3[], s4[];
 	extern double     tolerance;
 	extern JOB_TYPE  *job;
@@ -37,7 +37,7 @@ void approx(void)
 	NODE_TYPE        *last;
 	char             *p = "approx()";
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
 	if (nodes == 0 || streams == 0)
@@ -48,7 +48,7 @@ void approx(void)
 
 	iterations = 0;
 
-	if (DEBUG) {
+	if (PDQ_DEBUG) {
 		sprintf(s1, "\nIteration: %d", iterations);
 		debug(p, s1);
 		resets(s1);
@@ -71,7 +71,7 @@ void approx(void)
 					break;
 			}
 
-			if (DEBUG) {
+			if (PDQ_DEBUG) {
 				getjob_name(jobname, c);
 				sprintf(s2, "Que[%s][%s]: %3.4f (D=%f)",
 					node[k].devname,
@@ -88,7 +88,7 @@ void approx(void)
 	do {
 		iterations++;
 
-		if (DEBUG) {
+		if (PDQ_DEBUG) {
 			sprintf(s1, "\nIteration: %d", iterations);
 			debug(p, s1);
 			resets(s1);
@@ -99,7 +99,7 @@ void approx(void)
 
 			sumR[c] = 0.0;
 
-			if (DEBUG) {
+			if (PDQ_DEBUG) {
 				sprintf(s1, "\nStream: %s", jobname);
 				debug(p, s1);
 				resets(s1);
@@ -108,7 +108,7 @@ void approx(void)
 			should_be_class = job[c].should_be_class;
 
 			for (k = 0; k < nodes; k++) {
-				if (DEBUG) {
+				if (PDQ_DEBUG) {
 					sprintf(s2, "Que[%s][%s]: %3.4f (D=%1.5f)",
 						node[k].devname,
 						jobname,
@@ -140,7 +140,7 @@ void approx(void)
 						break;
 					}
 
-					if (DEBUG) {
+					if (PDQ_DEBUG) {
 						sprintf(s2, "<Q>[%s][%s]: %3.4f (D=%1.5f)",
 							node[k].devname,
 							jobname,
@@ -173,7 +173,7 @@ void approx(void)
 			sumR[c] += node[k].resit[c];
 
 
-			if (DEBUG) {
+			if (PDQ_DEBUG) {
 				printf("\tTot ResTime[%s] = %3.4f\n", jobname, sumR[c]);
 
 				printf("\tnode[%s].qsize[%s] = %3.4f\n",
@@ -208,7 +208,7 @@ void approx(void)
 				job[c].term->sys->residency =
 					job[c].term->pop - (job[c].term->sys->thruput * job[c].term->think);
 
-				if (DEBUG) {
+				if (PDQ_DEBUG) {
 					sprintf(s2, "\tTERM<X>[%s]: %5.4f",
 						jobname, job[c].term->sys->thruput);
 					debug(p, s2);
@@ -226,7 +226,7 @@ void approx(void)
 					(job[c].batch->pop / job[c].batch->sys->thruput);
 				job[c].batch->sys->residency = job[c].batch->pop;
 
-				if (DEBUG) {
+				if (PDQ_DEBUG) {
 					sprintf(s2, "\t<X>[%s]: %3.4f",
 						jobname, job[c].batch->sys->thruput);
 					debug(p, s2);
@@ -254,7 +254,7 @@ void approx(void)
 			should_be_class = job[c].should_be_class;
 			iterate = FALSE;
 
-			if (DEBUG) {
+			if (PDQ_DEBUG) {
 				sprintf(s1, "Updating queues of \"%s\"", jobname);
 				printf("\n");
 				debug(p, s1);
@@ -284,7 +284,7 @@ void approx(void)
 
 				last[k].qsize[c] = node[k].qsize[c];
 
-				if (DEBUG) {
+				if (PDQ_DEBUG) {
 					sprintf(s2, "Que[%s][%s]: %3.4f (D=%1.5f)",
 						node[k].devname,
 						jobname,
@@ -298,7 +298,7 @@ void approx(void)
 			resets(jobname);
 		}				/* over c */
 
-		if (DEBUG)
+		if (PDQ_DEBUG)
 			debug(p, "Update complete");
 	} while (iterate);
 
@@ -309,7 +309,7 @@ void approx(void)
 		last = NULL;
 	}
 
-	if (DEBUG)
+	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 }  /* approx */
 

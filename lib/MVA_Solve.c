@@ -19,7 +19,7 @@
 
 void PDQ_Solve(int meth)
 {
-    extern int        DEBUG, method, streams, nodes;
+    extern int        PDQ_DEBUG, method, streams, nodes;
     extern int        centers_declared, streams_declared;
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
@@ -35,7 +35,7 @@ void PDQ_Solve(int meth)
     char             *p = "solve()";
     extern double     sumD;
 
-    if (DEBUG)
+    if (PDQ_DEBUG)
         debug(p, "Entering");
 
     /* There'd better be a job[0] or you're in trouble !!!  */
@@ -174,7 +174,7 @@ void PDQ_Solve(int meth)
         
     }  // loop over c 
 
-    if (DEBUG)
+    if (PDQ_DEBUG)
         debug(p, "Exiting");
         
 }  // PDQ_Solve
