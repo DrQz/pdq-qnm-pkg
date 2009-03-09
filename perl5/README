@@ -68,3 +68,19 @@ Depending on the shell, use export or setenv
 setenv PERL5LIB .../lib/perl5/site_perl/5.8.6/darwin-thread-multi-2level/
 
 
+FOR CYGWIN ON VISTA
+-------------------
+
+You may need to change the permissions on the folder to which the modules will
+be installed. If this is the case you will see a message:
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  ERROR: Can't create '/usr/lib/perl5/site_perl/5.10/i686-cygwin'
+  Do not have write permissions on '/usr/lib/perl5/site_perl/5.10/i686-cygwin'
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+The path name may vary depending on the location of your Cygwin install and
+your Perl version. Open Windows Explorer and navigate to the folder in the
+error message. Right click on this folder and choose properties. In the
+Security tab of the i686-cygwin Properties box click the Edit button. Click
+Users, check the Allow box for Modify permission, and click OK until you are
+back to Windows Explorer. You may now attempt the install again, and it
+should complete successfully.
