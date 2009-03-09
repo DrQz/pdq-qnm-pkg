@@ -11,6 +11,7 @@
 (cd lib; make)
 (cd perl5; ./setup.sh)
 (cd python; make)
+(cd R; cp ../lib/*.[ch] pdq/src; R CMD INSTALL pdq)
 
 #---------------------------------------------------------------------
 

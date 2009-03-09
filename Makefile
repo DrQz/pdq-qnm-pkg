@@ -12,11 +12,15 @@ perl:
 python:
 	-(cd python; make)
 
+R:
+	-(cd R; cp ../lib/*.[ch] pdq/src; R CMD INSTALL pdq)
+
 #---------------------------------------------------------------------
 
 swig:
 	-(cd perl5; swig -perl5 -o pdq_wrap.c ../pdq.i)
 	-(cd python; swig -python -o pdq_wrap.c ../pdq.i)
+	-(cd R; swig -r -o pdq/src/pdq.c ../pdq.i; mv pdq/src/pdq.R pdq/R)
 
 #---------------------------------------------------------------------
 
@@ -31,6 +35,7 @@ clean:
 	-(cd examples; make clean)
 	-(cd perl5; make clean)
 	-(cd python; make clean)
+	-(cd R; make clean)
 
 #---------------------------------------------------------------------
 
