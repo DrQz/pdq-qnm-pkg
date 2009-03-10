@@ -13,7 +13,7 @@ python:
 	-(cd python; make)
 
 R:
-	-(cd R; cp ../lib/*.[ch] pdq/src; R CMD INSTALL pdq)
+	-(cd R; cp ../lib/*.[ch] pdq/src; cp ../lib/P*.[h] pdq/lib; R CMD INSTALL pdq)
 
 #---------------------------------------------------------------------
 
