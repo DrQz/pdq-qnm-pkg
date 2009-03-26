@@ -1,7 +1,20 @@
+/*******************************************************************************/
+/*  Copyright (C) 1994 - 2006, Performance Dynamics Company                    */
+/*                                                                             */
+/*  This software is licensed as described in the file COPYING, which          */
+/*  you should have received as part of this distribution. The terms           */
+/*  are also available at http://www.perfdynamics.com/Tools/copyright.html.    */
+/*                                                                             */
+/*  You may opt to use, copy, modify, merge, publish, distribute and/or sell   */
+/*  copies of the Software, and permit persons to whom the Software is         */
+/*  furnished to do so, under the terms of the COPYING file.                   */
+/*                                                                             */
+/*  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  */
+/*  KIND, either express or implied.                                           */
+/*******************************************************************************/
+
 /*
  * PDQ_Exact.c
- * 
- * Copyright (c) 1995-2006 Performance Dynamics Company
  * 
  * Updated by NJG on 02:44:17 AM  2/23/97
  * Edited by NJG: Fri Feb  5 16:58:09 PST 1999
