@@ -44,6 +44,7 @@ dist:
 	-mkdir /tmp/pdq
 	-cp -r . /tmp/pdq
 	-(cd /tmp/pdq; find . -name CVS -exec rm -rf \{\} \;)
+	-(cd /tmp/pdq; rm headache.cfg header.txt)
 	-(cd /tmp; tar cvf pdq.tar pdq; gzip pdq.tar)
 	-rm -rf /tmp/pdq
 	-mv /tmp/pdq.tar.gz ..
