@@ -1,0 +1,6 @@
+PDQ-R is new to this release, and has been tested to work on Linux, MacOS X,
+and OpenSolaris.
+
+If you do not have R installed, you can download it from:
+http://cran.r-project.org/
+http://sunfreeware.com/
