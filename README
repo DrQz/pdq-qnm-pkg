@@ -225,3 +225,18 @@ NOTES:
 3) See README in perl5 directory if installing in Cygwin on
  Windows Vista
  
+ 
+====================================================================
+
+Problems compiling on Solaris and other UNIX flavors
+
+PDQ has been compiled without problems on many UNIX and UNIX-like platforms
+with GNU development tools: Linux, MacOSX, OpenSolaris, and Cygwin. Some
+Solaris users have reported difficulty compiling. There is a
+Makefile.solaris file that you could try using should you be unable to
+compile with the regular Makefile. Try the following steps:
+lib: make -f Makefile.solaris
+perl5: setup.sh
+python: make
+R:  R CMD INSTALL pdq
+
