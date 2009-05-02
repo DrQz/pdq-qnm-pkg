@@ -1,5 +1,9 @@
 PDQ-R is new to this release, and has been tested to work on Linux, MacOS X,
-and OpenSolaris.
+Windows, and OpenSolaris.
+
+A pre-compiled Windows binary is available as a separate download. Otherwise
+Windows users need to download and install Rtools for Windows from
+http://www.murdoch-sutherland.com/Rtools/index.html.
 
 If you do not have R installed, you can download it from:
 http://cran.r-project.org/
