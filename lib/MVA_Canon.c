@@ -171,10 +171,9 @@ double sumU(int k)
     char             *p = "sumU()";
 
     for (c = 0; c < streams; c++) {
-    	// This older code works correctly
-        sum += (job[c].trans->arrival_rate * node[k].demand[c]);
-        // Do NOT use the following 
-        //sum += node[k].utiliz[c]; array not updated by here
+        // This branching is a hack. Why do I need it?
+         if (node[k].sched == MSQ) sum += node[k].utiliz[c];
+         else sum += (job[c].trans->arrival_rate * node[k].demand[c]);
     }
 
     return (sum);
