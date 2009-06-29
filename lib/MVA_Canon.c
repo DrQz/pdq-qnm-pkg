@@ -171,7 +171,9 @@ double sumU(int k)
     char             *p = "sumU()";
 
     for (c = 0; c < streams; c++) {
+    	// NJG on Sunday, June 28, 2009 7:29:45 PM
         // This branching is a hack. Why do I need it?
+        // I think it's because multi-class workloads and multi-servers are incompatible.
          if (node[k].sched == MSQ) sum += node[k].utiliz[c];
          else sum += (job[c].trans->arrival_rate * node[k].demand[c]);
     }
