@@ -30,20 +30,20 @@ printf("----------------------------\n");
 
 $L2 = $lambda * ($p12 + ($p32 * $p13)) / (1 - ($p32 * $p23));
 $L3 = ($p13 * $lambda) + ($p23 * $L2);
-printf(" lambda1: %10.4f * lambda\n", 1.0);
-printf(" lambda2: %10.4f * lambda\n", $L2 / $lambda);
-printf(" lambda3: %10.4f * lambda\n", $L3 / $lambda);
-printf(" lambda4: %10.4f * lambda\n", 1.0);
+printf(" lambda1: %10.4f * lambda = %6.4f\n", 1.0, $lambda);
+printf(" lambda2: %10.4f * lambda = %6.4f\n", $L2 / $lambda, $L2);
+printf(" lambda3: %10.4f * lambda = %6.4f\n", $L3 / $lambda, $L3);
+printf(" lambda4: %10.4f * lambda = %6.4f\n", 1.0, $lambda);
 printf("----------------------------\n");
 
 $rho1 = $lambda * 20;
 $rho2 = $L2 * 600;
 $rho3 = $L3 * 300;
 $rho4 = $lambda * 60;
-printf("Uwindow1: %10.4f * lambda\n", $rho1 / $lambda);
-printf("Uwindow2: %10.4f * lambda\n", $rho2 / $lambda);
-printf("Uwindow3: %10.4f * lambda\n", $rho3 / $lambda);
-printf("Uwindow4: %10.4f * lambda\n", $rho4 / $lambda);
+printf("Uwindow1: %10.4f * lambda = %6.4f\n", $rho1 / $lambda, $rho1);
+printf("Uwindow2: %10.4f * lambda = %6.4f\n", $rho2 / $lambda, $rho2);
+printf("Uwindow3: %10.4f * lambda = %6.4f\n", $rho3 / $lambda, $rho3);
+printf("Uwindow4: %10.4f * lambda = %6.4f\n", $rho4 / $lambda, $rho4);
 printf("----------------------------\n");
 $Q1 = $rho1 / (1 - $rho1);
 $Q2 = $rho2 / (1 - $rho2);
