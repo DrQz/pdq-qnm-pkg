@@ -50,4 +50,6 @@ export(MAXNODES,
        PrintNodes,
        GetNode,
        GetStreamsCount,
-       GetNodesCount)
+       GetNodesCount,
+       GetResidenceTime,
+       GetLoadOpt)
