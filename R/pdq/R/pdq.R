@@ -2102,9 +2102,9 @@ attr(`GetResponse`, 'returnType') = 'numeric'
 attr(`GetResponse`, "inputTypes") = c('integer', 'character')
 class(`GetResponse`) = c("SWIGFunction", class('GetResponse'))
 
-# Start of PDQ_GetResidenceTime
+# Start of GetResidenceTime
 
-`PDQ_GetResidenceTime` = function(device, work, should_be_class, .copy = FALSE)
+`GetResidenceTime` = function(device, work, should_be_class, .copy = FALSE)
 {
   device = as(device, "character") 
   work = as(work, "character") 
@@ -2114,13 +2114,13 @@ class(`GetResponse`) = c("SWIGFunction", class('GetResponse'))
     warning("using only the first element of should_be_class")
   }
   
-  .Call('R_swig_PDQ_GetResidenceTime', device, work, should_be_class, as.logical(.copy), PACKAGE='pdq')
+  .Call('R_swig_GetResidenceTime', device, work, should_be_class, as.logical(.copy), PACKAGE='pdq')
   
 }
 
-attr(`PDQ_GetResidenceTime`, 'returnType') = 'numeric'
-attr(`PDQ_GetResidenceTime`, "inputTypes") = c('character', 'character', 'integer')
-class(`PDQ_GetResidenceTime`) = c("SWIGFunction", class('PDQ_GetResidenceTime'))
+attr(`GetResidenceTime`, 'returnType') = 'numeric'
+attr(`GetResidenceTime`, "inputTypes") = c('character', 'character', 'integer')
+class(`GetResidenceTime`) = c("SWIGFunction", class('GetResidenceTime'))
 
 # Start of GetThruput
 
@@ -2141,9 +2141,9 @@ attr(`GetThruput`, 'returnType') = 'numeric'
 attr(`GetThruput`, "inputTypes") = c('integer', 'character')
 class(`GetThruput`) = c("SWIGFunction", class('GetThruput'))
 
-# Start of PDQ_GetLoadOpt
+# Start of GetLoadOpt
 
-`PDQ_GetLoadOpt` = function(should_be_class, wname, .copy = FALSE)
+`GetLoadOpt` = function(should_be_class, wname, .copy = FALSE)
 {
   should_be_class = as.integer(should_be_class) 
   
@@ -2152,13 +2152,13 @@ class(`GetThruput`) = c("SWIGFunction", class('GetThruput'))
   }
   
   wname = as(wname, "character") 
-  .Call('R_swig_PDQ_GetLoadOpt', should_be_class, wname, as.logical(.copy), PACKAGE='pdq')
+  .Call('R_swig_GetLoadOpt', should_be_class, wname, as.logical(.copy), PACKAGE='pdq')
   
 }
 
-attr(`PDQ_GetLoadOpt`, 'returnType') = 'numeric'
-attr(`PDQ_GetLoadOpt`, "inputTypes") = c('integer', 'character')
-class(`PDQ_GetLoadOpt`) = c("SWIGFunction", class('PDQ_GetLoadOpt'))
+attr(`GetLoadOpt`, 'returnType') = 'numeric'
+attr(`GetLoadOpt`, "inputTypes") = c('integer', 'character')
+class(`GetLoadOpt`) = c("SWIGFunction", class('GetLoadOpt'))
 
 # Start of GetUtilization
 

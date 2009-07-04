@@ -324,17 +324,17 @@ def GetResponse(*args):
   return _pdq.GetResponse(*args)
 GetResponse = _pdq.GetResponse
 
-def PDQ_GetResidenceTime(*args):
-  return _pdq.PDQ_GetResidenceTime(*args)
-PDQ_GetResidenceTime = _pdq.PDQ_GetResidenceTime
+def GetResidenceTime(*args):
+  return _pdq.GetResidenceTime(*args)
+GetResidenceTime = _pdq.GetResidenceTime
 
 def GetThruput(*args):
   return _pdq.GetThruput(*args)
 GetThruput = _pdq.GetThruput
 
-def PDQ_GetLoadOpt(*args):
-  return _pdq.PDQ_GetLoadOpt(*args)
-PDQ_GetLoadOpt = _pdq.PDQ_GetLoadOpt
+def GetLoadOpt(*args):
+  return _pdq.GetLoadOpt(*args)
+GetLoadOpt = _pdq.GetLoadOpt
 
 def GetUtilization(*args):
   return _pdq.GetUtilization(*args)

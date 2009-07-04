@@ -40,7 +40,8 @@
 %rename (GetNode)          getnode;
 %rename (GetStreamsCount)  PDQ_GetStreamsCount;
 %rename (GetNodesCount)    PDQ_GetNodesCount;
-
+%rename (GetResidenceTime) PDQ_GetResidenceTime;
+%rename (GetLoadOpt)       PDQ_GetLoadOpt;
 %include "../lib/PDQ_Lib.h"
 %include "../lib/PDQ_Global.h"
 

@@ -4989,7 +4989,7 @@ XS(_wrap_GetResponse) {
 }
 
 
-XS(_wrap_PDQ_GetResidenceTime) {
+XS(_wrap_GetResidenceTime) {
   {
     char *arg1 = (char *) 0 ;
     char *arg2 = (char *) 0 ;
@@ -5007,21 +5007,21 @@ XS(_wrap_PDQ_GetResidenceTime) {
     dXSARGS;
     
     if ((items < 3) || (items > 3)) {
-      SWIG_croak("Usage: PDQ_GetResidenceTime(device,work,should_be_class);");
+      SWIG_croak("Usage: GetResidenceTime(device,work,should_be_class);");
     }
     res1 = SWIG_AsCharPtrAndSize(ST(0), &buf1, NULL, &alloc1);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PDQ_GetResidenceTime" "', argument " "1"" of type '" "char *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetResidenceTime" "', argument " "1"" of type '" "char *""'");
     }
     arg1 = (char *)(buf1);
     res2 = SWIG_AsCharPtrAndSize(ST(1), &buf2, NULL, &alloc2);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PDQ_GetResidenceTime" "', argument " "2"" of type '" "char *""'");
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GetResidenceTime" "', argument " "2"" of type '" "char *""'");
     }
     arg2 = (char *)(buf2);
     ecode3 = SWIG_AsVal_int SWIG_PERL_CALL_ARGS_2(ST(2), &val3);
     if (!SWIG_IsOK(ecode3)) {
-      SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "PDQ_GetResidenceTime" "', argument " "3"" of type '" "int""'");
+      SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "GetResidenceTime" "', argument " "3"" of type '" "int""'");
     } 
     arg3 = (int)(val3);
     result = (double)PDQ_GetResidenceTime(arg1,arg2,arg3);
@@ -5078,7 +5078,7 @@ XS(_wrap_GetThruput) {
 }
 
 
-XS(_wrap_PDQ_GetLoadOpt) {
+XS(_wrap_GetLoadOpt) {
   {
     int arg1 ;
     char *arg2 = (char *) 0 ;
@@ -5092,16 +5092,16 @@ XS(_wrap_PDQ_GetLoadOpt) {
     dXSARGS;
     
     if ((items < 2) || (items > 2)) {
-      SWIG_croak("Usage: PDQ_GetLoadOpt(should_be_class,wname);");
+      SWIG_croak("Usage: GetLoadOpt(should_be_class,wname);");
     }
     ecode1 = SWIG_AsVal_int SWIG_PERL_CALL_ARGS_2(ST(0), &val1);
     if (!SWIG_IsOK(ecode1)) {
-      SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PDQ_GetLoadOpt" "', argument " "1"" of type '" "int""'");
+      SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "GetLoadOpt" "', argument " "1"" of type '" "int""'");
     } 
     arg1 = (int)(val1);
     res2 = SWIG_AsCharPtrAndSize(ST(1), &buf2, NULL, &alloc2);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PDQ_GetLoadOpt" "', argument " "2"" of type '" "char *""'");
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GetLoadOpt" "', argument " "2"" of type '" "char *""'");
     }
     arg2 = (char *)(buf2);
     result = (double)PDQ_GetLoadOpt(arg1,arg2);
@@ -5901,9 +5901,9 @@ static swig_command_info swig_commands[] = {
 {"pdqc::GetStreamsCount", _wrap_GetStreamsCount},
 {"pdqc::GetNodesCount", _wrap_GetNodesCount},
 {"pdqc::GetResponse", _wrap_GetResponse},
-{"pdqc::PDQ_GetResidenceTime", _wrap_PDQ_GetResidenceTime},
+{"pdqc::GetResidenceTime", _wrap_GetResidenceTime},
 {"pdqc::GetThruput", _wrap_GetThruput},
-{"pdqc::PDQ_GetLoadOpt", _wrap_PDQ_GetLoadOpt},
+{"pdqc::GetLoadOpt", _wrap_GetLoadOpt},
 {"pdqc::GetUtilization", _wrap_GetUtilization},
 {"pdqc::GetQueueLength", _wrap_GetQueueLength},
 {"pdqc::PDQ_GetThruMax", _wrap_PDQ_GetThruMax},

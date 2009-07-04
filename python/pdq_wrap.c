@@ -5506,7 +5506,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_PDQ_GetResidenceTime(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GetResidenceTime(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   char *arg1 = (char *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -5524,20 +5524,20 @@ SWIGINTERN PyObject *_wrap_PDQ_GetResidenceTime(PyObject *SWIGUNUSEDPARM(self), 
   PyObject * obj2 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:PDQ_GetResidenceTime",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOO:GetResidenceTime",&obj0,&obj1,&obj2)) SWIG_fail;
   res1 = SWIG_AsCharPtrAndSize(obj0, &buf1, NULL, &alloc1);
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PDQ_GetResidenceTime" "', argument " "1"" of type '" "char *""'");
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetResidenceTime" "', argument " "1"" of type '" "char *""'");
   }
   arg1 = (char *)(buf1);
   res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PDQ_GetResidenceTime" "', argument " "2"" of type '" "char *""'");
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GetResidenceTime" "', argument " "2"" of type '" "char *""'");
   }
   arg2 = (char *)(buf2);
   ecode3 = SWIG_AsVal_int(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "PDQ_GetResidenceTime" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "GetResidenceTime" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = (int)(val3);
   result = (double)PDQ_GetResidenceTime(arg1,arg2,arg3);
@@ -5586,7 +5586,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_PDQ_GetLoadOpt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GetLoadOpt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   int arg1 ;
   char *arg2 = (char *) 0 ;
@@ -5599,15 +5599,15 @@ SWIGINTERN PyObject *_wrap_PDQ_GetLoadOpt(PyObject *SWIGUNUSEDPARM(self), PyObje
   PyObject * obj1 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:PDQ_GetLoadOpt",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:GetLoadOpt",&obj0,&obj1)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PDQ_GetLoadOpt" "', argument " "1"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "GetLoadOpt" "', argument " "1"" of type '" "int""'");
   } 
   arg1 = (int)(val1);
   res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PDQ_GetLoadOpt" "', argument " "2"" of type '" "char *""'");
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GetLoadOpt" "', argument " "2"" of type '" "char *""'");
   }
   arg2 = (char *)(buf2);
   result = (double)PDQ_GetLoadOpt(arg1,arg2);
@@ -6372,9 +6372,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GetStreamsCount", _wrap_GetStreamsCount, METH_VARARGS, NULL},
 	 { (char *)"GetNodesCount", _wrap_GetNodesCount, METH_VARARGS, NULL},
 	 { (char *)"GetResponse", _wrap_GetResponse, METH_VARARGS, NULL},
-	 { (char *)"PDQ_GetResidenceTime", _wrap_PDQ_GetResidenceTime, METH_VARARGS, NULL},
+	 { (char *)"GetResidenceTime", _wrap_GetResidenceTime, METH_VARARGS, NULL},
 	 { (char *)"GetThruput", _wrap_GetThruput, METH_VARARGS, NULL},
-	 { (char *)"PDQ_GetLoadOpt", _wrap_PDQ_GetLoadOpt, METH_VARARGS, NULL},
+	 { (char *)"GetLoadOpt", _wrap_GetLoadOpt, METH_VARARGS, NULL},
 	 { (char *)"GetUtilization", _wrap_GetUtilization, METH_VARARGS, NULL},
 	 { (char *)"GetQueueLength", _wrap_GetQueueLength, METH_VARARGS, NULL},
 	 { (char *)"PDQ_GetThruMax", _wrap_PDQ_GetThruMax, METH_VARARGS, NULL},

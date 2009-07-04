@@ -17,7 +17,8 @@
  * MVA_Canon.c
  * 
  * Updated by NJG on Sat May 13 10:01:19 PDT 2006
- * Revised by NJG on Mon, Apr 2, 2007 (for MSQ erlang solution)
+ * Revised by NJG on Mon, Apr 2, 2007. MSQ erlang solver
+ * Revised by NJG on Friday, June 26, 2009. See function: sumU(int k)
  *
  *  $Id$
  */
@@ -158,6 +159,8 @@ void canonical(void)
 
 double sumU(int k)
 {
+	// Compute the total utilization for device k
+	
     extern int        PDQ_DEBUG, streams, nodes;
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
@@ -168,8 +171,10 @@ double sumU(int k)
     char             *p = "sumU()";
 
     for (c = 0; c < streams; c++) {
-        //sum += (job[c].trans->arrival_rate * node[k].demand[c]);
-        sum += node[k].utiliz[c];
+    	// This older code works correctly
+        sum += (job[c].trans->arrival_rate * node[k].demand[c]);
+        // Do NOT use the following 
+        //sum += node[k].utiliz[c]; array not updated by here
     }
 
     return (sum);

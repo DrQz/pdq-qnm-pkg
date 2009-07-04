@@ -4059,7 +4059,7 @@ R_swig_GetResponse ( SEXP should_be_class, SEXP wname, SEXP s_swig_copy)
 
 
 SWIGEXPORT SEXP
-R_swig_PDQ_GetResidenceTime ( SEXP device, SEXP work, SEXP should_be_class, SEXP s_swig_copy)
+R_swig_GetResidenceTime ( SEXP device, SEXP work, SEXP should_be_class, SEXP s_swig_copy)
 {
   double result;
   char *arg1 = (char *) 0 ;
@@ -4108,7 +4108,7 @@ R_swig_GetThruput ( SEXP should_be_class, SEXP wname, SEXP s_swig_copy)
 
 
 SWIGEXPORT SEXP
-R_swig_PDQ_GetLoadOpt ( SEXP should_be_class, SEXP wname, SEXP s_swig_copy)
+R_swig_GetLoadOpt ( SEXP should_be_class, SEXP wname, SEXP s_swig_copy)
 {
   double result;
   int arg1 ;
@@ -5106,7 +5106,7 @@ SWIGINTERN R_CallMethodDef CallEntries[] = {
    {"R_swig_BATCH_TYPE_name_set", (DL_FUNC) &R_swig_BATCH_TYPE_name_set, 2},
    {"R_swig_TERMINAL_TYPE_name_set", (DL_FUNC) &R_swig_TERMINAL_TYPE_name_set, 2},
    {"R_swig_CreateOpen", (DL_FUNC) &R_swig_CreateOpen, 3},
-   {"R_swig_PDQ_GetResidenceTime", (DL_FUNC) &R_swig_PDQ_GetResidenceTime, 4},
+   {"R_swig_GetResidenceTime", (DL_FUNC) &R_swig_GetResidenceTime, 4},
    {"R_swig_PDQ_GetThruMax", (DL_FUNC) &R_swig_PDQ_GetThruMax, 3},
    {"R_swig_streams_get", (DL_FUNC) &R_swig_streams_get, 1},
    {"R_swig_job_get", (DL_FUNC) &R_swig_job_get, 0},
@@ -5127,7 +5127,7 @@ SWIGINTERN R_CallMethodDef CallEntries[] = {
    {"R_swig_TERMINAL_TYPE_pop_set", (DL_FUNC) &R_swig_TERMINAL_TYPE_pop_set, 2},
    {"R_swig_SYSTAT_TYPE_physmem_get", (DL_FUNC) &R_swig_SYSTAT_TYPE_physmem_get, 2},
    {"R_swig_JOB_TYPE_trans_set", (DL_FUNC) &R_swig_JOB_TYPE_trans_set, 2},
-   {"R_swig_PDQ_GetLoadOpt", (DL_FUNC) &R_swig_PDQ_GetLoadOpt, 3},
+   {"R_swig_GetLoadOpt", (DL_FUNC) &R_swig_GetLoadOpt, 3},
    {"R_swig_SYSTAT_TYPE_minRT_set", (DL_FUNC) &R_swig_SYSTAT_TYPE_minRT_set, 2},
    {"R_swig_SetDemand", (DL_FUNC) &R_swig_SetDemand, 3},
    {"R_swig_version_set", (DL_FUNC) &R_swig_version_set, 1},
