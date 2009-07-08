@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2006, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2009, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -14,9 +14,13 @@
 /*******************************************************************************/
 
 /*
- * PDQ_Exact.c
+ * PDQ_Exact.c (not full MVA_Exact.c)
  * 
  * Updated by NJG on 02:44:17 AM  2/23/97
+ * The book release only permits up to 3 classes of workload 
+ * and thus, only a 3-deep loop.
+ * Hence, PDQ_Exact and not MVA_Exact, which uses recurseration.
+ * 
  * Edited by NJG: Fri Feb  5 16:58:09 PST 1999
  * 	Fix N=1 stability problem
  * 
@@ -34,7 +38,7 @@
 #define	MAXPOP1	 1000
 #define	MAXPOP2	 1000
 #define	MAXDEVS	 10
-#define  MAXCLASS  3
+#define MAXCLASS  3
 
 //-------------------------------------------------------------------------
 
