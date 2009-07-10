@@ -729,7 +729,11 @@ void print_node_stats(int c, int should_be_class)
 				devL = X * devW;
 				break;
 			default:
-				devU = node[k].utiliz[c];
+				//devU = node[k].utiliz[c];
+				// node[k].utiliz[c] is not updated in either EXACT or APPROX methods.
+				// Rather than implementing it in every relevant module, 
+				// we just use Little's law here.	
+				devU = X * node[k].demand[c];
 				devQ = X * node[k].resit[c];
 				devW = node[k].resit[c] - node[k].demand[c];
 				devL = X * devW;
