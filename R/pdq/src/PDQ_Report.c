@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2007, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2009, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -19,7 +19,8 @@
  * Last revised by NJG on Fri Aug  2 10:29:48  2002
  * Last revised by NJG on Thu Oct  7 20:02:27 PDT 2004
  * Last updated by NJG on Mon, Apr 2, 2007
- * Last updated by NJG on Wed, Apr 4, 2007 (NJG added Waiting line and time)
+ * Last updated by NJG on Wed, Apr 4, 2007: dded Waiting line and time
+ * Last updated by NJG on Friday, July 10, 2009: fixed dev utilization reporting
  * 
  *  $Id$
  */
@@ -729,7 +730,12 @@ void print_node_stats(int c, int should_be_class)
 				devL = X * devW;
 				break;
 			default:
-				devU = node[k].utiliz[c];
+				// NJG on Friday, July 10, 2009
+				//devU = node[k].utiliz[c];
+				// node[k].utiliz[c] is not updated in either EXACT or APPROX methods.
+				// Rather than implementing it in every relevant module, 
+				// we just use Little's law here.	
+				devU = X * node[k].demand[c];
 				devQ = X * node[k].resit[c];
 				devW = node[k].resit[c] - node[k].demand[c];
 				devL = X * devW;
