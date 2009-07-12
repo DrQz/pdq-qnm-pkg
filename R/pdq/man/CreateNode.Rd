@@ -36,9 +36,15 @@ Neil Gunther <njgunther@perfdynamics.com, with
 }
 \seealso{ }
 \examples{
+library("pdq")
+Init("Server")
 CreateNode("cpu",  CEN, FCFS)
 CreateNode("bus",  CEN, FCFS)
 CreateNode("disk", CEN, FCFS)
 }
-\keyword{ }
-\keyword{ }
+\keyword{CEN}
+\keyword{DLY}
+\keyword{FCFS}
+\keyword{ISRV}
+\keyword{LCFS}
+\keyword{PSHR}

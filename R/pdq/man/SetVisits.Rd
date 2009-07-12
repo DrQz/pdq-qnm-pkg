@@ -25,6 +25,8 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
+library(pdq)
+Init("ClosedCircuit")
 CreateClosed("DB_Workers", TERM, 57.4, 31.6)
 CreateNode("cpu", CEN, FCFS)
 SetVisits("cpu", "DB_Workers", 10.0, 0.013)

@@ -23,6 +23,9 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
+library(pdq)
+Init("PDQ Model")
+CreateOpen("work", 0.75)
 SetTUnit("Minutes")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

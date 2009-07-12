@@ -28,6 +28,12 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
+library("pdq")
+Init("Server")
+think <- 8 * 10^(-3) # ms as seconds
+CreateNode("disk", CEN, FCFS)
+CreateClosed("IOs", TERM, 100, think)
+SetDemand("disk","IOs",0.5)
 Solve(APPROX)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

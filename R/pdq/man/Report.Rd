@@ -20,6 +20,17 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
+library(pdq)
+
+arrivRate    <- 0.75
+service_time <- 1.0
+
+Init("OpenCircuit")
+CreateNode("server", CEN, FCFS)
+CreateOpen("work", arrivRate)
+SetDemand("server", "work", service_time)
+
+Solve(CANON)
 Report()
 }
 \keyword{ }

@@ -23,7 +23,27 @@ Neil Gunther <njgunther@perfdynamics.com, with
 }
 \seealso{ }
 \examples{
-Init("Application Model 1");
-}
+library("pdq")
+clients = 200
+think   = 8   * 10^(-3) # ms as seconds
+stime   = 500 * 10^(-3) # ms as seconds
+work    = "w"
+xc <- 0
+yc <- 0
+for (i in 1:clients) {
+    Init("")
+    CreateClosed(work, TERM, as.double(i), think) 
+    # create 20 queueing nodes in PDQ
+    for (j in 1:20) {
+        nname = paste("n",sep="",j) # concat j to node name
+        CreateNode(nname,CEN,FCFS)
+        SetDemand(nname,work,stime)
+    }
+    Solve(APPROX)
+    # set up for plotting
+    xc[i]<-as.double(i)
+    yc[i]<-GetThruput(TERM,work)
+    nopt<-(20*stime+think)/stime
+ }
 \keyword{ }
 \keyword{ }% __ONLY ONE__ keyword per line

@@ -34,8 +34,10 @@ Neil Gunther <njgunther@perfdynamics.com, with
 }
 \seealso{ }
 \examples{
-CreateMultiNode(3, "Claims", CEN, MSQ)
-CreateMultiNode(7, "Policy", CEN, MSQ)
+library("pdq")
+Init("Airport")
+CreateMultiNode(3, "Tickets", CEN, MSQ)
 }
-\keyword{ }
-\keyword{ }
+\keyword{ CEN }
+\keyword{ DLY }
+\keyword{ MSQ }

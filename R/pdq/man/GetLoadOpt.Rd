@@ -31,7 +31,12 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
-nopt <- GetLoadOpt(TRANS, "IO_Cmds")
+library("pdq")
+clients <- 200
+think <- 8 * 10^(-3) # ms as seconds
+Init("")
+CreateClosed("work", TERM, clients, think)
+nopt <- GetLoadOpt(TERM, "work")
 }
 \keyword{ }
 \keyword{ }% __ONLY ONE__ keyword per line

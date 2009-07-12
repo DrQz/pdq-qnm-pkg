@@ -33,6 +33,12 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
+library("pdq")
+Init("server")
+think <- 8 * 10^(-3)
+CreateClosed("IO_Cmds", TERM, 100, think)
+CreateNode("disk", CEN, FCFS)
+SetDemand("disk","IO_Cmds",0.5)
 Solve(EXACT);
 ut <- GetUtilization("disk", "IO_Cmds", TERM)
 }

@@ -22,6 +22,8 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
+library(pdq)
+Init("OpenCircuit")
 SetComment("A simple M/M/1 queue")
 }
 \keyword{ }

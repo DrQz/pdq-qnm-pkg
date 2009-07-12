@@ -22,6 +22,9 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 }
 \seealso{ }
 \examples{
+library(pdq)
+Init("OpenCircuit")
+CreateOpen("SAN_controller", 200)
 SetWUnit("I/O_Reqs")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

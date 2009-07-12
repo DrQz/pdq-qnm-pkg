@@ -30,8 +30,11 @@ Neil Gunther <njgunther@perfdynamics.com, with
 }
 \seealso{ }
 \examples{
-CreateClosed("DB_workers", TERM, 57.4, 31.6)
-CreateClosed("fax_tasks", BATCH, 10.0)
+library("pdq")
+clients <- 200
+think <- 8 * 10^(-3) # ms as seconds
+Init("")
+CreateClosed("work", TERM, clients, think)
 }
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line
+\keyword{ TERM }
+\keyword{ BATCH } % __ONLY ONE__ keyword per line

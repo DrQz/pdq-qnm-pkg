@@ -23,6 +23,8 @@ Neil Gunther <njgunther@perfdynamics.com, with
 }
 \seealso{ }
 \examples{
+library("pdq")
+Init("server")
 CreateOpen("IO_Cmds", 10.0)
 }
 \keyword{ }
