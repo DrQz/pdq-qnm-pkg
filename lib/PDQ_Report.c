@@ -724,8 +724,10 @@ void print_node_stats(int c, int should_be_class)
 				break;
 			case MSQ:
 				devU = node[k].utiliz[c];
-				devQ = X * node[k].resit[c];
 				m = node[k].devtype;
+				// X here is total arrival rate.
+				// Need divide by m to get server rate
+				devQ = X * node[k].resit[c] / m;
 				devW = node[k].resit[c] - node[k].demand[c];
 				devL = X * devW;
 				break;

@@ -88,10 +88,10 @@ sub mem_model
       if ($i <= $m) {
          pdq::Init("");
 
+ 		$pdq::streams = pdq::CreateClosed("work", $pdq::BATCH, $i, 0.0);
          $pdq::nodes   = pdq::CreateNode("CPU", $pdq::CEN, $pdq::FCFS);
          $pdq::nodes   = pdq::CreateNode("DK1", $pdq::CEN, $pdq::FCFS);
-         $pdq::nodes   = pdq::CreateNode("DK2", $pdq::CEN, $pdq::FCFS);
-         $pdq::streams = pdq::CreateClosed("work", $pdq::BATCH, $i, $i);
+         $pdq::nodes   = pdq::CreateNode("DK2", $pdq::CEN, $pdq::FCFS);       
 
          pdq::SetDemand("CPU", "work", 3.0);
          pdq::SetDemand("DK1", "work", 4.0);

@@ -20,6 +20,7 @@
  * Updated by NJG on Fri May 12 13:09:28 PDT 2006
  * Updated by NJG on Sat, Apr 7, 2007 Added GetNodesCount and GetStreamsCount
  * Updated by NJG on Mon, Sep 29, 2008 Removed resets() in debug()
+ * Updated by NJG on Thu, Sep 10, 2009 Changed GetUtilization() for m server case
  *
  *  $Id$
  */
@@ -310,7 +311,7 @@ PDQ_GetUtilization(char *device, char *work, int should_be_class)
 
 	double            x, u;
 
-	int               c, k;
+	int               c, k, m;
 
 	// g_debug("PDQ_GetUtilization\n");
 	// g_debugf("job[%d]\n", job);
@@ -325,7 +326,15 @@ PDQ_GetUtilization(char *device, char *work, int should_be_class)
 
 		for (k = 0; k < nodes; k++) {
 			if (strcmp(device, node[k].devname) == 0) {
+				// X is total arrival rate for MSQ
 				u = node[k].demand[c] * x;
+				
+				// Edited by NJG on Thursday, September 10, 2009
+				// Calculate per-server utilization; divide by m
+				if (node[k].sched == MSQ) {
+					m = node[k].devtype;
+					u = u/m;
+				}
 				return (u);
 			}
 		}
