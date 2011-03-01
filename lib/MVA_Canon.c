@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2007, Performance Dynamics Company                    */
+/*  Copyright (c) 1994 - 2011, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -19,6 +19,7 @@
  * Updated by NJG on Sat May 13 10:01:19 PDT 2006
  * Revised by NJG on Mon, Apr 2, 2007. MSQ erlang solver
  * Revised by NJG on Friday, June 26, 2009. See function: sumU(int k)
+ * Revised by NJG on Tuesday, March 1, 2011. Set Dsat=0.0 in each c-loop iteration (Newsom)
  *
  *  $Id$
  */
@@ -50,6 +51,7 @@ void canonical(void)
     double            devU;
     double            sumU();
     char              jobname[MAXBUF];
+    char              satname[MAXBUF];
     char             *p = "canonical()";
 
     if (PDQ_DEBUG)
@@ -57,12 +59,14 @@ void canonical(void)
 
     for (c = 0; c < streams; c++) {
         sumR[c] = 0.0;
-        X = job[c].trans->arrival_rate;
+        Dsat = 0.0; // Fix submitted by James Newsom, 23 Feb 2011
+        //Otherwise, stream index can be compared to wrong (old) device index
 
-                
-        // find the bottleneck node (i.e., largest service demand) 
+        X = job[c].trans->arrival_rate;
+               
+        // find bottleneck node (== largest service demand)
         for (k = 0; k < nodes; k++) {
-        	// Hope to remove single class restriction
+        	// Hope to remove single class restriction eventually
         	if (node[k].sched == MSQ && streams > 1) {
 				sprintf(s1, "Only single PDQ stream allowed with MSQ nodes.");
 				errmsg(p, s1);
@@ -74,23 +78,29 @@ void canonical(void)
             }
             if (Ddev > Dsat) {
                 Dsat = Ddev;
+                //Since we're about to fall out this k-loop
+                //keep device name in case of error msg
+                sprintf(satname, "%s", node[k].devname);
             }
-        }
+        } // end of k-loop
+        
+        Xsat = 1.0 / Dsat;
+        job[c].trans->saturation_rate = Xsat;
 
         if (Dsat == 0) {
             sprintf(s1, "Dsat = %3.3f", Dsat);
             errmsg(p, s1);
         }
 
-        job[c].trans->saturation_rate = Xsat = 1.0 / Dsat;
-
-        if (X > job[c].trans->saturation_rate) {
-            sprintf(s1,
-                "\nArrival rate %3.3f exceeds saturation throughput %3.3f = 1/%3.3f",
-                X, Xsat, Dsat);
-            errmsg(p, s1);
+        if (X > Xsat) {
+        	getjob_name(jobname, c);
+            sprintf(s1, 
+            	"\nArrival rate %3.3f for stream \'%s\' exceeds saturation thruput %3.3f of node \'%s\' with demand %3.3f", 
+            	X, jobname, Xsat, satname, Dsat
+            );  
+        	errmsg(p, s1);
         }
-
+        
         for (k = 0; k < nodes; k++) {
             node[k].utiliz[c] = X * node[k].demand[c];
             if (node[k].sched == MSQ) {     // multiserver case
@@ -135,7 +145,7 @@ void canonical(void)
             
             sumR[c] += node[k].resit[c];
             
-        }  // loop over k
+        }  // end of k-loop
 
         job[c].trans->sys->thruput = X;             // system throughput
         job[c].trans->sys->response = sumR[c];      // system response time 
@@ -148,7 +158,7 @@ void canonical(void)
             printf("\tN[%s]: %3.4f\n", jobname, job[c].trans->sys->residency);
         }
         
-    }  // loop over c
+    }  // end of c-loop
 
     if (PDQ_DEBUG)
         debug(p, "Exiting");
