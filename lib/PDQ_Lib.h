@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2009, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2011, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -37,7 +37,7 @@
 // This string gets read by GetVersion script amongst others
 // Do not modify order of fields
 // Must not contain more than 24 characters
-static char *version = "PDQ Analyzer v5.0 071209";
+static char *version = "PDQ Analyzer v5.0 030211";
 
 //---- TYPES --------------------------------------------------------------
 
