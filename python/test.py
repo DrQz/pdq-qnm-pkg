@@ -19,6 +19,10 @@
 #
 #---------------------------------------------------------------------
 
+# Prevent this program from loading pdq.py in this directory
+import sys
+del sys.path[0]
+
 import pdq
 
 #---- Define globals -------------------------------------------------
