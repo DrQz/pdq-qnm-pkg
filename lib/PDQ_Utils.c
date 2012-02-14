@@ -727,6 +727,14 @@ void
 errmsg(char *pname, char *msg)
 {
 	extern char     model[];  // in PDQ_Globals.c
+	
+	//Fix for error msg output that causes R-Console to crash.
+	//Bounds check msg array before printing to stderr
+	if (strlen(msg) > MAXBUF) {
+		printf("Error message function problem in PDQ_Utils.\n");
+		printf("String content has been corrupted.\n");
+		printf("Check for quoted name conflicts in your PDQ model.\n");
+	}
     
     // For some reason 'model' string is trashed (NJG Sat May 13 10:15:52 PDT 2006)
     //printf("ERROR in model: \'%s\' at procedure \'%s\': %s\n", model, pname, msg);
