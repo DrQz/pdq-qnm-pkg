@@ -22,12 +22,16 @@ use pdq;
 ## INPUTS ##
 # Measured parameters
 $MeasurePeriod = 3600; # seconds
-$ArrivalCount = 1800;
+#$ArrivalCount = 1800;
+$ArrivalCount = 3590;
+
 $ServiceVisits = 10;
 
 # Derived parameters
 $ArrivalRate = $ArrivalCount / $MeasurePeriod;
-$ServiceTime = 0.10; # seconds
+#$ServiceTime = 0.10; # seconds
+$ServiceTime = 0.09; # seconds
+
 $ServiceDemand = $ServiceVisits * $ServiceTime; # seconds
 
 # Check the queue meets stability condition
