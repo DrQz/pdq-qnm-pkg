@@ -727,7 +727,9 @@ void print_node_stats(int c, int should_be_class)
 				m = node[k].devtype;
 				// X here is total arrival rate.
 				// Need divide by m to get server rate
-				devQ = X * node[k].resit[c] / m;
+				// Wrong!
+				//devQ = X * node[k].resit[c] / m;
+				devQ = X * node[k].resit[c];
 				devW = node[k].resit[c] - node[k].demand[c];
 				devL = X * devW;
 				break;
