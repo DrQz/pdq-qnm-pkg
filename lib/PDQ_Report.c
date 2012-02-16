@@ -21,6 +21,7 @@
  * Last updated by NJG on Mon, Apr 2, 2007
  * Last updated by NJG on Wed, Apr 4, 2007: dded Waiting line and time
  * Last updated by NJG on Friday, July 10, 2009: fixed dev utilization reporting
+ * Revised by NJG on Wednesday, February 15, 2012. Don't recalc wsize and wtime.
  * 
  *  $Id$
  */
@@ -723,26 +724,12 @@ void print_node_stats(int c, int should_be_class)
 				devL = 0.0;
 				break;
 			case MSQ:
-				devU = node[k].utiliz[c];
-				m = node[k].devtype;
-				// X here is total arrival rate.
-				// Need divide by m to get server rate
-				// Wrong!
-				//devQ = X * node[k].resit[c] / m;
-				devQ = X * node[k].resit[c];
-				devW = node[k].resit[c] - node[k].demand[c];
-				devL = X * devW;
-				break;
 			default:
-				// NJG on Friday, July 10, 2009
-				//devU = node[k].utiliz[c];
-				// node[k].utiliz[c] is not updated in either EXACT or APPROX methods.
-				// Rather than implementing it in every relevant module, 
-				// we just use Little's law here.	
-				devU = X * node[k].demand[c];
-				devQ = X * node[k].resit[c];
-				devW = node[k].resit[c] - node[k].demand[c];
-				devL = X * devW;
+				// All now calculated in MVA_Canon.c for any m-server value
+				devU = node[k].utiliz[c];
+				devQ = node[k].qsize[c];
+				devL = node[k].wsize[c];
+				devW = node[k].wtime[c];
                 break;
 		}
 		

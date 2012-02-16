@@ -20,6 +20,7 @@
  * Revised by NJG on Mon, Apr 2, 2007. MSQ erlang solver
  * Revised by NJG on Friday, June 26, 2009. See function: sumU(int k)
  * Revised by NJG on Tuesday, March 1, 2011. Set Dsat=0.0 in each c-loop iteration (Newsom)
+ * Edited by NJG on Wednesday, February 15, 2012. Fix Xsat for M/M/m
  *
  *  $Id$
  */
@@ -41,7 +42,7 @@ void canonical(void)
     extern double     ErlangR(double arrivrate, double servtime, int servers); // ANSI
 
     int               k;
-    int               m; // servers in MSQ case
+    int               mservers = 1.0; // updated in MSQ case
     int               c = 0;
     double            X;
     double            Xsat;
@@ -72,9 +73,9 @@ void canonical(void)
 				errmsg(p, s1);
             }
             Ddev = node[k].demand[c];
-            if (node[k].sched == MSQ) {     // multiserver case
-                m = node[k].devtype;        // contains number of servers > 0
-                Ddev /= m;
+            if (node[k].sched == MSQ) {      // multiserver case
+                mservers = node[k].devtype;  // update here 
+                //Ddev /= m;            Don't do this here! --NJG: 2/15/12
             }
             if (Ddev > Dsat) {
                 Dsat = Ddev;
@@ -84,7 +85,8 @@ void canonical(void)
             }
         } // end of k-loop
         
-        Xsat = 1.0 / Dsat;
+        // We already have value of mservers
+        Xsat = mservers / Dsat; // Correct for M/M/m --NJG: 2/15/12
         job[c].trans->saturation_rate = Xsat;
 
         if (Dsat == 0) {
@@ -102,14 +104,17 @@ void canonical(void)
         }
         
         for (k = 0; k < nodes; k++) {
-            node[k].utiliz[c] = X * node[k].demand[c];
+            // We already have value of mservers
+            node[k].utiliz[c] = X * node[k].demand[c] / mservers;
+            /* 
             if (node[k].sched == MSQ) {     // multiserver case
-                m = node[k].devtype;            // recompute m in every k-loop
+                m = node[k].devtype;        // recompute m in every k-loop
                 node[k].utiliz[c] /= m;     // per server
             }
+            */
 
-            devU = sumU(k); // sum all workload classes
-
+			// Check total utilization over all workload classes
+            devU = sumU(k); 
             if (devU > 1.0) {
                 sprintf(s1, "\nTotal utilization of node \"%s\" is %2.2f%% (> 100%%)",
                     node[k].devname,
@@ -127,10 +132,16 @@ void canonical(void)
                 case LCFS:
                     node[k].resit[c] = node[k].demand[c] / (1.0 - devU);
                     node[k].qsize[c] = X * node[k].resit[c];
+                    node[k].wsize[c] = node[k].qsize[c] - node[k].demand[c];
+                    node[k].wtime[c] = node[k].qsize[c] * node[k].demand[c];
                     break;
                 case MSQ: // Added by NJG on Mon, Apr 2, 2007
-                    node[k].resit[c] = ErlangR(X, node[k].demand[c], m);
+                    node[k].resit[c] = ErlangR(X, node[k].demand[c], mservers);
                     node[k].qsize[c] = X * node[k].resit[c];
+                    // Added by NJG on 2/15/12
+                    node[k].wsize[c] = node[k].qsize[c] - (mservers * node[k].demand[c]);
+                    node[k].wtime[c] = 
+                    	ErlangR(X, node[k].demand[c], mservers) - node[k].demand[c];
                     break;
                 case ISRV:
                     node[k].resit[c] = node[k].demand[c];
@@ -175,7 +186,6 @@ double sumU(int k)
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
 
-
     int               c;
     double            sum = 0.0;
     char             *p = "sumU()";
@@ -184,8 +194,8 @@ double sumU(int k)
     	// NJG on Sunday, June 28, 2009 7:29:45 PM
         // This branching is a hack. Why do I need it?
         // I think it's because multi-class workloads and multi-servers are incompatible.
-         if (node[k].sched == MSQ) sum += node[k].utiliz[c];
-         else sum += (job[c].trans->arrival_rate * node[k].demand[c]);
+         if (node[k].sched == MSQ) { sum += node[k].utiliz[c]; }
+         else { sum += (job[c].trans->arrival_rate * node[k].demand[c]); }
     }
 
     return (sum);

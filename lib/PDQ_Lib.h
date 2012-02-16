@@ -152,6 +152,8 @@ typedef struct {
    double            resit[MAXSTREAMS];
    double            utiliz[MAXSTREAMS];    /* computed node utilization */
    double            qsize[MAXSTREAMS];
+   double            wsize[MAXSTREAMS];
+   double            wtime[MAXSTREAMS];
    double            avqsize[MAXSTREAMS];
 } NODE_TYPE;
 
