@@ -132,14 +132,14 @@ void canonical(void)
                 case LCFS:
                     node[k].resit[c] = node[k].demand[c] / (1.0 - devU);
                     node[k].qsize[c] = X * node[k].resit[c];
-                    node[k].wsize[c] = node[k].qsize[c] - node[k].demand[c];
+                    node[k].wsize[c] = node[k].qsize[c] - node[k].utiliz[c];
                     node[k].wtime[c] = node[k].qsize[c] * node[k].demand[c];
                     break;
                 case MSQ: // Added by NJG on Mon, Apr 2, 2007
                     node[k].resit[c] = ErlangR(X, node[k].demand[c], mservers);
                     node[k].qsize[c] = X * node[k].resit[c];
                     // Added by NJG on 2/15/12
-                    node[k].wsize[c] = node[k].qsize[c] - (mservers * node[k].demand[c]);
+                    node[k].wsize[c] = node[k].qsize[c] - (mservers * node[k].utiliz[c]);
                     node[k].wtime[c] = 
                     	ErlangR(X, node[k].demand[c], mservers) - node[k].demand[c];
                     break;
