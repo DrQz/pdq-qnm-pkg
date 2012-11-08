@@ -20,6 +20,7 @@
  * Revised by NJG on Mon, Apr 2, 2007. MSQ erlang solver
  * Revised by NJG on Friday, June 26, 2009. See function: sumU(int k)
  * Revised by NJG on Tuesday, March 1, 2011. Set Dsat=0.0 in each c-loop iteration (Newsom)
+ * Updated by PJP on Saturday, Nov 3, 2012. Added R support
  *
  *  $Id$
  */
@@ -119,7 +120,7 @@ void canonical(void)
             }
 
             if (PDQ_DEBUG)
-                printf("Tot Util: %3.4f for %s\n", devU, node[k].devname);
+                PRINTF("Tot Util: %3.4f for %s\n", devU, node[k].devname);
 
             switch (node[k].sched) {
                 case FCFS:
@@ -153,9 +154,9 @@ void canonical(void)
 
         if (PDQ_DEBUG) {
             getjob_name(jobname, c);
-            printf("\tX[%s]: %3.4f\n", jobname, job[c].trans->sys->thruput);
-            printf("\tR[%s]: %3.4f\n", jobname, job[c].trans->sys->response);
-            printf("\tN[%s]: %3.4f\n", jobname, job[c].trans->sys->residency);
+            PRINTF("\tX[%s]: %3.4f\n", jobname, job[c].trans->sys->thruput);
+            PRINTF("\tR[%s]: %3.4f\n", jobname, job[c].trans->sys->response);
+            PRINTF("\tN[%s]: %3.4f\n", jobname, job[c].trans->sys->residency);
         }
         
     }  // end of c-loop

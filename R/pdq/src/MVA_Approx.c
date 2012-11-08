@@ -17,6 +17,7 @@
  * MVA_Approx.c
  * 
  * Last revised by NJG: 14:14:59  7/16/95
+ * Last Updated by PJP: Nov 3, 2012
  * 
  *  $Id$
  */
@@ -27,6 +28,7 @@
 #include <math.h>
 
 #include "PDQ_Lib.h"
+
 
 //-------------------------------------------------------------------------
 
@@ -55,8 +57,11 @@ void approx(void)
 
 	if (nodes == 0 || streams == 0)
 		errmsg(p, "Network nodes and streams not defined.");
-
+#ifndef __R_PDQ
 	if ((last = (NODE_TYPE *) calloc(sizeof(NODE_TYPE), nodes)) == NULL)
+#else
+	  if ((last = (NODE_TYPE *) Calloc((size_t) nodes,  NODE_TYPE )) == NULL)
+#endif
 		errmsg(p, "Node (last) allocation failed!\n");
 
 	iterations = 0;
@@ -187,21 +192,21 @@ void approx(void)
 
 
 			if (PDQ_DEBUG) {
-				printf("\tTot ResTime[%s] = %3.4f\n", jobname, sumR[c]);
+				PRINTF("\tTot ResTime[%s] = %3.4f\n", jobname, sumR[c]);
 
-				printf("\tnode[%s].qsize[%s] = %3.4f\n",
+				PRINTF("\tnode[%s].qsize[%s] = %3.4f\n",
 					node[k].devname,
 					jobname,
 					node[k].qsize[c]
 				);
 
-				printf("\tnode[%s].demand[%s] = %3.4f\n",
+				PRINTF("\tnode[%s].demand[%s] = %3.4f\n",
 					node[k].devname,
 					jobname,
 					node[k].demand[c]
 				);
 
-				printf("\tnode[%s].resit[%s] = %3.4f\n",
+				PRINTF("\tnode[%s].resit[%s] = %3.4f\n",
 					node[k].devname,
 					jobname,
 					node[k].resit[c]
@@ -269,7 +274,7 @@ void approx(void)
 
 			if (PDQ_DEBUG) {
 				sprintf(s1, "Updating queues of \"%s\"", jobname);
-				printf("\n");
+				PRINTF("\n");
 				debug(p, s1);
 				resets(s1);
 			}
@@ -318,8 +323,8 @@ void approx(void)
 	/* cleanup */
 
 	if (last) {
-		free(last);
-		last = NULL;
+	  PDQ_FREE(last); 
+	  last = NULL; 
 	}
 
 	if (PDQ_DEBUG)

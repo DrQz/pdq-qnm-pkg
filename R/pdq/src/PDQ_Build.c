@@ -23,6 +23,7 @@
  * Updated by NJG on Wed, Apr 4, 2007 (change MSQ to devtype and m to sched)
  * Updated by NJG on Fri, Apr 6, 2007 (Error if SetUnit before calling Create circuit)
  * Updated by NJG on Wed Feb 25, 2009 (added PDQ_CreateMultiNode)
+ * Updated by PJP on Sat Nov 3, 2012 (added support for R)
  *
  *  $Id$
  */
@@ -31,8 +32,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #include "PDQ_Lib.h"
 #include "PDQ_Global.h"
+
+
 
 //-------------------------------------------------------------------------
 
@@ -90,42 +94,42 @@ void PDQ_Init(char *name)
 		for (c = 0; c < MAXSTREAMS; c++) {
 			if (job[c].term) {
 				if (job[c].term->sys) {
-					free(job[c].term->sys);
+					PDQ_FREE(job[c].term->sys);
 					job[c].term->sys = NULL;
 					job[c].batch->sys = NULL;
 					job[c].trans->sys = NULL;
 				}
-				free(job[c].term);
+				PDQ_FREE(job[c].term);
 				job[c].term = NULL;
 			}
 			if (job[c].batch) {
 				if (job[c].batch->sys) {
-					free(job[c].batch->sys);
+					PDQ_FREE(job[c].batch->sys);
 					job[c].term->sys = NULL;
 					job[c].batch->sys = NULL;
 					job[c].trans->sys = NULL;
 				}
-				free(job[c].batch);
+				PDQ_FREE(job[c].batch);
 				job[c].batch = NULL;
 			}
 			if (job[c].trans) {
 				if (job[c].trans->sys) {
-					free(job[c].trans->sys);
+					PDQ_FREE(job[c].trans->sys);
 					job[c].term->sys = NULL;
 					job[c].batch->sys = NULL;
 					job[c].trans->sys = NULL;
 				}
-				free(job[c].trans);
+				PDQ_FREE(job[c].trans);
 				job[c].trans = NULL;
 			}
 		}                         /* over c */
 
 		if (job) {
-			free(job);
+			PDQ_FREE(job);
 			job = NULL;
 		}
 		if (node) {
-			free(node);
+			PDQ_FREE(node);
 			node = NULL;
 		}
 
@@ -218,7 +222,9 @@ int PDQ_CreateNode(char *name, int device, int sched)
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
 		fprintf(out_fd, "name : %s  device : %d  sched : %d\n", name, device, sched);
-		close(out_fd);
+		//PJP this really needed to be fclose
+		//close(out_fd);
+		fclose(out_fd);
 	}
 
 	if (k > MAXNODES) {
@@ -249,7 +255,7 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	if (PDQ_DEBUG) {
 		typetostr(s1, node[k].devtype);
 		typetostr(s2, node[k].sched);
-		printf("\tNode[%d]: %s %s \"%s\"\n",
+		PRINTF("\tNode[%d]: %s %s \"%s\"\n",
 		  k, s1, s2, node[k].devname);
 		resets(s1);
 		resets(s2);
@@ -285,7 +291,9 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
 		fprintf(out_fd, "name : %s  device : %d  sched : %d\n", name, device, sched);
-		close(out_fd);
+		//The following should really be fclose
+		//		close(out_fd);
+		fclose(out_fd);
 	}
 
 	if (k > MAXNODES) {
@@ -316,7 +324,7 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 	if (PDQ_DEBUG) {
 		typetostr(s1, node[k].devtype);
 		typetostr(s2, node[k].sched);
-		printf("\tNode[%d]: %s %s \"%s\"\n",
+		PRINTF("\tNode[%d]: %s %s \"%s\"\n",
 		  k, s1, s2, node[k].devname);
 		resets(s1);
 		resets(s2);
@@ -356,7 +364,9 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
 		fprintf(out_fd, "name : %s  should_be_class : %d  pop : %f  think : %f\n", name, should_be_class, *pop, *think);
-		close(out_fd);
+		//PJP This really should be fclose
+		//close(out_fd);
+		fclose(out_fd);
 	}
 
 	if (strlen(name) >= MAXCHARS) {
@@ -366,7 +376,7 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 	}
 
 	if (c > MAXSTREAMS) {
-		printf("c = %d\n", c);
+		PRINTF("c = %d\n", c);
 		sprintf(s1, "Allocating \"%s\" exceeds %d max streams",
 			name, MAXSTREAMS);
 		errmsg(p, s1);
@@ -431,7 +441,9 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 	{
 		  out_fd = fopen("PDQ.out", "a");
 	fprintf(out_fd, "name : %s  lambda : %f\n", name, *lambda);
-		close(out_fd);
+	//PJP This should really be fclose
+	//	close(out_fd);
+		fclose(out_fd);
 	}
 	
 	if (strlen(name) > MAXCHARS) {
@@ -480,7 +492,9 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 		debug(p, "Entering");
 		out_fd = fopen("PDQ.out", "a");
 		fprintf(out_fd, "nodename : %s  workname : %s  time : %f\n", nodename, workname, *time);
-		close(out_fd);
+		//PJP This should really be fclose
+		//		close(out_fd);
+		fclose(out_fd);
 	}
 
 	/* that demand type is being used consistently per model */
@@ -488,7 +502,7 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 	if (demand_ext == VOID || demand_ext == DEMAND) {
 		node_index = getnode_index(nodename);
 		job_index  = getjob_index(workname);
-
+#ifndef __R_PDQ
 		if (!((node_index >=0) && (node_index <= nodes))) {
 			fprintf(stderr, "Illegal node index value %d\n", node_index);
 			exit(1);
@@ -498,6 +512,18 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 			fprintf(stderr, "Illegal job index value %d\n", job_index);
 			exit(1);
 		}
+#else
+		if (!((node_index >=0) && (node_index <= nodes))) {
+		  //			REprintf("Illegal node index value %d\n", node_index);
+			error("Illegal node index value %d\n", node_index);
+		}
+
+		if (!((job_index >=0) && (job_index <= streams))) {
+		  //			REprintf("Illegal node index value %d\n", node_index);
+			error("Illegal node index value %d\n", node_index);
+		}
+
+#endif
 
 		node[node_index].demand[job_index] = *time;
 		demand_ext = DEMAND;
@@ -526,7 +552,7 @@ void PDQ_SetVisits_p(char *nodename, char *workname, double *visits, double *ser
 
 	if (PDQ_DEBUG)
 	{
-		printf("nodename : %s  workname : %s  visits : %f  service : %f\n", nodename, workname, *visits, *service);
+		PRINTF("nodename : %s  workname : %s  visits : %f  service : %f\n", nodename, workname, *visits, *service);
 	}
 
 	if (demand_ext == VOID || demand_ext == VISITS) {
@@ -599,7 +625,7 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, job[c].should_be_class);
-		printf("\tStream[%d]: %s \"%s\"; N: %3.1f, Z: %3.2f\n",
+		PRINTF("\tStream[%d]: %s \"%s\"; N: %3.1f, Z: %3.2f\n",
 		  c, s1,
 		  job[c].term->name,
 		  job[c].term->pop,
@@ -634,7 +660,7 @@ void create_batch_stream(int net, char* label, double number)
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, job[c].should_be_class);
-		printf("\tStream[%d]: %s \"%s\"; N: %3.1f\n",
+		PRINTF("\tStream[%d]: %s \"%s\"; N: %3.1f\n",
 		  c, s1, job[c].batch->name, job[c].batch->pop);
 		resets(s1);
 	}
@@ -660,7 +686,7 @@ void create_transaction(int net, char* label, double lambda)
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, job[c].should_be_class);
-		printf("\tStream[%d]:  %s\t\"%s\";\tLambda: %3.1f\n",
+		PRINTF("\tStream[%d]:  %s\t\"%s\";\tLambda: %3.1f\n",
 		  c, s1, job[c].trans->name, job[c].trans->arrival_rate);
 		resets(s1);
 	}
@@ -671,7 +697,7 @@ void create_transaction(int net, char* label, double lambda)
 void writetmp(FILE* fp, char* s)
 {
 	fprintf(fp, "%s", s);
-	printf("%s", s);
+	PRINTF("%s", s);
 }  /* writetmp */
 
 //-------------------------------------------------------------------------

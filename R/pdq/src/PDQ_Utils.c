@@ -21,6 +21,7 @@
  * Updated by NJG on Sat, Apr 7, 2007 Added GetNodesCount and GetStreamsCount
  * Updated by NJG on Mon, Sep 29, 2008 Removed resets() in debug()
  * Updated by NJG on Thu, Sep 10, 2009 Changed GetUtilization() for m server case
+ * Updated by PJP on Sat, Nov 3, 2012 Added R support to the library
  *
  *  $Id$
  */
@@ -32,6 +33,7 @@
 
 #include "PDQ_Lib.h"
 #include "debug.h"
+
 
 //-------------------------------------------------------------------------
 
@@ -91,10 +93,12 @@ char            prevproc[MAXBUF];
 //         Public Utilities
 //*********************************************************************
 
+
 int 
 PDQ_GetStreamsCount()
 {
 	char           *p = "PDQ_GetStreamsCount()";
+	extern void errmsg();
 
 	if (streams == 0) {
 		errmsg(p, "No streams created.");
@@ -146,8 +150,14 @@ PDQ_GetResponse(int should_be_class, char *wname)
 				break;
 		}
 	} else {
+#ifndef __R_PDQ
 		fprintf(stderr, "[PDQ_GetResponse]  Invalid job index (%d)\n", job_index);
       exit(99);
+#else
+      //	REprintf("[PDQ_GetResponse]  Invalid job index (%d)\n", job_index);
+	error("[PDQ_GetResponse]  Invalid job index (%d)\n", job_index);
+
+#endif
 	}
 
 	return (r);
@@ -181,8 +191,13 @@ PDQ_GetThruput(int should_be_class, char *wname)
 				break;
 		}
 	} else {
-		fprintf(stderr, "[PDQ_GetThruput]  Invalid job index (%d)\n", job_index);
+#ifndef __R_PDQ
+	fprintf(stderr, "[PDQ_GetThruput]  Invalid job index (%d)\n", job_index);
       exit(99);
+#else
+      //	REprintf("[PDQ_GetThruput]  Invalid job index (%d)\n", job_index);
+	error("[PDQ_GetThruput]  Invalid job index (%d)\n", job_index);
+#endif
 	}
 
 	return (x);
@@ -214,8 +229,13 @@ PDQ_GetThruMax(int should_be_class, char *wname)
 				break;
 		}
 	} else {
-		fprintf(stderr, "[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+#ifndef __R_PDQ
+	fprintf(stderr, "[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
       exit(99);
+#else
+      //	REprintf("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+	error("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+#endif
 	}
 
 	return (x);
@@ -252,8 +272,13 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 					break;
 			}
 	} else {
+#ifndef __R_PDQ
 		fprintf(stderr, "[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
       exit(99);
+#else
+      //    REprintf("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+    error("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+#endif
 	}
 
 	Nopt = (Dsum + Z) / Dmax;
@@ -394,10 +419,10 @@ PDQ_SetDebug(int flag)
 	PDQ_DEBUG = flag;
 
 	if (PDQ_DEBUG) {
-		printf("debug on\n");
+		PRINTF("debug on\n");
 	}
 	else {
-		printf("debug off\n");
+		PRINTF("debug off\n");
 	}
 }  /* PDQ_SetDebug */
 
@@ -452,8 +477,13 @@ void
 allocate_nodes(int n)
 {
 	char           *p = "allocate_nodes";
+	
 
+#ifndef __R_PDQ
 	if ((node = (NODE_TYPE *) calloc(sizeof(NODE_TYPE), n)) == NULL)
+#else
+	  if ((node =  (NODE_TYPE *) Calloc( (size_t) n ,  NODE_TYPE )) == NULL)
+#endif
 		errmsg(p, "Node allocation failed!\n");
 }  /* allocate_nodes */
 
@@ -470,29 +500,44 @@ allocate_jobs(int jobs)
 	extern SYSTAT_TYPE       *sys;
 
 	int                       c;
-
+#ifndef __R_PDQ
 	if ((job = (JOB_TYPE*) calloc(sizeof(JOB_TYPE), jobs)) == NULL)
+#else
+	  if ((job = Calloc(jobs,JOB_TYPE)) == NULL)
+#endif
 		errmsg(p, "Job allocation failed!\n");
 
 	for (c = 0; c < jobs; c++) {
 		tm = NULL;
-
+#ifndef __R_PDQ
 		if ((tm = (TERMINAL_TYPE*) calloc(sizeof(TERMINAL_TYPE), 1)) == NULL)
+#else
+		  if ((tm = Calloc(1,TERMINAL_TYPE)) == NULL)
+#endif
 			errmsg(p, "term allocation failed!\n");
 
 		bt = NULL;
-
+#ifndef __R_PDQ
 		if ((bt = (BATCH_TYPE*) calloc(sizeof(BATCH_TYPE), 1)) == NULL)
+#else
+		  if ((bt = Calloc(1,BATCH_TYPE)) == NULL)
+#endif
 			errmsg(p, "batch allocation failed!\n");
 
 		tx = NULL;
-
+#ifndef __R_PDQ
 		if ((tx = (TRANSACTION_TYPE*) calloc(sizeof(TRANSACTION_TYPE), 1)) == NULL)
+#else
+		  if ((tx = Calloc(1,TRANSACTION_TYPE)) == NULL)
+#endif
 			errmsg(p, "trans allocation failed!\n");
 
 		sys = NULL;
-
+#ifndef __R_PDQ
 		if ((sys = (SYSTAT_TYPE*) calloc(sizeof(SYSTAT_TYPE), 1)) == NULL)
+#else
+		  if ((sys = Calloc(1,SYSTAT_TYPE)) == NULL)
+#endif
 			errmsg(p, "systat allocation failed!\n");
 
 		job[c].term            = tm;
@@ -712,9 +757,9 @@ debug(char *proc, char *info)
 {
 
 	if (strcmp(prevproc, proc) == 0)
-		printf("        %s\n", info);
+		PRINTF("        %s\n", info);
 	else {
-		printf("DEBUG: %s\n        %s\n", proc, info);
+		PRINTF("DEBUG: %s\n        %s\n", proc, info);
 		strcpy(prevproc, proc);
 	}
 	
@@ -731,14 +776,52 @@ errmsg(char *pname, char *msg)
     // For some reason 'model' string is trashed (NJG Sat May 13 10:15:52 PDT 2006)
     //printf("ERROR in model: \'%s\' at procedure \'%s\': %s\n", model, pname, msg);
     // output to tty always 
+#ifndef __R_PDQ
     fprintf(stderr, "ERROR in procedure \'%s\': %s\n", pname, msg);
  
 	if (strchr(msg, '\012') && strlen(msg) != 1) {
-		printf("\n");
+		PRINTF("\n");
     }
     
+
 	exit(1);
+#else
+	//    REprintf("ERROR in procedure \'%s\': %s\n", pname, msg);
+ 
+	if (strchr(msg, '\012') && strlen(msg) != 1) {
+		Rprintf("\n");
+	}
+    
+    error("ERROR in procedure \'%s\': %s\n", pname, msg);
+
+#endif
 }  /* errmsg */
 
 //-------------------------------------------------------------------------
 
+
+#ifdef __R_PDQ
+  
+
+void
+PDQ_SetNodes(int ns)
+{
+	nodes = ns;
+
+	if (PDQ_DEBUG) {
+		PRINTF("nodes global = %d\n",nodes);
+	}
+}  /* PDQ_SetNodes */
+
+void
+PDQ_SetStreams(int ss)
+{
+      
+	streams = ss;
+
+	if (PDQ_DEBUG) {
+		PRINTF("Streams global = %d\n",streams);
+	}
+}  /* PDQ_SetStreams */
+
+#endif
