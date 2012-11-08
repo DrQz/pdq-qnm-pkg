@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2011, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2009, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -34,10 +34,11 @@
  *  $Id$
  */
 
-// This string gets read by GetVersion script amongst others
+// This string is read by the GetVersion script 
 // Do not modify order of fields
 // Must not contain more than 24 characters
-static char *version = "PDQ Analyzer v5.1 021312";
+//
+static char *version = "PDQ Analyzer v6.0b 04112012";
 
 //---- TYPES --------------------------------------------------------------
 
@@ -152,8 +153,6 @@ typedef struct {
    double            resit[MAXSTREAMS];
    double            utiliz[MAXSTREAMS];    /* computed node utilization */
    double            qsize[MAXSTREAMS];
-   double            wsize[MAXSTREAMS];    // NJG added on 2/16/12
-   double            wtime[MAXSTREAMS];    // NJG added on 2/16/12
    double            avqsize[MAXSTREAMS];
 } NODE_TYPE;
 
@@ -262,4 +261,30 @@ JOB_TYPE  *getjob(int idx);
 // extern char        Comment[];
 
 //-------------------------------------------------------------------------
+
+//Add these to shut up the compile
+extern void resets(char *s);
+extern void debug(char *proc, char *info);
+extern void errmsg(char *pname, char *msg);
+extern void approx(void);
+extern void canonical(void);
+extern void exact(void);
+extern int getjob_index(char *wname);
+extern void getjob_name(char *str, int c);
+extern int getnode_index(char *name);
+extern void typetostr(char *str, int type);
+
+/* 
+ *   Added by PJP Nov 3, 2012: Added suppport R in the  library 
+ *
+ */
+
+#ifdef __R_PDQ
+#include <R.h>
+#define PRINTF Rprintf
+#define PDQ_FREE Free
+#else
+#define PRINTF printf
+#define PDQ_FREE free
+#endif
 

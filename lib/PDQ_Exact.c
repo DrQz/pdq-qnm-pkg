@@ -24,6 +24,8 @@
  * Edited by NJG: Fri Feb  5 16:58:09 PST 1999
  * 	Fix N=1 stability problem
  * 
+ * Updated by PJP: Sat Nov 3 2012: Added supported for R
+ *
  *  $Id$
  */
 
@@ -64,7 +66,7 @@ void exact(void)
 #undef DMVA
 
 	if (streams > MAXCLASS) {
-		printf("Streams = %d", streams);
+		PRINTF("Streams = %d", streams);
 		sprintf(s1, "%d workload streams exceeds maximum of 3.\n", streams);
 		sprintf(s2, "(At workload: \"%s\" with population: %3.2f)\n",
 			s3, getjob_pop(c));
