@@ -36,9 +36,9 @@
 
 // This string is read by the GetVersion script 
 // Do not modify order of fields
-// Must not contain more than 24 characters
+// Must not contain more than 24 characters for Report header
 //
-static char *version = "PDQ Analyzer v6.0b 04112012";
+static char *version = "PDQ Analyzer 6.0b 110812";
 
 //---- TYPES --------------------------------------------------------------
 
