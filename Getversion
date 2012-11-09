@@ -8,7 +8,7 @@
 cat lib/PDQ_Lib.h | awk '
 /version/ && /PDQ/ && /Analyzer/ { print $5 " " $7 " " $8} '
 
-ls -l lib | awk '
-/libpdq/ { print "Last compiled on " $6 " " $7 " " $8} '
+ls -lT lib | awk '
+/libpdq/ { print "Last compiled on " $6 " " $7 " " $8 " " $9} '
 
 exit 0
