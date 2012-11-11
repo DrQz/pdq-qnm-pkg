@@ -15,25 +15,25 @@
 
 #  $Id$
 
-# Updated by NJG on Sunday, November 11, 2012
-# Tabulate output using an R data frame.
-
 # From florida.pl
 require(pdq)
 
 STEP     <- 100
 MAXUSERS <- 3000
-think <- 10	   #seconds
-srvt1 <- 0.0050    #seconds
-srvt2 <- 0.0035    #seconds
-srvt3 <- 0.0020    #seconds
+think <- 10			#seconds
+srvt1 <- 0.0050		#seconds
+srvt2 <- 0.0035		#seconds
+srvt3 <- 0.0020		#seconds
 Dmax <- srvt1
-Rmin <- srvt1 + srvt2 + srvt3
+Rmin <- sum(srvt1,srvt2,srvt3)
 
 # Updated by NJG on Sunday, November 11, 2012
+# Tabulate output using an R data frame.
 df <- data.frame()
 
 # iterate up to $MAXUSERS ...
+# Updated by NJG on Saturday, November 110, 2012
+# CreateClosed wants a REAL not an INT via as.numeric.
 for (users in as.numeric(seq(1,MAXUSERS))) {
     Init("Florida Model")
     CreateClosed("benchload", TERM, users, think)
@@ -47,6 +47,7 @@ for (users in as.numeric(seq(1,MAXUSERS))) {
     Solve(APPROX)
 
     if ( (users == 1) || (users %% STEP == 0) ) {
+    	# Combine PDQ metrics into a column vector
 		metrics <- c( 
 			users,
 	    	GetThruput(TERM, "benchload"),
@@ -58,7 +59,7 @@ for (users in as.numeric(seq(1,MAXUSERS))) {
 	    	(users * Dmax) - think
 	    )
 	    
-	    # Add this row to the data frame
+	    # Add vector as a row to the data frame
 		df <- rbind(df, metrics)
     }
 }
