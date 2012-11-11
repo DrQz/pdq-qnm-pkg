@@ -15,10 +15,13 @@
 
 #  $Id$
 
-# florida.pl
+# Updated by NJG on Sunday, November 11, 2012
+# Tabulate output using an R data frame.
+
+# From florida.pl
 require(pdq)
 
-STEP <- 100
+STEP     <- 100
 MAXUSERS <- 3000
 think <- 10	   #seconds
 srvt1 <- 0.0050    #seconds
@@ -27,10 +30,8 @@ srvt3 <- 0.0020    #seconds
 Dmax <- srvt1
 Rmin <- srvt1 + srvt2 + srvt3
 
-# print the header ...
-cat(sprintf("%5s\t%6s\t%6s\t%6s\t%5s\t%6s\t%6s\t%6s\n",
-    "  N  ", "	X  ", "  Xlin ", " Xmax ",
-    "  N  ", "	R  ", "  Rmin ", " Rinf "))
+# Updated by NJG on Sunday, November 11, 2012
+df <- data.frame()
 
 # iterate up to $MAXUSERS ...
 for (users in as.numeric(seq(1,MAXUSERS))) {
@@ -46,17 +47,27 @@ for (users in as.numeric(seq(1,MAXUSERS))) {
     Solve(APPROX)
 
     if ( (users == 1) || (users %% STEP == 0) ) {
-	# print as TAB separated columns ...
-
-	cat(sprintf("%5d\t%6.2f\t%6.2f\t%6.2f\t%5d\t%6.2f\t%6.2f\t%6.2f\n",
-	    users,
-	    GetThruput(TERM, "benchload"),
-	    users / (Rmin + think),
-	    1 / Dmax,
-	    users,
-	    GetResponse(TERM, "benchload"),
-	    Rmin,
-	    (users * Dmax) - think
-	))
+		metrics <- c( 
+			users,
+	    	GetThruput(TERM, "benchload"),
+	    	users / (Rmin + think),
+	    	1 / Dmax,
+	    	users,
+	    	GetResponse(TERM, "benchload"),
+	    	Rmin,
+	    	(users * Dmax) - think
+	    )
+	    
+	    # Add this row to the data frame
+		df <- rbind(df, metrics)
     }
 }
+
+# Add column names and display the data frame
+names(df) <- c("N", "X", "Xlin", "Xmax", "N", "R", "Rmin", "Rinf")
+print(df)
+
+# Now try plotting from the data frame... Easy!
+#> plot(df)
+#> plot(df$N,df$X,type="b")
+#> plot(df$N,df$R,type="b")
