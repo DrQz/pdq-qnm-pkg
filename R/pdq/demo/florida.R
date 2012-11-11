@@ -31,7 +31,7 @@ cat(sprintf("%5s\t%6s\t%6s\t%6s\t%5s\t%6s\t%6s\t%6s\n",
     "  N  ", "	R  ", "  Rmin ", " Rinf "))
 
 # iterate up to $MAXUSERS ...
-for (users in seq(1,MAXUSERS)) {
+for (users in as.numeric(seq(1,MAXUSERS))) {
     Init("Florida Model")
     CreateClosed("benchload", TERM, users, think)
     CreateNode("Node1", CEN, FCFS)
