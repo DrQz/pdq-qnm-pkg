@@ -1,17 +1,17 @@
-###############################################################################
-#  Copyright (C) 1994 - 2009, Performance Dynamics Company		      #
-#									      #
-#  This software is licensed as described in the file COPYING, which	      #
-#  you should have received as part of this distribution. The terms	      #
-#  are also available at http://www.perfdynamics.com/Tools/copyright.html.    #
-#									      #
-#  You may opt to use, copy, modify, merge, publish, distribute and/or sell   #
-#  copies of the Software, and permit persons to whom the Software is	      #
-#  furnished to do so, under the terms of the COPYING file.		      #
-#									      #
-#  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  #
-#  KIND, either express or implied.					      #
-###############################################################################
+############################################################################
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company
+#
+#  This software is licensed as described in the file COPYING, which
+#  you should have received as part of this distribution. The terms
+#  are also available at http://www.perfdynamics.com/Tools/copyright.html.
+#
+#  You may opt to use, copy, modify, merge, publish, distribute and/or sell
+#  copies of the Software, and permit persons to whom the Software is	
+#  furnished to do so, under the terms of the COPYING file.
+#
+#  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY 
+#  KIND, either express or implied.
+############################################################################
 
 #  $Id$
 
@@ -20,12 +20,10 @@ require(pdq)
 
 STEP     <- 100
 MAXUSERS <- 3000
-think <- 10			#seconds
-srvt1 <- 0.0050		#seconds
-srvt2 <- 0.0035		#seconds
-srvt3 <- 0.0020		#seconds
-Dmax <- srvt1
-Rmin <- sum(srvt1,srvt2,srvt3)
+think    <- 10	#seconds
+srvts    <- c(0.0050,0.0035,0.0020) #seconds
+Dmax     <- max(srvts)
+Rmin     <- sum(srvts)
 
 # Updated by NJG on Sunday, November 11, 2012
 # Tabulate output using an R data frame.
@@ -40,21 +38,21 @@ for (users in as.numeric(seq(1,MAXUSERS))) {
     CreateNode("Node1", CEN, FCFS)
     CreateNode("Node2", CEN, FCFS)
     CreateNode("Node3", CEN, FCFS)
-    SetDemand("Node1", "benchload", srvt1)
-    SetDemand("Node2", "benchload", srvt2)
-    SetDemand("Node3", "benchload", srvt3)
+    SetDemand("Node1", "benchload", srvts[1])
+    SetDemand("Node2", "benchload", srvts[2])
+    SetDemand("Node3", "benchload", srvts[3])
 
     Solve(APPROX)
 
     if ( (users == 1) || (users %% STEP == 0) ) {
-    	# Combine PDQ metrics into a column vector
+    	# Combine selected PDQ metrics into a column vector
 		metrics <- c( 
 			users,
-	    	GetThruput(TERM, "benchload"),
+	    	pdq::GetThruput(TERM, "benchload"),
 	    	users / (Rmin + think),
 	    	1 / Dmax,
 	    	users,
-	    	GetResponse(TERM, "benchload"),
+	    	pdq::GetResponse(TERM, "benchload"),
 	    	Rmin,
 	    	(users * Dmax) - think
 	    )
