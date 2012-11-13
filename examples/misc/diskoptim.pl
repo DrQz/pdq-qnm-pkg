@@ -14,12 +14,12 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-# 
+# $Id$
+
 # An old performance gem.
 # Solve fast-slow disk I/O optimization problem
 # by searching for lowest mean response time.
-#
-# $Id$
+# Updated by NJG on Tuesday, November 13, 2012
 
 use pdq;
 
@@ -37,20 +37,22 @@ $IOReqsF        = "fastIOs";
 $IOReqsS        = "slowIOs";
 
 $modelName      = "Disk I/O Optimization";
-print "Solving: $modelName ...\n";
+print "Iterating: $modelName ... (times in seconds)\n";
+
+# Header for output
+printf("%6s\t%6s\t%6s\t%6s\t%6s\t%6s\n", "f","Uf","Us","Rf","Rs","Rt");
 
 while($fastFraction < 1.0) {
     pdq::Init($modelName);
     
-    $pdq::nodes = pdq::CreateNode($FastDk, $pdq::CEN, $pdq::FCFS);
-    $pdq::nodes = pdq::CreateNode($SlowDk, $pdq::CEN, $pdq::FCFS);
+    pdq::CreateNode($FastDk, $pdq::CEN, $pdq::FCFS);
+    pdq::CreateNode($SlowDk, $pdq::CEN, $pdq::FCFS);
     
-    $pdq::streams = pdq::CreateOpen($IOReqsF, $IOrate * $fastFraction);
-    $pdq::streams = pdq::CreateOpen($IOReqsS, $IOrate * (1 - $fastFraction));
+    pdq::CreateOpen($IOReqsF, $IOrate * $fastFraction);
+    pdq::CreateOpen($IOReqsS, $IOrate * (1 - $fastFraction));
       
     pdq::SetDemand($FastDk, $IOReqsF, $fastService);
     pdq::SetDemand($FastDk, $IOReqsS, 0.0);
-    
     pdq::SetDemand($SlowDk, $IOReqsS, $slowService);
     pdq::SetDemand($SlowDk, $IOReqsF, 0.0);
     
@@ -60,12 +62,15 @@ while($fastFraction < 1.0) {
     $sRT  = pdq::GetResponse($pdq::TRANS, $IOReqsS);
     $mRT  = ($fRT * $fastFraction) + ((1 - $fastFraction) * $sRT);
 
-    printf("f:  %6.4f, ", $fastFraction);
-    printf("Uf: %6.4f, ", pdq::GetUtilization($FastDk, $IOReqsF, $pdq::TRANS));
-    printf("Us: %6.4f, ", pdq::GetUtilization($SlowDk, $IOReqsS, $pdq::TRANS));
-    printf("Rf: %6.4f, ", $fRT);
-    printf("Rs: %6.4f, ", $sRT);
-    printf("Rt: %8.6f\n", $mRT);
-    
+	# Print a row of metrics
+    printf("%6.4f\t%6.4f\t%6.4f\t%6.2f\t%6.2f\t%6.2f\n", 
+    	$fastFraction,
+    	pdq::GetUtilization($FastDk, $IOReqsF, $pdq::TRANS),
+    	pdq::GetUtilization($SlowDk, $IOReqsS, $pdq::TRANS),
+    	($fRT * $fastFraction) * 1000,
+    	((1 - $fastFraction) * $sRT) * 1000,
+    	$mRT * 1000   
+    );
+
     $fastFraction += 0.01;
 }
