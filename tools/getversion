@@ -1,0 +1,2 @@
+#!/bin/sh
+grep version lib/PDQ_Lib.h | sed -n 's/^.*PDQ Analyzer \([0-9][0-9]*[.][0-9][0-9]*[a-z]*\) .*$/\1/p'
