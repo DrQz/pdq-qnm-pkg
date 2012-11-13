@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 ###############################################################################
-#  Copyright (C) 1994 - 2009, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -29,7 +29,7 @@ $fastService    = 0.005; # seconds
 $slowService    = 0.015; # seconds 
 
 # Start with 3:1 ratio based on speed 15/5 ms
-$fastFraction    = 0.75; 
+$fastFraction    = 0.65; 
 
 $FastDk         = "FastDisk";
 $SlowDk         = "SlowDisk";
@@ -39,7 +39,7 @@ $IOReqsS        = "slowIOs";
 $modelName      = "Disk I/O Optimization";
 print "Solving: $modelName ...\n";
 
-while($fastFraction < 0.86) {
+while($fastFraction < 1.0) {
     pdq::Init($modelName);
     
     $pdq::nodes = pdq::CreateNode($FastDk, $pdq::CEN, $pdq::FCFS);
