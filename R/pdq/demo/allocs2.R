@@ -1,5 +1,5 @@
 ###############################################################################
-#  Copyright (C) 1994 - 2006, Performance Dynamics Company                    #
+#  Copyright (C) 2006 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -23,7 +23,8 @@
 # Created by NJG on Wed, May 17, 2006
 # Updated by NJG on Wed, May 17, 2006
 # Ported to R PJP on Wed, Aug 1, 2012
-#
+# Updated by NJG on Monday, November 12, 2012
+
 # $Id$
 
 
@@ -47,7 +48,7 @@ sharesPool <- guestsHi * sharesHiPri
 #}
    
 for( vm in seq(guestsLo) ){
-     sharePool <- sharesLoPri
+     sharesPool <- sharesPool + sharesLoPri
 }
 
 # share proportions
