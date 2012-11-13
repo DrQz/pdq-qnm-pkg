@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ###############################################################################
-#  Copyright (C) 1994 - 2007, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -13,6 +13,8 @@
 #  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  #
 #  KIND, either express or implied.                                           #
 ###############################################################################
+
+# $Id$
 
 """
     bookstore.py

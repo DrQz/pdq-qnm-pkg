@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ###############################################################################
-#  Copyright (C) 1994 - 2007, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -14,7 +14,8 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-#
+# $Id$
+
 # Created by NJG on Wed, Apr 18, 2007
 #
 # Queueing model of an email-spam analyzer system comprising a 
@@ -24,8 +25,6 @@
 #
 # This simple M/M/4 model gave results that were in surprisingly 
 # good agreement with monitored queue lengths.
-#
-# $Id$
 
 import pdq
 
