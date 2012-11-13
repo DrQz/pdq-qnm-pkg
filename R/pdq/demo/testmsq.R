@@ -13,33 +13,26 @@
 #/*  KIND, either express or implied.                                           */
 #/*******************************************************************************/
 
-#/*
-# * testmsq.c
-# * 
-# * test multiserver queue (MSQ) code.
-# * 
-# * Created by NJG on Mon, Apr 2, 2007
-# *
 # *  $Id$
-# */
 
+# * From testmsq.c
+# * test multiserver queue (MSQ) code.
+# * Created by NJG on Mon, Apr 2, 2007
 
-
+arate   <- 75.0
+stime   <- 0.20
+servers <- 30
 	
-        arate   <- 75.0
-	stime   <- 0.20
-        servers <- 30
+name <- sprintf("mServer%d", servers)   
 	
-	name <- sprintf("mServer%d", servers)   
+Init("MSQ Test")
 	
-	Init("MSQ Test")
+nodes <- CreateNode(name, servers, MSQ)
+streams <- CreateOpen("Work", arate)
+SetDemand(name, "Work", stime)
 	
-	nodes <- CreateNode(name, servers, MSQ)
-	streams <- CreateOpen("Work", arate)
-	SetDemand(name, "Work", stime)
-	
-	Solve(CANON)
-	Report()
+Solve(CANON)
+Report()
    
 
 
