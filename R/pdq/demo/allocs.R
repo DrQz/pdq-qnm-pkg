@@ -1,5 +1,5 @@
 ###############################################################################
-#  Copyright (C) 1994 - 2006, Performance Dynamics Company                    #
+#  Copyright (C) 2006 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -19,25 +19,27 @@
 # Share allocation performance model based on measurements
 # of VMWare ESX Server 2 running the SPEC CPU2000 gzip benchmark on 
 # a single physical CPU with each VM guest defaulted to 1000 shares.
+# See Chapter 7 of Guerrilla Capacity Planning book (Springer 2006)
+# http://www.perfdynamics.com/iBook/gcap.html
 #
 # Created by NJG on Wed, May 17, 2006
 # Updated by NJG on Wed, May 17, 2006
-# Ported to R PJP on Wed, Aug 1, 2012
+# Ported to R by PJP on Wed, Aug 1, 2012
+# Updated by NJG on Monday, November 12, 2012
 #
 # $Id$
 
 
-guests <- 8
-guestsHi <- 3
+guests      <- 8
+guestsHi    <- 3
 sharesHiPri <- 5000
 sharesLoPri <- 1000
 
-guestsLo <- guests - guestsHi;
+guestsLo    <- guests - guestsHi
 sharesDefault <- 1000
-vmInst <- "VMid"
-workHi = "gzipHi"
-workLo = "gzipLo"
-
+vmInst      <- "VMid"
+workHi      <- "gzipHi"
+workLo      <- "gzipLo"
 scenarioName <- "VMWare ESX Benchmark"
 
 # do the allocations ...
@@ -47,7 +49,9 @@ sharesPool <- guestsHi * sharesHiPri
 #}
    
 for( vm in seq(guestsLo) ){
-     sharePool <- sharesLoPri
+	# Updated by NJG on Monday, November 12, 2012
+	# Fixed typo: was 'sharePool' (singular) s.b. 'sharesPool' (plural)
+	sharesPool <- sharesPool + sharesLoPri
 }
 
 # share proportions
