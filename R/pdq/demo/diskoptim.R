@@ -28,19 +28,19 @@ fastService <- 0.005 # seconds
 slowService <- 0.015 # seconds
 
 # Start with 3:1 ratio based on speed 15/5 ms
-fastFraction <- 0.75
+fastFraction <- 0.65
 
 FastDk	<- "FastDisk"
 SlowDk	<- "SlowDisk"
 IOReqsF <- "fastIOs"
 IOReqsS <- "slowIOs"
 
-modelName <- "Disk I/O Optimization"
+modelName <- "Disk IO Optimization"
 cat(sprintf("Solving: %s ...\n", modelName))
 
 dkf <- data.frame()
 
-while(fastFraction < 0.86) {
+while(fastFraction < 1.0) {
     Init(modelName)
 
     CreateNode(FastDk, CEN, FCFS)
@@ -72,9 +72,9 @@ while(fastFraction < 0.86) {
      	fastFraction,
      	GetUtilization(FastDk, IOReqsF, TRANS),
      	GetUtilization(SlowDk, IOReqsS, TRANS),
-     	fRT,
-     	sRT,
-     	mRT   
+     	fRT * fastFraction * 100,
+     	sRT * (1 - fastFraction) * 100,
+     	mRT  * 100  
      )
      
      dkf <- rbind(dkf, dkmets)
@@ -86,5 +86,14 @@ names(dkf) <- c("f", "Uf", "Us", "Rf", "Rs", "Rt")
 print(dkf)
 cat("\n")
 print("Find the row with minimum RT")
-print(dkf[which(dkf$Rt == min(dkf$Rt)),])
+minRow <- dkf[which(dkf$Rt == min(dkf$Rt)),]
+print(minRow)
+
+# Now see why...
+plot(dkf$f,dkf$Rt,type="b",main=modelName,ylim=c(0,ceiling(max(dkf$Rt))),
+	xlab="Fast fraction (f)",ylab="Response Times (Seconds)")
+abline(v=minRow$f, lty="dashed")
+lines(dkf$f,dkf$Rs,col="green")
+lines(dkf$f,dkf$Rf,col="red")
+
 
