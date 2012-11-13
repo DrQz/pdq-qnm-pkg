@@ -68,5 +68,5 @@ print(df)
 
 # Now try plotting from the data frame... Easy!
 #> plot(df)
-#> plot(df$N,df$X,type="b")
+#> plot(X ~ N, data=df,type="b")
 #> plot(df$N,df$R,type="b")
