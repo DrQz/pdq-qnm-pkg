@@ -1,5 +1,5 @@
 #******************************************************************************/
-#*  Copyright (C) 1994 - 2007, Performance Dynamics Company                   */
+#*  Copyright (C) 1994 - 2013, Performance Dynamics Company                   */
 #*                                                                            */
 #*  This software is licensed as described in the file COPYING, which         */
 #*  you should have received as part of this distribution. The terms          */
@@ -13,28 +13,18 @@
 #*  KIND, either express or implied.                                          */
 #******************************************************************************/
 
-#*
-#* passport2.c
-#* 
+# $Id$
+
+#* From passport2.c
 #* Jackson network with feedback.
 #* Same as model in PPA book Example 3-3 on p. 96 ff.
 #* 
 #* Updated by NJG on Fri, Apr 6, 2007
-#* 
-#* $Id$
-#*/
-
-#/-------------------------------------------------------------------------
-
-
-
-
 
 # 16 applications per hour
 arrivals <- 15.36/3600 
 
-
-#   // Branching probabilities and weights 
+#   // Branching probabilities appear in SetDemand times. 
 p12 <- 0.30
 p13 <- 0.70
 p23 <- 0.20
