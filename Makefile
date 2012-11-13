@@ -3,6 +3,8 @@
 #
 #---------------------------------------------------------------------
 
+PDQ_VERSION=$(shell tools/getversion)
+
 all:
 	./Makeall
 
@@ -40,6 +42,7 @@ clean:
 #---------------------------------------------------------------------
 
 dist:
+	@echo $(PDQ_VERSION)
 	-rm -rf /tmp/pdq /tmp/pdq.tar /tmp/pdq.tar.gz
 	-mkdir /tmp/pdq
 	-cp -r . /tmp/pdq
@@ -47,7 +50,7 @@ dist:
 	-(cd /tmp/pdq; rm headache.cfg header.txt)
 	-(cd /tmp; tar cvf pdq.tar pdq; gzip pdq.tar)
 	-rm -rf /tmp/pdq
-	-mv /tmp/pdq.tar.gz ..
+	-mv /tmp/pdq.tar.gz ../pdq-$(PDQ_VERSION).tar.gz
+	-(cd R; R CMD build pdq ; mv *.tar.gz ../../)
 
 #---------------------------------------------------------------------
-
