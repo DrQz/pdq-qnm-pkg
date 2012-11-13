@@ -29,7 +29,6 @@
 #
 # $Id$
 
-
 guests      <- 8
 guestsHi    <- 3
 sharesHiPri <- 5000
