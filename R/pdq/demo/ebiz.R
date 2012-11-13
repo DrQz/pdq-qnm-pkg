@@ -13,24 +13,22 @@
 #  KIND, either express or implied.					      #
 ###############################################################################
 
+# From ebiz.pl
 #
-# ebiz.pl
-#
-#---------------------------------------------------------------------
+# $Id$
 
 require(pdq)
 
-model	 <- "Middleware"
-work	<- "eBiz-tx"
-node1	 <- "WebServer"
-node2	 <- "AppServer"
-node3	 <- "DBMServer"
-think	 <-  0.0 * 1e-3  # treat as free param
+model <- "Middleware"
+work  <- "eBiz-tx"
+node1 <- "WebServer"
+node2 <- "AppServer"
+node3 <- "DBMServer"
+think <-  0.0 * 1e-3  # treat as free param
 
-#  Add dummy node names here
-node4 = "DummySvr"
-
-users = 10
+# Add dummy node names here
+node4 <- "DummySvr"
+users <- 10
 
 Init(model)
 
