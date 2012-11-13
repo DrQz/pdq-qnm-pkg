@@ -1,5 +1,5 @@
 ###############################################################################
-#  Copyright (C) 1994 - 2007, Performance Dynamics Company                    #
+#  Copyright (C) 2007 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -13,7 +13,8 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-#
+# $Id$
+
 # Created by NJG on Thu, May 31, 2007
 #
 # Blair Zajac, author of Orca states:
