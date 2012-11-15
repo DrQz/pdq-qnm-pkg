@@ -12,14 +12,14 @@ CreateNode(name, device, sched)
   \item{device}{ The type of server: CEN or DLY }
   \item{sched}{ The queue discipline: FCFS, ISRV, LCFS, or PSHR }
 }
-The two types of servers are:
 \details{
+The two types of servers are:
 \describe{
 \item{CEN}{ Generic queueing center }
 \item{DLY}{ Generic delay center: a delay without a queue }
 }
 The types of queue discipline are:
-\details{
+\itemize{
 \item{FCFS}{ First-come first-served }
 \item{ISRV}{ Infinite server; used to represent a delay }
 \item{LCFS}{ Last-come first-served }

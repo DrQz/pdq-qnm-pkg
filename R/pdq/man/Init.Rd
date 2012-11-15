@@ -45,5 +45,6 @@ for (i in 1:clients) {
     yc[i]<-GetThruput(TERM,work)
     nopt<-(20*stime+think)/stime
  }
+}
 \keyword{ }
 \keyword{ }% __ONLY ONE__ keyword per line

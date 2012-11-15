@@ -13,14 +13,14 @@ CreateMultiNode(servers, name, device, sched)
   \item{device}{ The type of server: CEN or DLY }
   \item{sched}{ The queue discipline: MSQ }
 }
-The two types of servers are:
 \details{
-\describe{
+The two types of servers are:
+\itemize{
 \item{CEN}{ Generic queueing center }
 \item{DLY}{ Generic delay center: a delay without a queue }
 }
 The only valid type of queue discipline is:
-\details{
+\itemize{
 \item{MSQ}{ Multi-server queue }
 }
 }
