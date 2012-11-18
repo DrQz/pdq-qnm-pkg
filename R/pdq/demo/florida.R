@@ -66,7 +66,7 @@ for (users in as.numeric(seq(1,MAXUSERS))) {
 names(df) <- c("N", "X", "Xlin", "Xmax", "N", "R", "Rmin", "Rinf")
 print(df)
 
-# Now try plotting from the data frame... Easy!
-#> plot(df)
-#> plot(X ~ N, data=df,type="b")
-#> plot(df$N,df$R,type="b")
+print("Now, it's easy to plot X and R from the data frame.")
+plot(df)
+plot(X ~ N, data=df,type="b")
+plot(df$N,df$R,type="b")
