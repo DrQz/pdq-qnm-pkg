@@ -1,30 +1,38 @@
 ====================================================================
- PDQ (Pretty Damn Quick) Queueing Analyzer v5.0
+ PDQ (Pretty Damn Quick) Queueing Analyzer 6.0
 ====================================================================
 PDQ is an analytic queueing-circuit analyzer made freely available under
-MIT/X11 license from www.perfdynamics.com (See the COPYING file for the
-legal gore).
+MIT/X11 license from www.perfdynamics.com
+See the COPYING file (same level as this README) for more legal gore.
 
-Main new features of PDQ 5.0
+New features of PDQ 6.0
 
- 1. Multiserver queues with the API defined in section 6.6.2 of the Perl::PDQ 
-    book (see below).
+The main purpose of this release is improved compatibility and stability 
+between PDQ and the R statistical package environment. Many PDQ models 
+found in the /examples directory can now also be accessed via the R demo()
+command in the R-console. Otherwise, PDQ should look cosmetically the same 
+as the version 5 release.
 
- 2. R version of PDQ. Tested on Linux, OpenSolaris, and Mac OS X, but is
-    not yet operational on Windows.
 
-Deprecated features
+After installing PDQ, issue the following commands in the R-console:
+> library(pdq)
+> demo(package="pdq")
+and a list of available PDQ-R models will be listed.
 
- 1. Pure Java implementation of PDQ v4.2 (by Peter Harding) has been retained.
-    It will be replaced in the next release by a JNI-based Java implementation
-    that adheres to the same APIs as the C, Perl, Python, and R implementations.
+These PDQ-R scripts can be executed and studied entirely from within the 
+R environment in the usual way.
+For an online introduction:
+> help(pdq)
+To see listing of PDQ function calls, go to the bottom of the Help page 
+in R and click on the Index link.
 
- 2. PHP implementation of PDQ v4.2 (by Italian student Samuel Zallocco) has been
-    retained. It will be dropped in the next release.
+Too see the R source code for the PQQ-R models, click on the 
+Code demos link at the top of the PDQ listings page. 
 
-====================================================================
+Please read http://www.perfdynamics.com/Tools/PDQcode.html for the 
+definitive description of all the release changes.
+
 ******************* DISCLAIMER OF WARRANTY ************************
-====================================================================
 Performance Dynamics Company(SM), Neil J. Gunther, and the developers 
 of PDQ, make no warranty, express or implied, that the source code 
 contained in the PDQ files or in any of the attendant books is free 
@@ -38,22 +46,20 @@ consequential damages resulting from your use of this source code.
 
 This software is intended to accompany the following books:
 
- "Guerrilla Capacity Planning" (GCAP)
- by Neil J. Gunther, 
- Springer-Verlag, 2007
- ISBN: 3540261389
-
- The accompanying PDQ models for the GCAP book are located in the directory
- ../examples/gcap_2007/
-
- 
  "Analyzing Computer System Performance Using Perl::PDQ" (PPDQ)
  by Neil J. Gunther, 
- Springer-Verlag, 2005
- ISBN: 3540208658
+ 2nd Edition
+ Springer-Verlag, 2011
+ ISBN: 3642225829
+ http://www.amazon.com/Analyzing-Computer-System-Performance-Perl/dp/3642225829
+ 
+ The 1st edition was published in 2005.
+ http://www.amazon.com/Analyzing-Computer-Systems-Performance-Perl/dp/3540208658
 
  PDQ models for the PPDQ book are located in the directory
  ../examples/ppdq_2005/
+ See the table in the Appendix entitled "PDQ Scripts" to find the corresponding 
+ PDQ model name in the relevant book edition.
 
 
  "The Practical Performance Analyst" (PPA)
@@ -64,6 +70,13 @@ This software is intended to accompany the following books:
  PDQ models (in C code) for the PPA book are located in
  ../examples/ppa-1998/
 
+ "Guerrilla Capacity Planning" (GCAP)
+ by Neil J. Gunther, 
+ Springer-Verlag, 2007
+ ISBN: 3540261389
+
+ The accompanying PDQ models for the GCAP book are located in the directory
+ ../examples/gcap_2007/
 
 Various and sundry PDQ models can also be found in
 ../examples/misc/ 
@@ -76,50 +89,47 @@ of the PPDQ book.
 
 Top-level directories
 ---------------------
+COPYING*	- the MIT/X11 license that PDQ is released under
+Getversion*	- Script to report version of PDQ
+Makeall*	- Used to install PDQ (see next section of this README) 
+Makefile*
+R/ 			- R support
+README*		- This file
+bin/		- Java support
+examples/	- PDQ models discussed in the above-mentioned books  
+java/		- Stand alone PDQ v4.2 in Eclipse-based Java
+lib/		- PDQ library source code in C 
+pdq.i		- configuration file for generating SWIG binding code
+perl5/		- Perl5 support 
+php/		- Stand alone PDQ v4.2 in PHP (*untested and deprecated*)
+python/		- Python support 
+tools/		- Miscellaneous translators
 
-COPYRIGHT* 
-Makefile* 
-examples/ - PDQ models discussed in the books above 
-perl5/ - Perl5 support 
-tools/ - Miscellaneous translators
-Getversion* - Script to report version of PDQ
-README* - This file 
-java/ - Stand alone PDQ v4.2 in Eclipse-based Java
-php/ - Stand alone PDQ v4.2 in PHP (*untested and deprecated*) 
-Makeall* - Used to install PDQ (see next section) 
-bin/ - Java support
-lib/ - PDQ library in C 
-python/ - Python support 
-R/ - R support
-COPYING - the MIT/X11 license that PDQ is released under
-pdq.i - configuration file for generating SWIG binding code
+
 
 Examples directory
 ------------------
-
-Makefile - Make all PDQ models in the sub-directories 
-gcap_2007/ - Contains Perl script PDQ models for GCAP book (2007) 
-misc/ - Odds and sods (see next section) 
-ppa_1998/ - Contains C-code PDQ models for PPA book (1998/2000) 
- Also contains some Perl and Python versions of the same models, but not guaranteed to work
-ppdq_2005/ - Contains Perl script PDQ models for PPDQ book (2005)
-Big Book Store - PDQ circuit of a bookstore with separate browsing and buying facilities.
-Linux magazine - PDQ models for Linux Magazine article "Streeeeeeetch!" (2007).
-Multiserver - Test cases based on examples in Gross and Harris (Wiley 1998).
-Passport - Uses NumPy import to PyDQ to solve traffic equations directly.
+Big Book Store/	- PDQ circuit of a bookstore with separate browsing and buying facilities
+Linux Magazine/	- PDQ models for Linux Magazine article "Streeeeeeetch!" (2007)
+Makefile		- Make all PDQ models in the sub-directories
+MultiServer/	- Test cases based on examples in Gross and Harris (Wiley 1998)
+Passport/		- Uses NumPy import to PyDQ to solve traffic equations directly
+gcap_2007/		- Contains Perl script PDQ models for GCAP book (2007) 
+misc/			- Odds and ends (see next section of this README) 
+ppa_1998/		- Contains PDQ models in C-code for PPA book (1998/2000)
+ppdq_2005/		- Contains Perl script PDQ models for PPDQ book (2005)
 
 
 Misc directory
 --------------
-
 These PDQ models were developed independently of the books mentioned above.
 
-diskoptim.pl* - Optimize response time for I/Os going to a fast & slow disk 
-jackpdq.py* - Jackson network problem in PDQ
-jacksim.py* - Corresponding Jackson network in SimPy simulator code
-threadapp.pl* - Threaded application model
-floggit.py* - M/M/1 queue model in PyDQ
-spamcan.pl* - Model of email spam-filters running on a 4-way SMP
+diskoptim.pl*	- Optimize response time for I/Os going to a fast & slow disk 
+jackpdq.py*		- Jackson network problem in PDQ
+jacksim.py*		- Corresponding Jackson network in SimPy simulator code
+threadapp.pl*	- Threaded application model
+floggit.py*		- M/M/1 queue model in PyDQ
+spamcan.pl*		- Model of email spam-filters running on a 4-way SMP
 
 ====================================================================
 

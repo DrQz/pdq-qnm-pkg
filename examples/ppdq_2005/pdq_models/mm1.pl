@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 ###############################################################################
-#  Copyright (C) 1994 - 2006, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #

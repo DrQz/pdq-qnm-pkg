@@ -50,7 +50,7 @@ dist:
 	-(cd /tmp/pdq; rm headache.cfg header.txt)
 	-(cd /tmp; tar cvf pdq.tar pdq; gzip pdq.tar)
 	-rm -rf /tmp/pdq
-	-mv /tmp/pdq.tar.gz ../pdq-$(PDQ_VERSION).tar.gz
+	-mv /tmp/pdq.tar.gz ../PDQ-$(PDQ_VERSION).tar.gz
 	-(cd R; R CMD build pdq ; mv *.tar.gz ../../)
 
 #---------------------------------------------------------------------
