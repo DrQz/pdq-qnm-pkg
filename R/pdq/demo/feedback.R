@@ -13,8 +13,7 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-# feedback.pl
-# 
+# frmo feedback.pl 
 # $Id$
 
 require(pdq)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ###############################################################################
-#  Copyright (C) 1994 - 2004, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -75,11 +75,8 @@ def ShowState ( *L ):
 
 
 # PDQ modeling code starts here ...
-jNet = JackNet("SimPy Jackson Network", 1) # create an instance
+jNet = JackNet("SimPy Jackson Network", 0) # create an instance
 pdq.Init(jNet.name)
-pdq.SetWUnit("Msgs")
-pdq.SetTUnit("Time")
-
 
 # Create PDQ context and workload for the network
 streams = pdq.CreateOpen(jNet.work, jNet.arrivRate)
@@ -89,6 +86,9 @@ for i in range(len(jNet.router)):
    nodes = pdq.CreateNode(jNet.router[i], pdq.CEN, pdq.FCFS)
    pdq.SetVisits(jNet.router[i], jNet.work, jNet.visitRatio[i], \
       jNet.servTime[i])
+
+pdq.SetWUnit("Msgs")
+pdq.SetTUnit("Time")
 
 # Solve the model and report the peformance measures
 pdq.Solve(pdq.CANON)

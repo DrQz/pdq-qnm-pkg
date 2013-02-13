@@ -2,6 +2,7 @@
 #  $Id$
 #
 #---------------------------------------------------------------------
+.PHONY: all test
 
 all:
 	-(cd chap2; make)
@@ -13,11 +14,12 @@ all:
 #---------------------------------------------------------------------
 
 test:
-	-(cd chap2; make test)
-	-(cd chap3; make test)
-	-(cd chap6; make test)
-	-(cd chap8; make test)
-	-(cd chap9; make test)
+	make --directory=chap2 test
+#	-(cd chap2;make test)
+	make --directory=chap3 test
+	make --directory=chap6 test
+	make --directory=chap8 test
+	make --directory=chap9 test
 
 #---------------------------------------------------------------------
 

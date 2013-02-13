@@ -1,5 +1,5 @@
 ###############################################################################
-#  Copyright (C) 1994 - 2009, Performance Dynamics Company		      #
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company		      #
 #									      #
 #  This software is licensed as described in the file COPYING, which	      #
 #  you should have received as part of this distribution. The terms	      #
@@ -13,16 +13,15 @@
 #  KIND, either express or implied.					      #
 ###############################################################################
 
-# httpd.pl
-# 
+# From httpd.pl
 # $Id$
 
 require(pdq)
 
 clients <- 5
 smaster <- 0.0109 #seconds
-sdemon <- 0.0044 #seconds
-work <- "homepage"
+sdemon  <- 0.0044 #seconds
+work    <- "homepage"
 slave <- c("slave1", "slave2", "slave3", "slave4", "slave5",
 "slave6", "slave7", "slave8", "slave9", "slave10",
 "slave11", "slave12", "slave13", "slave14", "slave15",

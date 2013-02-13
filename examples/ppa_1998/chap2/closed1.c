@@ -41,7 +41,7 @@ main()
    //----- Initialize the model -------------------------------------------
 
    PDQ_Init("Time Share Computer");
-   PDQ_SetComment("This is just a simple M/M/1 queue.");
+   PDQ_SetComment("This is a M/M/1/N/N/FCFS queue.");
 
    // Define the workload and circuit type
 

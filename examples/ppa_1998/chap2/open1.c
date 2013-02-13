@@ -45,10 +45,6 @@ main()
    PDQ_Init("OpenCenter");
    PDQ_SetComment("This is just a simple M/M/1 queue.");
    
-   //----- Change unit labels -----
-
-   PDQ_SetWUnit("Customers");
-   PDQ_SetTUnit("Seconds");
 
    //----- Define the queueing center -----
 
@@ -61,6 +57,12 @@ main()
    //----- Define service demand due to workload on the queueing center ------
 
    PDQ_SetDemand("server", "work", service_time);
+   
+   //----- Change unit labels -----
+
+   PDQ_SetWUnit("Customers");
+   PDQ_SetTUnit("Seconds");
+
 
    //----- Solve the model -----
    //  Must use the CANONical method for an open circuit

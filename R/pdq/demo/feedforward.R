@@ -13,8 +13,7 @@
 #  KIND, either express or implied.					      #
 ###############################################################################
 
-# feedforward.pl
-#
+# From feedforward.pl
 # $Id$
 
 require(pdq)

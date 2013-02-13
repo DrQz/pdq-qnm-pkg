@@ -8,8 +8,10 @@
 %module pdq
 
 %{
-#include "../lib/PDQ_Lib.h"
-#include "../lib/PDQ_Global.h"
+
+#include "PDQ_Lib.h"
+#include "PDQ_Global.h"
+
 %}
 
 /* Let's just grab the header file here */
@@ -55,3 +57,4 @@
     }
   }
 %}
+

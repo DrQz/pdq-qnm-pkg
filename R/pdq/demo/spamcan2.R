@@ -1,5 +1,5 @@
 ###############################################################################
-#  Copyright (C) 1994 - 2007, Performance Dynamics Company		      #
+#  Copyright (C) 1994 - 2013, Performance Dynamics Company		      #
 #									      #
 #  This software is licensed as described in the file COPYING, which	      #
 #  you should have received as part of this distribution. The terms	      #
@@ -13,7 +13,8 @@
 #  KIND, either express or implied.					      #
 ###############################################################################
 require(pdq)
-#
+
+# spamcan2.R
 # Created by NJG on Wed, Apr 18, 2007
 # Ported to R by PJP on Thru, Aug 8, 2012
 # Queueing model of an email-spam analyzer system comprising a

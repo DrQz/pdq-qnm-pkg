@@ -12,27 +12,51 @@
 # 
 #   Copyright (C) Peter Harding, 2003-2004,  All rights reserved
 # 
-#           @(#) [1.2.0] Makefile 04/01/2003
+#           @(#) [6.1.1] Makefile 01/13/2012
 # 
 #   $Id$
 #---------------------------------------------------------------------
+COPY := cp
+SWIG := swig
+SOURCETARGET := .
+HEADERSTARGET := .
+PDQSOURCES := $(wildcard ../lib/*.c)
+PDQHEADERS := $(wildcard ../lib/*.h)
+SOURCES := $(notdir $(PDQSOURCES))
+HEADERS := $(notdir $(PDQHEADERS))
 
-all:	build
+.PHONY:  all install build setup dist
+
+all:	install
 
 #---------------------------------------------------------------------
 
-build:
-	python setup.py build
+install: build
 	python setup.py install
 
-install:
-	python setup.py install
+build: setup
+	python setup.py build
+
+setup: $(SOURCES) $(HEADERS) pdq_wrap.c
+
+$(SOURCES): %.c:../lib/%.c
+	$(COPY) $< $@
+
+$(HEADERS): %.h:../lib/%.h
+	$(COPY) $< $@
+
+pdq_wrap.c: ../pdq.i
+	swig -python -o pdq_wrap.c ../pdq.i
+
 
 #---------------------------------------------------------------------
 
 clean:
-	rm -rf build
+	rm -rf build dist 
+	rm -f $(SOURCES) $(HEADERS) MANIFEST
 
+dist: setup
+	python setup.py sdist
 #---------------------------------------------------------------------
 #
 # Note:

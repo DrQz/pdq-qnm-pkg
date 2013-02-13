@@ -42,7 +42,7 @@ ln:
 	ln ../../../java/examples/Ch8_*.out .
 
 clean:
-	-/bin/rm ${PGM} *.o *.exe *.log *~ *.tst
+	-/bin/rm -f ${PGM} *.o *.exe *.log *~ *.tst
 
 #--------------------------------------------------------------------------
 

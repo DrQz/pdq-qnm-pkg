@@ -32,7 +32,7 @@ ln:
 	ln ../../../java/examples/Ch7_*.out .
 
 clean:
-	-/bin/rm ${PGM} *.o *.exe *~ *.log *.tst Ch7_*.out
+	-/bin/rm -f ${PGM} *.o *.exe *~ *.log *.tst Ch7_*.out
 
 #--------------------------------------------------------------------------
 
