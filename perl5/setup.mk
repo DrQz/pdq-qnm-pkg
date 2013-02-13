@@ -22,7 +22,9 @@ build_module: set_up
 dist: set_up
 	make dist
 
-set_up: $(SOURCES) $(HEADERS) pdq_wrap.c Makefile
+set_up: $(SOURCES) $(HEADERS)  Makefile
+
+swig: pdq_wrap.c
 
 Makefile:
 	perl Makefile.PL

@@ -33,7 +33,10 @@ $(EXAMPLES):
 
 #---------------------------------------------------------------------
 
-#swig:
+swig:
+	make --directory=perl5 -f setup.mk swig
+	make --directory=python swig
+	make --directory=R swig
 #	-(cd perl5; swig -perl5 -o pdq_wrap.c ../pdq.i)
 #	-(cd python; swig -python -o pdq_wrap.c ../pdq.i)
 #	-(cd R; swig -r -o pdq/src/pdq.c ../pdq.i; mv pdq/src/pdq.R pdq/R)

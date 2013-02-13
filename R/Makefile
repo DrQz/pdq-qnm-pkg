@@ -19,7 +19,9 @@ install: set_up_package
 dist: set_up_package
 	R CMD build pdq
 
-set_up_package: $(HEADERS) $(SOURCES) pdq/src/pdq.c
+set_up_package: $(HEADERS) $(SOURCES) 
+
+swig: pdq/src/pdq.c
 
 $(SOURCES): pdq/src/%.c:../lib/%.c
 	$(COPY) $< $@

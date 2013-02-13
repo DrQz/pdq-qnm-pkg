@@ -37,7 +37,9 @@ install: build
 build: setup
 	python setup.py build
 
-setup: $(SOURCES) $(HEADERS) pdq_wrap.c
+setup: $(SOURCES) $(HEADERS) 
+
+swig: pdq_wrap.c
 
 $(SOURCES): %.c:../lib/%.c
 	$(COPY) $< $@
