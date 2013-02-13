@@ -67,7 +67,7 @@ clean:
 
 #---------------------------------------------------------------------
 
-dist:
+dist: swig
 	@echo $(PDQ_VERSION)
 	-rm -rf /tmp/pdq /tmp/pdq.tar /tmp/pdq.tar.gz
 	-mkdir /tmp/pdq
