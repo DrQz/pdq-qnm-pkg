@@ -1,33 +1,44 @@
 ====================================================================
- PDQ (Pretty Damn Quick) Queueing Analyzer 6.0
+ PDQ (Pretty Damn Quick) Queueing Analyzer 6
 ====================================================================
 PDQ is an analytic queueing-circuit analyzer made freely available under
 MIT/X11 license from www.perfdynamics.com
 See the COPYING file (same level as this README) for more legal gore.
 
-New features of PDQ 6.0
-
+New features of PDQ 6
+---------------------
 The main purpose of this release is improved compatibility and stability 
 between PDQ and the R statistical package environment. Many PDQ models 
-found in the /examples directory can now also be accessed via the R demo()
-command in the R-console. Otherwise, PDQ should look cosmetically the same 
-as the version 5 release.
-
+found in the /examples directory can now also be accessed by issuing the 
+demo() command in the R-console. Otherwise, PDQ should look cosmetically 
+the same as the version 5 release.
 
 After installing PDQ, issue the following commands in the R-console:
 > library(pdq)
 > demo(package="pdq")
-and a list of available PDQ-R models will be listed.
 
-These PDQ-R scripts can be executed and studied entirely from within the 
-R environment in the usual way.
-For an online introduction:
+and a list of available PDQ-R models will be displayed.
+
+These PDQ-R scripts can be executed separately and studied entirely from 
+within the R environment. For an online introduction, issue the command:
 > help(pdq)
-To see listing of PDQ function calls, go to the bottom of the Help page 
-in R and click on the Index link.
 
-Too see the R source code for the PQQ-R models, click on the 
-Code demos link at the top of the PDQ listings page. 
+To see a listing of the PDQ function calls (in the PDQ library), go to the 
+bottom of the Help page in R and click on the Index link.
+
+Too see the R source code for any of the PQQ-R models, click on the 
+Code demos link at the top of the PDQ listings page.
+
+Another useful trick, now available in PDQ-R 6, is the ability to save 
+the PDQ report output, which is normally only displayed in the R-console, 
+to a file. This is done by wrapping the PDQ function Report() with sink() 
+function calls as follows:
+> sink("myPDQrpt.txt")
+> Report()
+> sink()
+
+The PDQ report output will be found in the file named myPDQrpt.txt. The 
+second sink() call returns default character output to the R-console.
 
 Please read http://www.perfdynamics.com/Tools/PDQcode.html for the 
 definitive description of all the release changes.

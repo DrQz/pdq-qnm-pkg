@@ -34,12 +34,12 @@
  *  $Id$
  */
 
-// This string is read by the GetVersion script 
+// This string is read by the GetVersion and Report()
 // Do not modify order of fields
-// Must not contain more than 24 characters for Report header
+// Must not contain more than 25 characters for Report header
+// Updated by NJG on Friday, January 11, 2013
 //
-static char *version = "PDQ Analyzer 6.0 121512";
-
+static char *version = "PDQ Analyzer 6.1.1 011013";
 //---- TYPES --------------------------------------------------------------
 
 #ifndef   TRUE
@@ -72,7 +72,7 @@ static char *version = "PDQ Analyzer 6.0 121512";
 #define ISRV    7                /* infinite server */
 #define FCFS    8                /* first-come first-serve */
 #define PSHR    9                /* processor sharing */
-#define LCFS    10                /* last-come first-serve */
+#define LCFS    10               /* last-come first-serve */
 
 
 /* Job Types */

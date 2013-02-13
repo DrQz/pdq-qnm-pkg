@@ -18,6 +18,7 @@
  * 
  * Revised by NJG: 20:05:52  7/28/95
  * Updated by NJG: 6:28:39 PM Mon, Apr 2, 2007
+ * Updated by NJG: Wednesday, February 6, 2013 - flag MSQ node if CLOSED network
  * 
  *  $Id$
  */
@@ -40,7 +41,7 @@ void PDQ_Solve(int meth)
 
     int               should_be_class;
     int               k, c;
-    int               m; 	// MSQ servers (added by NJG)
+    int               mservers = 0; // MSQ servers (added by NJG)
     double            maxXX;
     double            maxTP = MAXTP;
     double            maxD  = 0.0;
@@ -138,18 +139,26 @@ void PDQ_Solve(int meth)
 			// Added by NJG on Mon, Apr 2, 2007
 			// Find largest thruput across all nodes and multinodes
 			if (node[k].sched == MSQ) {
-				m = node[k].devtype; // contains number of servers
-				maxXX = m / demand;
+				mservers = node[k].devtype; // contains number of servers
+				maxXX = mservers / demand;
             } else {
                 maxXX = 1 / demand;
             }
             
-            // The LEAST of these max X's will throttle the system X
+            // The LEAST of these max X's will throttle the system-X
 			if (maxXX < maxTP) {
                 maxTP = maxXX;
 			}
             
         }  // loop over k 
+        
+        
+        if(job[c].network == CLOSED && mservers != 0) { //bail !!
+        // Solving MSQ node in CLOSED network is not logically compatible
+        	typetostr(s2, job[c].network);
+            sprintf(s1, "Network class \"%s\" is incompatible with \"CreateMultiNode\" function", s2);
+            errmsg(p, s1);
+        } 
 
         switch (should_be_class) {
             case TERM:

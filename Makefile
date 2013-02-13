@@ -1,43 +1,66 @@
-#
 #  $Id$
 #
 #---------------------------------------------------------------------
+EXAMPLES := $(wildcard examples/ppa_1998/chap*)
+ECHO := /bin/echo
+ECHO_OPTION := -e
+ECHO_MESSAGE := "\n\nMaking chapter $@ PDQ files ...\n"
+.PHONY: all lib perl5 python R examples $(EXAMPLES)
+
 
 PDQ_VERSION=$(shell tools/getversion)
 
-all:
-	./Makeall
 
-perl:
-	-(cd perl5; ./setup.sh)
+all:	lib perl5 R python examples
+
+lib:
+	make --directory=$@
+
+perl5:
+	make --directory=$@ -f ./setup.mk
 
 python:
-	-(cd python; make)
+	make --directory=$@
 
 R:
-	-(cd R; cp ../lib/*.[ch] pdq/src; cp ../lib/P*.[h] pdq/lib; R CMD INSTALL pdq)
+	make --directory=$@
+
+examples: $(EXAMPLES)
+
+$(EXAMPLES):
+	@$(ECHO) $(ECHO_OPTION) $(ECHO_MESSAGE)
+	$(MAKE) --directory=$@ -f Makefile all
 
 #---------------------------------------------------------------------
 
-swig:
-	-(cd perl5; swig -perl5 -o pdq_wrap.c ../pdq.i)
-	-(cd python; swig -python -o pdq_wrap.c ../pdq.i)
-	-(cd R; swig -r -o pdq/src/pdq.c ../pdq.i; mv pdq/src/pdq.R pdq/R)
+#swig:
+#	-(cd perl5; swig -perl5 -o pdq_wrap.c ../pdq.i)
+#	-(cd python; swig -python -o pdq_wrap.c ../pdq.i)
+#	-(cd R; swig -r -o pdq/src/pdq.c ../pdq.i; mv pdq/src/pdq.R pdq/R)
 
 #---------------------------------------------------------------------
 
+#test:
+#	-(cd examples; make test)
+
+# test:
+# 	for num in $(CHPLIST); do\
+# 		echo;echo; \
+# 		echo "Making chapter $$num PDQ files ..."; \
+# 		(cd examples/ppa_1998/chap$$num; make -f Makefile all);\
+# 	done
 test:
-	-(cd examples; make test)
+	make --directory=examples test
 
 #---------------------------------------------------------------------
 
 clean:
 	-/bin/rm *~ 
-	-(cd lib; make clean)
-	-(cd examples; make clean)
-	-(cd perl5; make clean)
-	-(cd python; make clean)
-	-(cd R; make clean)
+	make --directory=lib clean
+	make --directory=perl5 -f setup.mk clean
+	make --directory=examples clean
+	make --directory=python clean
+	make --directory=R clean
 
 #---------------------------------------------------------------------
 
@@ -51,6 +74,8 @@ dist:
 	-(cd /tmp; tar cvf pdq.tar pdq; gzip pdq.tar)
 	-rm -rf /tmp/pdq
 	-mv /tmp/pdq.tar.gz ../PDQ-$(PDQ_VERSION).tar.gz
-	-(cd R; R CMD build pdq ; mv *.tar.gz ../../)
+	make --directory=R dist
+	make --directory=perl5 -f setup.mk dist
+	make --directory=python dist
 
 #---------------------------------------------------------------------

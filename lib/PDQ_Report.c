@@ -16,12 +16,20 @@
 /*
  * PDQ_Report.c
  * 
- * Last revised by NJG on Fri Aug  2 10:29:48  2002
- * Last revised by NJG on Thu Oct  7 20:02:27 PDT 2004
- * Last updated by NJG on Mon, Apr 2, 2007
- * Last updated by NJG on Wed, Apr 4, 2007: dded Waiting line and time
- * Last updated by NJG on Friday, July 10, 2009: fixed dev utilization reporting
- * Last updated by PJP on Sat, Nov 3, 2012: Added R support
+ * Revised by NJG on Fri Aug  2 10:29:48  2002
+ * Revised by NJG on Thu Oct  7 20:02:27 PDT 2004
+ * Updated by NJG on Mon, Apr 2, 2007
+ * Updated by NJG on Wed, Apr 4, 2007: Added Waiting line and time
+ * Updated by NJG on Friday, July 10, 2009: fixed dev utilization reporting
+ * Updated by PJP on Sat, Nov 3, 2012: Added R support
+ * Updated by NJG on Friday, January 11, 2013: 
+ *    o Widened top header for new Z.x.y version format
+ *    o Centered Report title w/o stars and less glitter
+ *    o Modified Model INPUTS to show number of servers numerically for 
+ *      both *single* and multi node comparison
+ * Updated by NJG on Saturday, January 12, 2013: 
+ *    o Fixed wUnit to be tUnit in WORKLOAD Parameters section
+ *    o Queue was sometimes wrong for MSQ (too many divides by m)
  * 
  *  $Id$
  */
@@ -79,9 +87,9 @@ void PDQ_Report(void)
 	time_t          clock;
 	char           *pc;
 	char           *tstamp;
-	int             fillbase = 24;
+	int             fillbase = 25; // was 24
 	int             fill;
-	char           *pad = "                       ";
+	char           *pad = "                        "; // 24 was 23
 	FILE           *fp;
 	double          allusers = 0.0;
 	char           *p = "PDQ_Report()";
@@ -102,12 +110,18 @@ void PDQ_Report(void)
 	nodhdr = FALSE;
 	devhdr = FALSE;
 
-	if ((clock = time(0)) == -1)
+	if ((clock = time(0)) == -1) {
 		errmsg(p, "Failed to get date");
+	}
 
-	tstamp = (char *) ctime(&clock);	/* 24 chars + \n\0  */
-	strncpy(s1, tstamp, fillbase);
-
+    tstamp = (char *) ctime(&clock);
+    // e.g., "Thu Jan 10 21:19:40 2013" is 24 chars + \n\0 
+    // see http://www.thinkage.ca/english/gcos/expl/c/lib/ctime.html
+	strncpy(s4, tstamp, 24); // toss embedded \n char
+	fill = fillbase - strlen(s4);
+	strcpy(s1, s4);
+	strncat(s1, pad, fill);
+	
 	fill = fillbase - strlen(model);
 	strcpy(s2, model);
 	strncat(s2, pad, fill);
@@ -116,18 +130,20 @@ void PDQ_Report(void)
 	strcpy(s3, version);
 	strncat(s3, pad, fill);
 
-	banner_stars();
-	banner_chars(" Pretty Damn Quick REPORT");
-	banner_stars();
-	PRINTF("                ***  of : %s  ***\n", s1);
-	PRINTF("                ***  for: %s  ***\n", s2);
-	PRINTF("                ***  Ver: %s  ***\n", s3);
-	banner_stars();
-	banner_stars();
+	PRINTF("\n");
+	// NJG on Friday, January 11, 2013
+	// Center the Report title w/o stars
+	PRINTF("%15s%9s%24s%9s\n", " ", " ","PRETTY DAMN QUICK REPORT"," ");
+	banner_dash();
+	PRINTF("               ***    of: %s   ***\n", s1);
+	PRINTF("               ***   for: %s   ***\n", s2);
+	PRINTF("               ***   Ver: %s   ***\n", s3);
+	banner_dash();
 
 	resets(s1);
 	resets(s2);
 	resets(s3);
+	resets(s4);
 
 	PRINTF("\n");
 	
@@ -166,11 +182,11 @@ void PDQ_Report(void)
 		}
 	}  /* loop over c */
 
-	PRINTF("Queueing Circuit Totals:\n");
-	PRINTF("        Streams:    %3d\n", streams);
-	PRINTF("        Nodes:      %3d\n\n", nodes);
+	PRINTF("Queueing Circuit Totals\n");
+	PRINTF("Streams: %3d\n", streams);
+	PRINTF("Nodes:   %3d\n\n", nodes);
 
-	PRINTF("WORKLOAD Parameters:\n");
+	//PRINTF("WORKLOAD Parameters:\n");
 
 	for (c = 0; c < streams; c++) {
 		switch (job[c].should_be_class) {
@@ -255,6 +271,9 @@ void print_node_head(void)
 		PRINTF("%s Network: \"%s\"\n", s1, model);
 		resets(s1);
 	}
+	
+	PRINTF("WORKLOAD Parameters:\n\n");
+
 	switch (demand_ext) {
 	case DEMAND:
 		PRINTF(dmdfmt,
@@ -304,22 +323,30 @@ void print_nodes(void)
 
 			typetostr(s3, node[k].sched);
 			if (node[k].sched == MSQ) {
-				sprintf(s1, "%3d", node[k].devtype); // number of MSQ servers
+			// From CreateMultiNode()
+			// number of MSQ servers contained in node.devtype
+				sprintf(s1, "%3d", node[k].devtype); 
 			} else {
-				typetostr(s1, node[k].devtype);
+			// NJG: Friday, January 11, 2013
+			// From CreateNode() node.devtype == CEN
+			// More consistent with MSQ Inputs reporting 
+			// to show number of servers as numeric 1
+			// node.sched still displays as FCFS
+				//typetostr(s1, node[k].devtype);
+				sprintf(s1, "%3d", 1);
 			}
 
 			getjob_name(s2, c);
 
 			switch (job[c].should_be_class) {
 				case TERM:
-					strcpy(s4, "TERML");
+					strcpy(s4, "Closed");
 					break;
 				case BATCH:
-					strcpy(s4, "BATCH");
+					strcpy(s4, "Batch");
 					break;
 				case TRANS:
-					strcpy(s4, "TRANS");
+					strcpy(s4, "Open");
 					break;
 				default:
 					break;
@@ -462,7 +489,7 @@ int             trxhdr = FALSE;
 
 void print_job_head(int should_be_class)
 {
-	extern char      wUnit[];
+	extern char      tUnit[];
 
 	switch (should_be_class) {
 		case TERM:
@@ -485,8 +512,8 @@ void print_job_head(int should_be_class)
 			break;
 		case TRANS:
 			if (!trxhdr) {
-				PRINTF("Source        per %s        Demand\n", wUnit);
-				PRINTF("------        -------        ------\n");
+				PRINTF("Arrivals       per %-5s     Demand \n", tUnit);
+				PRINTF("--------       --------     -------\n");
 				trxhdr = TRUE;
 				trmhdr = bathdr = FALSE;
 			}
@@ -656,6 +683,7 @@ void print_node_stats(int c, int should_be_class)
 	extern int        PDQ_DEBUG, demand_ext, nodes;
 	extern JOB_TYPE  *job;
 	extern NODE_TYPE *node;
+	extern char       s3[];
 	extern char       s4[];
 
 	double            	X;
@@ -666,7 +694,7 @@ void print_node_stats(int c, int should_be_class)
 	double          	devW;
 	double          	devL;
 	int               	k;
-	int               	m;
+	int               	mservers;
 	char             	*p = "print_node_stats()";
 
 	if (PDQ_DEBUG)
@@ -707,6 +735,27 @@ void print_node_stats(int c, int should_be_class)
 			strcat(s4, tUnit);
 		}
 
+// NJG: Friday, January 11, 2013 
+// New metric: MSQ server capacity; the 'm' in M/M/m
+			resets(s3);
+			typetostr(s3, node[k].sched);
+			if (node[k].sched == MSQ) {
+			// This is a hack until the multiserver data types are consistent
+			// number of MSQ servers
+				mservers = node[k].devtype; 
+			} else {
+				mservers = 1;
+			}
+		// Now, display mservers metric	
+		PRINTF("%-14s  %-10s   %-10s   %10d   %s\n",
+		  "Capacity",
+		  node[k].devname,
+		  s1,
+		  mservers,
+		  "Servers"
+		);
+
+
 		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
 		  "Throughput",
 		  node[k].devname,
@@ -725,18 +774,19 @@ void print_node_stats(int c, int should_be_class)
 				devL = 0.0;
 				break;
 			case MSQ:
-				devU = node[k].utiliz[c];
-				m = node[k].devtype;
-				// X here is total arrival rate.
-				// Need divide by m to get server rate
-				devQ = X * node[k].resit[c] / m;
+			 	// devU is per-server from U<1 test in MVA_Canon.c
+			 	devU = node[k].utiliz[c];
+				mservers = node[k].devtype;
+				// X is total arrival rate into PDQ network
+				devQ = X * node[k].resit[c]; // Little's law
 				devW = node[k].resit[c] - node[k].demand[c];
 				devL = X * devW;
 				break;
 			default:
 				// NJG on Friday, July 10, 2009
-				//devU = node[k].utiliz[c];
-				// node[k].utiliz[c] is not updated in either EXACT or APPROX methods.
+				// devU = node[k].utiliz[c];
+				// node[k].utiliz[c] is not updated in either EXACT 
+				// or APPROX methods.
 				// Rather than implementing it in every relevant module, 
 				// we just use Little's law here.	
 				devU = X * node[k].demand[c];
@@ -745,7 +795,16 @@ void print_node_stats(int c, int should_be_class)
 				devL = X * devW;
                 break;
 		}
-		
+
+// NJG: Friday, January 11, 2013 
+		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		  "In service",
+		  node[k].devname,
+		  s1,
+		  devU * mservers,
+		  wUnit
+		);
+			
 		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
 		  "Utilization",
 		  node[k].devname,
@@ -753,7 +812,7 @@ void print_node_stats(int c, int should_be_class)
 		  devU * 100,
 		  "Percent"
 		);
-
+	
 		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
 		  "Queue length",
 		  node[k].devname,
@@ -812,7 +871,7 @@ void print_node_stats(int c, int should_be_class)
 
 void banner_stars(void)
 {
-	PRINTF("                ***************************************\n");
+	PRINTF("               ******************************************\n");
 
 }  /* banner_stars */
 
@@ -820,7 +879,7 @@ void banner_stars(void)
 
 void banner_dash(void)
 {
-	PRINTF("                =======================================\n");
+	PRINTF("               ==========================================\n");
 
 }  // banner_dash
 
@@ -831,7 +890,7 @@ void banner_dash(void)
 void banner_chars(char *s)
 {
 
-	PRINTF("                ******%-26s*******\n", s);
+	PRINTF("               ********%-26s********\n", s);
 
 }  /* banner_chars */
 

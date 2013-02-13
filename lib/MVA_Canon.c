@@ -21,6 +21,7 @@
  * Revised by NJG on Friday, June 26, 2009. See function: sumU(int k)
  * Revised by NJG on Tuesday, March 1, 2011. Set Dsat=0.0 in each c-loop iteration (Newsom)
  * Updated by PJP on Saturday, Nov 3, 2012. Added R support
+ * Updated by NJG on Saturday, January 12, 2013. Change devU to perSrvrU
  *
  *  $Id$
  */
@@ -49,7 +50,7 @@ void canonical(void)
     double            Dsat = 0.0;
     double            Ddev;
     double            sumR[MAXSTREAMS];
-    double            devU;
+    double            perSrvrU;
     double            sumU();
     char              jobname[MAXBUF];
     char              satname[MAXBUF];
@@ -73,8 +74,8 @@ void canonical(void)
 				errmsg(p, s1);
             }
             Ddev = node[k].demand[c];
-            if (node[k].sched == MSQ) {     // multiserver case
-                m = node[k].devtype;        // contains number of servers > 0
+            if (node[k].sched == MSQ) { // multiserver case
+                m = node[k].devtype;	// contains m > 1 servers
                 Ddev /= m;
             }
             if (Ddev > Dsat) {
@@ -104,32 +105,36 @@ void canonical(void)
         
         for (k = 0; k < nodes; k++) {
             node[k].utiliz[c] = X * node[k].demand[c];
-            if (node[k].sched == MSQ) {     // multiserver case
-                m = node[k].devtype;            // recompute m in every k-loop
-                node[k].utiliz[c] /= m;     // per server
+            if (node[k].sched == MSQ) { // multiserver case
+                m = node[k].devtype;    // recompute m in every k-itertn
+                node[k].utiliz[c] /= m; // per server
             }
 
-            devU = sumU(k); // sum all workload classes
+        	// Sum over all work classes on dev k
+        	// Uses node[k].utiliz[c] per server for MSQ case
+        	// Also used below for R = D/(1-U) in M/M/1 case
+        	perSrvrU = sumU(k); 
 
-            if (devU > 1.0) {
+            if (perSrvrU > 1.0) {
                 sprintf(s1, "\nTotal utilization of node \"%s\" is %2.2f%% (> 100%%)",
                     node[k].devname,
-                    devU * 100
+                    perSrvrU * 100
                     );
                 errmsg(p, s1);
             }
 
             if (PDQ_DEBUG)
-                PRINTF("Tot Util: %3.4f for %s\n", devU, node[k].devname);
+                PRINTF("Tot Util: %3.4f for %s\n", perSrvrU, node[k].devname);
 
             switch (node[k].sched) {
                 case FCFS:
                 case PSHR:
-                case LCFS:
-                    node[k].resit[c] = node[k].demand[c] / (1.0 - devU);
+                case LCFS: // M/M/1 type nodes
+                    node[k].resit[c] = node[k].demand[c] / (1.0 - perSrvrU);
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
-                case MSQ: // Added by NJG on Mon, Apr 2, 2007
+                case MSQ:  // M/M/m type node
+                	// Added by NJG on Mon, Apr 2, 2007
                     node[k].resit[c] = ErlangR(X, node[k].demand[c], m);
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
@@ -183,10 +188,13 @@ double sumU(int k)
 
     for (c = 0; c < streams; c++) {
     	// NJG on Sunday, June 28, 2009 7:29:45 PM
-        // This branching is a hack. Why do I need it?
-        // I think it's because multi-class workloads and multi-servers are incompatible.
-         if (node[k].sched == MSQ) sum += node[k].utiliz[c];
-         else sum += (job[c].trans->arrival_rate * node[k].demand[c]);
+        // Following if-else is a hack b/c multi-class workloads 
+        // and multi-servers are currently incompatible. (I think)
+         if (node[k].sched == MSQ) {
+         	sum += node[k].utiliz[c];
+         } else {
+         	sum += (job[c].trans->arrival_rate * node[k].demand[c]);
+         }
     }
 
     return (sum);
