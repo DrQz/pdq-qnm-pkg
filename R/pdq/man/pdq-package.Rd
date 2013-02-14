@@ -9,12 +9,12 @@ The PDQ performance analyzer uses queueing-theory concepts to represent computer
 \details{
 \tabular{ll}{
 Package: \tab pdq\cr
-Version: \tab 6.0-1\cr
-Date: \tab 2012-12-15\cr
+Version: \tab \Sexpr[stage=render]{packageVersion("pdq")}\cr
+Date: \tab \Sexpr[stage=render]{packageDescription("pdq")$Date}\cr
 License: \tab MIT\cr
 URL: \tab http://www.perfdynamics.com/Tools/PDQ.html\cr
 \tab http://sourceforge.net/projects/pdq-qnm-pkg/\cr
-Built: \tab R 2.15.2; x86_64-pc-linux-gnu; 2013-12-15 17:45:09; unix\cr
+Built: \tab \Sexpr[stage=render]{packageDescription("pdq")$Built}\cr
 }
 }
 
