@@ -13,6 +13,8 @@
 #  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  #
 #  KIND, either express or implied.                                           #
 ###############################################################################
+#
+#  $Id$
 
 # mm1-book.pl
 # Updated by NJG on Sat, Apr 8, 2006 per erratum for p. 220
