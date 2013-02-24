@@ -13,27 +13,29 @@
 #  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  #
 #  KIND, either express or implied.                                           #
 ###############################################################################
+#
+#  $Id$
 
 # mwl.pl
-# Updated by NJG on Sun, Feb 19, 2006
-# Added missing disk to "Aggregate UPGRADE" model
+# Updated by NJG on Sun, Feb 19, 2006 - Added missing disk to "Agg UPGRADE" model
+# Edited by NJG on Sunday, February 24, 2013
 
 use pdq;
 
 # ****************************************
 #  Parameters from workload measurements *
 # ****************************************
-$maxBatJobs = 10;
-$maxIntJobs = 25;
-$intThink = 30;
-$batThink = 0.0;
-$cpuBatBusy = 600.0;
-$dskBatBusy = 54.0;
-$cpuIntBusy = 47.6;
-$dskIntBusy = 428.4;
+$maxBatJobs     = 10;
+$maxIntJobs     = 25;
+$intThink       = 30;
+$batThink       = 0.0;
+$cpuBatBusy     = 600.0;
+$dskBatBusy     = 54.0;
+$cpuIntBusy     = 47.6;
+$dskIntBusy     = 428.4;
 $batchCompletes = 600;
 $interCompletes = 476; 
-$cpuSpeedup = 5; # CPU upgrade in relative units
+$cpuSpeedup     = 5; # CPU upgrade in relative units
 
 $totCpuBusy = $cpuBatBusy + $cpuIntBusy;
 $totDskBusy = $dskBatBusy + $dskIntBusy;
@@ -49,10 +51,9 @@ $aggDskDemand = $totDskBusy / $totalCompletes;
 # ************************************************************
 pdq::Init("Aggregate BASELINE");
 
-$pdq::nodes = pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
-$pdq::nodes = pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
-$pdq::streams = pdq::CreateClosed("aggwork", $pdq::TERM, 
-    $maxAggJobs, $aggThink);
+pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
+pdq::CreateClosed("aggwork", $pdq::TERM, $maxAggJobs, $aggThink);
 
 pdq::SetDemand("cpu", "aggwork", $aggCpuDemand);
 pdq::SetDemand("dsk", "aggwork", $aggDskDemand);
@@ -62,12 +63,10 @@ pdq::Report();
 
 
 pdq::Init("Aggregate UPGRADE");
+pdq::CreateClosed("aggwork", $pdq::TERM, $maxAggJobs, $aggThink);
 
-$pdq::nodes = pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
-$pdq::nodes = pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
-$pdq::streams = pdq::CreateClosed("aggwork", $pdq::TERM, 
-    $maxAggJobs, $aggThink);
-
+pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
 pdq::SetDemand("cpu", "aggwork", $aggCpuDemand / $cpuSpeedup);
 pdq::SetDemand("dsk", "aggwork", $aggDskDemand); # Added missing disk
 
@@ -76,20 +75,17 @@ pdq::Report();
 
 
 # ******************************************************
-#  Now analyze models based on the workload components *
+#  Now analyze models based on the component workloads *
 # ******************************************************
 pdq::Init("Component BASELINE");
+pdq::CreateClosed("batch", $pdq::BATCH, $maxBatJobs, $batThink);
 
-$pdq::nodes = pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
-$pdq::nodes = pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
-$pdq::streams = pdq::CreateClosed("batch", $pdq::BATCH,
-    $maxBatJobs, $batThink);
-
+pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
 pdq::SetDemand("cpu", "batch", $cpuBatBusy / $batchCompletes);
 pdq::SetDemand("dsk", "batch", $dskBatBusy / $batchCompletes);
 
-$pdq::streams = pdq::CreateClosed("online", $pdq::TERM, 
-    $maxIntJobs, $intThink);
+pdq::CreateClosed("online", $pdq::TERM, $maxIntJobs, $intThink);
 pdq::SetDemand("cpu", "online", $cpuIntBusy / $interCompletes);
 pdq::SetDemand("dsk", "online", $dskIntBusy / $interCompletes);
 
@@ -99,17 +95,15 @@ pdq::Report();
 
 pdq::Init("Component UPGRADE");
 
-$pdq::nodes = pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
-$pdq::nodes = pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("cpu", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("dsk", $pdq::CEN, $pdq::FCFS);
 
-$pdq::streams = pdq::CreateClosed("batch", $pdq::BATCH, 
-    $maxBatJobs, $batThink);
+pdq::CreateClosed("batch", $pdq::BATCH, $maxBatJobs, $batThink);
 pdq::SetDemand("cpu", "batch", 
     ($cpuBatBusy / $batchCompletes) / $cpuSpeedup);
 pdq::SetDemand("dsk", "batch", $dskBatBusy / $batchCompletes);
 
-$pdq::streams = pdq::CreateClosed("online", $pdq::TERM, 
-    $maxIntJobs, $intThink);
+pdq::CreateClosed("online", $pdq::TERM, $maxIntJobs, $intThink);
 pdq::SetDemand("cpu", "online", 
     ($cpuIntBusy / $interCompletes) / $cpuSpeedup);
 pdq::SetDemand("dsk", "online", $dskIntBusy / $interCompletes);
