@@ -13,30 +13,37 @@
 /*  KIND, either express or implied.                                           */
 /*******************************************************************************/
 
+
 /*
+$Id$
 
-baseline.c - Corrected client/server model for PPA Chap. 8
-
+baseline.c
 Created by NJG on Sat Jul 23 08:11:23 PST 1994
+Corrected client/server model for PPA book Chap. 8
 
-Updated by NJG on Fri Dec 12 17:26:46 PST 2004 to correctly account for
-the combination of request-response service times on the same resource.
-PPA book code has separate SetDemand() calls for request and response on
-the same PDQ node. This is incorrect because the response call to
-SetDemand() merely overwrites the request call.
+Updated by NJG on Fri Dec 12 17:26:46 PST 2004
+Correctly account for the combination of request-response service
+times on the same resource. PPA book code has separate SetDemand()
+calls for request and response on the same PDQ node. This is incorrect
+because the response call to SetDemand() merely overwrites the request
+call.
 
-Updated by NJG on Thu May 11 23:27:43 PDT 2006 to improve reconciliation
-with the results as they appear in the original CMG93 paper. The
-technology (Novell Netware) may be considered "ancient" but it is still
-very instructive from a modeling standpoint because it involves SIX
-workload classes (PDQ streams) and the computational resources (PDQ
-nodes) are distributed across THREE tiers. This level of queueing model
-is really documented or discussed anywhere. The interested reader can
-compare this example with the more modern variants 'cs_baseline.pl' and
-'ebiz.pl' in the ../examples/sv_2004/pdq_models/ directory.
+Updated by NJG on Thu May 11 23:27:43 PDT 2006
+Improve reconciliation with the results as they appear in the original
+CMG93 paper. The technology (Novell Netware) may be considered
+"ancient" but it is still very instructive from a modeling standpoint
+because it involves SIX workload classes (PDQ streams) and the
+computational resources (PDQ nodes) are distributed across THREE
+tiers. This level of queueing model is really documented or discussed
+anywhere. The interested reader can compare this example with the more
+modern variants 'cs_baseline.pl' and 'ebiz.pl' in the
+../examples/sv_2004/pdq_models/ directory.
  
-Updated by NJG on Fri May 12 11:56:10 PDT 2006 parameterize token ring
-transfer rate with number of bytes per frame.
+Updated by NJG on Fri May 12 11:56:10 PDT 2006 
+parameterize token ring transfer rate with number of bytes per frame.
+
+Updated by NJG on Sunday, February 24, 2013
+Removed redundant 'streams' and 'nodes' returns from CreateXXX() calls.
 
 */
 
@@ -51,7 +58,7 @@ transfer rate with number of bytes per frame.
  * Code at the end of main() prints out selected performance metrics. Toggle
  * whether to prepend with a generic PDQ  Report.
  */
-#define PRINT_REPORT 0
+#define PRINT_REPORT 1
 
 /* Useful multipliers */
 #define 	K		    1024
@@ -120,7 +127,8 @@ typedef struct {
 
 main()
 {
-   extern int      nodes, streams;
+   extern int      nodes;
+   extern int      streams;
    extern JOB_TYPE *job;
    extern NODE_TYPE *node;
    extern char     s1[];
@@ -231,17 +239,17 @@ main()
    strcpy(nodeMF, "MFRAME");
    strcpy(nodeTR, "TRLAN");
 
-   nodes = PDQ_CreateNode(nodePC, CEN, FCFS);
-   nodes = PDQ_CreateNode(nodeFS, CEN, FCFS);
-   nodes = PDQ_CreateNode(nodeGW, CEN, FCFS);
-   nodes = PDQ_CreateNode(nodeMF, CEN, FCFS);
+   PDQ_CreateNode(nodePC, CEN, FCFS);
+   PDQ_CreateNode(nodeFS, CEN, FCFS);
+   PDQ_CreateNode(nodeGW, CEN, FCFS);
+   PDQ_CreateNode(nodeMF, CEN, FCFS);
 
    for (i = 0; i < FS_DISKS; i++) {
-      nodes = PDQ_CreateNode(FDarray[i].label, CEN, FCFS);
+      PDQ_CreateNode(FDarray[i].label, CEN, FCFS);
    }
 
    for (i = 0; i < MF_DISKS; i++) {
-      nodes = PDQ_CreateNode(MDarray[i].label, CEN, FCFS);
+      PDQ_CreateNode(MDarray[i].label, CEN, FCFS);
    }
 
    /*
@@ -250,7 +258,7 @@ main()
     * in the original CMG 1993 paper.
     */
 
-   nodes = PDQ_CreateNode(nodeTR, CEN, FCFS);
+   PDQ_CreateNode(nodeTR, CEN, FCFS);
 
    /*
     * Because the desktop PCs are all of the same type and emitting the same
@@ -270,12 +278,12 @@ main()
    strcpy(dummyRQ, "RemQuotAgg");
    strcpy(dummySU, "StatUpdAgg");
 
-   streams = PDQ_CreateOpen(transCD, 1 * 4.0 * TPS);
-   streams = PDQ_CreateOpen(transRQ, 1 * 8.0 * TPS);
-   streams = PDQ_CreateOpen(transSU, 1 * 1.0 * TPS);
-   streams = PDQ_CreateOpen(dummyCD, (USERS - 1) * 4.0 * TPS);
-   streams = PDQ_CreateOpen(dummyRQ, (USERS - 1) * 8.0 * TPS);
-   streams = PDQ_CreateOpen(dummySU, (USERS - 1) * 1.0 * TPS);
+   PDQ_CreateOpen(transCD, 1 * 4.0 * TPS);
+   PDQ_CreateOpen(transRQ, 1 * 8.0 * TPS);
+   PDQ_CreateOpen(transSU, 1 * 1.0 * TPS);
+   PDQ_CreateOpen(dummyCD, (USERS - 1) * 4.0 * TPS);
+   PDQ_CreateOpen(dummyRQ, (USERS - 1) * 8.0 * TPS);
+   PDQ_CreateOpen(dummySU, (USERS - 1) * 1.0 * TPS);
 
    /*
    Define the service demands on each physical resource.
