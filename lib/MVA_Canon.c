@@ -50,7 +50,7 @@ void canonical(void)
     double            Dsat = 0.0;
     double            Ddev;
     double            sumR[MAXSTREAMS];
-    double            perSrvrU;
+    double            perSrvrU = 0;
     double            sumU();
     char              jobname[MAXBUF];
     char              satname[MAXBUF];
@@ -106,7 +106,7 @@ void canonical(void)
         for (k = 0; k < nodes; k++) {
             node[k].utiliz[c] = X * node[k].demand[c];
             if (node[k].sched == MSQ) { // multiserver case
-                m = node[k].devtype;    // recompute m in every k-itertn
+                m = node[k].devtype;    // recompute m in each k-iteration
                 node[k].utiliz[c] /= m; // per server
             }
 
@@ -115,6 +115,9 @@ void canonical(void)
         	// Also used below for R = D/(1-U) in M/M/1 case
         	perSrvrU = sumU(k); 
 
+            if (PDQ_DEBUG) // Call here or won't appear if perSrvrU > 1 error
+                PRINTF("Tot Util: %3.4f for %s\n", perSrvrU, node[k].devname);
+
             if (perSrvrU > 1.0) {
                 sprintf(s1, "\nTotal utilization of node \"%s\" is %2.2f%% (> 100%%)",
                     node[k].devname,
@@ -122,9 +125,6 @@ void canonical(void)
                     );
                 errmsg(p, s1);
             }
-
-            if (PDQ_DEBUG)
-                PRINTF("Tot Util: %3.4f for %s\n", perSrvrU, node[k].devname);
 
             switch (node[k].sched) {
                 case FCFS:
