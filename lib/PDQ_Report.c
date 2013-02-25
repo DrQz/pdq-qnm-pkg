@@ -430,6 +430,7 @@ void print_job(int c, int should_be_class)
 				);
 			break;
 		default:
+			errmsg("print_job()", "Unknown job type");
 			break;
 	}
 
@@ -520,6 +521,7 @@ void print_job_head(int should_be_class)
 			}
 			break;
 		default:
+			errmsg("print_job_head()", "Unknown workload type");
 			break;
 	}
 }  /* print_job_head */
