@@ -182,6 +182,7 @@ void PDQ_Report(void)
 		}
 	}  /* loop over c */
 
+	PRINTF("\n");
 	PRINTF("Queueing Circuit Totals\n");
 	PRINTF("Streams: %3d\n", streams);
 	PRINTF("Nodes:   %3d\n\n", nodes);
@@ -354,7 +355,7 @@ void print_nodes(void)
 
 			switch (demand_ext) {
 				case DEMAND:
-					PRINTF("%-4s %-5s %-10s %-10s %-5s %10.4lf\n",
+					PRINTF("%-4s %-5s %-10s %-10s %-5s %10.4lf",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -364,7 +365,7 @@ void print_nodes(void)
 					);
 					break;
 				case VISITS:
-					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %10.4lf\n",
+					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %10.4lf",
 					  s1,
 					  s3,
 					  node[k].devname,
