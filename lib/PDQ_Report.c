@@ -30,6 +30,7 @@
  * Updated by NJG on Saturday, January 12, 2013: 
  *    o Fixed wUnit to be tUnit in WORKLOAD Parameters section
  *    o Queue was sometimes wrong for MSQ (too many divides by m)
+ * Updated by NJG on Monday, February 25, 2013: Removed blank b/w Workload parameters
  * 
  *  $Id$
  */
@@ -355,7 +356,7 @@ void print_nodes(void)
 
 			switch (demand_ext) {
 				case DEMAND:
-					PRINTF("%-4s %-5s %-10s %-10s %-5s %10.4lf",
+					PRINTF("%-4s %-5s %-10s %-10s %-5s %10.4lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -365,7 +366,7 @@ void print_nodes(void)
 					);
 					break;
 				case VISITS:
-					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %10.4lf",
+					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %10.4lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -382,7 +383,7 @@ void print_nodes(void)
 			}  /* switch */
 		}  /* over k */
 
-		PRINTF("\n");
+		//PRINTF("\n");
 	}  /* over c */
 
 
