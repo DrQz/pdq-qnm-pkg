@@ -30,7 +30,7 @@
  * Updated by NJG on Saturday, January 12, 2013: 
  *    o Fixed wUnit to be tUnit in WORKLOAD Parameters section
  *    o Queue was sometimes wrong for MSQ (too many divides by m)
- * Updated by NJG on Monday, February 25, 2013: Removed blank b/w Workload parameters
+ * Updated by NJG on Monday, February 25, 2013: Removed blank line b/w Workload parameters
  * 
  *  $Id$
  */
