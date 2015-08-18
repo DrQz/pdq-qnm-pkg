@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1996, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -31,7 +31,7 @@
 
 //--------------------------------------------------------------------
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 
    double          erlangB;

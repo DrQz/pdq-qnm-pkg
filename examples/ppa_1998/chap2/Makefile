@@ -2,33 +2,39 @@
 #  $Id$
 #
 #-----------------------------------------------------------
+# Updated by NJG on Tuesday, August 18, 2015
+# Make file was not building b/c explicit src and obj dependencies needed
+
+
 .PHONY: all test clean
 
 CC       = gcc
 EXT      = .exe
-EXT      = 
 LIB      = ../../../lib
 INCL     = ../../../lib
 
+CFLAGS    = -I $(INCL) -l $(LIB) -ggdb
+
+
 PGM      = \
-         erlang${EXT} \
-         closed1${EXT} \
-         open1${EXT}
+         erlang \
+         open1 \
+         closed1
 
 #-----------------------------------------------------------
 
-all:	${PGM}
+all: ${PGM}
 
 #-----------------------------------------------------------
 
-erlang${EXT}:
-	${CC} -o erlang${EXT} erlang.c -lm
+erlang: erlang.c erlang.o
+	${CC} -o erlang erlang.c -I$(INCL) -L$(LIB) -lpdq -lm
 
-open1${EXT}:
-	${CC} -o open1${EXT} open1.c -I$(INCL) -L$(LIB) -lpdq -lm
+open1: open1.c open1.o
+	${CC} -o open1 open1.c -I$(INCL) -L$(LIB) -lpdq -lm
 
-closed1${EXT}:
-	${CC} -o closed1${EXT} closed1.c -I$(INCL) -L$(LIB) -lpdq -lm
+closed1: closed1.c closed1.o
+	${CC} -o closed1 closed1.c -I$(INCL) -L$(LIB) -lpdq -lm
 
 #-----------------------------------------------------------
 
@@ -41,7 +47,7 @@ test:
 #-----------------------------------------------------------
 
 clean:
-	-/bin/rm -f ${PGM} *.exe *~ *.log *.tst Ch2_*.out
+	-/bin/rm -f ${PGM} *.o *.exe *~ *.log *.tst Ch2_*.out
 
 #-----------------------------------------------------------
 

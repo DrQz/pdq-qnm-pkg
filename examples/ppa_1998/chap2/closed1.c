@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -14,7 +14,7 @@
 /*******************************************************************************/
 
 /*
- * time_share.c
+ * closed1.c
  * 
  * Illustrates PDQ solver for closed uni-server queue. Compare with repair.c
  *
@@ -25,42 +25,35 @@
 #include <math.h>
 #include "PDQ_Lib.h"
 
-//-------------------------------------------------------------------------
 
-main()
+int main()
 {
-   //----- Model specific variables ---------------------------------------
-
+   //----- Deprecated since PDQ release 6
    int              nodes;
    int              streams;
-
+   
+   //----- Model-specific variables
    double           pop   = 100.0;
    double           think = 300.0;
    double           servt = 0.63;
 
-   //----- Initialize the model -------------------------------------------
-
+   //----- Initialize the model
    PDQ_Init("Time Share Computer");
    PDQ_SetComment("This is a M/M/1/N/N/FCFS queue.");
 
    // Define the workload and circuit type
-
    streams = PDQ_CreateClosed("compile", TERM, pop, think);
 
    // Define the queueing center
-
    nodes = PDQ_CreateNode("CPU", CEN, FCFS);
 
    // Define service demand
-
    PDQ_SetDemand("CPU", "compile", servt);
 
-   //----- Solve the model and generate report ----------------------------
-
+   //----- Solve the model and generate report
    PDQ_Solve(EXACT);
-
    PDQ_Report();
-}  // main
+   
+}
 
-//-------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -14,11 +14,10 @@
 /*******************************************************************************/
 
 /*
- * open_center.c
+ * open1.c
  * 
  * Illustrate use of PDQ solver for open uni-server queue.
  * 
- *
  *  $Id$
  */
 
@@ -30,49 +29,42 @@
 
 //----------------------------------------------------------------------------
 
-main()
+int main()
 {
-   //----- Model specific variables -----
-
+   //----- Deprecated since PDQ 6 -----
    int              nodes;
    int              streams;
-
+   
+   //----- Model specific variables -----
    double           arrivRate    = 0.75;
    double           service_time = 1.0;
 
    //----- Initialize the model & Give it a name ------
-
    PDQ_Init("OpenCenter");
    PDQ_SetComment("This is just a simple M/M/1 queue.");
    
 
    //----- Define the queueing center -----
-
    nodes = PDQ_CreateNode("server", CEN, FCFS);
 
    //----- Define the workload and circuit type -----
-
    streams = PDQ_CreateOpen("work", arrivRate);
 
    //----- Define service demand due to workload on the queueing center ------
-
    PDQ_SetDemand("server", "work", service_time);
    
    //----- Change unit labels -----
-
    PDQ_SetWUnit("Customers");
    PDQ_SetTUnit("Seconds");
 
 
    //----- Solve the model -----
    //  Must use the CANONical method for an open circuit
-
    PDQ_Solve(CANON);
 
    //----- Generate a report -----
-
    PDQ_Report();
-}  // main
+   
+}
 
-//----------------------------------------------------------------------------
 
