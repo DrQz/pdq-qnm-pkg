@@ -130,7 +130,7 @@ double
 PDQ_GetResponse(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetResponse()";
-	double           r;
+	double          r = 0.0;
 
    int job_index = getjob_index(wname);
 
@@ -169,7 +169,7 @@ double
 PDQ_GetThruput(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetThruput()";
-	double           x;
+	double          x = 0.0;
 
 	// g_debugf("wname[%s]\n", wname);
 
@@ -209,7 +209,7 @@ double
 PDQ_GetThruMax(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetThruMax()";
-	double           x;
+	double          x = 0.0;
 
    int job_index = getjob_index(wname);
 
@@ -247,8 +247,12 @@ double
 PDQ_GetLoadOpt(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetLoadOpt()";
-	double          Dmax, Dsum;
-	double          Nopt, Z;
+	// Edited by NJG on Tuesday, August 18, 2015
+	// Initialize vars to suppress compiler warnings
+	double          Dmax = 0.0;
+	double          Dsum = 0.0;
+	double          Nopt = 0.0;
+	double          Z = 0.0;
 
    int job_index = getjob_index(wname);
 
@@ -273,17 +277,32 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 			}
 	} else {
 #ifndef __R_PDQ
-		fprintf(stderr, "[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+		fprintf(stderr, "[PDQ_GetLoadOpt]  Invalid job index (%d)\n", job_index);
       exit(99);
 #else
-      //    REprintf("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
-    error("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+      //    REprintf("[PDQ_GetLoadOpt]  Invalid job index (%d)\n", job_index);
+    error("[PDQ_GetLoadOpt]  Invalid job index (%d)\n", job_index);
 #endif
 	}
 
+	if (Dsum == 0) {
+		#ifndef __R_PDQ
+		 fprintf(stderr, "[PDQ_GetLoadOpt]  No service demands defined.\n");
+     	 exit(99);
+		#else
+   		 error("[PDQ_GetLoadOpt]  No service demands defined.\n");
+		#endif
+	}
+    
 	Nopt = (Dsum + Z) / Dmax;
 
-	return (floor(Nopt)); /* return lower bound as integral value */
+	// Removed Tuesday, August 18, 2015
+	//return (floor(Nopt)); /* return lower bound as integral value */
+	// This was a silly idea. Want theoretical value, not rounded down 'practical' value. 
+	// If Nopt < 1 then floor produces zero!
+		
+	return (Nopt);
+	
 }  /* PDQ_GetLoadOpt */
 
 //-------------------------------------------------------------------------
@@ -298,8 +317,10 @@ PDQ_GetResidenceTime(char *device, char *work, int should_be_class)
 {
 	char           *p = "PDQ_GetResidenceTime()";
 	extern char       s1[];
-	double            r;
-	int               c, k;
+	// Initialize vars to suppress compiler warnings
+	double            r = 0.0;
+	int               c = 0;
+	int               k = 0;
 
 	c = getjob_index(work);
 
@@ -331,12 +352,13 @@ double
 PDQ_GetUtilization(char *device, char *work, int should_be_class)
 {
 	char             *p = "PDQ_GetUtilization()";
-
 	extern char       s1[];
-
-	double            x, u;
-
-	int               c, k, m;
+	// Initialize vars to suppress compiler warnings
+	double            x = 0.0;
+	double            u = 0.0;
+	int               c = 0;
+	int               k = 0;
+	int               m = 0;
 
 	// g_debug("PDQ_GetUtilization\n");
 	// g_debugf("job[%d]\n", job);
@@ -390,8 +412,11 @@ PDQ_GetQueueLength(char *device, char *work, int should_be_class)
 	char             *p = "PDQ_GetQueueLength()";
 
 	extern char       s1[];
-	double            q, x;
-	int               c, k;
+	// Initialize vars to suppress compiler warnings
+	double            q = 0.0;
+	double            x = 0.0;
+	int               c = 0;
+	int               k = 0;
 
 	c = getjob_index(work);
 	x = PDQ_GetThruput(should_be_class, work);
@@ -435,7 +460,7 @@ typetostr(char *str, int type)
 /* convert a #define to a string */
 {
 	char            buf[MAXBUF];
-	int             i;
+	int             i = 0;
 
 	for (i = 0; i < MAXVAL; i++) {
 		if (type == typetable[i].value) {
@@ -456,7 +481,7 @@ int
 strtotype(char *str)
 /* convert a string to its #define value */
 {
-	int             i;
+	int             i = 0;
 	char            buf[MAXBUF];
 
 	for (i = 0; i <= MAXVAL; i++) {
@@ -499,7 +524,7 @@ allocate_jobs(int jobs)
 	extern TRANSACTION_TYPE  *tx;
 	extern SYSTAT_TYPE       *sys;
 
-	int                       c;
+	int                       c = 0;
 #ifndef __R_PDQ
 	if ((job = (JOB_TYPE*) calloc(sizeof(JOB_TYPE), jobs)) == NULL)
 #else
@@ -561,7 +586,7 @@ getjob_index(char *wname)
 
 	extern char     s1[];
 
-	int             n;
+	int             n = 0;
 
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
@@ -616,7 +641,7 @@ getnode_index(char *name)
 
 	extern char       s1[];
 
-	int               k;
+	int               k = 0;
 
 	if (PDQ_DEBUG)
 		debug(p, "Entering");

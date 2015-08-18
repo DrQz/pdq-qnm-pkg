@@ -39,7 +39,7 @@
 // Must not contain more than 25 characters for Report header
 // Updated by NJG on Friday, January 11, 2013
 //
-static char *version = "PDQ Analyzer 6.1.1 011013";
+static char *version = "PDQ Analyzer 6.1.2 081815";
 //---- TYPES --------------------------------------------------------------
 
 #ifndef   TRUE
