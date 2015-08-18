@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -16,9 +16,10 @@
 /*
  * httpd.c
  * 
+ *  $Id$
+ *
  * HTTP daemon performance model
  * 
- *  $Id$
  */
 
 #include <stdio.h>
@@ -123,7 +124,7 @@ int main()
    }
 
    return(0);
-}  // main
+}
 
-//-------------------------------------------------------------------------
+
 

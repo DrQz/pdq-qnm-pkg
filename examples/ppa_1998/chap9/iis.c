@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -16,18 +16,16 @@
 /*
  * iis.c
  *
- * Based on Microsoft WAS measurements of IIS.
- * 
- * CMG 2001 paper.
- *
  *  $Id$
+ *
+ * Based on Microsoft WAS measurements of IIS from CMG 2001 paper.
+ *
  */
 
 #include <stdio.h>
 #include <math.h>
 #include "PDQ_Lib.h"
 
-//-------------------------------------------------------------------------
 
 int main()
 {
@@ -153,7 +151,7 @@ int main()
 	printf("\n");
 
    return(0);
-}  // main
+}
 
-//-------------------------------------------------------------------------
+
 

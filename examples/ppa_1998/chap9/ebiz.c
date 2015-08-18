@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2002, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -16,6 +16,8 @@
 /*
  * ebiz.c
  *
+ *  $Id$
+ *
  * Created by NJG: Wed May  8 22:29:36  2002
  * Created by NJG: Fri Aug  2 08:57:31  2002
  *
@@ -31,16 +33,13 @@
  * Thinktime Z should be zero by virtue of N = XR assumption in paper.
  * We find that a Z~27 mSecs is needed to calibrate thruputs and utilizations.
  *
- *  $Id$
  */
 
-//-------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <math.h>
-#include "../lib/PDQ_Lib.h"
+#include "PDQ_Lib.h"
 
-//-------------------------------------------------------------------------
 
 int main()
 {
@@ -188,7 +187,7 @@ int main()
 	PDQ_Report();
 
    return(0);
-}  // main
+   
+} 
 
-//-------------------------------------------------------------------------
 
