@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "../lib/PDQ_Lib.h"
+#include "PDQ_Lib.h"
 
 //-------------------------------------------------------------------------
 
@@ -140,24 +140,20 @@ int main(int argc, char *argv[])
    fflush(stdout);
 
    PDQ_Solve(sol_mode);
-
    printf("Done.\n");
-
    /* PDQ_PrintXLS(); */
-
    PDQ_Report();
 
    return 0;
-}  /* main */
+   
+}  
 
-//-------------------------------------------------------------------------
 
 void nullit(char *s)
 {
    s[0] = '\0';
-}  /* nullit */
+}
 
-//-------------------------------------------------------------------------
 
 void itoa(int n, char s[])
 {
@@ -179,7 +175,6 @@ void itoa(int n, char s[])
       s[i] = s[j];
       s[j] = c;
    }
-}  /* itoa */
+}
 
-//-------------------------------------------------------------------------
 
