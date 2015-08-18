@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1999, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -16,7 +16,8 @@
 /*
  * abcache.c  -  Cache protocol scaling
  * 
- * Created by NJG: 13:03:53  07-19-96 Revised by NJG: 18:58:44  04-02-99
+ * Created by NJG: 13:03:53  07-19-96 
+ * Revised by NJG: 18:58:44  04-02-99
  * 
  *  $Id$
  */
@@ -25,7 +26,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
 #include "PDQ_Lib.h"
 
 //-------------------------------------------------------------------------
@@ -133,9 +133,6 @@ int main()
 
    PDQ_Init(model);
 
-   PDQ_SetWUnit("Reqs");
-   PDQ_SetTUnit("Cycs");
-
    /* create single bus queueing center */
 
    nodes = PDQ_CreateNode(BUS, CEN, FCFS);
@@ -192,8 +189,12 @@ int main()
 	 		PDQ_SetDemand(BUS, wname, 1.0);
       }
    }
-   PDQ_Solve(APPROX);
+   
+   
+   PDQ_SetWUnit("Reqs");
+   PDQ_SetTUnit("Cycs");
 
+   PDQ_Solve(APPROX);
 
    /* bus utilizations */
 
@@ -289,9 +290,8 @@ int main()
    printf("Uca%d[total]: %5.2f %%\n", i, (Ucht + Ucrd + Ucwr + Ucin) * 100.0);
 
    return 0;
-}  /* main */
+} 
 
-//-------------------------------------------------------------------------
 
 void itoa(int n, char *s)
 {
@@ -318,9 +318,8 @@ void itoa(int n, char *s)
       s[i] = s[j];
       s[j] = c;
    }
-}  /* itoa */
+}
 
-//-------------------------------------------------------------------------
 
 void namex(int i, char *s, char *r)
 /* append index i to string s and return it in r */
@@ -335,9 +334,8 @@ void namex(int i, char *s, char *r)
    itoa(i, s2);
    strcat(s1, s2);
    strcpy(r, s1);
-}				/* namex */
+}
 
-//-------------------------------------------------------------------------
 
 int intwt(double N, double *W)
 {
@@ -352,7 +350,6 @@ int intwt(double N, double *W)
       *W = 1.0;
    }
    return (i);
-}  /* intwt */
+}
 
-//-------------------------------------------------------------------------
 

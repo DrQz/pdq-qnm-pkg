@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1996, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -16,7 +16,8 @@
 /*
  * multibus.c
  * 
- * Created by NJG: 13:03:53  07-19-96 Updated by NJG: 19:31:12  07-31-96
+ * Created by NJG: 13:03:53  07-19-96 
+ * Updated by NJG: 19:31:12  07-31-96
  * 
  *  $Id$
  */
@@ -24,11 +25,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
 #include "PDQ_Lib.h"
 
 
-//-------------------------------------------------------------------------
 /* System parameters */
 
 #define BUSES	9
@@ -94,13 +93,14 @@ int main()
 	 *   Processing Power   *
 	 ************************/
 
-	 printf("Buses:%2d, CPUs:%2d\n", BUSES, CPUS);
+	printf("Buses:%2d, CPUs:%2d\n", BUSES, CPUS);
     printf("Load %3.4f\n", STIME / COMPT);
     printf("X at FESC: %3.4f\n", xn);
-	 printf("P %3.4f\n", xn * COMPT);
+	printf("P %3.4f\n", xn * COMPT);
 
    return 0;
-}  /* main */
+   
+} 
 
 //-------------------------------------------------------------------------
 
@@ -128,7 +128,6 @@ void multiserver(int m, double stime)
 	 		sm_x[i] = x;
 		}
 	}
-}  /* multiserver */
+}
 
-//-------------------------------------------------------------------------
 
