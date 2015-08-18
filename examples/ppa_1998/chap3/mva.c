@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -13,20 +13,18 @@
 /*  KIND, either express or implied.                                           */
 /*******************************************************************************/
 
-/*
+/* 
+ *	$Id$
+ * 
  * mva.c - Mean Value Analysis algorithm for single class workload
  *
- * $Id$
  */
 
-
-//-------------------------------------------------------------------------
-
+#include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
-//-------------------------------------------------------------------------
-
-#define	MAXK	6		// max. service centers + 1   
+#define	MAXK	6		        // max. service centers + 1   
 double          D[MAXK];        // service demand at center k
 double          R[MAXK];        // residence time at center k
 double          Q[MAXK];        // no. customers at center k
@@ -34,7 +32,6 @@ double          Z;              // think time (0 for batch system)
 int             K;              // no. of queueing centers 
 int             N;              // no. of customers
 
-//-------------------------------------------------------------------------
 
 int main()
 {
@@ -43,6 +40,8 @@ int main()
 	int             k;
 	char            input[8];
 	double          atof();
+	void			mva();
+
 	while (1) {                
 		printf("\n(Hit RETURN to exit)\n\n");
 		printf("Enter no. of centers (K): ");
@@ -75,11 +74,10 @@ int main()
 	}
 
    return(0);
-}  // main
+}  
 
-//-------------------------------------------------------------------------
 
-mva()
+void mva()
 {
 	int             k;
 	int             n;
@@ -110,7 +108,6 @@ mva()
 		printf("%2d%9.3f%7.3f%7.3f\n", k, R[k], Q[k], X * D[k]);
 
 	printf("\nX = %7.4f, R = %9.3f\n", X, (double) N / X - Z);
-}  // mva
+}  
 
-//-------------------------------------------------------------------------
 

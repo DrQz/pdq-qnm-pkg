@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -109,9 +109,9 @@ int main()
 		printf(" %2d\t\tp(%2d|%2d): %3.4f\n", n, n, USERS, pq[n][USERS]);
 
    return(0);
-}  /* main */
+   
+}
 
-//-------------------------------------------------------------------------
 
 void mem_model(int n, int m)
 {
@@ -145,8 +145,7 @@ void mem_model(int n, int m)
 		} else
 			sm_x[i] = x;        /* last computed value */
 
-	}
-}  /* mem_model */
+	}	
+} 
 
-//-------------------------------------------------------------------------
 

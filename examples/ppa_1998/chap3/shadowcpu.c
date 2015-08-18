@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994, Performance Dynamics Company                           */
+/*  Copyright (c) 1994-2015, Performance Dynamics Company                     */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -24,26 +24,19 @@
  * $Id$
  */
 
-//-------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <math.h>
 #include "PDQ_Lib.h"
 
-//-------------------------------------------------------------------------
-
 #define PRIORITY TRUE // Turn priority on or off here
-
-//-------------------------------------------------------------------------
 
 int main()
 {
    int              noNodes;
    int              noStreams;
-
    char *noPri = "CPU Scheduler - No Pri";
    char *priOn = "CPU Scheduler - Pri On";
-
    float Ucpu_prod;
    float GetProdU();
 
@@ -92,9 +85,8 @@ int main()
    PDQ_Report();
 
    return(0);
-}  // main
+}
 
-//-------------------------------------------------------------------------
 
 float GetProdU(void) {
    int              noNodes;
@@ -114,8 +106,6 @@ float GetProdU(void) {
    PDQ_Solve(APPROX); 
 
    return(PDQ_GetUtilization("CPU", "Production", TERM));
-}  // GetProdU
-
-//-------------------------------------------------------------------------
+} 
 
 

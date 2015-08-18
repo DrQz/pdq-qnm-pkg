@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1996, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -34,8 +34,7 @@
 int main(int argc, char *argv[])
 {
    double          L;		/* mean number of broken machines in line */
-   double          Q;		/* mean number of broken machines in
-				 * system */
+   double          Q;		/* mean number of broken machines in system */
    double          R;		/* mean response time */
    double          S;		/* mean service time */
    double          U;		/* total mean utilization */
@@ -45,7 +44,6 @@ int main(int argc, char *argv[])
    double          Z;		/* mean time to failure (MTTF) */
    double          p;		/* temp variable for prob calc. */
    double          p0;		/* prob if zero breakdowns */
-
    long            m;		/* Number of servicemen */
    long            N;		/* Number of machines */
    long            k;		/* loop index */
@@ -111,7 +109,7 @@ int main(int argc, char *argv[])
    printf("  \n");
 
    return(0);
-}  /* main */
+   
+}
 
-//-------------------------------------------------------------------------
 

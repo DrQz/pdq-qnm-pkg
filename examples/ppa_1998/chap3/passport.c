@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 1998, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -14,34 +14,28 @@
 /*******************************************************************************/
 
 /*
- * passpt_office.c
+ * passport.c
  * 
  * Illustration of an open queueing circuit with feedback.
  * 
  * $Id$
  */
 
-//-------------------------------------------------------------------------
-
 #include <stdio.h>
 #include <math.h>
 #include "PDQ_Lib.h"
-
-//-------------------------------------------------------------------------
 
 int main()
 {
    extern JOB_TYPE *job;
    extern NODE_TYPE *node;
 
-	int              noNodes;
+   int              noNodes;
    int              noStreams;
 
-   double           arrivals = 16.0 / 3600;	/* 16 applications per
-						 * hour */
+   double           arrivals = 16.0 / 3600;	/* 16 applns per hour */
 
    /* Branching probabilities and weights */
-
    double           p12 = 0.30;
    double           p13 = 0.70;
    double           p23 = 0.20;
@@ -51,7 +45,6 @@ int main()
    double           w2 = p12 + p32 * w3;
 
    /* Initialize and solve the model */
-
    PDQ_Init("Passport Office");
 
    noStreams = PDQ_CreateOpen("Applicant", 0.00427);
@@ -67,11 +60,8 @@ int main()
    PDQ_SetDemand("Window4", "Applicant", 60.0);
 
    PDQ_Solve(CANON);
-
    PDQ_Report();
 
    return(0);
-}  // main
-
-//-------------------------------------------------------------------------
-
+   
+} 
