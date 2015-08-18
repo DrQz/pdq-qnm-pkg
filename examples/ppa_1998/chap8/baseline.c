@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (c) 1994-2013, Performance Dynamics Company                           */
+/*  Copyright (c) 1994-2015, Performance Dynamics Company                           */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -17,33 +17,33 @@
 /*
 $Id$
 
-baseline.c
-Created by NJG on Sat Jul 23 08:11:23 PST 1994
-Corrected client/server model for PPA book Chap. 8
+	* baseline.c
+	Created by NJG on Sat Jul 23 08:11:23 PST 1994
+	Corrected client/server model for PPA book Chap. 8
 
-Updated by NJG on Fri Dec 12 17:26:46 PST 2004
-Correctly account for the combination of request-response service
-times on the same resource. PPA book code has separate SetDemand()
-calls for request and response on the same PDQ node. This is incorrect
-because the response call to SetDemand() merely overwrites the request
-call.
+	* Updated by NJG on Fri Dec 12 17:26:46 PST 2004
+	Correctly account for the combination of request-response service
+	times on the same resource. PPA book code has separate SetDemand()
+	calls for request and response on the same PDQ node. This is incorrect
+	because the response call to SetDemand() merely overwrites the request
+	call.
 
-Updated by NJG on Thu May 11 23:27:43 PDT 2006
-Improve reconciliation with the results as they appear in the original
-CMG93 paper. The technology (Novell Netware) may be considered
-"ancient" but it is still very instructive from a modeling standpoint
-because it involves SIX workload classes (PDQ streams) and the
-computational resources (PDQ nodes) are distributed across THREE
-tiers. This level of queueing model is really documented or discussed
-anywhere. The interested reader can compare this example with the more
-modern variants 'cs_baseline.pl' and 'ebiz.pl' in the
-../examples/sv_2004/pdq_models/ directory.
+	* Updated by NJG on Thu May 11 23:27:43 PDT 2006
+	Improve reconciliation with the results as they appear in the original
+	CMG93 paper. The technology (Novell Netware) may be considered
+	"ancient" but it is still very instructive from a modeling standpoint
+	because it involves SIX workload classes (PDQ streams) and the
+	computational resources (PDQ nodes) are distributed across THREE
+	tiers. This level of queueing model is really documented or discussed
+	anywhere. The interested reader can compare this example with the more
+	modern variants 'cs_baseline.pl' and 'ebiz.pl' in the
+	../examples/sv_2004/pdq_models/ directory.
  
-Updated by NJG on Fri May 12 11:56:10 PDT 2006 
-parameterize token ring transfer rate with number of bytes per frame.
+	* Updated by NJG on Fri May 12 11:56:10 PDT 2006 
+	parameterize token ring transfer rate with number of bytes per frame.
 
-Updated by NJG on Sunday, February 24, 2013
-Removed redundant 'streams' and 'nodes' returns from CreateXXX() calls.
+	* Updated by NJG on Sunday, February 24, 2013
+	Removed redundant 'streams' and 'nodes' returns from CreateXXX() calls.
 
 */
 
@@ -125,7 +125,7 @@ typedef struct {
 
 
 
-main()
+int main()
 {
    extern int      nodes;
    extern int      streams;

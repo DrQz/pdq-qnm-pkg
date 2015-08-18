@@ -112,7 +112,7 @@ typedef struct {
 
 
 
-main()
+int main()
 {
    extern int      nodes, streams;
    extern JOB_TYPE *job;

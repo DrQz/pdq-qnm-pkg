@@ -2,6 +2,8 @@
 #  $Id$
 #
 #--------------------------------------------------------------------------
+# Updated by NJG on Tuesday, August 18, 2015
+# Make file was not compiling b/c now needs explicit syntax
 
 EXT       = .exe
 CC        = gcc
@@ -24,16 +26,16 @@ all: ${PGM}
 
 #--------------------------------------------------------------------------
 
-baseline:
+baseline: baseline.c baseline.o
 	${CC} -o baseline baseline.c -I$(INCL) -L$(LIB) -lpdq -lm
 
-scaleup:
+scaleup: scaleup.c scaleup.o
 	${CC} -o scaleup scaleup.c -I$(INCL) -L$(LIB) -lpdq -lm
 
-upgrade1:
+upgrade1: upgrade1.c upgrade1.o
 	${CC} -o upgrade1 upgrade1.c -I$(INCL) -L$(LIB) -lpdq -lm
 
-upgrade2:
+upgrade2: upgrade2.c upgrade2.o
 	${CC} -o upgrade2 upgrade2.c -I$(INCL) -L$(LIB) -lpdq -lm
 
 #--------------------------------------------------------------------------
