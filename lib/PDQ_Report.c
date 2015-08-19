@@ -72,8 +72,9 @@ void banner_chars(char *s);
 
 void PDQ_Report_null(void)
 {
-	PRINTF("foo!\n");
-}	/* PDQ_Report_null */
+	PRINTF("foo!\n");  //From PDQ_Lib.h #define PRINTF Rprintf
+	
+}
 
 //-------------------------------------------------------------------------
 
@@ -149,17 +150,18 @@ void PDQ_Report(void)
 
 	PRINTF("\n");
 	
+	// Added by NJG on Wednesday, August 19, 2015
+	if (!streams) PRINTF("[PDQ_Report] No PDQ workload defined.\n");
+	else if (!nodes) PRINTF("[PDQ_Report] No PDQ nodes defined.\n");
+	else PRINTF("[PDQ_Report] No PDQ service demands defined.\n");
+
+
 	// Append comments
     if (strlen(Comment)) {
 		PRINTF("COMMENT: ");
 		PRINTF("%s\n\n", Comment);  // Is defined as a global!
 	}
 		
-	// Added by NJG on Wednesday, August 19, 2015
-	if (!streams) printf("[PDQ_Report] No PDQ workload defined.\n");
-	else if (!nodes) printf("[PDQ_Report] No PDQ nodes defined.\n");
-	else printf("[PDQ_Report] No PDQ service demands defined.\n");
-
 
 	/* Show INPUT Parameters */
 	banner_dash();
