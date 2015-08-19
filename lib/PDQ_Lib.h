@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2013, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -34,12 +34,14 @@
  *  $Id$
  */
 
-// This string is read by the GetVersion and Report()
+// The following string is read by the GetVersion and Report()
 // Do not modify order of fields
 // Must not contain more than 25 characters for Report header
-// Updated by NJG on Friday, January 11, 2013
-//
+// Updated by NJG on Tuesday, August 18, 2015
+
 static char *version = "PDQ Analyzer 6.1.2 081815";
+
+
 //---- TYPES --------------------------------------------------------------
 
 #ifndef   TRUE
@@ -54,20 +56,20 @@ static char *version = "PDQ Analyzer 6.1.2 081815";
 #define MAXSTREAMS    64        /* Max job streams */
 #define MAXCHARS      64        /* Max chars in param fields */
 
-/* Queueing Network Type */
+// Queueing Network Types
 
 #define VOID    0				// Changed per PDQ_Init code (NJG: Wed, Apr 4, 2007)
 #define OPEN    1
 #define CLOSED  2
 
-/* Nodes */
+// Queueing Node Types
 
 #define MEM     3
 #define CEN     4                /* unspecified queueing center */
 #define DLY     5                /* unspecified delay center */
 #define MSQ     6                /* unspecified multi-server queue */
 
-/* Queueing Disciplines */
+// Queueing Disciplines
 
 #define ISRV    7                /* infinite server */
 #define FCFS    8                /* first-come first-serve */
@@ -75,27 +77,27 @@ static char *version = "PDQ Analyzer 6.1.2 081815";
 #define LCFS    10               /* last-come first-serve */
 
 
-/* Job Types */
+// Queueing Job Types
 
 #define TERM   11
 #define TRANS  12
 #define BATCH  13
 
-/* Solution Methods */
+// Solution Methods
 
-#define EXACT  14
-#define APPROX 15
-#define CANON  16
+#define EXACT  14		// for moderate TERM workloads
+#define APPROX 15		// for large TERM workloads
+#define CANON  16		// for TRANS workloads
 
-/* Service-demand Types */
+// Service Time and Demand Types
 
 #define VISITS 17
 #define DEMAND 18
 
-/* MP scalability */
+// MP scalability
 
-#define PDQ_SP 19        /* uniprocessor */
-#define PDQ_MP 20        /* multiprocessor */
+#define PDQ_SP 19        // uniprocessor
+#define PDQ_MP 20        // multiprocessor
 
 #define TOL 0.0010
 
@@ -251,34 +253,28 @@ JOB_TYPE  *getjob(int idx);
 //-------------------------------------------------------------------------
 // Move into PDQ_Global.h header to hide them from outside world
 // Add explicit methods to expose them!
-
 // extern int         nodes;
 // extern int         streams;
-
 // extern NODE_TYPE  *node;
 // extern JOB_TYPE   *job;
-
 // extern char        Comment[];
 
 //-------------------------------------------------------------------------
 
-//Add these to shut up the compile
+// Added these to shut the compiler up
 extern void resets(char *s);
 extern void debug(char *proc, char *info);
 extern void errmsg(char *pname, char *msg);
 extern void approx(void);
 extern void canonical(void);
 extern void exact(void);
-extern int getjob_index(char *wname);
+extern int  getjob_index(char *wname);
 extern void getjob_name(char *str, int c);
-extern int getnode_index(char *name);
+extern int  getnode_index(char *name);
 extern void typetostr(char *str, int type);
 
-/* 
- *   Added by PJP Nov 3, 2012: Added suppport R in the  library 
- *
- */
 
+// Added by PJP Nov 3, 2012: Added support for R in the library 
 #ifdef __R_PDQ
 #include <R.h>
 #define PRINTF Rprintf
