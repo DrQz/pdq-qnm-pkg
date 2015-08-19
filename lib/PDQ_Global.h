@@ -27,8 +27,7 @@
  * problem whose correct solution could result in injury to a person or
  * loss of property. The author disclaims all liability for direct or
  * consequential damages resulting from your use of this source code.
- * Please refer to the separate disclaimer from McGraw-Hill attached to
- * the diskette. 
+ * Also see separate disclaimers from the respective book publishers.
 ************************* DO NOT REMOVE ****************************
  *
  *  $Id$
@@ -40,10 +39,16 @@
 extern int         nodes;
 extern int         streams;
 
+// Added by NJG on Wednesday, August 19, 2015
+extern int         nzdemand; 
+// Init() sets it to zero; non-zero when SetDemand() called
+
+
 extern NODE_TYPE  *node;
 extern JOB_TYPE   *job;
 
 extern char        Comment[];
+
 
 //-------------------------------------------------------------------------
 

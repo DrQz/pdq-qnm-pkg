@@ -16,7 +16,7 @@
 /*
  * PDQ_Lib.h
  * 
- * Headers for the PDQ (Pretty Damn Quick) performance analyzer.
+ * Header file for the PDQ (Pretty Damn Quick) performance analyzer.
  * 
 *******************  DISCLAIMER OF WARRANTY ************************
  * Performance Dynamics Company(SM) and Neil J. Gunther make no warranty,
@@ -27,8 +27,7 @@
  * problem whose correct solution could result in injury to a person or
  * loss of property. The author disclaims all liability for direct or
  * consequential damages resulting from your use of this source code.
- * Please refer to the separate disclaimer from McGraw-Hill attached to
- * the diskette. 
+ * Also see separate disclaimers from the respective book publishers.
 ************************* DO NOT REMOVE ****************************
  *
  *  $Id$
@@ -161,6 +160,9 @@ typedef struct {
 
 //---- FUNCTION PROTOTYPES -------------------------------------------------
 
+// ************************************
+// Do NOT convert to 'void' or will conflict with SWIG compile
+// ************************************
 
 int     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
 int     PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *think);

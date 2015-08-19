@@ -32,6 +32,7 @@
 #include <math.h>
 
 #include "PDQ_Lib.h"
+#include "PDQ_Global.h"
 #include "debug.h"
 
 
@@ -45,6 +46,7 @@ extern NODE_TYPE *node;
 extern JOB_TYPE  *job;
 extern int        nodes;
 extern int        streams;
+extern int        nzdemand; // non-zero when SetDemand() called
 extern int        PDQ_DEBUG;
 
 //-------------------------------------------------------------------------
@@ -131,8 +133,14 @@ PDQ_GetResponse(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetResponse()";
 	double          r = 0.0;
-
-   int job_index = getjob_index(wname);
+    int     job_index = getjob_index(wname);
+   
+   	// Added by NJG on Wednesday, August 19, 2015
+	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
+		if (!streams) printf("[PDQ_GetResponse]  No PDQ workload defined.\n");
+		else if (!nodes) printf("[PDQ_GetResponse]  No PDQ nodes defined.\n");
+		else printf("[PDQ_GetResponse]  No PDQ service demands defined.\n");
+	}
 
    if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -159,7 +167,7 @@ PDQ_GetResponse(int should_be_class, char *wname)
 
 #endif
 	}
-
+	
 	return (r);
 }  /* PDQ_GetResponse */
 
@@ -170,10 +178,14 @@ PDQ_GetThruput(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetThruput()";
 	double          x = 0.0;
-
-	// g_debugf("wname[%s]\n", wname);
-
-   int job_index = getjob_index(wname);
+    int     job_index = getjob_index(wname);
+   
+   	// Added by NJG on Wednesday, August 19, 2015
+	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
+		if (!streams) printf("[PDQ_GetThruput]  No PDQ workload defined.\n");
+		else if (!nodes) printf("[PDQ_GetThruput]  No PDQ nodes defined.\n");
+		else printf("[PDQ_GetThruput]  No PDQ service demands defined.\n");
+	}
 
    if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -199,7 +211,7 @@ PDQ_GetThruput(int should_be_class, char *wname)
 	error("[PDQ_GetThruput]  Invalid job index (%d)\n", job_index);
 #endif
 	}
-
+	
 	return (x);
 }  /* PDQ_GetThruput */
 
@@ -210,10 +222,16 @@ PDQ_GetThruMax(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetThruMax()";
 	double          x = 0.0;
+    int     job_index = getjob_index(wname);
 
-   int job_index = getjob_index(wname);
+	// Added by NJG on Wednesday, August 19, 2015
+	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
+		if (!streams) printf("[PDQ_GetThruMax]  No PDQ workload defined.\n");
+		else if (!nodes) printf("[PDQ_GetThruMax]  No PDQ nodes defined.\n");
+		else printf("[PDQ_GetThruMax]  No PDQ service demands defined.\n");
+	}
 
-   if ((job_index >= 0) && (job_index < streams)) {
+    if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
 			case TERM:
 				x = job[job_index].term->sys->maxTP;
@@ -252,9 +270,16 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 	double          Dmax = 0.0;
 	double          Dsum = 0.0;
 	double          Nopt = 0.0;
-	double          Z = 0.0;
+	double             Z = 0.0;
 
    int job_index = getjob_index(wname);
+   
+   	// Added by NJG on Wednesday, August 19, 2015
+	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
+		if (!streams) printf("[PDQ_GetLoadOpt]  No PDQ workload defined.\n");
+		else if (!nodes) printf("[PDQ_GetLoadOpt]  No PDQ nodes defined.\n");
+		else printf("[PDQ_GetLoadOpt]  No PDQ service demands defined.\n");
+	}
 
    if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -285,20 +310,11 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 #endif
 	}
 
-	if (Dsum == 0) {
-		#ifndef __R_PDQ
-		 fprintf(stderr, "[PDQ_GetLoadOpt]  No service demands defined.\n");
-     	 exit(99);
-		#else
-   		 error("[PDQ_GetLoadOpt]  No service demands defined.\n");
-		#endif
-	}
-    
 	Nopt = (Dsum + Z) / Dmax;
 
 	// Removed Tuesday, August 18, 2015
 	//return (floor(Nopt)); /* return lower bound as integral value */
-	// This was a silly idea. Want theoretical value, not rounded down 'practical' value. 
+	// Want theoretical value, not rounded down 'practical' value. 
 	// If Nopt < 1 then floor produces zero!
 		
 	return (Nopt);
@@ -315,12 +331,19 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 double
 PDQ_GetResidenceTime(char *device, char *work, int should_be_class)
 {
-	char           *p = "PDQ_GetResidenceTime()";
+	char             *p = "PDQ_GetResidenceTime()";
 	extern char       s1[];
 	// Initialize vars to suppress compiler warnings
 	double            r = 0.0;
 	int               c = 0;
 	int               k = 0;
+	
+	// Added by NJG on Wednesday, August 19, 2015
+	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
+		if (!streams) printf("[PDQ_GetResidenceTime]  No PDQ workload defined.\n");
+		else if (!nodes) printf("[PDQ_GetResidenceTime]  No PDQ nodes defined.\n");
+		else printf("[PDQ_GetResidenceTime]  No PDQ service demands defined.\n");
+	}
 
 	c = getjob_index(work);
 
@@ -359,6 +382,13 @@ PDQ_GetUtilization(char *device, char *work, int should_be_class)
 	int               c = 0;
 	int               k = 0;
 	int               m = 0;
+
+	// Added by NJG on Wednesday, August 19, 2015
+	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
+		if (!streams) printf("[PDQ_GetUtilization]  No PDQ workload defined.\n");
+		else if (!nodes) printf("[PDQ_GetUtilization]  No PDQ nodes defined.\n");
+		else printf("[PDQ_GetUtilization]  No PDQ service demands defined.\n");
+	}
 
 	// g_debug("PDQ_GetUtilization\n");
 	// g_debugf("job[%d]\n", job);
@@ -417,6 +447,13 @@ PDQ_GetQueueLength(char *device, char *work, int should_be_class)
 	double            x = 0.0;
 	int               c = 0;
 	int               k = 0;
+
+	// Added by NJG on Wednesday, August 19, 2015
+	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
+		if (!streams) printf("[PDQ_GetQueueLength]  No PDQ workload defined.\n");
+		else if (!nodes) printf("[PDQ_GetQueueLength]  No PDQ nodes defined.\n");
+		else printf("[PDQ_GetQueueLength]  No PDQ service demands defined.\n");
+	}
 
 	c = getjob_index(work);
 	x = PDQ_GetThruput(should_be_class, work);
@@ -503,7 +540,6 @@ allocate_nodes(int n)
 {
 	char           *p = "allocate_nodes";
 	
-
 #ifndef __R_PDQ
 	if ((node = (NODE_TYPE *) calloc(sizeof(NODE_TYPE), n)) == NULL)
 #else

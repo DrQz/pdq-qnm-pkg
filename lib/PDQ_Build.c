@@ -16,6 +16,8 @@
 /*
  * PDQ_Build.c
  * 
+ *  $Id$
+ *
  * Created by NJG on 18:19:02  04-28-95 
  * Revised by NJG on 09:33:05  31-03-99
  * Updated by NJG on Mon, Apr 2, 2007 (added MSQ multiserver hack)
@@ -26,18 +28,14 @@
  * Updated by PJP on Sat Nov 3, 2012 (added support for R)
  * Updated by NJG on Saturday, January 12, 2013 (removed Create count returns)
  *
- *  $Id$
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-
 #include "PDQ_Lib.h"
 #include "PDQ_Global.h"
-
-
 
 //-------------------------------------------------------------------------
 
@@ -65,8 +63,12 @@ void PDQ_Init(char *name)
 	extern int              demand_ext;
 	extern int              method;
 	extern double           tolerance;
+	
+	// These 3 globals are reset = 0 at the end of this proc
 	extern int              nodes;
 	extern int              streams;
+	extern int              nzdemand; // set = 1 by SetDemand()
+	
 	extern int              prev_init;
 	extern NODE_TYPE        *node;
 	extern JOB_TYPE         *job;
@@ -80,7 +82,7 @@ void PDQ_Init(char *name)
 	char                    *p = "PDQ_Init()";
 
 	int             cc, kk;
-
+	
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
@@ -183,7 +185,8 @@ void PDQ_Init(char *name)
 **********************************************************************************/
 	
 	// reset circuit counters 
-	nodes = streams = 0;
+	nodes = streams = nzdemand = 0; 
+
 	c = k = 0;
 	prev_init = TRUE;
 
@@ -268,6 +271,8 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	k =  ++nodes;
 
 	//return nodes;
+	return(0); // silence gcc warnings
+	
 }  /* PDQ_CreateNode */
 
 
@@ -337,6 +342,7 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 	k =  ++nodes;
 
 	//return nodes;
+	return(0); // silence gcc warnings
 	
 }  /* PDQ_CreateMultiNode */
 
@@ -418,7 +424,8 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 	c =  ++streams;
 
 	//return streams;
-	
+	return(0); // silence gcc warnings
+
 }  /* PDQ_CreateClosed */
 
 //-------------------------------------------------------------------------
@@ -463,6 +470,8 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 	c =  ++streams;
 
 	//return streams;
+	return(0); // silence gcc warnings
+
 	
 }  /* PDQ_CreateOpen */
 
@@ -482,6 +491,7 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 	extern NODE_TYPE *node;
 	extern int        nodes;
 	extern int        streams;
+	extern int        nzdemand; // from PDQ_Globals.h
 	extern int        demand_ext;
 	extern int        PDQ_DEBUG;
 
@@ -489,6 +499,8 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 	int               job_index;
 
 	FILE             *out_fd;
+	
+	nzdemand = 1; // non-zero since SetDemand now called
 
 	if (PDQ_DEBUG)
 	{
@@ -530,11 +542,14 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 
 		node[node_index].demand[job_index] = *time;
 		demand_ext = DEMAND;
-	} else
+	} else {
 		errmsg(p, "Extension conflict");
-
-	if (PDQ_DEBUG)
+	}
+	
+	if (PDQ_DEBUG) {
 		debug(p, "Exiting");
+	}
+		
 }  /* PDQ_SetDemand */
 
 //-------------------------------------------------------------------------
