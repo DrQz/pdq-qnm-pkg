@@ -136,11 +136,9 @@ PDQ_GetResponse(int should_be_class, char *wname)
     int     job_index = getjob_index(wname);
    
    	// Added by NJG on Wednesday, August 19, 2015
-	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
-		if (!streams) printf("[PDQ_GetResponse]  No PDQ workload defined.\n");
-		else if (!nodes) printf("[PDQ_GetResponse]  No PDQ nodes defined.\n");
-		else printf("[PDQ_GetResponse]  No PDQ service demands defined.\n");
-	}
+	if (!streams) printf("[PDQ_GetResponse]  No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_GetResponse]  No PDQ nodes defined.\n");
+	else printf("[PDQ_GetResponse]  No PDQ service demands defined.\n");
 
    if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -181,11 +179,9 @@ PDQ_GetThruput(int should_be_class, char *wname)
     int     job_index = getjob_index(wname);
    
    	// Added by NJG on Wednesday, August 19, 2015
-	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
-		if (!streams) printf("[PDQ_GetThruput]  No PDQ workload defined.\n");
-		else if (!nodes) printf("[PDQ_GetThruput]  No PDQ nodes defined.\n");
-		else printf("[PDQ_GetThruput]  No PDQ service demands defined.\n");
-	}
+	if (!streams) printf("[PDQ_GetThruput]  No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_GetThruput]  No PDQ nodes defined.\n");
+	else printf("[PDQ_GetThruput] No PDQ service demands defined.\n");
 
    if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -225,11 +221,9 @@ PDQ_GetThruMax(int should_be_class, char *wname)
     int     job_index = getjob_index(wname);
 
 	// Added by NJG on Wednesday, August 19, 2015
-	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
-		if (!streams) printf("[PDQ_GetThruMax]  No PDQ workload defined.\n");
-		else if (!nodes) printf("[PDQ_GetThruMax]  No PDQ nodes defined.\n");
-		else printf("[PDQ_GetThruMax]  No PDQ service demands defined.\n");
-	}
+	if (!streams) printf("[PDQ_GetThruMax]  No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_GetThruMax]  No PDQ nodes defined.\n");
+	else printf("[PDQ_GetThruMax] No PDQ service demands defined.\n");
 
     if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -275,11 +269,9 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
    int job_index = getjob_index(wname);
    
    	// Added by NJG on Wednesday, August 19, 2015
-	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
-		if (!streams) printf("[PDQ_GetLoadOpt]  No PDQ workload defined.\n");
-		else if (!nodes) printf("[PDQ_GetLoadOpt]  No PDQ nodes defined.\n");
-		else printf("[PDQ_GetLoadOpt]  No PDQ service demands defined.\n");
-	}
+	if (!streams) printf("[PDQ_GetLoadOpt]  No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_GetLoadOpt]  No PDQ nodes defined.\n");
+	else printf("[PDQ_GetLoadOpt]  No PDQ service demands defined.\n");
 
    if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -339,11 +331,9 @@ PDQ_GetResidenceTime(char *device, char *work, int should_be_class)
 	int               k = 0;
 	
 	// Added by NJG on Wednesday, August 19, 2015
-	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
-		if (!streams) printf("[PDQ_GetResidenceTime]  No PDQ workload defined.\n");
-		else if (!nodes) printf("[PDQ_GetResidenceTime]  No PDQ nodes defined.\n");
-		else printf("[PDQ_GetResidenceTime]  No PDQ service demands defined.\n");
-	}
+	if (!streams) printf("[PDQ_GetResidenceTime]  No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_GetResidenceTime]  No PDQ nodes defined.\n");
+	else printf("[PDQ_GetResidenceTime]  No PDQ service demands defined.\n");
 
 	c = getjob_index(work);
 
@@ -384,11 +374,9 @@ PDQ_GetUtilization(char *device, char *work, int should_be_class)
 	int               m = 0;
 
 	// Added by NJG on Wednesday, August 19, 2015
-	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
-		if (!streams) printf("[PDQ_GetUtilization]  No PDQ workload defined.\n");
-		else if (!nodes) printf("[PDQ_GetUtilization]  No PDQ nodes defined.\n");
-		else printf("[PDQ_GetUtilization]  No PDQ service demands defined.\n");
-	}
+	if (!streams) printf("[PDQ_GetUtilization]  No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_GetUtilization]  No PDQ nodes defined.\n");
+	else printf("[PDQ_GetUtilization]  No PDQ service demands defined.\n");
 
 	// g_debug("PDQ_GetUtilization\n");
 	// g_debugf("job[%d]\n", job);
@@ -449,11 +437,9 @@ PDQ_GetQueueLength(char *device, char *work, int should_be_class)
 	int               k = 0;
 
 	// Added by NJG on Wednesday, August 19, 2015
-	if (streams == 0 || nodes == 0 || nzdemand == 0) { 
-		if (!streams) printf("[PDQ_GetQueueLength]  No PDQ workload defined.\n");
-		else if (!nodes) printf("[PDQ_GetQueueLength]  No PDQ nodes defined.\n");
-		else printf("[PDQ_GetQueueLength]  No PDQ service demands defined.\n");
-	}
+	if (!streams) printf("[PDQ_GetQueueLength]  No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_GetQueueLength]  No PDQ nodes defined.\n");
+	else printf("[PDQ_GetQueueLength] No PDQ service demands defined.\n");
 
 	c = getjob_index(work);
 	x = PDQ_GetThruput(should_be_class, work);
