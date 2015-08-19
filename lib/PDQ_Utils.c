@@ -22,6 +22,10 @@
  * Updated by NJG on Mon, Sep 29, 2008 Removed resets() in debug()
  * Updated by NJG on Thu, Sep 10, 2009 Changed GetUtilization() for m server case
  * Updated by PJP on Sat, Nov 3, 2012 Added R support to the library
+ * Updated by NJG on Tuesday, August 18, 2015 
+ * 		Removed floor() in GetLoadOpt() return
+ *		Added tests for PDQ circuit existence
+ * Updated by NJG on Wed, August 19, 2015  Use PRINTF from PDQ_Lib.h for R
  *
  *  $Id$
  */
@@ -307,7 +311,7 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 	// Removed Tuesday, August 18, 2015
 	//return (floor(Nopt)); /* return lower bound as integral value */
 	// Want theoretical value, not rounded down 'practical' value. 
-	// If Nopt < 1 then floor produces zero!
+	// If Nopt < 1 then floor produces zero !!!
 		
 	return (Nopt);
 	
