@@ -16,6 +16,8 @@
 /*
  * PDQ_Report.c
  * 
+ *  $Id$
+ *
  * Revised by NJG on Fri Aug  2 10:29:48  2002
  * Revised by NJG on Thu Oct  7 20:02:27 PDT 2004
  * Updated by NJG on Mon, Apr 2, 2007
@@ -32,7 +34,6 @@
  *    o Queue was sometimes wrong for MSQ (too many divides by m)
  * Updated by NJG on Monday, February 25, 2013: Removed blank line b/w Workload parameters
  * 
- *  $Id$
  */
 
 #include <stdio.h>
@@ -153,9 +154,14 @@ void PDQ_Report(void)
 		PRINTF("COMMENT: ");
 		PRINTF("%s\n\n", Comment);  // Is defined as a global!
 	}
+		
+	// Added by NJG on Wednesday, August 19, 2015
+	if (!streams) printf("[PDQ_Report] No PDQ workload defined.\n");
+	else if (!nodes) printf("[PDQ_Report] No PDQ nodes defined.\n");
+	else printf("[PDQ_Report] No PDQ service demands defined.\n");
+
 
 	/* Show INPUT Parameters */
-
 	banner_dash();
 	banner_chars("    PDQ Model INPUTS");
 	banner_dash();
