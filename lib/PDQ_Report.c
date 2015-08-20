@@ -90,7 +90,7 @@ void PDQ_Report(void)
 	time_t          clock;
 	char           *pc;
 	char           *tstamp;
-	int             fillbase = 25; // was 24
+	int             fillbase = 26; // was 25
 	int             fill;
 	char           *pad = "                        "; // 24 was 23
 	FILE           *fp;
@@ -138,9 +138,9 @@ void PDQ_Report(void)
 	// Center the Report title w/o stars
 	PRINTF("%15s%9s%24s%9s\n", " ", " ","PRETTY DAMN QUICK REPORT"," ");
 	banner_dash();
-	PRINTF("               ***    of: %s   ***\n", s1);
-	PRINTF("               ***   for: %s   ***\n", s2);
-	PRINTF("               ***   Ver: %s   ***\n", s3);
+	PRINTF("               ***  on   %s   ***\n", s1);
+	PRINTF("               ***  for  %s   ***\n", s2);
+	PRINTF("               ***  PDQ  %s   ***\n", s3);
 	banner_dash();
 
 	resets(s1);
