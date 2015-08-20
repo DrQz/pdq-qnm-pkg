@@ -35,10 +35,9 @@
 
 // The following string is read by the GetVersion and Report()
 // Do not modify order of fields
-// Must not contain more than 25 characters for Report header
-// Updated by NJG on Tuesday, August 18, 2015
-
-static char *version = "PDQ Analyzer 6.1.2 081815";
+// Must not contain more than 25 characters for Report() header
+//
+static char *version = "PDQ Analyzer 6.2.0 082015";
 
 
 //---- TYPES --------------------------------------------------------------
