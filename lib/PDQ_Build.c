@@ -67,7 +67,7 @@ void PDQ_Init(char *name)
 	// These 3 globals are reset = 0 at the end of this proc
 	extern int              nodes;
 	extern int              streams;
-	extern int              nzdemand; // set = 1 by SetDemand()
+	extern int              demands; // set = 1 by SetDemand()
 	
 	extern int              prev_init;
 	extern NODE_TYPE        *node;
@@ -185,7 +185,7 @@ void PDQ_Init(char *name)
 **********************************************************************************/
 	
 	// reset circuit counters 
-	nodes = streams = nzdemand = 0; 
+	nodes = streams = demands = 0; 
 
 	c = k = 0;
 	prev_init = TRUE;
@@ -491,7 +491,7 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 	extern NODE_TYPE *node;
 	extern int        nodes;
 	extern int        streams;
-	extern int        nzdemand; // from PDQ_Globals.h
+	extern int        demands; // from PDQ_Globals.h
 	extern int        demand_ext;
 	extern int        PDQ_DEBUG;
 
@@ -500,7 +500,7 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 
 	FILE             *out_fd;
 	
-	nzdemand = 1; // non-zero since SetDemand now called
+	demands = 1; // non-zero since SetDemand now called
 
 	if (PDQ_DEBUG)
 	{

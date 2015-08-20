@@ -151,12 +151,11 @@ void PDQ_Report(void)
 	PRINTF("\n");
 	
 	// Added by NJG on Wednesday, August 19, 2015
-	if (!streams) PRINTF("[PDQ_Report] No PDQ workload defined.\n");
-	else if (!nodes) PRINTF("[PDQ_Report] No PDQ nodes defined.\n");
-	else PRINTF("[PDQ_Report] No PDQ service demands defined.\n");
+	if (!streams) PRINTF("PDQ_Report warning: No PDQ workload defined.\n");
+	if (!nodes) PRINTF("PDQ_Report warning: No PDQ nodes defined.\n");
+	if (!demands) PRINTF("PDQ_Report warning: No PDQ service demands defined.\n");
 
-
-	// Append comments
+	// Append any user comments
     if (strlen(Comment)) {
 		PRINTF("COMMENT: ");
 		PRINTF("%s\n\n", Comment);  // Is defined as a global!

@@ -34,7 +34,7 @@ int                 prev_init          = FALSE;
 int                 demand_ext;
 int                 nodes;
 int                 streams;
-int                 nzdemand; // Set to 0 by Init() & 1 by SetDemand()
+int                 demands; // Set to 0 by Init() & 1 by SetDemand()
 int                 iterations;
 int                 method;
 int                 memdata;
