@@ -41,7 +41,8 @@ extern int         streams;
 
 // Added by NJG on Wednesday, August 19, 2015
 extern int         demands; 
-// Init() sets it to zero; non-zero when SetDemand() called
+// Init() sets it to 0 (FALSE)
+// SetDemand() sets it to 1 (TRUE)
 
 
 extern NODE_TYPE  *node;
