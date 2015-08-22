@@ -6,9 +6,9 @@
 #
 
 cat lib/PDQ_Lib.h | awk '
-/version/ && /PDQ/ && /Analyzer/ { print $5 " " $7 " " $8} '
+/static char \*version/ {sub(/^\"/, "", $5); sub(/\";/, "", $8); print "PDQ " $5 " " $6 " " $7 " " $8} '
 
 ls -lT lib | awk '
-/libpdq/ { print "Last compiled on " $6 " " $7 " " $8 " " $9} '
+/libpdq/ { print "Compiled on " $6 " " $7 " " $8 " " $9} '
 
 exit 0
