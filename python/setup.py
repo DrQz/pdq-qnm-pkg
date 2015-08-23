@@ -37,7 +37,7 @@ for var in ("CFLAGS", "BASECFLAGS", "PY_CFLAGS"):
 #---------------------------------------------------------------------
 
 setup(name='pdq',
-  version='6.1.1',
+  version='6.2.0',
   description='PDQ Python Wrapper',
   author='Phil Feller',
   author_email='phil@philfeller.com',
