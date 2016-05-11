@@ -20,13 +20,13 @@
  *
  * Created by NJG on 18:19:02  04-28-95 
  * Revised by NJG on 09:33:05  31-03-99
- * Updated by NJG on Mon, Apr 2, 2007 (added MSQ multiserver hack)
- * Updated by NJG on Tue, Apr 3, 2007 (remove nested loops in Init)
- * Updated by NJG on Wed, Apr 4, 2007 (change MSQ -> devtype and m -> sched)
- * Updated by NJG on Fri, Apr 6, 2007 (Error if SetUnit before calling Create circuit)
- * Updated by NJG on Wed Feb 25, 2009 (added CreateMultiNode function)
- * Updated by PJP on Sat Nov 3, 2012 (added support for R)
- * Updated by NJG on Saturday, January 12, 2013 (removed Create count returns)
+ * Updated by NJG on Mon, Apr 2, 2007 Added MSQ multiserver hack
+ * Updated by NJG on Tue, Apr 3, 2007 Removed nested loops in Init
+ * Updated by NJG on Wed, Apr 4, 2007 Changed MSQ -> devtype and m -> sched
+ * Updated by NJG on Fri, Apr 6, 2007 Error if SetWUnit or SetTUnit before calling Create circuit
+ * Updated by NJG on Wed Feb 25, 2009 Added CreateMultiNode function
+ * Updated by PJP on Sat Nov 3, 2012  Added support for R
+ * Updated by NJG on Saturday, January 12, 2013 Removed Create count returns
  *
  */
 

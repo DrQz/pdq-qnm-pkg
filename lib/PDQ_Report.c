@@ -332,14 +332,14 @@ void print_nodes(void)
 
 			typetostr(s3, node[k].sched);
 			if (node[k].sched == MSQ) {
-			// From CreateMultiNode()
-			// number of MSQ servers contained in node.devtype
+			// In CreateMultiNode() function, number of MSQ servers is in node.devtype
 				sprintf(s1, "%3d", node[k].devtype); 
 			} else {
 			// NJG: Friday, January 11, 2013
-			// From CreateNode() node.devtype == CEN
-			// More consistent with MSQ Inputs reporting 
-			// to show number of servers as numeric 1
+			// In CreateNode() function, node.devtype == CEN
+			// To be consistent with MSQ reporting that shows number of servers under "Node"
+            // column in the WORKLOAD Parameters section of Report(), show single server from
+            // CreateNode() as a numeric 1 in "Node" column.
 			// node.sched still displays as FCFS
 				//typetostr(s1, node[k].devtype);
 				sprintf(s1, "%3d", 1);

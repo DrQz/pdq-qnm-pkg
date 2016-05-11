@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -37,7 +37,7 @@
 // Do not modify order of fields
 // Must not contain more than 26 characters for Report() header
 //
-static char *version = "Version 6.2.0 Build 082015";
+static char *version = "Version 7.x.x Build 051116";
 
 
 //---- TYPES --------------------------------------------------------------
@@ -55,47 +55,40 @@ static char *version = "Version 6.2.0 Build 082015";
 #define MAXCHARS      64        /* Max chars in param fields */
 
 // Queueing Network Types
-
-#define VOID    0				// Changed per PDQ_Init code (NJG: Wed, Apr 4, 2007)
+#define VOID    0				// Changed per PDQ_Init code (NJG on Apr 4, 2007)
 #define OPEN    1
 #define CLOSED  2
 
 // Queueing Node Types
-
 #define MEM     3
 #define CEN     4                /* unspecified queueing center */
 #define DLY     5                /* unspecified delay center */
 #define MSQ     6                /* unspecified multi-server queue */
 
 // Queueing Disciplines
-
 #define ISRV    7                /* infinite server */
 #define FCFS    8                /* first-come first-serve */
 #define PSHR    9                /* processor sharing */
 #define LCFS    10               /* last-come first-serve */
 
-
 // Queueing Job Types
-
 #define TERM   11
 #define TRANS  12
 #define BATCH  13
 
 // Solution Methods
-
 #define EXACT  14		// for moderate TERM workloads
 #define APPROX 15		// for large TERM workloads
 #define CANON  16		// for TRANS workloads
+#define APPROXMSQ 17	// multiclass MSQ workloads (NJG on May 8, 2016)
 
 // Service Time and Demand Types
+#define VISITS 18
+#define DEMAND 19
 
-#define VISITS 17
-#define DEMAND 18
-
-// MP scalability
-
-#define PDQ_SP 19        // uniprocessor
-#define PDQ_MP 20        // multiprocessor
+// Multiprocessor scalability
+#define PDQ_SP 20        // uniprocessor
+#define PDQ_MP 21        // multiprocessor
 
 #define TOL 0.0010
 

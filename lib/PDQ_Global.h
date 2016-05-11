@@ -38,6 +38,7 @@
 
 extern int         nodes;
 extern int         streams;
+extern int         method;
 
 // Added by NJG on Wednesday, August 19, 2015
 extern int         demands; 

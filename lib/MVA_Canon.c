@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (c) 1994 - 2013, Performance Dynamics Company                    */
+/*  Copyright (c) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -16,12 +16,15 @@
 /*
  * MVA_Canon.c
  * 
- * Updated by NJG on Sat May 13 10:01:19 PDT 2006
- * Revised by NJG on Mon, Apr 2, 2007. MSQ erlang solver
- * Revised by NJG on Friday, June 26, 2009. See function: sumU(int k)
- * Revised by NJG on Tuesday, March 1, 2011. Set Dsat=0.0 in each c-loop iteration (Newsom)
- * Updated by PJP on Saturday, Nov 3, 2012. Added R support
- * Updated by NJG on Saturday, January 12, 2013. Change devU to perSrvrU
+ * Updated by NJG on Saturday, May 13, 2006.     Reviewed for Perl::PDQ book release (1st edn.)
+ * Revised by NJG on Monday, Apr 2, 2007.        Added MSQ Erlang multiserver
+ * Revised by NJG on Friday, June 26, 2009.      See function: sumU(int k)
+ * Revised by NJG on Tuesday, March 1, 2011.     Set Dsat=0.0 in each c-loop iteration (Newsom)
+ * Updated by PJP on Saturday, Nov 3, 2012.      Added R support
+ * Updated by NJG on Saturday, January 12, 2013. Changed devU to perServerU
+ * Updated by NJG on Saturday, May 7, 2016.      Added approximate multiclass multiserver
+ * Updated by NJG on Sunday, May 8, 2016.        Must choose APPROX solution method with
+ *                                               multiclass multiserver MSQ nodes
  *
  *  $Id$
  */
@@ -36,7 +39,7 @@
 
 void canonical(void)
 {
-    extern int        PDQ_DEBUG, streams, nodes;
+    extern int        PDQ_DEBUG, method, streams, nodes;
     extern char       s1[], s2[], s3[], s4[];
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
@@ -50,7 +53,7 @@ void canonical(void)
     double            Dsat = 0.0;
     double            Ddev;
     double            sumR[MAXSTREAMS];
-    double            perSrvrU = 0;
+    double            perServerU = 0.0;
     double            sumU();
     char              jobname[MAXBUF];
     char              satname[MAXBUF];
@@ -69,9 +72,13 @@ void canonical(void)
         // find bottleneck node (== largest service demand)
         for (k = 0; k < nodes; k++) {
         	// Hope to remove single class restriction eventually
+            // And today is the day: Sun May  8 18:34:27 PDT 2016
         	if (node[k].sched == MSQ && streams > 1) {
-				sprintf(s1, "Only single PDQ stream allowed with MSQ nodes.");
-				errmsg(p, s1);
+                if (method == CANON) {
+                    //sprintf(s1, "Only single PDQ stream allowed with MSQ nodes.");
+                    sprintf(s1, "Must use APPROXMSQ method with multi-stream MSQ nodes.");
+                    errmsg(p, s1);
+                }
             }
             Ddev = node[k].demand[c];
             if (node[k].sched == MSQ) { // multiserver case
@@ -110,18 +117,18 @@ void canonical(void)
                 node[k].utiliz[c] /= m; // per server
             }
 
-        	// Sum over all work classes on dev k
+        	// Sum over all workload classes on dev k
         	// Uses node[k].utiliz[c] per server for MSQ case
-        	// Also used below for R = D/(1-U) in M/M/1 case
-        	perSrvrU = sumU(k); 
+        	// Also used below for R = D/(1-U) in single node case
+        	perServerU = sumU(k); 
 
-            if (PDQ_DEBUG) // Call here or won't appear if perSrvrU > 1 error
-                PRINTF("Tot Util: %3.4f for %s\n", perSrvrU, node[k].devname);
+            if (PDQ_DEBUG) // Call here or won't appear if perServerU > 1 error
+                PRINTF("Tot Util: %3.4f for %s\n", perServerU, node[k].devname);
 
-            if (perSrvrU > 1.0) {
+            if (perServerU > 1.0) {
                 sprintf(s1, "\nTotal utilization of node \"%s\" is %2.2f%% (> 100%%)",
                     node[k].devname,
-                    perSrvrU * 100
+                    perServerU * 100
                     );
                 errmsg(p, s1);
             }
@@ -129,13 +136,20 @@ void canonical(void)
             switch (node[k].sched) {
                 case FCFS:
                 case PSHR:
-                case LCFS: // M/M/1 type nodes
-                    node[k].resit[c] = node[k].demand[c] / (1.0 - perSrvrU);
+                case LCFS: // All these denotes M/M/1 type nodes
+                    node[k].resit[c] = node[k].demand[c] / (1.0 - perServerU);
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
-                case MSQ:  // M/M/m type node
-                	// Added by NJG on Mon, Apr 2, 2007
-                    node[k].resit[c] = ErlangR(X, node[k].demand[c], m);
+                case MSQ:  // This denotes M/M/m type node
+                    if (streams == 1) {
+                        // Added by NJG on Monday, Apr 2, 2007
+                        // Use exact solution
+                        node[k].resit[c] = ErlangR(X, node[k].demand[c], m);
+                    } else { // multiple workload classes
+                        // Added by NJG on Saturday, May 7, 2016
+                        // Use approximate solution
+                        node[k].resit[c] = node[k].demand[c] / (1 - pow(perServerU,m));
+                    }
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
                 case ISRV:
@@ -188,7 +202,7 @@ double sumU(int k)
 
     for (c = 0; c < streams; c++) {
     	// NJG on Sunday, June 28, 2009 7:29:45 PM
-        // Following if-else is a hack b/c multi-class workloads 
+        // The following if-else is a hack b/c multi-class workloads
         // and multi-servers are currently incompatible. (I think)
          if (node[k].sched == MSQ) {
          	sum += node[k].utiliz[c];

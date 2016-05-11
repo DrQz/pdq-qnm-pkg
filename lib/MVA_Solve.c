@@ -108,6 +108,18 @@ void PDQ_Solve(int meth)
             canonical();
             break;
 
+        case APPROXMSQ:
+            if (job[0].network != OPEN) {   // bail !!
+                typetostr(s2, job[0].network);
+                typetostr(s3, method);
+                sprintf(s1,
+                        "Network should_be_class \"%s\" is incompatible with \"%s\" method",
+                        s2, s3);
+                errmsg(p, s1);
+            }
+            canonical();
+            break;
+            
         default:
             typetostr(s3, method);
             sprintf(s1, "Unknown  method \"%s\"", s3);

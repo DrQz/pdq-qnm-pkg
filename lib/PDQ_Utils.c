@@ -86,6 +86,7 @@ TYPE_TABLE
 		{"EXACT",   EXACT},
 		{"APPROX",  APPROX},
 		{"CANON",   CANON},
+        {"APPROXMSQ", APPROXMSQ},
 		{"VISITS",  VISITS},
 		{"DEMAND",  DEMAND},
 		{"SP",      PDQ_SP},

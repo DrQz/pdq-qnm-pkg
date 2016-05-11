@@ -34,7 +34,7 @@
 
 void approx(void)
 {
-	extern int        PDQ_DEBUG, iterations, streams, nodes;
+	extern int        PDQ_DEBUG, iterations, method, streams, nodes;
 	extern char       s1[], s2[], s3[], s4[];
 	extern double     tolerance;
 	extern JOB_TYPE  *job;
@@ -256,10 +256,24 @@ void approx(void)
 				}
 
 				break;
-					default:
-						sprintf(s1, "Unknown should_be_class: %s", should_be_class);
-						errmsg(p, s1);
-						break;
+                default:
+                switch (should_be_class) {
+                    case TRANS:
+                        sprintf(s1, "Unknown should_be_class: %s", "TRANS");
+                        errmsg(p, s1);
+                        break;
+                    case TERM:
+                        sprintf(s1, "Unknown should_be_class: %s", "TERM");
+                        errmsg(p, s1);
+                        break;
+                    case BATCH:
+                        sprintf(s1, "Unknown should_be_class: %s", "BATCH");
+                        errmsg(p, s1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
 			}
 
 			resets(jobname);
@@ -288,8 +302,22 @@ void approx(void)
 						node[k].qsize[c] = job[c].batch->sys->thruput * node[k].resit[c];
 						break;
 					default:
-						sprintf(s1, "Unknown should_be_class: %s", should_be_class);
-						errmsg(p, s1);
+                        switch (should_be_class) {
+                            case TRANS:
+                                sprintf(s1, "Unknown should_be_class: %s", "TRANS");
+                                errmsg(p, s1);
+                                break;
+                            case TERM:
+                                sprintf(s1, "Unknown should_be_class: %s", "TERM");
+                                errmsg(p, s1);
+                                break;
+                            case BATCH:
+                                sprintf(s1, "Unknown should_be_class: %s", "BATCH");
+                                errmsg(p, s1);
+                                break;
+                            default:
+                                break;
+                        }
 						break;
 				}
 
