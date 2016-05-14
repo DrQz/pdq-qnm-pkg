@@ -1,0 +1,19 @@
+
+  M/M/3/8/8 Repair Model
+  ----------------------------
+  Machine pop:         8
+  MT to failure:      12.5000
+  Service time:        1.2000
+  Breakage rate:       0.0800
+  Service rate:        0.8333
+  Utilization:         0.7003
+  Per Server:          0.2334
+  
+  No. in system:       0.7052
+  No. in service:      0.7003
+  No. enqueued:        0.0049
+  Waiting time:        0.0084
+  Throughput:          0.5836
+  Response time:       1.2084
+  Normalized RT:       1.0070
+  

@@ -1,0 +1,78 @@
+
+
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Sun Feb 22 18:11:01 2004  ***
+                ***  for: OpenCenter                ***
+                ***  Ver: PDQ Analyzer v2.7 080202  ***
+                ***************************************
+                ***************************************
+
+
+
+                ******        Comments          *******
+
+        This is just a simple M/M/1 queue.
+
+
+                ***************************************
+                ******    PDQ Model INPUTS      *******
+                ***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  server     work       TRANS     1.0000
+
+
+
+Queueing Circuit Totals:
+
+        Streams:      1
+        Nodes:        1
+
+
+
+WORKLOAD Parameters
+
+Source        per Sec        Demand
+------        -------        ------
+work           0.7500        1.0000
+
+
+
+
+
+                ***************************************
+                ******   PDQ Model OUTPUTS      *******
+                ***************************************
+
+
+Solution Method: CANON
+
+                ******   SYSTEM Performance     *******
+
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "work"
+Mean Throughput           0.7500    Customers/Seconds
+Response Time             4.0000    Seconds
+
+Bounds Analysis:
+Max Demand                1.0000    Customers/Seconds
+Max Throughput            1.0000    Customers/Seconds
+
+
+                ******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      server       work             0.7500   Customers/Seconds
+Utilization     server       work            75.0000   Percent
+Queue Length    server       work             3.0000   Customers
+Residence Time  server       work             4.0000   Seconds
+
+

@@ -1,0 +1,85 @@
+
+
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Wed Dec 27 13:33:41 2006  ***
+                ***  for: Simple Series Circuit     ***
+                ***  Ver: PDQ Analyzer v4.0 040906  ***
+                ***************************************
+                ***************************************
+
+
+
+                ***************************************
+                ******    PDQ Model INPUTS      *******
+                ***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  Center1    Work       TRANS     1.0000
+CEN  FCFS  Center2    Work       TRANS     2.0000
+CEN  FCFS  Center3    Work       TRANS     3.0000
+
+
+
+Queueing Circuit Totals:
+
+        Streams:      1
+        Nodes:        3
+
+
+
+WORKLOAD Parameters
+
+Source        per Sec        Demand
+------        -------        ------
+Work           0.1000        6.0000
+
+
+
+
+
+                ***************************************
+                ******   PDQ Model OUTPUTS      *******
+                ***************************************
+
+
+Solution Method: CANON
+
+                ******   SYSTEM Performance     *******
+
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "Work"
+Mean Throughput           0.1000    Job/Sec
+Response Time             7.8968    Sec
+
+Bounds Analysis:
+Max Demand                0.3333    Job/Sec
+Max Throughput            0.3333    Job/Sec
+
+
+                ******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      Center1      Work             0.1000   Job/Sec
+Utilization     Center1      Work            10.0000   Percent
+Queue Length    Center1      Work             0.1111   Job
+Residence Time  Center1      Work             1.1111   Sec
+
+Throughput      Center2      Work             0.1000   Job/Sec
+Utilization     Center2      Work            20.0000   Percent
+Queue Length    Center2      Work             0.2500   Job
+Residence Time  Center2      Work             2.5000   Sec
+
+Throughput      Center3      Work             0.1000   Job/Sec
+Utilization     Center3      Work            30.0000   Percent
+Queue Length    Center3      Work             0.4286   Job
+Residence Time  Center3      Work             4.2857   Sec
+
+

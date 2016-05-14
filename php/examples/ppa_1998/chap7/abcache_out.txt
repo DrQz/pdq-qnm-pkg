@@ -1,0 +1,26 @@
+
+**** ABC Model Results ****
+PDQ nodes: 16  PDQ streams: 17
+Memory Mode: WriteBack
+Ncpu:  15
+Nrwht: 12.11 (N:12  W: 1.00)
+Nrdop:  1.28 (N: 1  W: 1.00)
+Nwbop:  0.45 (N: 1  W: 0.45)
+Ninvl:  0.23 (N: 1  W: 0.23)
+
+Hit Ratio:   95.00 %
+Read Miss:    4.25 %
+WriteMiss:    0.75 %
+Ucpu:        30.08 %
+Pcpu:         4.51
+
+Ubus[reads]: 76.93 %
+Ubus[write]:  6.09 %
+Ubus[inval]:  0.31 %
+Ubus[total]: 83.34 %
+
+Uca0[hits]:  94.07 %
+Uca0[reads]:  1.92 %
+Uca0[write]:  0.30 %
+Uca0[inval]:  0.31 %
+Uca0[total]: 96.61 %

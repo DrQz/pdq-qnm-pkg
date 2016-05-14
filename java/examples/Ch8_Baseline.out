@@ -1,0 +1,25 @@
+debug off
+*** Metric breakout for "CMG93 C/S Baseline" with 125 clients ***
+
+Transaction	    R (Sec)	  CMG paper
+-----------	    -------	  ---------
+CatDisplay     	    0.2749	    0.2754
+RemotQuote     	    0.2884	    0.2625
+StatUpdate     	    0.1010	    0.1252
+CatDispAgg     	    0.2489	    0.2624
+RemQuotAgg     	    0.2605	    0.2470
+StatUpdAgg     	    0.0787	    0.1120
+
+
+PDQ Node       	    % Busy	  CMG paper
+--------       	    -------	  ---------
+Token ring     	   53.1006	   49.3333
+PC Desktop     	    0.5802	    0.5802
+File server    	   11.9157	   11.9157
+Gateway CPU    	   60.4167	   60.4167
+Mainframe      	   14.0873	   14.0873
+FS disks10	   58.7503	   59.0028
+DASD disk20	   35.4485	   35.5502
+DASD disk21	   35.4485	   35.5502
+DASD disk22	   35.4485	   35.5502
+DASD disk23	   35.4485	   35.5502

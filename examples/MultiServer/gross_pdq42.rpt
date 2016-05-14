@@ -1,0 +1,76 @@
+                ***************************************
+                ****** Pretty Damn Quick REPORT *******
+                ***************************************
+                ***  of : Sun Aug 26 18:30:27 2007  ***
+                ***  for: G&H Example 4.2           ***
+                ***  Ver: PDQ Analyzer v4.B 040707  ***
+                ***************************************
+                ***************************************
+
+                =======================================
+                ******    PDQ Model INPUTS      *******
+                =======================================
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  Select     Customers  TRANS     0.5000
+  3  MSQ   Claims     Customers  TRANS     3.3420
+  7  MSQ   Policy     Customers  TRANS     9.2228
+
+Queueing Circuit Totals:
+        Streams:      1
+        Nodes:        3
+
+WORKLOAD Parameters:
+Source        per Sec        Demand
+------        -------        ------
+Customers      0.5833       13.0648
+
+
+                =======================================
+                ******   PDQ Model OUTPUTS      *******
+                =======================================
+
+Solution Method: CANON
+
+                ******   SYSTEM Performance     *******
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "Customers"
+Number in system          9.9253    Calls
+Mean throughput           0.5833    Calls/Min
+Response time            17.0148    Min
+Stretch factor            1.3023
+
+Bounds Analysis:
+Max throughput            0.7590    Calls/Min
+Min response             13.0648    Min
+
+
+                ******   RESOURCE Performance   *******
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Throughput      Select       Customers        0.5833   Calls/Min
+Utilization     Select       Customers       29.1667   Percent
+Queue length    Select       Customers        0.4118   Calls
+Waiting line    Select       Customers        0.1201   Calls
+Waiting time    Select       Customers        0.2059   Min
+Residence time  Select       Customers        0.7059   Min
+
+Throughput      Claims       Customers        0.5833   Calls/Min
+Utilization     Claims       Customers       64.9841   Percent
+Queue length    Claims       Customers        2.7309   Calls
+Waiting line    Claims       Customers        0.7813   Calls
+Waiting time    Claims       Customers        1.3395   Min
+Residence time  Claims       Customers        4.6815   Min
+
+Throughput      Policy       Customers        0.5833   Calls/Min
+Utilization     Policy       Customers       76.8567   Percent
+Queue length    Policy       Customers        6.7826   Calls
+Waiting line    Policy       Customers        1.4027   Calls
+Waiting time    Policy       Customers        2.4046   Min
+Residence time  Policy       Customers       11.6274   Min
+
+

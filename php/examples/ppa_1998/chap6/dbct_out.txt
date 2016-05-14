@@ -1,0 +1,1066 @@
+Solving ... Done.
+
+
+		***************************************
+		****** Pretty Damn Quick REPORT *******
+		***************************************
+		***  of : Tue Apr 04 13:17:50 2006  ***
+		***  for: Teradata DBC-10/12        ***
+		***  Ver: PDQ Analyzer v3.0 111904  ***
+		***************************************
+		***************************************
+
+
+
+		***************************************
+		******    PDQ Model INPUTS      *******
+		***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  IFP0       query      TERML     0.0067
+CEN  FCFS  IFP1       query      TERML     0.0067
+CEN  FCFS  IFP2       query      TERML     0.0067
+CEN  FCFS  IFP3       query      TERML     0.0067
+CEN  FCFS  IFP4       query      TERML     0.0067
+CEN  FCFS  IFP5       query      TERML     0.0067
+CEN  FCFS  IFP6       query      TERML     0.0067
+CEN  FCFS  IFP7       query      TERML     0.0067
+CEN  FCFS  IFP8       query      TERML     0.0067
+CEN  FCFS  IFP9       query      TERML     0.0067
+CEN  FCFS  IFP10      query      TERML     0.0067
+CEN  FCFS  IFP11      query      TERML     0.0067
+CEN  FCFS  IFP12      query      TERML     0.0067
+CEN  FCFS  IFP13      query      TERML     0.0067
+CEN  FCFS  IFP14      query      TERML     0.0067
+CEN  FCFS  AMP0       query      TERML     0.0120
+CEN  FCFS  AMP1       query      TERML     0.0120
+CEN  FCFS  AMP2       query      TERML     0.0120
+CEN  FCFS  AMP3       query      TERML     0.0120
+CEN  FCFS  AMP4       query      TERML     0.0120
+CEN  FCFS  AMP5       query      TERML     0.0120
+CEN  FCFS  AMP6       query      TERML     0.0120
+CEN  FCFS  AMP7       query      TERML     0.0120
+CEN  FCFS  AMP8       query      TERML     0.0120
+CEN  FCFS  AMP9       query      TERML     0.0120
+CEN  FCFS  AMP10      query      TERML     0.0120
+CEN  FCFS  AMP11      query      TERML     0.0120
+CEN  FCFS  AMP12      query      TERML     0.0120
+CEN  FCFS  AMP13      query      TERML     0.0120
+CEN  FCFS  AMP14      query      TERML     0.0120
+CEN  FCFS  AMP15      query      TERML     0.0120
+CEN  FCFS  AMP16      query      TERML     0.0120
+CEN  FCFS  AMP17      query      TERML     0.0120
+CEN  FCFS  AMP18      query      TERML     0.0120
+CEN  FCFS  AMP19      query      TERML     0.0120
+CEN  FCFS  AMP20      query      TERML     0.0120
+CEN  FCFS  AMP21      query      TERML     0.0120
+CEN  FCFS  AMP22      query      TERML     0.0120
+CEN  FCFS  AMP23      query      TERML     0.0120
+CEN  FCFS  AMP24      query      TERML     0.0120
+CEN  FCFS  AMP25      query      TERML     0.0120
+CEN  FCFS  AMP26      query      TERML     0.0120
+CEN  FCFS  AMP27      query      TERML     0.0120
+CEN  FCFS  AMP28      query      TERML     0.0120
+CEN  FCFS  AMP29      query      TERML     0.0120
+CEN  FCFS  AMP30      query      TERML     0.0120
+CEN  FCFS  AMP31      query      TERML     0.0120
+CEN  FCFS  AMP32      query      TERML     0.0120
+CEN  FCFS  AMP33      query      TERML     0.0120
+CEN  FCFS  AMP34      query      TERML     0.0120
+CEN  FCFS  AMP35      query      TERML     0.0120
+CEN  FCFS  AMP36      query      TERML     0.0120
+CEN  FCFS  AMP37      query      TERML     0.0120
+CEN  FCFS  AMP38      query      TERML     0.0120
+CEN  FCFS  AMP39      query      TERML     0.0120
+CEN  FCFS  AMP40      query      TERML     0.0120
+CEN  FCFS  AMP41      query      TERML     0.0120
+CEN  FCFS  AMP42      query      TERML     0.0120
+CEN  FCFS  AMP43      query      TERML     0.0120
+CEN  FCFS  AMP44      query      TERML     0.0120
+CEN  FCFS  AMP45      query      TERML     0.0120
+CEN  FCFS  AMP46      query      TERML     0.0120
+CEN  FCFS  AMP47      query      TERML     0.0120
+CEN  FCFS  AMP48      query      TERML     0.0120
+CEN  FCFS  AMP49      query      TERML     0.0120
+CEN  FCFS  DSU0       query      TERML     0.0120
+CEN  FCFS  DSU1       query      TERML     0.0120
+CEN  FCFS  DSU2       query      TERML     0.0120
+CEN  FCFS  DSU3       query      TERML     0.0120
+CEN  FCFS  DSU4       query      TERML     0.0120
+CEN  FCFS  DSU5       query      TERML     0.0120
+CEN  FCFS  DSU6       query      TERML     0.0120
+CEN  FCFS  DSU7       query      TERML     0.0120
+CEN  FCFS  DSU8       query      TERML     0.0120
+CEN  FCFS  DSU9       query      TERML     0.0120
+CEN  FCFS  DSU10      query      TERML     0.0120
+CEN  FCFS  DSU11      query      TERML     0.0120
+CEN  FCFS  DSU12      query      TERML     0.0120
+CEN  FCFS  DSU13      query      TERML     0.0120
+CEN  FCFS  DSU14      query      TERML     0.0120
+CEN  FCFS  DSU15      query      TERML     0.0120
+CEN  FCFS  DSU16      query      TERML     0.0120
+CEN  FCFS  DSU17      query      TERML     0.0120
+CEN  FCFS  DSU18      query      TERML     0.0120
+CEN  FCFS  DSU19      query      TERML     0.0120
+CEN  FCFS  DSU20      query      TERML     0.0120
+CEN  FCFS  DSU21      query      TERML     0.0120
+CEN  FCFS  DSU22      query      TERML     0.0120
+CEN  FCFS  DSU23      query      TERML     0.0120
+CEN  FCFS  DSU24      query      TERML     0.0120
+CEN  FCFS  DSU25      query      TERML     0.0120
+CEN  FCFS  DSU26      query      TERML     0.0120
+CEN  FCFS  DSU27      query      TERML     0.0120
+CEN  FCFS  DSU28      query      TERML     0.0120
+CEN  FCFS  DSU29      query      TERML     0.0120
+CEN  FCFS  DSU30      query      TERML     0.0120
+CEN  FCFS  DSU31      query      TERML     0.0120
+CEN  FCFS  DSU32      query      TERML     0.0120
+CEN  FCFS  DSU33      query      TERML     0.0120
+CEN  FCFS  DSU34      query      TERML     0.0120
+CEN  FCFS  DSU35      query      TERML     0.0120
+CEN  FCFS  DSU36      query      TERML     0.0120
+CEN  FCFS  DSU37      query      TERML     0.0120
+CEN  FCFS  DSU38      query      TERML     0.0120
+CEN  FCFS  DSU39      query      TERML     0.0120
+CEN  FCFS  DSU40      query      TERML     0.0120
+CEN  FCFS  DSU41      query      TERML     0.0120
+CEN  FCFS  DSU42      query      TERML     0.0120
+CEN  FCFS  DSU43      query      TERML     0.0120
+CEN  FCFS  DSU44      query      TERML     0.0120
+CEN  FCFS  DSU45      query      TERML     0.0120
+CEN  FCFS  DSU46      query      TERML     0.0120
+CEN  FCFS  DSU47      query      TERML     0.0120
+CEN  FCFS  DSU48      query      TERML     0.0120
+CEN  FCFS  DSU49      query      TERML     0.0120
+CEN  FCFS  DSU50      query      TERML     0.0120
+CEN  FCFS  DSU51      query      TERML     0.0120
+CEN  FCFS  DSU52      query      TERML     0.0120
+CEN  FCFS  DSU53      query      TERML     0.0120
+CEN  FCFS  DSU54      query      TERML     0.0120
+CEN  FCFS  DSU55      query      TERML     0.0120
+CEN  FCFS  DSU56      query      TERML     0.0120
+CEN  FCFS  DSU57      query      TERML     0.0120
+CEN  FCFS  DSU58      query      TERML     0.0120
+CEN  FCFS  DSU59      query      TERML     0.0120
+CEN  FCFS  DSU60      query      TERML     0.0120
+CEN  FCFS  DSU61      query      TERML     0.0120
+CEN  FCFS  DSU62      query      TERML     0.0120
+CEN  FCFS  DSU63      query      TERML     0.0120
+CEN  FCFS  DSU64      query      TERML     0.0120
+CEN  FCFS  DSU65      query      TERML     0.0120
+CEN  FCFS  DSU66      query      TERML     0.0120
+CEN  FCFS  DSU67      query      TERML     0.0120
+CEN  FCFS  DSU68      query      TERML     0.0120
+CEN  FCFS  DSU69      query      TERML     0.0120
+CEN  FCFS  DSU70      query      TERML     0.0120
+CEN  FCFS  DSU71      query      TERML     0.0120
+CEN  FCFS  DSU72      query      TERML     0.0120
+CEN  FCFS  DSU73      query      TERML     0.0120
+CEN  FCFS  DSU74      query      TERML     0.0120
+CEN  FCFS  DSU75      query      TERML     0.0120
+CEN  FCFS  DSU76      query      TERML     0.0120
+CEN  FCFS  DSU77      query      TERML     0.0120
+CEN  FCFS  DSU78      query      TERML     0.0120
+CEN  FCFS  DSU79      query      TERML     0.0120
+CEN  FCFS  DSU80      query      TERML     0.0120
+CEN  FCFS  DSU81      query      TERML     0.0120
+CEN  FCFS  DSU82      query      TERML     0.0120
+CEN  FCFS  DSU83      query      TERML     0.0120
+CEN  FCFS  DSU84      query      TERML     0.0120
+CEN  FCFS  DSU85      query      TERML     0.0120
+CEN  FCFS  DSU86      query      TERML     0.0120
+CEN  FCFS  DSU87      query      TERML     0.0120
+CEN  FCFS  DSU88      query      TERML     0.0120
+CEN  FCFS  DSU89      query      TERML     0.0120
+CEN  FCFS  DSU90      query      TERML     0.0120
+CEN  FCFS  DSU91      query      TERML     0.0120
+CEN  FCFS  DSU92      query      TERML     0.0120
+CEN  FCFS  DSU93      query      TERML     0.0120
+CEN  FCFS  DSU94      query      TERML     0.0120
+CEN  FCFS  DSU95      query      TERML     0.0120
+CEN  FCFS  DSU96      query      TERML     0.0120
+CEN  FCFS  DSU97      query      TERML     0.0120
+CEN  FCFS  DSU98      query      TERML     0.0120
+CEN  FCFS  DSU99      query      TERML     0.0120
+
+
+
+Queueing Circuit Totals:
+
+	Clients:    300.00
+	Streams:      1
+	Nodes:      165
+
+
+
+WORKLOAD Parameters
+
+
+Client       Number       Demand   Thinktime 
+----         ------       ------   --------- 
+query        300.00        1.9000    10.00
+
+
+
+
+
+		***************************************
+		******   PDQ Model OUTPUTS      *******
+		***************************************
+
+
+Solution Method: APPROX	(Iterations: 6; Accuracy: 0.1000%)
+
+		******   SYSTEM Performance     *******
+
+
+Metric              	     Value	Unit      
+-----------------   	     -----	----      
+Workload: "query"
+Mean Throughput  	   23.7455   	Job/Sec
+Response Time    	    2.6340   	Sec
+Mean Concurrency 	   62.5446   	Job
+Stretch Factor  	    1.3863
+
+Bounds Analysis:
+Max Throughput  	   83.3333   	Job/Sec
+Min Response    	    1.9000   	Sec
+Max Demand      	    0.0120   	Sec
+Tot Demand      	    1.9000   	Sec
+Think time      	   10.0000   	Sec
+Optimal Clients 	  991.6667   	Clients
+
+
+		******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit   
+---------       ------       ----              -----   ----   
+Throughput      IFP0         query           23.7455   Job/Sec
+Utilization     IFP0         query           15.8304   Percent
+Queue Length    IFP0         query            0.1879   Job    
+Residence Time  IFP0         query            0.0079   Sec    
+
+Throughput      IFP1         query           23.7455   Job/Sec
+Utilization     IFP1         query           15.8304   Percent
+Queue Length    IFP1         query            0.1879   Job    
+Residence Time  IFP1         query            0.0079   Sec    
+
+Throughput      IFP2         query           23.7455   Job/Sec
+Utilization     IFP2         query           15.8304   Percent
+Queue Length    IFP2         query            0.1879   Job    
+Residence Time  IFP2         query            0.0079   Sec    
+
+Throughput      IFP3         query           23.7455   Job/Sec
+Utilization     IFP3         query           15.8304   Percent
+Queue Length    IFP3         query            0.1879   Job    
+Residence Time  IFP3         query            0.0079   Sec    
+
+Throughput      IFP4         query           23.7455   Job/Sec
+Utilization     IFP4         query           15.8304   Percent
+Queue Length    IFP4         query            0.1879   Job    
+Residence Time  IFP4         query            0.0079   Sec    
+
+Throughput      IFP5         query           23.7455   Job/Sec
+Utilization     IFP5         query           15.8304   Percent
+Queue Length    IFP5         query            0.1879   Job    
+Residence Time  IFP5         query            0.0079   Sec    
+
+Throughput      IFP6         query           23.7455   Job/Sec
+Utilization     IFP6         query           15.8304   Percent
+Queue Length    IFP6         query            0.1879   Job    
+Residence Time  IFP6         query            0.0079   Sec    
+
+Throughput      IFP7         query           23.7455   Job/Sec
+Utilization     IFP7         query           15.8304   Percent
+Queue Length    IFP7         query            0.1879   Job    
+Residence Time  IFP7         query            0.0079   Sec    
+
+Throughput      IFP8         query           23.7455   Job/Sec
+Utilization     IFP8         query           15.8304   Percent
+Queue Length    IFP8         query            0.1879   Job    
+Residence Time  IFP8         query            0.0079   Sec    
+
+Throughput      IFP9         query           23.7455   Job/Sec
+Utilization     IFP9         query           15.8304   Percent
+Queue Length    IFP9         query            0.1879   Job    
+Residence Time  IFP9         query            0.0079   Sec    
+
+Throughput      IFP10        query           23.7455   Job/Sec
+Utilization     IFP10        query           15.8304   Percent
+Queue Length    IFP10        query            0.1879   Job    
+Residence Time  IFP10        query            0.0079   Sec    
+
+Throughput      IFP11        query           23.7455   Job/Sec
+Utilization     IFP11        query           15.8304   Percent
+Queue Length    IFP11        query            0.1879   Job    
+Residence Time  IFP11        query            0.0079   Sec    
+
+Throughput      IFP12        query           23.7455   Job/Sec
+Utilization     IFP12        query           15.8304   Percent
+Queue Length    IFP12        query            0.1879   Job    
+Residence Time  IFP12        query            0.0079   Sec    
+
+Throughput      IFP13        query           23.7455   Job/Sec
+Utilization     IFP13        query           15.8304   Percent
+Queue Length    IFP13        query            0.1879   Job    
+Residence Time  IFP13        query            0.0079   Sec    
+
+Throughput      IFP14        query           23.7455   Job/Sec
+Utilization     IFP14        query           15.8304   Percent
+Queue Length    IFP14        query            0.1879   Job    
+Residence Time  IFP14        query            0.0079   Sec    
+
+Throughput      AMP0         query           23.7455   Job/Sec
+Utilization     AMP0         query           28.4946   Percent
+Queue Length    AMP0         query            0.3982   Job    
+Residence Time  AMP0         query            0.0168   Sec    
+
+Throughput      AMP1         query           23.7455   Job/Sec
+Utilization     AMP1         query           28.4946   Percent
+Queue Length    AMP1         query            0.3982   Job    
+Residence Time  AMP1         query            0.0168   Sec    
+
+Throughput      AMP2         query           23.7455   Job/Sec
+Utilization     AMP2         query           28.4946   Percent
+Queue Length    AMP2         query            0.3982   Job    
+Residence Time  AMP2         query            0.0168   Sec    
+
+Throughput      AMP3         query           23.7455   Job/Sec
+Utilization     AMP3         query           28.4946   Percent
+Queue Length    AMP3         query            0.3982   Job    
+Residence Time  AMP3         query            0.0168   Sec    
+
+Throughput      AMP4         query           23.7455   Job/Sec
+Utilization     AMP4         query           28.4946   Percent
+Queue Length    AMP4         query            0.3982   Job    
+Residence Time  AMP4         query            0.0168   Sec    
+
+Throughput      AMP5         query           23.7455   Job/Sec
+Utilization     AMP5         query           28.4946   Percent
+Queue Length    AMP5         query            0.3982   Job    
+Residence Time  AMP5         query            0.0168   Sec    
+
+Throughput      AMP6         query           23.7455   Job/Sec
+Utilization     AMP6         query           28.4946   Percent
+Queue Length    AMP6         query            0.3982   Job    
+Residence Time  AMP6         query            0.0168   Sec    
+
+Throughput      AMP7         query           23.7455   Job/Sec
+Utilization     AMP7         query           28.4946   Percent
+Queue Length    AMP7         query            0.3982   Job    
+Residence Time  AMP7         query            0.0168   Sec    
+
+Throughput      AMP8         query           23.7455   Job/Sec
+Utilization     AMP8         query           28.4946   Percent
+Queue Length    AMP8         query            0.3982   Job    
+Residence Time  AMP8         query            0.0168   Sec    
+
+Throughput      AMP9         query           23.7455   Job/Sec
+Utilization     AMP9         query           28.4946   Percent
+Queue Length    AMP9         query            0.3982   Job    
+Residence Time  AMP9         query            0.0168   Sec    
+
+Throughput      AMP10        query           23.7455   Job/Sec
+Utilization     AMP10        query           28.4946   Percent
+Queue Length    AMP10        query            0.3982   Job    
+Residence Time  AMP10        query            0.0168   Sec    
+
+Throughput      AMP11        query           23.7455   Job/Sec
+Utilization     AMP11        query           28.4946   Percent
+Queue Length    AMP11        query            0.3982   Job    
+Residence Time  AMP11        query            0.0168   Sec    
+
+Throughput      AMP12        query           23.7455   Job/Sec
+Utilization     AMP12        query           28.4946   Percent
+Queue Length    AMP12        query            0.3982   Job    
+Residence Time  AMP12        query            0.0168   Sec    
+
+Throughput      AMP13        query           23.7455   Job/Sec
+Utilization     AMP13        query           28.4946   Percent
+Queue Length    AMP13        query            0.3982   Job    
+Residence Time  AMP13        query            0.0168   Sec    
+
+Throughput      AMP14        query           23.7455   Job/Sec
+Utilization     AMP14        query           28.4946   Percent
+Queue Length    AMP14        query            0.3982   Job    
+Residence Time  AMP14        query            0.0168   Sec    
+
+Throughput      AMP15        query           23.7455   Job/Sec
+Utilization     AMP15        query           28.4946   Percent
+Queue Length    AMP15        query            0.3982   Job    
+Residence Time  AMP15        query            0.0168   Sec    
+
+Throughput      AMP16        query           23.7455   Job/Sec
+Utilization     AMP16        query           28.4946   Percent
+Queue Length    AMP16        query            0.3982   Job    
+Residence Time  AMP16        query            0.0168   Sec    
+
+Throughput      AMP17        query           23.7455   Job/Sec
+Utilization     AMP17        query           28.4946   Percent
+Queue Length    AMP17        query            0.3982   Job    
+Residence Time  AMP17        query            0.0168   Sec    
+
+Throughput      AMP18        query           23.7455   Job/Sec
+Utilization     AMP18        query           28.4946   Percent
+Queue Length    AMP18        query            0.3982   Job    
+Residence Time  AMP18        query            0.0168   Sec    
+
+Throughput      AMP19        query           23.7455   Job/Sec
+Utilization     AMP19        query           28.4946   Percent
+Queue Length    AMP19        query            0.3982   Job    
+Residence Time  AMP19        query            0.0168   Sec    
+
+Throughput      AMP20        query           23.7455   Job/Sec
+Utilization     AMP20        query           28.4946   Percent
+Queue Length    AMP20        query            0.3982   Job    
+Residence Time  AMP20        query            0.0168   Sec    
+
+Throughput      AMP21        query           23.7455   Job/Sec
+Utilization     AMP21        query           28.4946   Percent
+Queue Length    AMP21        query            0.3982   Job    
+Residence Time  AMP21        query            0.0168   Sec    
+
+Throughput      AMP22        query           23.7455   Job/Sec
+Utilization     AMP22        query           28.4946   Percent
+Queue Length    AMP22        query            0.3982   Job    
+Residence Time  AMP22        query            0.0168   Sec    
+
+Throughput      AMP23        query           23.7455   Job/Sec
+Utilization     AMP23        query           28.4946   Percent
+Queue Length    AMP23        query            0.3982   Job    
+Residence Time  AMP23        query            0.0168   Sec    
+
+Throughput      AMP24        query           23.7455   Job/Sec
+Utilization     AMP24        query           28.4946   Percent
+Queue Length    AMP24        query            0.3982   Job    
+Residence Time  AMP24        query            0.0168   Sec    
+
+Throughput      AMP25        query           23.7455   Job/Sec
+Utilization     AMP25        query           28.4946   Percent
+Queue Length    AMP25        query            0.3982   Job    
+Residence Time  AMP25        query            0.0168   Sec    
+
+Throughput      AMP26        query           23.7455   Job/Sec
+Utilization     AMP26        query           28.4946   Percent
+Queue Length    AMP26        query            0.3982   Job    
+Residence Time  AMP26        query            0.0168   Sec    
+
+Throughput      AMP27        query           23.7455   Job/Sec
+Utilization     AMP27        query           28.4946   Percent
+Queue Length    AMP27        query            0.3982   Job    
+Residence Time  AMP27        query            0.0168   Sec    
+
+Throughput      AMP28        query           23.7455   Job/Sec
+Utilization     AMP28        query           28.4946   Percent
+Queue Length    AMP28        query            0.3982   Job    
+Residence Time  AMP28        query            0.0168   Sec    
+
+Throughput      AMP29        query           23.7455   Job/Sec
+Utilization     AMP29        query           28.4946   Percent
+Queue Length    AMP29        query            0.3982   Job    
+Residence Time  AMP29        query            0.0168   Sec    
+
+Throughput      AMP30        query           23.7455   Job/Sec
+Utilization     AMP30        query           28.4946   Percent
+Queue Length    AMP30        query            0.3982   Job    
+Residence Time  AMP30        query            0.0168   Sec    
+
+Throughput      AMP31        query           23.7455   Job/Sec
+Utilization     AMP31        query           28.4946   Percent
+Queue Length    AMP31        query            0.3982   Job    
+Residence Time  AMP31        query            0.0168   Sec    
+
+Throughput      AMP32        query           23.7455   Job/Sec
+Utilization     AMP32        query           28.4946   Percent
+Queue Length    AMP32        query            0.3982   Job    
+Residence Time  AMP32        query            0.0168   Sec    
+
+Throughput      AMP33        query           23.7455   Job/Sec
+Utilization     AMP33        query           28.4946   Percent
+Queue Length    AMP33        query            0.3982   Job    
+Residence Time  AMP33        query            0.0168   Sec    
+
+Throughput      AMP34        query           23.7455   Job/Sec
+Utilization     AMP34        query           28.4946   Percent
+Queue Length    AMP34        query            0.3982   Job    
+Residence Time  AMP34        query            0.0168   Sec    
+
+Throughput      AMP35        query           23.7455   Job/Sec
+Utilization     AMP35        query           28.4946   Percent
+Queue Length    AMP35        query            0.3982   Job    
+Residence Time  AMP35        query            0.0168   Sec    
+
+Throughput      AMP36        query           23.7455   Job/Sec
+Utilization     AMP36        query           28.4946   Percent
+Queue Length    AMP36        query            0.3982   Job    
+Residence Time  AMP36        query            0.0168   Sec    
+
+Throughput      AMP37        query           23.7455   Job/Sec
+Utilization     AMP37        query           28.4946   Percent
+Queue Length    AMP37        query            0.3982   Job    
+Residence Time  AMP37        query            0.0168   Sec    
+
+Throughput      AMP38        query           23.7455   Job/Sec
+Utilization     AMP38        query           28.4946   Percent
+Queue Length    AMP38        query            0.3982   Job    
+Residence Time  AMP38        query            0.0168   Sec    
+
+Throughput      AMP39        query           23.7455   Job/Sec
+Utilization     AMP39        query           28.4946   Percent
+Queue Length    AMP39        query            0.3982   Job    
+Residence Time  AMP39        query            0.0168   Sec    
+
+Throughput      AMP40        query           23.7455   Job/Sec
+Utilization     AMP40        query           28.4946   Percent
+Queue Length    AMP40        query            0.3982   Job    
+Residence Time  AMP40        query            0.0168   Sec    
+
+Throughput      AMP41        query           23.7455   Job/Sec
+Utilization     AMP41        query           28.4946   Percent
+Queue Length    AMP41        query            0.3982   Job    
+Residence Time  AMP41        query            0.0168   Sec    
+
+Throughput      AMP42        query           23.7455   Job/Sec
+Utilization     AMP42        query           28.4946   Percent
+Queue Length    AMP42        query            0.3982   Job    
+Residence Time  AMP42        query            0.0168   Sec    
+
+Throughput      AMP43        query           23.7455   Job/Sec
+Utilization     AMP43        query           28.4946   Percent
+Queue Length    AMP43        query            0.3982   Job    
+Residence Time  AMP43        query            0.0168   Sec    
+
+Throughput      AMP44        query           23.7455   Job/Sec
+Utilization     AMP44        query           28.4946   Percent
+Queue Length    AMP44        query            0.3982   Job    
+Residence Time  AMP44        query            0.0168   Sec    
+
+Throughput      AMP45        query           23.7455   Job/Sec
+Utilization     AMP45        query           28.4946   Percent
+Queue Length    AMP45        query            0.3982   Job    
+Residence Time  AMP45        query            0.0168   Sec    
+
+Throughput      AMP46        query           23.7455   Job/Sec
+Utilization     AMP46        query           28.4946   Percent
+Queue Length    AMP46        query            0.3982   Job    
+Residence Time  AMP46        query            0.0168   Sec    
+
+Throughput      AMP47        query           23.7455   Job/Sec
+Utilization     AMP47        query           28.4946   Percent
+Queue Length    AMP47        query            0.3982   Job    
+Residence Time  AMP47        query            0.0168   Sec    
+
+Throughput      AMP48        query           23.7455   Job/Sec
+Utilization     AMP48        query           28.4946   Percent
+Queue Length    AMP48        query            0.3982   Job    
+Residence Time  AMP48        query            0.0168   Sec    
+
+Throughput      AMP49        query           23.7455   Job/Sec
+Utilization     AMP49        query           28.4946   Percent
+Queue Length    AMP49        query            0.3982   Job    
+Residence Time  AMP49        query            0.0168   Sec    
+
+Throughput      DSU0         query           23.7455   Job/Sec
+Utilization     DSU0         query           28.4946   Percent
+Queue Length    DSU0         query            0.3982   Job    
+Residence Time  DSU0         query            0.0168   Sec    
+
+Throughput      DSU1         query           23.7455   Job/Sec
+Utilization     DSU1         query           28.4946   Percent
+Queue Length    DSU1         query            0.3982   Job    
+Residence Time  DSU1         query            0.0168   Sec    
+
+Throughput      DSU2         query           23.7455   Job/Sec
+Utilization     DSU2         query           28.4946   Percent
+Queue Length    DSU2         query            0.3982   Job    
+Residence Time  DSU2         query            0.0168   Sec    
+
+Throughput      DSU3         query           23.7455   Job/Sec
+Utilization     DSU3         query           28.4946   Percent
+Queue Length    DSU3         query            0.3982   Job    
+Residence Time  DSU3         query            0.0168   Sec    
+
+Throughput      DSU4         query           23.7455   Job/Sec
+Utilization     DSU4         query           28.4946   Percent
+Queue Length    DSU4         query            0.3982   Job    
+Residence Time  DSU4         query            0.0168   Sec    
+
+Throughput      DSU5         query           23.7455   Job/Sec
+Utilization     DSU5         query           28.4946   Percent
+Queue Length    DSU5         query            0.3982   Job    
+Residence Time  DSU5         query            0.0168   Sec    
+
+Throughput      DSU6         query           23.7455   Job/Sec
+Utilization     DSU6         query           28.4946   Percent
+Queue Length    DSU6         query            0.3982   Job    
+Residence Time  DSU6         query            0.0168   Sec    
+
+Throughput      DSU7         query           23.7455   Job/Sec
+Utilization     DSU7         query           28.4946   Percent
+Queue Length    DSU7         query            0.3982   Job    
+Residence Time  DSU7         query            0.0168   Sec    
+
+Throughput      DSU8         query           23.7455   Job/Sec
+Utilization     DSU8         query           28.4946   Percent
+Queue Length    DSU8         query            0.3982   Job    
+Residence Time  DSU8         query            0.0168   Sec    
+
+Throughput      DSU9         query           23.7455   Job/Sec
+Utilization     DSU9         query           28.4946   Percent
+Queue Length    DSU9         query            0.3982   Job    
+Residence Time  DSU9         query            0.0168   Sec    
+
+Throughput      DSU10        query           23.7455   Job/Sec
+Utilization     DSU10        query           28.4946   Percent
+Queue Length    DSU10        query            0.3982   Job    
+Residence Time  DSU10        query            0.0168   Sec    
+
+Throughput      DSU11        query           23.7455   Job/Sec
+Utilization     DSU11        query           28.4946   Percent
+Queue Length    DSU11        query            0.3982   Job    
+Residence Time  DSU11        query            0.0168   Sec    
+
+Throughput      DSU12        query           23.7455   Job/Sec
+Utilization     DSU12        query           28.4946   Percent
+Queue Length    DSU12        query            0.3982   Job    
+Residence Time  DSU12        query            0.0168   Sec    
+
+Throughput      DSU13        query           23.7455   Job/Sec
+Utilization     DSU13        query           28.4946   Percent
+Queue Length    DSU13        query            0.3982   Job    
+Residence Time  DSU13        query            0.0168   Sec    
+
+Throughput      DSU14        query           23.7455   Job/Sec
+Utilization     DSU14        query           28.4946   Percent
+Queue Length    DSU14        query            0.3982   Job    
+Residence Time  DSU14        query            0.0168   Sec    
+
+Throughput      DSU15        query           23.7455   Job/Sec
+Utilization     DSU15        query           28.4946   Percent
+Queue Length    DSU15        query            0.3982   Job    
+Residence Time  DSU15        query            0.0168   Sec    
+
+Throughput      DSU16        query           23.7455   Job/Sec
+Utilization     DSU16        query           28.4946   Percent
+Queue Length    DSU16        query            0.3982   Job    
+Residence Time  DSU16        query            0.0168   Sec    
+
+Throughput      DSU17        query           23.7455   Job/Sec
+Utilization     DSU17        query           28.4946   Percent
+Queue Length    DSU17        query            0.3982   Job    
+Residence Time  DSU17        query            0.0168   Sec    
+
+Throughput      DSU18        query           23.7455   Job/Sec
+Utilization     DSU18        query           28.4946   Percent
+Queue Length    DSU18        query            0.3982   Job    
+Residence Time  DSU18        query            0.0168   Sec    
+
+Throughput      DSU19        query           23.7455   Job/Sec
+Utilization     DSU19        query           28.4946   Percent
+Queue Length    DSU19        query            0.3982   Job    
+Residence Time  DSU19        query            0.0168   Sec    
+
+Throughput      DSU20        query           23.7455   Job/Sec
+Utilization     DSU20        query           28.4946   Percent
+Queue Length    DSU20        query            0.3982   Job    
+Residence Time  DSU20        query            0.0168   Sec    
+
+Throughput      DSU21        query           23.7455   Job/Sec
+Utilization     DSU21        query           28.4946   Percent
+Queue Length    DSU21        query            0.3982   Job    
+Residence Time  DSU21        query            0.0168   Sec    
+
+Throughput      DSU22        query           23.7455   Job/Sec
+Utilization     DSU22        query           28.4946   Percent
+Queue Length    DSU22        query            0.3982   Job    
+Residence Time  DSU22        query            0.0168   Sec    
+
+Throughput      DSU23        query           23.7455   Job/Sec
+Utilization     DSU23        query           28.4946   Percent
+Queue Length    DSU23        query            0.3982   Job    
+Residence Time  DSU23        query            0.0168   Sec    
+
+Throughput      DSU24        query           23.7455   Job/Sec
+Utilization     DSU24        query           28.4946   Percent
+Queue Length    DSU24        query            0.3982   Job    
+Residence Time  DSU24        query            0.0168   Sec    
+
+Throughput      DSU25        query           23.7455   Job/Sec
+Utilization     DSU25        query           28.4946   Percent
+Queue Length    DSU25        query            0.3982   Job    
+Residence Time  DSU25        query            0.0168   Sec    
+
+Throughput      DSU26        query           23.7455   Job/Sec
+Utilization     DSU26        query           28.4946   Percent
+Queue Length    DSU26        query            0.3982   Job    
+Residence Time  DSU26        query            0.0168   Sec    
+
+Throughput      DSU27        query           23.7455   Job/Sec
+Utilization     DSU27        query           28.4946   Percent
+Queue Length    DSU27        query            0.3982   Job    
+Residence Time  DSU27        query            0.0168   Sec    
+
+Throughput      DSU28        query           23.7455   Job/Sec
+Utilization     DSU28        query           28.4946   Percent
+Queue Length    DSU28        query            0.3982   Job    
+Residence Time  DSU28        query            0.0168   Sec    
+
+Throughput      DSU29        query           23.7455   Job/Sec
+Utilization     DSU29        query           28.4946   Percent
+Queue Length    DSU29        query            0.3982   Job    
+Residence Time  DSU29        query            0.0168   Sec    
+
+Throughput      DSU30        query           23.7455   Job/Sec
+Utilization     DSU30        query           28.4946   Percent
+Queue Length    DSU30        query            0.3982   Job    
+Residence Time  DSU30        query            0.0168   Sec    
+
+Throughput      DSU31        query           23.7455   Job/Sec
+Utilization     DSU31        query           28.4946   Percent
+Queue Length    DSU31        query            0.3982   Job    
+Residence Time  DSU31        query            0.0168   Sec    
+
+Throughput      DSU32        query           23.7455   Job/Sec
+Utilization     DSU32        query           28.4946   Percent
+Queue Length    DSU32        query            0.3982   Job    
+Residence Time  DSU32        query            0.0168   Sec    
+
+Throughput      DSU33        query           23.7455   Job/Sec
+Utilization     DSU33        query           28.4946   Percent
+Queue Length    DSU33        query            0.3982   Job    
+Residence Time  DSU33        query            0.0168   Sec    
+
+Throughput      DSU34        query           23.7455   Job/Sec
+Utilization     DSU34        query           28.4946   Percent
+Queue Length    DSU34        query            0.3982   Job    
+Residence Time  DSU34        query            0.0168   Sec    
+
+Throughput      DSU35        query           23.7455   Job/Sec
+Utilization     DSU35        query           28.4946   Percent
+Queue Length    DSU35        query            0.3982   Job    
+Residence Time  DSU35        query            0.0168   Sec    
+
+Throughput      DSU36        query           23.7455   Job/Sec
+Utilization     DSU36        query           28.4946   Percent
+Queue Length    DSU36        query            0.3982   Job    
+Residence Time  DSU36        query            0.0168   Sec    
+
+Throughput      DSU37        query           23.7455   Job/Sec
+Utilization     DSU37        query           28.4946   Percent
+Queue Length    DSU37        query            0.3982   Job    
+Residence Time  DSU37        query            0.0168   Sec    
+
+Throughput      DSU38        query           23.7455   Job/Sec
+Utilization     DSU38        query           28.4946   Percent
+Queue Length    DSU38        query            0.3982   Job    
+Residence Time  DSU38        query            0.0168   Sec    
+
+Throughput      DSU39        query           23.7455   Job/Sec
+Utilization     DSU39        query           28.4946   Percent
+Queue Length    DSU39        query            0.3982   Job    
+Residence Time  DSU39        query            0.0168   Sec    
+
+Throughput      DSU40        query           23.7455   Job/Sec
+Utilization     DSU40        query           28.4946   Percent
+Queue Length    DSU40        query            0.3982   Job    
+Residence Time  DSU40        query            0.0168   Sec    
+
+Throughput      DSU41        query           23.7455   Job/Sec
+Utilization     DSU41        query           28.4946   Percent
+Queue Length    DSU41        query            0.3982   Job    
+Residence Time  DSU41        query            0.0168   Sec    
+
+Throughput      DSU42        query           23.7455   Job/Sec
+Utilization     DSU42        query           28.4946   Percent
+Queue Length    DSU42        query            0.3982   Job    
+Residence Time  DSU42        query            0.0168   Sec    
+
+Throughput      DSU43        query           23.7455   Job/Sec
+Utilization     DSU43        query           28.4946   Percent
+Queue Length    DSU43        query            0.3982   Job    
+Residence Time  DSU43        query            0.0168   Sec    
+
+Throughput      DSU44        query           23.7455   Job/Sec
+Utilization     DSU44        query           28.4946   Percent
+Queue Length    DSU44        query            0.3982   Job    
+Residence Time  DSU44        query            0.0168   Sec    
+
+Throughput      DSU45        query           23.7455   Job/Sec
+Utilization     DSU45        query           28.4946   Percent
+Queue Length    DSU45        query            0.3982   Job    
+Residence Time  DSU45        query            0.0168   Sec    
+
+Throughput      DSU46        query           23.7455   Job/Sec
+Utilization     DSU46        query           28.4946   Percent
+Queue Length    DSU46        query            0.3982   Job    
+Residence Time  DSU46        query            0.0168   Sec    
+
+Throughput      DSU47        query           23.7455   Job/Sec
+Utilization     DSU47        query           28.4946   Percent
+Queue Length    DSU47        query            0.3982   Job    
+Residence Time  DSU47        query            0.0168   Sec    
+
+Throughput      DSU48        query           23.7455   Job/Sec
+Utilization     DSU48        query           28.4946   Percent
+Queue Length    DSU48        query            0.3982   Job    
+Residence Time  DSU48        query            0.0168   Sec    
+
+Throughput      DSU49        query           23.7455   Job/Sec
+Utilization     DSU49        query           28.4946   Percent
+Queue Length    DSU49        query            0.3982   Job    
+Residence Time  DSU49        query            0.0168   Sec    
+
+Throughput      DSU50        query           23.7455   Job/Sec
+Utilization     DSU50        query           28.4946   Percent
+Queue Length    DSU50        query            0.3982   Job    
+Residence Time  DSU50        query            0.0168   Sec    
+
+Throughput      DSU51        query           23.7455   Job/Sec
+Utilization     DSU51        query           28.4946   Percent
+Queue Length    DSU51        query            0.3982   Job    
+Residence Time  DSU51        query            0.0168   Sec    
+
+Throughput      DSU52        query           23.7455   Job/Sec
+Utilization     DSU52        query           28.4946   Percent
+Queue Length    DSU52        query            0.3982   Job    
+Residence Time  DSU52        query            0.0168   Sec    
+
+Throughput      DSU53        query           23.7455   Job/Sec
+Utilization     DSU53        query           28.4946   Percent
+Queue Length    DSU53        query            0.3982   Job    
+Residence Time  DSU53        query            0.0168   Sec    
+
+Throughput      DSU54        query           23.7455   Job/Sec
+Utilization     DSU54        query           28.4946   Percent
+Queue Length    DSU54        query            0.3982   Job    
+Residence Time  DSU54        query            0.0168   Sec    
+
+Throughput      DSU55        query           23.7455   Job/Sec
+Utilization     DSU55        query           28.4946   Percent
+Queue Length    DSU55        query            0.3982   Job    
+Residence Time  DSU55        query            0.0168   Sec    
+
+Throughput      DSU56        query           23.7455   Job/Sec
+Utilization     DSU56        query           28.4946   Percent
+Queue Length    DSU56        query            0.3982   Job    
+Residence Time  DSU56        query            0.0168   Sec    
+
+Throughput      DSU57        query           23.7455   Job/Sec
+Utilization     DSU57        query           28.4946   Percent
+Queue Length    DSU57        query            0.3982   Job    
+Residence Time  DSU57        query            0.0168   Sec    
+
+Throughput      DSU58        query           23.7455   Job/Sec
+Utilization     DSU58        query           28.4946   Percent
+Queue Length    DSU58        query            0.3982   Job    
+Residence Time  DSU58        query            0.0168   Sec    
+
+Throughput      DSU59        query           23.7455   Job/Sec
+Utilization     DSU59        query           28.4946   Percent
+Queue Length    DSU59        query            0.3982   Job    
+Residence Time  DSU59        query            0.0168   Sec    
+
+Throughput      DSU60        query           23.7455   Job/Sec
+Utilization     DSU60        query           28.4946   Percent
+Queue Length    DSU60        query            0.3982   Job    
+Residence Time  DSU60        query            0.0168   Sec    
+
+Throughput      DSU61        query           23.7455   Job/Sec
+Utilization     DSU61        query           28.4946   Percent
+Queue Length    DSU61        query            0.3982   Job    
+Residence Time  DSU61        query            0.0168   Sec    
+
+Throughput      DSU62        query           23.7455   Job/Sec
+Utilization     DSU62        query           28.4946   Percent
+Queue Length    DSU62        query            0.3982   Job    
+Residence Time  DSU62        query            0.0168   Sec    
+
+Throughput      DSU63        query           23.7455   Job/Sec
+Utilization     DSU63        query           28.4946   Percent
+Queue Length    DSU63        query            0.3982   Job    
+Residence Time  DSU63        query            0.0168   Sec    
+
+Throughput      DSU64        query           23.7455   Job/Sec
+Utilization     DSU64        query           28.4946   Percent
+Queue Length    DSU64        query            0.3982   Job    
+Residence Time  DSU64        query            0.0168   Sec    
+
+Throughput      DSU65        query           23.7455   Job/Sec
+Utilization     DSU65        query           28.4946   Percent
+Queue Length    DSU65        query            0.3982   Job    
+Residence Time  DSU65        query            0.0168   Sec    
+
+Throughput      DSU66        query           23.7455   Job/Sec
+Utilization     DSU66        query           28.4946   Percent
+Queue Length    DSU66        query            0.3982   Job    
+Residence Time  DSU66        query            0.0168   Sec    
+
+Throughput      DSU67        query           23.7455   Job/Sec
+Utilization     DSU67        query           28.4946   Percent
+Queue Length    DSU67        query            0.3982   Job    
+Residence Time  DSU67        query            0.0168   Sec    
+
+Throughput      DSU68        query           23.7455   Job/Sec
+Utilization     DSU68        query           28.4946   Percent
+Queue Length    DSU68        query            0.3982   Job    
+Residence Time  DSU68        query            0.0168   Sec    
+
+Throughput      DSU69        query           23.7455   Job/Sec
+Utilization     DSU69        query           28.4946   Percent
+Queue Length    DSU69        query            0.3982   Job    
+Residence Time  DSU69        query            0.0168   Sec    
+
+Throughput      DSU70        query           23.7455   Job/Sec
+Utilization     DSU70        query           28.4946   Percent
+Queue Length    DSU70        query            0.3982   Job    
+Residence Time  DSU70        query            0.0168   Sec    
+
+Throughput      DSU71        query           23.7455   Job/Sec
+Utilization     DSU71        query           28.4946   Percent
+Queue Length    DSU71        query            0.3982   Job    
+Residence Time  DSU71        query            0.0168   Sec    
+
+Throughput      DSU72        query           23.7455   Job/Sec
+Utilization     DSU72        query           28.4946   Percent
+Queue Length    DSU72        query            0.3982   Job    
+Residence Time  DSU72        query            0.0168   Sec    
+
+Throughput      DSU73        query           23.7455   Job/Sec
+Utilization     DSU73        query           28.4946   Percent
+Queue Length    DSU73        query            0.3982   Job    
+Residence Time  DSU73        query            0.0168   Sec    
+
+Throughput      DSU74        query           23.7455   Job/Sec
+Utilization     DSU74        query           28.4946   Percent
+Queue Length    DSU74        query            0.3982   Job    
+Residence Time  DSU74        query            0.0168   Sec    
+
+Throughput      DSU75        query           23.7455   Job/Sec
+Utilization     DSU75        query           28.4946   Percent
+Queue Length    DSU75        query            0.3982   Job    
+Residence Time  DSU75        query            0.0168   Sec    
+
+Throughput      DSU76        query           23.7455   Job/Sec
+Utilization     DSU76        query           28.4946   Percent
+Queue Length    DSU76        query            0.3982   Job    
+Residence Time  DSU76        query            0.0168   Sec    
+
+Throughput      DSU77        query           23.7455   Job/Sec
+Utilization     DSU77        query           28.4946   Percent
+Queue Length    DSU77        query            0.3982   Job    
+Residence Time  DSU77        query            0.0168   Sec    
+
+Throughput      DSU78        query           23.7455   Job/Sec
+Utilization     DSU78        query           28.4946   Percent
+Queue Length    DSU78        query            0.3982   Job    
+Residence Time  DSU78        query            0.0168   Sec    
+
+Throughput      DSU79        query           23.7455   Job/Sec
+Utilization     DSU79        query           28.4946   Percent
+Queue Length    DSU79        query            0.3982   Job    
+Residence Time  DSU79        query            0.0168   Sec    
+
+Throughput      DSU80        query           23.7455   Job/Sec
+Utilization     DSU80        query           28.4946   Percent
+Queue Length    DSU80        query            0.3982   Job    
+Residence Time  DSU80        query            0.0168   Sec    
+
+Throughput      DSU81        query           23.7455   Job/Sec
+Utilization     DSU81        query           28.4946   Percent
+Queue Length    DSU81        query            0.3982   Job    
+Residence Time  DSU81        query            0.0168   Sec    
+
+Throughput      DSU82        query           23.7455   Job/Sec
+Utilization     DSU82        query           28.4946   Percent
+Queue Length    DSU82        query            0.3982   Job    
+Residence Time  DSU82        query            0.0168   Sec    
+
+Throughput      DSU83        query           23.7455   Job/Sec
+Utilization     DSU83        query           28.4946   Percent
+Queue Length    DSU83        query            0.3982   Job    
+Residence Time  DSU83        query            0.0168   Sec    
+
+Throughput      DSU84        query           23.7455   Job/Sec
+Utilization     DSU84        query           28.4946   Percent
+Queue Length    DSU84        query            0.3982   Job    
+Residence Time  DSU84        query            0.0168   Sec    
+
+Throughput      DSU85        query           23.7455   Job/Sec
+Utilization     DSU85        query           28.4946   Percent
+Queue Length    DSU85        query            0.3982   Job    
+Residence Time  DSU85        query            0.0168   Sec    
+
+Throughput      DSU86        query           23.7455   Job/Sec
+Utilization     DSU86        query           28.4946   Percent
+Queue Length    DSU86        query            0.3982   Job    
+Residence Time  DSU86        query            0.0168   Sec    
+
+Throughput      DSU87        query           23.7455   Job/Sec
+Utilization     DSU87        query           28.4946   Percent
+Queue Length    DSU87        query            0.3982   Job    
+Residence Time  DSU87        query            0.0168   Sec    
+
+Throughput      DSU88        query           23.7455   Job/Sec
+Utilization     DSU88        query           28.4946   Percent
+Queue Length    DSU88        query            0.3982   Job    
+Residence Time  DSU88        query            0.0168   Sec    
+
+Throughput      DSU89        query           23.7455   Job/Sec
+Utilization     DSU89        query           28.4946   Percent
+Queue Length    DSU89        query            0.3982   Job    
+Residence Time  DSU89        query            0.0168   Sec    
+
+Throughput      DSU90        query           23.7455   Job/Sec
+Utilization     DSU90        query           28.4946   Percent
+Queue Length    DSU90        query            0.3982   Job    
+Residence Time  DSU90        query            0.0168   Sec    
+
+Throughput      DSU91        query           23.7455   Job/Sec
+Utilization     DSU91        query           28.4946   Percent
+Queue Length    DSU91        query            0.3982   Job    
+Residence Time  DSU91        query            0.0168   Sec    
+
+Throughput      DSU92        query           23.7455   Job/Sec
+Utilization     DSU92        query           28.4946   Percent
+Queue Length    DSU92        query            0.3982   Job    
+Residence Time  DSU92        query            0.0168   Sec    
+
+Throughput      DSU93        query           23.7455   Job/Sec
+Utilization     DSU93        query           28.4946   Percent
+Queue Length    DSU93        query            0.3982   Job    
+Residence Time  DSU93        query            0.0168   Sec    
+
+Throughput      DSU94        query           23.7455   Job/Sec
+Utilization     DSU94        query           28.4946   Percent
+Queue Length    DSU94        query            0.3982   Job    
+Residence Time  DSU94        query            0.0168   Sec    
+
+Throughput      DSU95        query           23.7455   Job/Sec
+Utilization     DSU95        query           28.4946   Percent
+Queue Length    DSU95        query            0.3982   Job    
+Residence Time  DSU95        query            0.0168   Sec    
+
+Throughput      DSU96        query           23.7455   Job/Sec
+Utilization     DSU96        query           28.4946   Percent
+Queue Length    DSU96        query            0.3982   Job    
+Residence Time  DSU96        query            0.0168   Sec    
+
+Throughput      DSU97        query           23.7455   Job/Sec
+Utilization     DSU97        query           28.4946   Percent
+Queue Length    DSU97        query            0.3982   Job    
+Residence Time  DSU97        query            0.0168   Sec    
+
+Throughput      DSU98        query           23.7455   Job/Sec
+Utilization     DSU98        query           28.4946   Percent
+Queue Length    DSU98        query            0.3982   Job    
+Residence Time  DSU98        query            0.0168   Sec    
+
+Throughput      DSU99        query           23.7455   Job/Sec
+Utilization     DSU99        query           28.4946   Percent
+Queue Length    DSU99        query            0.3982   Job    
+Residence Time  DSU99        query            0.0168   Sec    
+
+

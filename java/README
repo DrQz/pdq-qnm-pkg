@@ -1,0 +1,24 @@
+This Java port implements the PDQ v4.2 APIs in pure Java. Among other
+things, this means that it lacks the support for multiserver queues
+that was introduced in v5.0. Plans for the next PDQ release call for
+this pure-Java implementation to be dropped in favor of a JNI-based
+implementation that will support the same APIs as all other PDQ
+flavors (C, Perl, Python, and R). The use of SWIG-generated JNI wrapper
+code introduces a dependence on a native shared library (a dependence
+that the Perl and Python have always had), but makes it easier to
+maintain a Java implementation that keeps up with changes to the PDQ
+APIs.
+
+
+
+
+
+
+Problem with Ch7_abcache - am looking for job streams which don't
+exist and this caused and exeption. I have put special case
+handling in getjob_index() and GetUtilization() to return zero
+values if a job is not found (jobIdx = -1). Is this the best way
+to handle this?
+
+Need to do more analysis of this problem! 2004-02-20
+
