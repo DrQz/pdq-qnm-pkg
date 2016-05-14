@@ -9,7 +9,7 @@ function or creating customized reports based on
 
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
 
-**Languages:**	[C](https://en.wikipedia.org/wiki/C_(programming_language), 
+**Languages:**	[C](https://en.wikibooks.org/wiki/C_Programming), 
 [Perl](http://www.perfdynamics.com/Tools/PDQperl.html), 
 [Python](http://www.perfdynamics.com/Tools/PDQpython.html), 
 [R](http://www.perfdynamics.com/Tools/PDQ-R.html)
@@ -19,5 +19,6 @@ function or creating customized reports based on
 **Maintainers:** Neil Gunther, Paul Puglia
 
 **Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
+
 
 
