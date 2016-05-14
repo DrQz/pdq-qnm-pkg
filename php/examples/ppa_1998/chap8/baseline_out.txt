@@ -1,0 +1,288 @@
+
+
+		***************************************
+		****** Pretty Damn Quick REPORT *******
+		***************************************
+		***  of : Tue Apr 04 13:19:26 2006  ***
+		***  for: C/S Baseline              ***
+		***  Ver: PDQ Analyzer v3.0 111904  ***
+		***************************************
+		***************************************
+
+
+
+		***************************************
+		******    PDQ Model INPUTS      *******
+		***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  PC         CatDsply   TRANS     0.0265
+CEN  FCFS  FS         CatDsply   TRANS     0.0056
+CEN  FCFS  FD0        CatDsply   TRANS     0.0233
+CEN  FCFS  GW         CatDsply   TRANS     0.0307
+CEN  FCFS  MF         CatDsply   TRANS     0.0024
+CEN  FCFS  MD0        CatDsply   TRANS     0.0083
+CEN  FCFS  MD1        CatDsply   TRANS     0.0083
+CEN  FCFS  MD2        CatDsply   TRANS     0.0083
+CEN  FCFS  MD3        CatDsply   TRANS     0.0083
+CEN  FCFS  TR         CatDsply   TRANS     0.0154
+
+CEN  FCFS  PC         RemQuote   TRANS     0.0284
+CEN  FCFS  FS         RemQuote   TRANS     0.0044
+CEN  FCFS  FD0        RemQuote   TRANS     0.0233
+CEN  FCFS  GW         RemQuote   TRANS     0.0205
+CEN  FCFS  MF         RemQuote   TRANS     0.0073
+CEN  FCFS  MD0        RemQuote   TRANS     0.0166
+CEN  FCFS  MD1        RemQuote   TRANS     0.0166
+CEN  FCFS  MD2        RemQuote   TRANS     0.0166
+CEN  FCFS  MD3        RemQuote   TRANS     0.0166
+CEN  FCFS  TR         RemQuote   TRANS     0.0102
+
+CEN  FCFS  PC         StatusUp   TRANS     0.0228
+CEN  FCFS  FS         StatusUp   TRANS     0.0011
+CEN  FCFS  FD0        StatusUp   TRANS     0.0027
+CEN  FCFS  GW         StatusUp   TRANS     0.0102
+CEN  FCFS  MF         StatusUp   TRANS     0.0010
+CEN  FCFS  MD0        StatusUp   TRANS     0.0042
+CEN  FCFS  MD1        StatusUp   TRANS     0.0042
+CEN  FCFS  MD2        StatusUp   TRANS     0.0042
+CEN  FCFS  MD3        StatusUp   TRANS     0.0042
+CEN  FCFS  TR         StatusUp   TRANS     0.0051
+
+
+
+Queueing Circuit Totals:
+
+	Streams:      3
+	Nodes:       10
+
+
+
+WORKLOAD Parameters
+
+Source       per Sec       Demand
+--------     -------       ------
+CatDsply     8.3333        0.1372
+RemQuote     16.6667        0.1605
+StatusUp     2.0833        0.0595
+
+
+
+
+
+		***************************************
+		******   PDQ Model OUTPUTS      *******
+		***************************************
+
+
+Solution Method: CANON
+
+		******   SYSTEM Performance     *******
+
+
+Metric              	     Value	Unit      
+-----------------   	     -----	----      
+Workload: "CatDsply"
+Mean Throughput  	    8.3333	Job/Sec
+Response Time    	    0.3231	Sec
+
+Bounds Analysis:
+Max Demand      	   32.5521   	Job/Sec
+Max Throughput  	   32.5521   	Job/Sec
+
+Workload: "RemQuote"
+Mean Throughput  	   16.6667	Job/Sec
+Response Time    	    0.3519	Sec
+
+Bounds Analysis:
+Max Demand      	   35.1563   	Job/Sec
+Max Throughput  	   35.1563   	Job/Sec
+
+Workload: "StatusUp"
+Mean Throughput  	    2.0833	Job/Sec
+Response Time    	    0.1574	Sec
+
+Bounds Analysis:
+Max Demand      	   43.9453   	Job/Sec
+Max Throughput  	   43.9453   	Job/Sec
+
+
+		******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit   
+---------       ------       ----              -----   ----   
+Throughput      PC           CatDsply         8.3333   Job/Sec
+Utilization     PC           CatDsply        22.1235   Percent
+Queue Length    PC           CatDsply         0.8599   Job    
+Residence Time  PC           CatDsply         0.1032   Sec    
+
+Throughput      FS           CatDsply         8.3333   Job/Sec
+Utilization     FS           CatDsply         4.6829   Percent
+Queue Length    FS           CatDsply         0.0533   Job    
+Residence Time  FS           CatDsply         0.0064   Sec    
+
+Throughput      FD0          CatDsply         8.3333   Job/Sec
+Utilization     FD0          CatDsply        19.3949   Percent
+Queue Length    FD0          CatDsply         0.4702   Job    
+Residence Time  FD0          CatDsply         0.0564   Sec    
+
+Throughput      GW           CatDsply         8.3333   Job/Sec
+Utilization     GW           CatDsply        25.6000   Percent
+Queue Length    GW           CatDsply         0.6713   Job    
+Residence Time  GW           CatDsply         0.0806   Sec    
+
+Throughput      MF           CatDsply         8.3333   Job/Sec
+Utilization     MF           CatDsply         2.0317   Percent
+Queue Length    MF           CatDsply         0.0237   Job    
+Residence Time  MF           CatDsply         0.0028   Sec    
+
+Throughput      MD0          CatDsply         8.3333   Job/Sec
+Utilization     MD0          CatDsply         6.9168   Percent
+Queue Length    MD0          CatDsply         0.1072   Job    
+Residence Time  MD0          CatDsply         0.0129   Sec    
+
+Throughput      MD1          CatDsply         8.3333   Job/Sec
+Utilization     MD1          CatDsply         6.9168   Percent
+Queue Length    MD1          CatDsply         0.1072   Job    
+Residence Time  MD1          CatDsply         0.0129   Sec    
+
+Throughput      MD2          CatDsply         8.3333   Job/Sec
+Utilization     MD2          CatDsply         6.9168   Percent
+Queue Length    MD2          CatDsply         0.1072   Job    
+Residence Time  MD2          CatDsply         0.0129   Sec    
+
+Throughput      MD3          CatDsply         8.3333   Job/Sec
+Utilization     MD3          CatDsply         6.9168   Percent
+Queue Length    MD3          CatDsply         0.1072   Job    
+Residence Time  MD3          CatDsply         0.0129   Sec    
+
+Throughput      TR           CatDsply         8.3333   Job/Sec
+Utilization     TR           CatDsply        12.8000   Percent
+Queue Length    TR           CatDsply         0.1853   Job    
+Residence Time  TR           CatDsply         0.0222   Sec    
+
+Throughput      PC           RemQuote        16.6667   Job/Sec
+Utilization     PC           RemQuote        47.4074   Percent
+Queue Length    PC           RemQuote         1.8426   Job    
+Residence Time  PC           RemQuote         0.1106   Sec    
+
+Throughput      FS           RemQuote        16.6667   Job/Sec
+Utilization     FS           RemQuote         7.2846   Percent
+Queue Length    FS           RemQuote         0.0830   Job    
+Residence Time  FS           RemQuote         0.0050   Sec    
+
+Throughput      FD0          RemQuote        16.6667   Job/Sec
+Utilization     FD0          RemQuote        38.7898   Percent
+Queue Length    FD0          RemQuote         0.9404   Job    
+Residence Time  FD0          RemQuote         0.0564   Sec    
+
+Throughput      GW           RemQuote        16.6667   Job/Sec
+Utilization     GW           RemQuote        34.1333   Percent
+Queue Length    GW           RemQuote         0.8951   Job    
+Residence Time  GW           RemQuote         0.0537   Sec    
+
+Throughput      MF           RemQuote        16.6667   Job/Sec
+Utilization     MF           RemQuote        12.1905   Percent
+Queue Length    MF           RemQuote         0.1425   Job    
+Residence Time  MF           RemQuote         0.0085   Sec    
+
+Throughput      MD0          RemQuote        16.6667   Job/Sec
+Utilization     MD0          RemQuote        27.6671   Percent
+Queue Length    MD0          RemQuote         0.4286   Job    
+Residence Time  MD0          RemQuote         0.0257   Sec    
+
+Throughput      MD1          RemQuote        16.6667   Job/Sec
+Utilization     MD1          RemQuote        27.6671   Percent
+Queue Length    MD1          RemQuote         0.4286   Job    
+Residence Time  MD1          RemQuote         0.0257   Sec    
+
+Throughput      MD2          RemQuote        16.6667   Job/Sec
+Utilization     MD2          RemQuote        27.6671   Percent
+Queue Length    MD2          RemQuote         0.4286   Job    
+Residence Time  MD2          RemQuote         0.0257   Sec    
+
+Throughput      MD3          RemQuote        16.6667   Job/Sec
+Utilization     MD3          RemQuote        27.6671   Percent
+Queue Length    MD3          RemQuote         0.4286   Job    
+Residence Time  MD3          RemQuote         0.0257   Sec    
+
+Throughput      TR           RemQuote        16.6667   Job/Sec
+Utilization     TR           RemQuote        17.0667   Percent
+Queue Length    TR           RemQuote         0.2471   Job    
+Residence Time  TR           RemQuote         0.0148   Sec    
+
+Throughput      PC           StatusUp         2.0833   Job/Sec
+Utilization     PC           StatusUp         4.7407   Percent
+Queue Length    PC           StatusUp         0.1843   Job    
+Residence Time  PC           StatusUp         0.0884   Sec    
+
+Throughput      FS           StatusUp         2.0833   Job/Sec
+Utilization     FS           StatusUp         0.2341   Percent
+Queue Length    FS           StatusUp         0.0027   Job    
+Residence Time  FS           StatusUp         0.0013   Sec    
+
+Throughput      FD0          StatusUp         2.0833   Job/Sec
+Utilization     FD0          StatusUp         0.5657   Percent
+Queue Length    FD0          StatusUp         0.0137   Job    
+Residence Time  FD0          StatusUp         0.0066   Sec    
+
+Throughput      GW           StatusUp         2.0833   Job/Sec
+Utilization     GW           StatusUp         2.1333   Percent
+Queue Length    GW           StatusUp         0.0559   Job    
+Residence Time  GW           StatusUp         0.0269   Sec    
+
+Throughput      MF           StatusUp         2.0833   Job/Sec
+Utilization     MF           StatusUp         0.2032   Percent
+Queue Length    MF           StatusUp         0.0024   Job    
+Residence Time  MF           StatusUp         0.0011   Sec    
+
+Throughput      MD0          StatusUp         2.0833   Job/Sec
+Utilization     MD0          StatusUp         0.8646   Percent
+Queue Length    MD0          StatusUp         0.0134   Job    
+Residence Time  MD0          StatusUp         0.0064   Sec    
+
+Throughput      MD1          StatusUp         2.0833   Job/Sec
+Utilization     MD1          StatusUp         0.8646   Percent
+Queue Length    MD1          StatusUp         0.0134   Job    
+Residence Time  MD1          StatusUp         0.0064   Sec    
+
+Throughput      MD2          StatusUp         2.0833   Job/Sec
+Utilization     MD2          StatusUp         0.8646   Percent
+Queue Length    MD2          StatusUp         0.0134   Job    
+Residence Time  MD2          StatusUp         0.0064   Sec    
+
+Throughput      MD3          StatusUp         2.0833   Job/Sec
+Utilization     MD3          StatusUp         0.8646   Percent
+Queue Length    MD3          StatusUp         0.0134   Job    
+Residence Time  MD3          StatusUp         0.0064   Sec    
+
+Throughput      TR           StatusUp         2.0833   Job/Sec
+Utilization     TR           StatusUp         1.0667   Percent
+Queue Length    TR           StatusUp         0.0154   Job    
+Residence Time  TR           StatusUp         0.0074   Sec    
+
+
+*** PDQ Breakout "C/S Baseline" (125 clients) ***
+
+Transaction  	Latency(Secs)
+-----------  	-----------
+CatDsply	 0.3231
+RemQuote	 0.3519
+StatusUp	 0.1574
+
+
+Node      	% Utilization
+----      	--------------
+Token Ring 	30.9333
+Desktop PC 	 0.5942
+FileServer 	12.2016
+FS Disk10	58.7503
+Gateway SNA	61.8667
+Mainframe  	14.4254
+MFrame DASD20	35.4485
+MFrame DASD21	35.4485
+MFrame DASD22	35.4485
+MFrame DASD23	35.4485

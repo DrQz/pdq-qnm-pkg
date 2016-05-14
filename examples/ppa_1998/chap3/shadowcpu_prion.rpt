@@ -1,0 +1,119 @@
+
+
+		***************************************
+		****** Pretty Damn Quick REPORT *******
+		***************************************
+		***  of : Fri May  3 18:49:41 2002  ***
+		***  for: CPU Scheduler - Pri On    ***
+		***  Rel: PDQ Analyzer v2.6 032202  ***
+		***************************************
+		***************************************
+
+
+
+		***************************************
+		******    PDQ Model INPUTS      *******
+		***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  CPU        Production TERML     0.3000
+CEN  FCFS  shadCPU    Production TERML     0.0000
+CEN  FCFS  DK1        Production TERML     0.0800
+CEN  FCFS  DK2        Production TERML     0.1000
+
+CEN  FCFS  CPU        Developmnt TERML     0.0000
+CEN  FCFS  shadCPU    Developmnt TERML     1.4106
+CEN  FCFS  DK1        Developmnt TERML     0.0500
+CEN  FCFS  DK2        Developmnt TERML     0.0600
+
+
+
+Queueing Circuit Totals:
+
+	Generators: 35.00
+	Streams   :   2
+	Nodes     :   4
+
+
+
+WORKLOAD Parameters
+
+
+Gens         Number       Demand   Thinktime 
+----         ------       ------   --------- 
+Production    20.00        0.4800    20.00
+Developmnt    15.00        1.5206    15.00
+
+
+
+
+
+		***************************************
+		******   PDQ Model OUTPUTS      *******
+		***************************************
+
+
+Solution Method: APPROX	(Iterations: 13; Accuracy: 0.1000%)
+
+		******   SYSTEM Performance     *******
+
+
+Metric              	     Value	Unit      
+-----------------   	     -----	----      
+Workload: "Production"
+Mean Throughput  	    0.9700   	Job/Sec
+Response Time    	    0.6190   	Sec
+Mean Concurrency 	    0.6004   	Job
+Stretch Factor  	    1.2896
+Bounds Analysis:
+Max Throughput  	    3.3333   	Job/Sec
+Min Response    	    0.4800   	Sec
+
+Workload: "Developmnt"
+Mean Throughput  	    0.6340   	Job/Sec
+Response Time    	    8.6611   	Sec
+Mean Concurrency 	    5.4907   	Job
+Stretch Factor  	    5.6957
+Bounds Analysis:
+Max Throughput  	    0.7089   	Job/Sec
+Min Response    	    1.5206   	Sec
+
+
+		******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit   
+---------       ------       ----              -----   ----   
+Throughput      CPU          Production       0.9700   Job/Sec
+Utilization     CPU          Production      29.0993   Percent
+Queue Length    CPU          Production       0.4022   Job    
+Residence Time  CPU          Production       0.4146   Sec    
+
+Throughput      DK1          Production       0.9700   Job/Sec
+Utilization     DK1          Production       7.7598   Percent
+Queue Length    DK1          Production       0.0867   Job    
+Residence Time  DK1          Production       0.0894   Sec    
+
+Throughput      DK2          Production       0.9700   Job/Sec
+Utilization     DK2          Production       9.6998   Percent
+Queue Length    DK2          Production       0.1115   Job    
+Residence Time  DK2          Production       0.1150   Sec    
+
+Throughput      shadCPU      Developmnt       0.6340   Job/Sec
+Utilization     shadCPU      Developmnt      89.4276   Percent
+Queue Length    shadCPU      Developmnt       5.4114   Job    
+Residence Time  shadCPU      Developmnt       8.5360   Sec    
+
+Throughput      DK1          Developmnt       0.6340   Job/Sec
+Utilization     DK1          Developmnt       3.1698   Percent
+Queue Length    DK1          Developmnt       0.0355   Job    
+Residence Time  DK1          Developmnt       0.0560   Sec    
+
+Throughput      DK2          Developmnt       0.6340   Job/Sec
+Utilization     DK2          Developmnt       3.8037   Percent
+Queue Length    DK2          Developmnt       0.0438   Job    
+Residence Time  DK2          Developmnt       0.0691   Sec    
+
+

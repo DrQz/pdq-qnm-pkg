@@ -1,0 +1,16 @@
+Mean queue1 =   1.6297
+Mean queue2 =   1.6192
+Mean queue3 =   1.1724
+Mean number =   4.4213
+Mean delay  =   8.8639
+Mean stime  =   1.1994
+Mean thrupt =   0.4983
+Total jobs  =     9966
+Total time  = 20000.0000
+------------------------
+/usr/bin/time -p ./simjack.py
+real        67.56
+user        20.32
+sys          1.96
+------------------------
+

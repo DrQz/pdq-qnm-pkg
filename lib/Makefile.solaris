@@ -1,0 +1,27 @@
+#
+#  $Id$
+#
+#-----------------------------------------------------------
+
+CC     = gcc
+
+LIB    = libpdq.so
+
+OBJ    =  \
+	  MVA_Approx.o\
+	  MVA_Canon.o\
+	  MVA_Solve.o\
+	  PDQ_Build.o\
+	  PDQ_Exact.o\
+	  PDQ_Globals.o\
+	  PDQ_MServer.o \
+	  PDQ_Report.o\
+	  PDQ_Utils.o
+
+#-----------------------------------------------------------
+
+all:	$(OBJ)
+	-$(CC) -G *.o -o ${LIB} -lm
+
+#-----------------------------------------------------------
+

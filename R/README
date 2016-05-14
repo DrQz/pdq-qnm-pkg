@@ -1,0 +1,10 @@
+PDQ-R is an R package that allows R users to run pdq from inside the R statistics environment.
+
+If you do not have R installed, you can download it from:
+
+http://cran.r-project.org/
+
+Windows users can build PDQ-R need for the Windows version of R by downloading 
+and installing Rtools for Windows from:
+
+http://www.murdoch-sutherland.com/Rtools/index.html.

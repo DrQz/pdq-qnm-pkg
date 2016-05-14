@@ -1,0 +1,710 @@
+debug off
+
+                        PRETTY DAMN QUICK REPORT         
+               ==========================================
+               ***    of: Sun Feb 24 13:10:29 2013    ***
+               ***   for: CMG93 C/S Baseline          ***
+               ***   Ver: PDQ Analyzer 6.1.1 011013   ***
+               ==========================================
+
+               ==========================================
+               ********    PDQ Model INPUTS      ********
+               ==========================================
+
+WORKLOAD Parameters:
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+  1  FCFS  PCDESK     CatDisplay Open      0.0259
+  1  FCFS  FSERVR     CatDisplay Open      0.0055
+  1  FCFS  GATWAY     CatDisplay Open      0.0300
+  1  FCFS  MFRAME     CatDisplay Open      0.0024
+  1  FCFS  FSDK10     CatDisplay Open      0.0233
+  1  FCFS  MFDK20     CatDisplay Open      0.0083
+  1  FCFS  MFDK21     CatDisplay Open      0.0083
+  1  FCFS  MFDK22     CatDisplay Open      0.0083
+  1  FCFS  MFDK23     CatDisplay Open      0.0083
+  1  FCFS  TRLAN      CatDisplay Open      0.0264
+
+  1  FCFS  PCDESK     RemotQuote Open      0.0278
+  1  FCFS  FSERVR     RemotQuote Open      0.0043
+  1  FCFS  GATWAY     RemotQuote Open      0.0200
+  1  FCFS  MFRAME     RemotQuote Open      0.0071
+  1  FCFS  FSDK10     RemotQuote Open      0.0233
+  1  FCFS  MFDK20     RemotQuote Open      0.0166
+  1  FCFS  MFDK21     RemotQuote Open      0.0166
+  1  FCFS  MFDK22     RemotQuote Open      0.0166
+  1  FCFS  MFDK23     RemotQuote Open      0.0166
+  1  FCFS  TRLAN      RemotQuote Open      0.0176
+
+  1  FCFS  PCDESK     StatUpdate Open      0.0222
+  1  FCFS  FSERVR     StatUpdate Open      0.0011
+  1  FCFS  GATWAY     StatUpdate Open      0.0100
+  1  FCFS  MFRAME     StatUpdate Open      0.0010
+  1  FCFS  FSDK10     StatUpdate Open      0.0027
+  1  FCFS  MFDK20     StatUpdate Open      0.0042
+  1  FCFS  MFDK21     StatUpdate Open      0.0042
+  1  FCFS  MFDK22     StatUpdate Open      0.0042
+  1  FCFS  MFDK23     StatUpdate Open      0.0042
+  1  FCFS  TRLAN      StatUpdate Open      0.0088
+
+  1  FCFS  PCDESK     CatDispAgg Open      0.0000
+  1  FCFS  FSERVR     CatDispAgg Open      0.0055
+  1  FCFS  GATWAY     CatDispAgg Open      0.0300
+  1  FCFS  MFRAME     CatDispAgg Open      0.0024
+  1  FCFS  FSDK10     CatDispAgg Open      0.0233
+  1  FCFS  MFDK20     CatDispAgg Open      0.0083
+  1  FCFS  MFDK21     CatDispAgg Open      0.0083
+  1  FCFS  MFDK22     CatDispAgg Open      0.0083
+  1  FCFS  MFDK23     CatDispAgg Open      0.0083
+  1  FCFS  TRLAN      CatDispAgg Open      0.0264
+
+  1  FCFS  PCDESK     RemQuotAgg Open      0.0000
+  1  FCFS  FSERVR     RemQuotAgg Open      0.0043
+  1  FCFS  GATWAY     RemQuotAgg Open      0.0200
+  1  FCFS  MFRAME     RemQuotAgg Open      0.0071
+  1  FCFS  FSDK10     RemQuotAgg Open      0.0233
+  1  FCFS  MFDK20     RemQuotAgg Open      0.0166
+  1  FCFS  MFDK21     RemQuotAgg Open      0.0166
+  1  FCFS  MFDK22     RemQuotAgg Open      0.0166
+  1  FCFS  MFDK23     RemQuotAgg Open      0.0166
+  1  FCFS  TRLAN      RemQuotAgg Open      0.0176
+
+  1  FCFS  PCDESK     StatUpdAgg Open      0.0000
+  1  FCFS  FSERVR     StatUpdAgg Open      0.0011
+  1  FCFS  GATWAY     StatUpdAgg Open      0.0100
+  1  FCFS  MFRAME     StatUpdAgg Open      0.0010
+  1  FCFS  FSDK10     StatUpdAgg Open      0.0027
+  1  FCFS  MFDK20     StatUpdAgg Open      0.0042
+  1  FCFS  MFDK21     StatUpdAgg Open      0.0042
+  1  FCFS  MFDK22     StatUpdAgg Open      0.0042
+  1  FCFS  MFDK23     StatUpdAgg Open      0.0042
+  1  FCFS  TRLAN      StatUpdAgg Open      0.0088
+
+Queueing Circuit Totals
+Streams:   6
+Nodes:    10
+
+Arrivals       per Sec       Demand 
+--------       --------     -------
+CatDisplay     0.0667        0.1466
+RemotQuote     0.1333        0.1664
+StatUpdate     0.0167        0.0624
+CatDispAgg     8.2667        0.1207
+RemQuotAgg    16.5333        0.1387
+StatUpdAgg     2.0667        0.0402
+
+
+               ==========================================
+               ********   PDQ Model OUTPUTS      ********
+               ==========================================
+
+Solution Method: CANON
+
+               ********   SYSTEM Performance     ********
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "CatDisplay"
+Number in system          0.0183    Trans
+Mean throughput           0.0667    Trans/Sec
+Response time             0.2749    Sec
+Stretch factor            1.8750
+
+Bounds Analysis:
+Max throughput           33.3333    Trans/Sec
+Min response              0.1466    Sec
+
+Workload: "RemotQuote"
+Number in system          0.0385    Trans
+Mean throughput           0.1333    Trans/Sec
+Response time             0.2884    Sec
+Stretch factor            1.7327
+
+Bounds Analysis:
+Max throughput           33.3333    Trans/Sec
+Min response              0.1664    Sec
+
+Workload: "StatUpdate"
+Number in system          0.0017    Trans
+Mean throughput           0.0167    Trans/Sec
+Response time             0.1010    Sec
+Stretch factor            1.6193
+
+Bounds Analysis:
+Max throughput           33.3333    Trans/Sec
+Min response              0.0624    Sec
+
+Workload: "CatDispAgg"
+Number in system          2.0573    Trans
+Mean throughput           8.2667    Trans/Sec
+Response time             0.2489    Sec
+Stretch factor            2.0617
+
+Bounds Analysis:
+Max throughput           33.3333    Trans/Sec
+Min response              0.1207    Sec
+
+Workload: "RemQuotAgg"
+Number in system          4.3062    Trans
+Mean throughput          16.5333    Trans/Sec
+Response time             0.2605    Sec
+Stretch factor            1.8783
+
+Bounds Analysis:
+Max throughput           33.3333    Trans/Sec
+Min response              0.1387    Sec
+
+Workload: "StatUpdAgg"
+Number in system          0.1626    Trans
+Mean throughput           2.0667    Trans/Sec
+Response time             0.0787    Sec
+Stretch factor            1.9589
+
+Bounds Analysis:
+Max throughput           33.3333    Trans/Sec
+Min response              0.0402    Sec
+
+
+               ********   RESOURCE Performance   ********
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Capacity        PCDESK       CatDisplay            1   Servers
+Throughput      PCDESK       CatDisplay       0.0667   Trans/Sec
+In service      PCDESK       CatDisplay       0.0017   Trans
+Utilization     PCDESK       CatDisplay       0.1728   Percent
+Queue length    PCDESK       CatDisplay       0.0017   Trans
+Waiting line    PCDESK       CatDisplay       0.0000   Trans
+Waiting time    PCDESK       CatDisplay       0.0002   Sec
+Residence time  PCDESK       CatDisplay       0.0261   Sec
+
+Capacity        FSERVR       CatDisplay            1   Servers
+Throughput      FSERVR       CatDisplay       0.0667   Trans/Sec
+In service      FSERVR       CatDisplay       0.0004   Trans
+Utilization     FSERVR       CatDisplay       0.0366   Percent
+Queue length    FSERVR       CatDisplay       0.0004   Trans
+Waiting line    FSERVR       CatDisplay       0.0000   Trans
+Waiting time    FSERVR       CatDisplay       0.0007   Sec
+Residence time  FSERVR       CatDisplay       0.0062   Sec
+
+Capacity        GATWAY       CatDisplay            1   Servers
+Throughput      GATWAY       CatDisplay       0.0667   Trans/Sec
+In service      GATWAY       CatDisplay       0.0020   Trans
+Utilization     GATWAY       CatDisplay       0.2000   Percent
+Queue length    GATWAY       CatDisplay       0.0051   Trans
+Waiting line    GATWAY       CatDisplay       0.0031   Trans
+Waiting time    GATWAY       CatDisplay       0.0458   Sec
+Residence time  GATWAY       CatDisplay       0.0758   Sec
+
+Capacity        MFRAME       CatDisplay            1   Servers
+Throughput      MFRAME       CatDisplay       0.0667   Trans/Sec
+In service      MFRAME       CatDisplay       0.0002   Trans
+Utilization     MFRAME       CatDisplay       0.0159   Percent
+Queue length    MFRAME       CatDisplay       0.0002   Trans
+Waiting line    MFRAME       CatDisplay       0.0000   Trans
+Waiting time    MFRAME       CatDisplay       0.0004   Sec
+Residence time  MFRAME       CatDisplay       0.0028   Sec
+
+Capacity        FSDK10       CatDisplay            1   Servers
+Throughput      FSDK10       CatDisplay       0.0667   Trans/Sec
+In service      FSDK10       CatDisplay       0.0016   Trans
+Utilization     FSDK10       CatDisplay       0.1552   Percent
+Queue length    FSDK10       CatDisplay       0.0038   Trans
+Waiting line    FSDK10       CatDisplay       0.0022   Trans
+Waiting time    FSDK10       CatDisplay       0.0331   Sec
+Residence time  FSDK10       CatDisplay       0.0564   Sec
+
+Capacity        MFDK20       CatDisplay            1   Servers
+Throughput      MFDK20       CatDisplay       0.0667   Trans/Sec
+In service      MFDK20       CatDisplay       0.0006   Trans
+Utilization     MFDK20       CatDisplay       0.0553   Percent
+Queue length    MFDK20       CatDisplay       0.0009   Trans
+Waiting line    MFDK20       CatDisplay       0.0003   Trans
+Waiting time    MFDK20       CatDisplay       0.0046   Sec
+Residence time  MFDK20       CatDisplay       0.0129   Sec
+
+Capacity        MFDK21       CatDisplay            1   Servers
+Throughput      MFDK21       CatDisplay       0.0667   Trans/Sec
+In service      MFDK21       CatDisplay       0.0006   Trans
+Utilization     MFDK21       CatDisplay       0.0553   Percent
+Queue length    MFDK21       CatDisplay       0.0009   Trans
+Waiting line    MFDK21       CatDisplay       0.0003   Trans
+Waiting time    MFDK21       CatDisplay       0.0046   Sec
+Residence time  MFDK21       CatDisplay       0.0129   Sec
+
+Capacity        MFDK22       CatDisplay            1   Servers
+Throughput      MFDK22       CatDisplay       0.0667   Trans/Sec
+In service      MFDK22       CatDisplay       0.0006   Trans
+Utilization     MFDK22       CatDisplay       0.0553   Percent
+Queue length    MFDK22       CatDisplay       0.0009   Trans
+Waiting line    MFDK22       CatDisplay       0.0003   Trans
+Waiting time    MFDK22       CatDisplay       0.0046   Sec
+Residence time  MFDK22       CatDisplay       0.0129   Sec
+
+Capacity        MFDK23       CatDisplay            1   Servers
+Throughput      MFDK23       CatDisplay       0.0667   Trans/Sec
+In service      MFDK23       CatDisplay       0.0006   Trans
+Utilization     MFDK23       CatDisplay       0.0553   Percent
+Queue length    MFDK23       CatDisplay       0.0009   Trans
+Waiting line    MFDK23       CatDisplay       0.0003   Trans
+Waiting time    MFDK23       CatDisplay       0.0046   Sec
+Residence time  MFDK23       CatDisplay       0.0129   Sec
+
+Capacity        TRLAN        CatDisplay            1   Servers
+Throughput      TRLAN        CatDisplay       0.0667   Trans/Sec
+In service      TRLAN        CatDisplay       0.0018   Trans
+Utilization     TRLAN        CatDisplay       0.1758   Percent
+Queue length    TRLAN        CatDisplay       0.0037   Trans
+Waiting line    TRLAN        CatDisplay       0.0020   Trans
+Waiting time    TRLAN        CatDisplay       0.0299   Sec
+Residence time  TRLAN        CatDisplay       0.0562   Sec
+
+Capacity        PCDESK       RemotQuote            1   Servers
+Throughput      PCDESK       RemotQuote       0.1333   Trans/Sec
+In service      PCDESK       RemotQuote       0.0037   Trans
+Utilization     PCDESK       RemotQuote       0.3704   Percent
+Queue length    PCDESK       RemotQuote       0.0037   Trans
+Waiting line    PCDESK       RemotQuote       0.0000   Trans
+Waiting time    PCDESK       RemotQuote       0.0002   Sec
+Residence time  PCDESK       RemotQuote       0.0279   Sec
+
+Capacity        FSERVR       RemotQuote            1   Servers
+Throughput      FSERVR       RemotQuote       0.1333   Trans/Sec
+In service      FSERVR       RemotQuote       0.0006   Trans
+Utilization     FSERVR       RemotQuote       0.0569   Percent
+Queue length    FSERVR       RemotQuote       0.0006   Trans
+Waiting line    FSERVR       RemotQuote       0.0001   Trans
+Waiting time    FSERVR       RemotQuote       0.0006   Sec
+Residence time  FSERVR       RemotQuote       0.0048   Sec
+
+Capacity        GATWAY       RemotQuote            1   Servers
+Throughput      GATWAY       RemotQuote       0.1333   Trans/Sec
+In service      GATWAY       RemotQuote       0.0027   Trans
+Utilization     GATWAY       RemotQuote       0.2667   Percent
+Queue length    GATWAY       RemotQuote       0.0067   Trans
+Waiting line    GATWAY       RemotQuote       0.0041   Trans
+Waiting time    GATWAY       RemotQuote       0.0305   Sec
+Residence time  GATWAY       RemotQuote       0.0505   Sec
+
+Capacity        MFRAME       RemotQuote            1   Servers
+Throughput      MFRAME       RemotQuote       0.1333   Trans/Sec
+In service      MFRAME       RemotQuote       0.0010   Trans
+Utilization     MFRAME       RemotQuote       0.0952   Percent
+Queue length    MFRAME       RemotQuote       0.0011   Trans
+Waiting line    MFRAME       RemotQuote       0.0002   Trans
+Waiting time    MFRAME       RemotQuote       0.0012   Sec
+Residence time  MFRAME       RemotQuote       0.0083   Sec
+
+Capacity        FSDK10       RemotQuote            1   Servers
+Throughput      FSDK10       RemotQuote       0.1333   Trans/Sec
+In service      FSDK10       RemotQuote       0.0031   Trans
+Utilization     FSDK10       RemotQuote       0.3103   Percent
+Queue length    FSDK10       RemotQuote       0.0075   Trans
+Waiting line    FSDK10       RemotQuote       0.0044   Trans
+Waiting time    FSDK10       RemotQuote       0.0331   Sec
+Residence time  FSDK10       RemotQuote       0.0564   Sec
+
+Capacity        MFDK20       RemotQuote            1   Servers
+Throughput      MFDK20       RemotQuote       0.1333   Trans/Sec
+In service      MFDK20       RemotQuote       0.0022   Trans
+Utilization     MFDK20       RemotQuote       0.2213   Percent
+Queue length    MFDK20       RemotQuote       0.0034   Trans
+Waiting line    MFDK20       RemotQuote       0.0012   Trans
+Waiting time    MFDK20       RemotQuote       0.0091   Sec
+Residence time  MFDK20       RemotQuote       0.0257   Sec
+
+Capacity        MFDK21       RemotQuote            1   Servers
+Throughput      MFDK21       RemotQuote       0.1333   Trans/Sec
+In service      MFDK21       RemotQuote       0.0022   Trans
+Utilization     MFDK21       RemotQuote       0.2213   Percent
+Queue length    MFDK21       RemotQuote       0.0034   Trans
+Waiting line    MFDK21       RemotQuote       0.0012   Trans
+Waiting time    MFDK21       RemotQuote       0.0091   Sec
+Residence time  MFDK21       RemotQuote       0.0257   Sec
+
+Capacity        MFDK22       RemotQuote            1   Servers
+Throughput      MFDK22       RemotQuote       0.1333   Trans/Sec
+In service      MFDK22       RemotQuote       0.0022   Trans
+Utilization     MFDK22       RemotQuote       0.2213   Percent
+Queue length    MFDK22       RemotQuote       0.0034   Trans
+Waiting line    MFDK22       RemotQuote       0.0012   Trans
+Waiting time    MFDK22       RemotQuote       0.0091   Sec
+Residence time  MFDK22       RemotQuote       0.0257   Sec
+
+Capacity        MFDK23       RemotQuote            1   Servers
+Throughput      MFDK23       RemotQuote       0.1333   Trans/Sec
+In service      MFDK23       RemotQuote       0.0022   Trans
+Utilization     MFDK23       RemotQuote       0.2213   Percent
+Queue length    MFDK23       RemotQuote       0.0034   Trans
+Waiting line    MFDK23       RemotQuote       0.0012   Trans
+Waiting time    MFDK23       RemotQuote       0.0091   Sec
+Residence time  MFDK23       RemotQuote       0.0257   Sec
+
+Capacity        TRLAN        RemotQuote            1   Servers
+Throughput      TRLAN        RemotQuote       0.1333   Trans/Sec
+In service      TRLAN        RemotQuote       0.0023   Trans
+Utilization     TRLAN        RemotQuote       0.2344   Percent
+Queue length    TRLAN        RemotQuote       0.0050   Trans
+Waiting line    TRLAN        RemotQuote       0.0027   Trans
+Waiting time    TRLAN        RemotQuote       0.0199   Sec
+Residence time  TRLAN        RemotQuote       0.0375   Sec
+
+Capacity        PCDESK       StatUpdate            1   Servers
+Throughput      PCDESK       StatUpdate       0.0167   Trans/Sec
+In service      PCDESK       StatUpdate       0.0004   Trans
+Utilization     PCDESK       StatUpdate       0.0370   Percent
+Queue length    PCDESK       StatUpdate       0.0004   Trans
+Waiting line    PCDESK       StatUpdate       0.0000   Trans
+Waiting time    PCDESK       StatUpdate       0.0001   Sec
+Residence time  PCDESK       StatUpdate       0.0224   Sec
+
+Capacity        FSERVR       StatUpdate            1   Servers
+Throughput      FSERVR       StatUpdate       0.0167   Trans/Sec
+In service      FSERVR       StatUpdate       0.0000   Trans
+Utilization     FSERVR       StatUpdate       0.0018   Percent
+Queue length    FSERVR       StatUpdate       0.0000   Trans
+Waiting line    FSERVR       StatUpdate       0.0000   Trans
+Waiting time    FSERVR       StatUpdate       0.0001   Sec
+Residence time  FSERVR       StatUpdate       0.0012   Sec
+
+Capacity        GATWAY       StatUpdate            1   Servers
+Throughput      GATWAY       StatUpdate       0.0167   Trans/Sec
+In service      GATWAY       StatUpdate       0.0002   Trans
+Utilization     GATWAY       StatUpdate       0.0167   Percent
+Queue length    GATWAY       StatUpdate       0.0004   Trans
+Waiting line    GATWAY       StatUpdate       0.0003   Trans
+Waiting time    GATWAY       StatUpdate       0.0153   Sec
+Residence time  GATWAY       StatUpdate       0.0253   Sec
+
+Capacity        MFRAME       StatUpdate            1   Servers
+Throughput      MFRAME       StatUpdate       0.0167   Trans/Sec
+In service      MFRAME       StatUpdate       0.0000   Trans
+Utilization     MFRAME       StatUpdate       0.0016   Percent
+Queue length    MFRAME       StatUpdate       0.0000   Trans
+Waiting line    MFRAME       StatUpdate       0.0000   Trans
+Waiting time    MFRAME       StatUpdate       0.0002   Sec
+Residence time  MFRAME       StatUpdate       0.0011   Sec
+
+Capacity        FSDK10       StatUpdate            1   Servers
+Throughput      FSDK10       StatUpdate       0.0167   Trans/Sec
+In service      FSDK10       StatUpdate       0.0000   Trans
+Utilization     FSDK10       StatUpdate       0.0045   Percent
+Queue length    FSDK10       StatUpdate       0.0001   Trans
+Waiting line    FSDK10       StatUpdate       0.0001   Trans
+Waiting time    FSDK10       StatUpdate       0.0039   Sec
+Residence time  FSDK10       StatUpdate       0.0066   Sec
+
+Capacity        MFDK20       StatUpdate            1   Servers
+Throughput      MFDK20       StatUpdate       0.0167   Trans/Sec
+In service      MFDK20       StatUpdate       0.0001   Trans
+Utilization     MFDK20       StatUpdate       0.0069   Percent
+Queue length    MFDK20       StatUpdate       0.0001   Trans
+Waiting line    MFDK20       StatUpdate       0.0000   Trans
+Waiting time    MFDK20       StatUpdate       0.0023   Sec
+Residence time  MFDK20       StatUpdate       0.0064   Sec
+
+Capacity        MFDK21       StatUpdate            1   Servers
+Throughput      MFDK21       StatUpdate       0.0167   Trans/Sec
+In service      MFDK21       StatUpdate       0.0001   Trans
+Utilization     MFDK21       StatUpdate       0.0069   Percent
+Queue length    MFDK21       StatUpdate       0.0001   Trans
+Waiting line    MFDK21       StatUpdate       0.0000   Trans
+Waiting time    MFDK21       StatUpdate       0.0023   Sec
+Residence time  MFDK21       StatUpdate       0.0064   Sec
+
+Capacity        MFDK22       StatUpdate            1   Servers
+Throughput      MFDK22       StatUpdate       0.0167   Trans/Sec
+In service      MFDK22       StatUpdate       0.0001   Trans
+Utilization     MFDK22       StatUpdate       0.0069   Percent
+Queue length    MFDK22       StatUpdate       0.0001   Trans
+Waiting line    MFDK22       StatUpdate       0.0000   Trans
+Waiting time    MFDK22       StatUpdate       0.0023   Sec
+Residence time  MFDK22       StatUpdate       0.0064   Sec
+
+Capacity        MFDK23       StatUpdate            1   Servers
+Throughput      MFDK23       StatUpdate       0.0167   Trans/Sec
+In service      MFDK23       StatUpdate       0.0001   Trans
+Utilization     MFDK23       StatUpdate       0.0069   Percent
+Queue length    MFDK23       StatUpdate       0.0001   Trans
+Waiting line    MFDK23       StatUpdate       0.0000   Trans
+Waiting time    MFDK23       StatUpdate       0.0023   Sec
+Residence time  MFDK23       StatUpdate       0.0064   Sec
+
+Capacity        TRLAN        StatUpdate            1   Servers
+Throughput      TRLAN        StatUpdate       0.0167   Trans/Sec
+In service      TRLAN        StatUpdate       0.0001   Trans
+Utilization     TRLAN        StatUpdate       0.0146   Percent
+Queue length    TRLAN        StatUpdate       0.0003   Trans
+Waiting line    TRLAN        StatUpdate       0.0002   Trans
+Waiting time    TRLAN        StatUpdate       0.0100   Sec
+Residence time  TRLAN        StatUpdate       0.0187   Sec
+
+Capacity        FSERVR       CatDispAgg            1   Servers
+Throughput      FSERVR       CatDispAgg       8.2667   Trans/Sec
+In service      FSERVR       CatDispAgg       0.0454   Trans
+Utilization     FSERVR       CatDispAgg       4.5366   Percent
+Queue length    FSERVR       CatDispAgg       0.0515   Trans
+Waiting line    FSERVR       CatDispAgg       0.0061   Trans
+Waiting time    FSERVR       CatDispAgg       0.0007   Sec
+Residence time  FSERVR       CatDispAgg       0.0062   Sec
+
+Capacity        GATWAY       CatDispAgg            1   Servers
+Throughput      GATWAY       CatDispAgg       8.2667   Trans/Sec
+In service      GATWAY       CatDispAgg       0.2480   Trans
+Utilization     GATWAY       CatDispAgg      24.8000   Percent
+Queue length    GATWAY       CatDispAgg       0.6265   Trans
+Waiting line    GATWAY       CatDispAgg       0.3785   Trans
+Waiting time    GATWAY       CatDispAgg       0.0458   Sec
+Residence time  GATWAY       CatDispAgg       0.0758   Sec
+
+Capacity        MFRAME       CatDispAgg            1   Servers
+Throughput      MFRAME       CatDispAgg       8.2667   Trans/Sec
+In service      MFRAME       CatDispAgg       0.0197   Trans
+Utilization     MFRAME       CatDispAgg       1.9683   Percent
+Queue length    MFRAME       CatDispAgg       0.0229   Trans
+Waiting line    MFRAME       CatDispAgg       0.0032   Trans
+Waiting time    MFRAME       CatDispAgg       0.0004   Sec
+Residence time  MFRAME       CatDispAgg       0.0028   Sec
+
+Capacity        FSDK10       CatDispAgg            1   Servers
+Throughput      FSDK10       CatDispAgg       8.2667   Trans/Sec
+In service      FSDK10       CatDispAgg       0.1924   Trans
+Utilization     FSDK10       CatDispAgg      19.2397   Percent
+Queue length    FSDK10       CatDispAgg       0.4664   Trans
+Waiting line    FSDK10       CatDispAgg       0.2740   Trans
+Waiting time    FSDK10       CatDispAgg       0.0331   Sec
+Residence time  FSDK10       CatDispAgg       0.0564   Sec
+
+Capacity        MFDK20       CatDispAgg            1   Servers
+Throughput      MFDK20       CatDispAgg       8.2667   Trans/Sec
+In service      MFDK20       CatDispAgg       0.0686   Trans
+Utilization     MFDK20       CatDispAgg       6.8614   Percent
+Queue length    MFDK20       CatDispAgg       0.1063   Trans
+Waiting line    MFDK20       CatDispAgg       0.0377   Trans
+Waiting time    MFDK20       CatDispAgg       0.0046   Sec
+Residence time  MFDK20       CatDispAgg       0.0129   Sec
+
+Capacity        MFDK21       CatDispAgg            1   Servers
+Throughput      MFDK21       CatDispAgg       8.2667   Trans/Sec
+In service      MFDK21       CatDispAgg       0.0686   Trans
+Utilization     MFDK21       CatDispAgg       6.8614   Percent
+Queue length    MFDK21       CatDispAgg       0.1063   Trans
+Waiting line    MFDK21       CatDispAgg       0.0377   Trans
+Waiting time    MFDK21       CatDispAgg       0.0046   Sec
+Residence time  MFDK21       CatDispAgg       0.0129   Sec
+
+Capacity        MFDK22       CatDispAgg            1   Servers
+Throughput      MFDK22       CatDispAgg       8.2667   Trans/Sec
+In service      MFDK22       CatDispAgg       0.0686   Trans
+Utilization     MFDK22       CatDispAgg       6.8614   Percent
+Queue length    MFDK22       CatDispAgg       0.1063   Trans
+Waiting line    MFDK22       CatDispAgg       0.0377   Trans
+Waiting time    MFDK22       CatDispAgg       0.0046   Sec
+Residence time  MFDK22       CatDispAgg       0.0129   Sec
+
+Capacity        MFDK23       CatDispAgg            1   Servers
+Throughput      MFDK23       CatDispAgg       8.2667   Trans/Sec
+In service      MFDK23       CatDispAgg       0.0686   Trans
+Utilization     MFDK23       CatDispAgg       6.8614   Percent
+Queue length    MFDK23       CatDispAgg       0.1063   Trans
+Waiting line    MFDK23       CatDispAgg       0.0377   Trans
+Waiting time    MFDK23       CatDispAgg       0.0046   Sec
+Residence time  MFDK23       CatDispAgg       0.0129   Sec
+
+Capacity        TRLAN        CatDispAgg            1   Servers
+Throughput      TRLAN        CatDispAgg       8.2667   Trans/Sec
+In service      TRLAN        CatDispAgg       0.2180   Trans
+Utilization     TRLAN        CatDispAgg      21.7969   Percent
+Queue length    TRLAN        CatDispAgg       0.4648   Trans
+Waiting line    TRLAN        CatDispAgg       0.2468   Trans
+Waiting time    TRLAN        CatDispAgg       0.0299   Sec
+Residence time  TRLAN        CatDispAgg       0.0562   Sec
+
+Capacity        FSERVR       RemQuotAgg            1   Servers
+Throughput      FSERVR       RemQuotAgg      16.5333   Trans/Sec
+In service      FSERVR       RemQuotAgg       0.0706   Trans
+Utilization     FSERVR       RemQuotAgg       7.0569   Percent
+Queue length    FSERVR       RemQuotAgg       0.0801   Trans
+Waiting line    FSERVR       RemQuotAgg       0.0095   Trans
+Waiting time    FSERVR       RemQuotAgg       0.0006   Sec
+Residence time  FSERVR       RemQuotAgg       0.0048   Sec
+
+Capacity        GATWAY       RemQuotAgg            1   Servers
+Throughput      GATWAY       RemQuotAgg      16.5333   Trans/Sec
+In service      GATWAY       RemQuotAgg       0.3307   Trans
+Utilization     GATWAY       RemQuotAgg      33.0667   Percent
+Queue length    GATWAY       RemQuotAgg       0.8354   Trans
+Waiting line    GATWAY       RemQuotAgg       0.5047   Trans
+Waiting time    GATWAY       RemQuotAgg       0.0305   Sec
+Residence time  GATWAY       RemQuotAgg       0.0505   Sec
+
+Capacity        MFRAME       RemQuotAgg            1   Servers
+Throughput      MFRAME       RemQuotAgg      16.5333   Trans/Sec
+In service      MFRAME       RemQuotAgg       0.1181   Trans
+Utilization     MFRAME       RemQuotAgg      11.8095   Percent
+Queue length    MFRAME       RemQuotAgg       0.1375   Trans
+Waiting line    MFRAME       RemQuotAgg       0.0194   Trans
+Waiting time    MFRAME       RemQuotAgg       0.0012   Sec
+Residence time  MFRAME       RemQuotAgg       0.0083   Sec
+
+Capacity        FSDK10       RemQuotAgg            1   Servers
+Throughput      FSDK10       RemQuotAgg      16.5333   Trans/Sec
+In service      FSDK10       RemQuotAgg       0.3848   Trans
+Utilization     FSDK10       RemQuotAgg      38.4794   Percent
+Queue length    FSDK10       RemQuotAgg       0.9328   Trans
+Waiting line    FSDK10       RemQuotAgg       0.5480   Trans
+Waiting time    FSDK10       RemQuotAgg       0.0331   Sec
+Residence time  FSDK10       RemQuotAgg       0.0564   Sec
+
+Capacity        MFDK20       RemQuotAgg            1   Servers
+Throughput      MFDK20       RemQuotAgg      16.5333   Trans/Sec
+In service      MFDK20       RemQuotAgg       0.2745   Trans
+Utilization     MFDK20       RemQuotAgg      27.4458   Percent
+Queue length    MFDK20       RemQuotAgg       0.4252   Trans
+Waiting line    MFDK20       RemQuotAgg       0.1507   Trans
+Waiting time    MFDK20       RemQuotAgg       0.0091   Sec
+Residence time  MFDK20       RemQuotAgg       0.0257   Sec
+
+Capacity        MFDK21       RemQuotAgg            1   Servers
+Throughput      MFDK21       RemQuotAgg      16.5333   Trans/Sec
+In service      MFDK21       RemQuotAgg       0.2745   Trans
+Utilization     MFDK21       RemQuotAgg      27.4458   Percent
+Queue length    MFDK21       RemQuotAgg       0.4252   Trans
+Waiting line    MFDK21       RemQuotAgg       0.1507   Trans
+Waiting time    MFDK21       RemQuotAgg       0.0091   Sec
+Residence time  MFDK21       RemQuotAgg       0.0257   Sec
+
+Capacity        MFDK22       RemQuotAgg            1   Servers
+Throughput      MFDK22       RemQuotAgg      16.5333   Trans/Sec
+In service      MFDK22       RemQuotAgg       0.2745   Trans
+Utilization     MFDK22       RemQuotAgg      27.4458   Percent
+Queue length    MFDK22       RemQuotAgg       0.4252   Trans
+Waiting line    MFDK22       RemQuotAgg       0.1507   Trans
+Waiting time    MFDK22       RemQuotAgg       0.0091   Sec
+Residence time  MFDK22       RemQuotAgg       0.0257   Sec
+
+Capacity        MFDK23       RemQuotAgg            1   Servers
+Throughput      MFDK23       RemQuotAgg      16.5333   Trans/Sec
+In service      MFDK23       RemQuotAgg       0.2745   Trans
+Utilization     MFDK23       RemQuotAgg      27.4458   Percent
+Queue length    MFDK23       RemQuotAgg       0.4252   Trans
+Waiting line    MFDK23       RemQuotAgg       0.1507   Trans
+Waiting time    MFDK23       RemQuotAgg       0.0091   Sec
+Residence time  MFDK23       RemQuotAgg       0.0257   Sec
+
+Capacity        TRLAN        RemQuotAgg            1   Servers
+Throughput      TRLAN        RemQuotAgg      16.5333   Trans/Sec
+In service      TRLAN        RemQuotAgg       0.2906   Trans
+Utilization     TRLAN        RemQuotAgg      29.0625   Percent
+Queue length    TRLAN        RemQuotAgg       0.6197   Trans
+Waiting line    TRLAN        RemQuotAgg       0.3291   Trans
+Waiting time    TRLAN        RemQuotAgg       0.0199   Sec
+Residence time  TRLAN        RemQuotAgg       0.0375   Sec
+
+Capacity        FSERVR       StatUpdAgg            1   Servers
+Throughput      FSERVR       StatUpdAgg       2.0667   Trans/Sec
+In service      FSERVR       StatUpdAgg       0.0023   Trans
+Utilization     FSERVR       StatUpdAgg       0.2268   Percent
+Queue length    FSERVR       StatUpdAgg       0.0026   Trans
+Waiting line    FSERVR       StatUpdAgg       0.0003   Trans
+Waiting time    FSERVR       StatUpdAgg       0.0001   Sec
+Residence time  FSERVR       StatUpdAgg       0.0012   Sec
+
+Capacity        GATWAY       StatUpdAgg            1   Servers
+Throughput      GATWAY       StatUpdAgg       2.0667   Trans/Sec
+In service      GATWAY       StatUpdAgg       0.0207   Trans
+Utilization     GATWAY       StatUpdAgg       2.0667   Percent
+Queue length    GATWAY       StatUpdAgg       0.0522   Trans
+Waiting line    GATWAY       StatUpdAgg       0.0315   Trans
+Waiting time    GATWAY       StatUpdAgg       0.0153   Sec
+Residence time  GATWAY       StatUpdAgg       0.0253   Sec
+
+Capacity        MFRAME       StatUpdAgg            1   Servers
+Throughput      MFRAME       StatUpdAgg       2.0667   Trans/Sec
+In service      MFRAME       StatUpdAgg       0.0020   Trans
+Utilization     MFRAME       StatUpdAgg       0.1968   Percent
+Queue length    MFRAME       StatUpdAgg       0.0023   Trans
+Waiting line    MFRAME       StatUpdAgg       0.0003   Trans
+Waiting time    MFRAME       StatUpdAgg       0.0002   Sec
+Residence time  MFRAME       StatUpdAgg       0.0011   Sec
+
+Capacity        FSDK10       StatUpdAgg            1   Servers
+Throughput      FSDK10       StatUpdAgg       2.0667   Trans/Sec
+In service      FSDK10       StatUpdAgg       0.0056   Trans
+Utilization     FSDK10       StatUpdAgg       0.5612   Percent
+Queue length    FSDK10       StatUpdAgg       0.0136   Trans
+Waiting line    FSDK10       StatUpdAgg       0.0080   Trans
+Waiting time    FSDK10       StatUpdAgg       0.0039   Sec
+Residence time  FSDK10       StatUpdAgg       0.0066   Sec
+
+Capacity        MFDK20       StatUpdAgg            1   Servers
+Throughput      MFDK20       StatUpdAgg       2.0667   Trans/Sec
+In service      MFDK20       StatUpdAgg       0.0086   Trans
+Utilization     MFDK20       StatUpdAgg       0.8577   Percent
+Queue length    MFDK20       StatUpdAgg       0.0133   Trans
+Waiting line    MFDK20       StatUpdAgg       0.0047   Trans
+Waiting time    MFDK20       StatUpdAgg       0.0023   Sec
+Residence time  MFDK20       StatUpdAgg       0.0064   Sec
+
+Capacity        MFDK21       StatUpdAgg            1   Servers
+Throughput      MFDK21       StatUpdAgg       2.0667   Trans/Sec
+In service      MFDK21       StatUpdAgg       0.0086   Trans
+Utilization     MFDK21       StatUpdAgg       0.8577   Percent
+Queue length    MFDK21       StatUpdAgg       0.0133   Trans
+Waiting line    MFDK21       StatUpdAgg       0.0047   Trans
+Waiting time    MFDK21       StatUpdAgg       0.0023   Sec
+Residence time  MFDK21       StatUpdAgg       0.0064   Sec
+
+Capacity        MFDK22       StatUpdAgg            1   Servers
+Throughput      MFDK22       StatUpdAgg       2.0667   Trans/Sec
+In service      MFDK22       StatUpdAgg       0.0086   Trans
+Utilization     MFDK22       StatUpdAgg       0.8577   Percent
+Queue length    MFDK22       StatUpdAgg       0.0133   Trans
+Waiting line    MFDK22       StatUpdAgg       0.0047   Trans
+Waiting time    MFDK22       StatUpdAgg       0.0023   Sec
+Residence time  MFDK22       StatUpdAgg       0.0064   Sec
+
+Capacity        MFDK23       StatUpdAgg            1   Servers
+Throughput      MFDK23       StatUpdAgg       2.0667   Trans/Sec
+In service      MFDK23       StatUpdAgg       0.0086   Trans
+Utilization     MFDK23       StatUpdAgg       0.8577   Percent
+Queue length    MFDK23       StatUpdAgg       0.0133   Trans
+Waiting line    MFDK23       StatUpdAgg       0.0047   Trans
+Waiting time    MFDK23       StatUpdAgg       0.0023   Sec
+Residence time  MFDK23       StatUpdAgg       0.0064   Sec
+
+Capacity        TRLAN        StatUpdAgg            1   Servers
+Throughput      TRLAN        StatUpdAgg       2.0667   Trans/Sec
+In service      TRLAN        StatUpdAgg       0.0182   Trans
+Utilization     TRLAN        StatUpdAgg       1.8164   Percent
+Queue length    TRLAN        StatUpdAgg       0.0387   Trans
+Waiting line    TRLAN        StatUpdAgg       0.0206   Trans
+Waiting time    TRLAN        StatUpdAgg       0.0100   Sec
+Residence time  TRLAN        StatUpdAgg       0.0187   Sec
+
+
+*** Metric breakout for "CMG93 C/S Baseline" with 125 clients ***
+
+Transaction	    R (Sec)	  CMG paper
+-----------	    -------	  ---------
+CatDisplay     	    0.2749	    0.2754
+RemotQuote     	    0.2884	    0.2625
+StatUpdate     	    0.1010	    0.1252
+CatDispAgg     	    0.2489	    0.2624
+RemQuotAgg     	    0.2605	    0.2470
+StatUpdAgg     	    0.0787	    0.1120
+
+
+PDQ Node       	    % Busy	  CMG paper
+--------       	    -------	  ---------
+Token ring     	   53.1006	   49.3333
+PC Desktop     	    0.5802	    0.5802
+File server    	   11.9157	   11.9157
+Gateway CPU    	   60.4167	   60.4167
+Mainframe      	   14.0873	   14.0873
+FS disks10	   58.7503	   59.0028
+DASD disk20	   35.4485	   35.5502
+DASD disk21	   35.4485	   35.5502
+DASD disk22	   35.4485	   35.5502
+DASD disk23	   35.4485	   35.5502

@@ -1,0 +1,58 @@
+
+Wed Feb 28 10:35:54 AUSEDT 2007
+-------------------------------
+
+Note these notes depend on you having your
+Java environment sey up properly!
+
+
+1)  To compile all programs
+
+Type:
+
+  $ make
+
+to compile all java programs
+
+This invokes the compile_all script:
+
+  $ ./compile_all.sh
+
+Alternatively a rudimentary ant build file exists
+an so you could also type:
+
+  $ ant
+
+if you have ant installed and configure properly.
+
+2) To compile indivisual programs
+
+Individual programs may be com,piles as follows:
+
+  $ ./compile.sh Ch_Baseline.java
+
+3)  To test the suite of examples
+
+To test the suite of examples type:
+
+  $ make test
+
+4)  To clean up.
+
+Type:
+
+  $ make clean
+
+or
+
+  $ ant clean
+
+
+
+Notes:
+
+1)  Chapter 8 versions of programs predate the last
+    rework of the original C programs done by Neil in 2006.
+
+    They need to be re-done.
+

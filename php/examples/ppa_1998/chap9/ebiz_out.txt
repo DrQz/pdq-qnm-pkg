@@ -1,0 +1,140 @@
+
+(Tx: "eBiz-tx" for "Middleware I")
+
+Client delay Z= 0.00 mSec. (Assumed)
+
+ N 	   X       R       %Uws    %Uas    %Udb
+---	------  ------   ------  ------  ------
+  1	 43.82   22.82    42.94   10.96    3.16
+  2	 63.42   31.53    62.16   15.86    4.57
+  3	 73.70   40.71    72.22   18.42    5.31
+  4	 79.79   50.13    78.19   19.95    5.74
+  5	 83.76   59.70    82.08   20.94    6.03
+  6	 86.53   69.34    84.80   21.63    6.23
+  7	 88.58   79.03    86.80   22.14    6.38
+  8	 90.15   88.75    88.34   22.54    6.49
+  9	 91.39   98.48    89.56   22.85    6.58
+ 10	 92.39  108.23    90.55   23.10    6.65
+ 11	 93.23  117.99    91.36   23.31    6.71
+ 12	 93.93  127.76    92.05   23.48    6.76
+ 13	 94.53  137.53    92.64   23.63    6.81
+ 14	 95.04  147.30    93.14   23.76    6.84
+ 15	 95.49  157.08    93.58   23.87    6.88
+ 16	 95.89  166.87    93.97   23.97    6.90
+ 17	 96.24  176.65    94.31   24.06    6.93
+ 18	 96.55  186.44    94.62   24.14    6.95
+ 19	 96.83  196.22    94.89   24.21    6.97
+ 20	 97.08  206.01    95.14   24.27    6.99
+
+Error Analysis of Utilizations
+
+   	          WS                      AS                      DB          
+   	----------------------  ----------------------  ----------------------
+ N      %Udat   %Updq   %Uerr   %Udat   %Updq   %Uerr   %Udat   %Updq   %Uerr
+---     -----   -----   -----   -----   -----   -----   -----   -----   -----
+  1	21.00	42.94	104.50	 8.00	10.96	36.94	 4.00	 3.16	-21.12
+  2	41.00	62.16	51.60	13.00	15.86	21.97	 5.00	 4.57	-8.67
+  4	74.00	78.19	 5.66	20.00	19.95	-0.27	 5.00	 5.74	14.89
+  7	95.00	86.80	-8.63	23.00	22.14	-3.72	 5.00	 6.38	27.55
+ 10	96.00	90.55	-5.68	22.00	23.10	 4.99	 6.00	 6.65	10.87
+ 20	96.00	95.14	-0.90	22.00	24.27	10.32	 6.00	 6.99	16.50
+
+
+
+		***************************************
+		****** Pretty Damn Quick REPORT *******
+		***************************************
+		***  of : Tue Apr 04 13:21:52 2006  ***
+		***  for: Middleware I              ***
+		***  Ver: PDQ Analyzer v3.0 111904  ***
+		***************************************
+		***************************************
+
+
+
+		***************************************
+		******    PDQ Model INPUTS      *******
+		***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  WebServer  eBiz-tx    TERML     0.0098
+CEN  FCFS  AppServer  eBiz-tx    TERML     0.0025
+CEN  FCFS  DBMServer  eBiz-tx    TERML     0.0007
+CEN  FCFS  DummySvr   eBiz-tx    TERML     0.0098
+
+
+
+Queueing Circuit Totals:
+
+	Clients:    20.00
+	Streams:      1
+	Nodes:        4
+
+
+
+WORKLOAD Parameters
+
+
+Client       Number       Demand   Thinktime 
+----         ------       ------   --------- 
+eBiz-tx       20.00        0.0228     0.00
+
+
+
+
+
+		***************************************
+		******   PDQ Model OUTPUTS      *******
+		***************************************
+
+
+Solution Method: EXACT
+
+		******   SYSTEM Performance     *******
+
+
+Metric              	     Value	Unit      
+-----------------   	     -----	----      
+Workload: "eBiz-tx"
+Mean Throughput  	   97.0821   	Job/Sec
+Response Time    	    0.2060   	Sec
+Mean Concurrency 	   20.0000   	Job
+Stretch Factor  	    9.0277
+
+Bounds Analysis:
+Max Throughput  	  102.0408   	Job/Sec
+Min Response    	    0.0228   	Sec
+Max Demand      	    0.0098   	Sec
+Tot Demand      	    0.0228   	Sec
+Think time      	    0.0000   	Sec
+Optimal Clients 	    2.3286   	Clients
+
+
+		******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit   
+---------       ------       ----              -----   ----   
+Throughput      WebServer    eBiz-tx         97.0821   Job/Sec
+Utilization     WebServer    eBiz-tx         95.1405   Percent
+Queue Length    WebServer    eBiz-tx          9.8024   Job    
+Residence Time  WebServer    eBiz-tx          0.1010   Sec    
+
+Throughput      AppServer    eBiz-tx         97.0821   Job/Sec
+Utilization     AppServer    eBiz-tx         24.2705   Percent
+Queue Length    AppServer    eBiz-tx          0.3201   Job    
+Residence Time  AppServer    eBiz-tx          0.0033   Sec    
+
+Throughput      DBMServer    eBiz-tx         97.0821   Job/Sec
+Utilization     DBMServer    eBiz-tx          6.9899   Percent
+Queue Length    DBMServer    eBiz-tx          0.0751   Job    
+Residence Time  DBMServer    eBiz-tx          0.0008   Sec    
+
+Throughput      DummySvr     eBiz-tx         97.0821   Job/Sec
+Utilization     DummySvr     eBiz-tx         95.1405   Percent
+Queue Length    DummySvr     eBiz-tx          9.8024   Job    
+Residence Time  DummySvr     eBiz-tx          0.1010   Sec    
+
+

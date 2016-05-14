@@ -1,0 +1,10 @@
+
+  3 Server System
+  -----------------
+  Traffic intensity:  10.00000
+  Server utilization: 3.33333
+  
+  Erlang B  (loss  prob): 0.73206
+  Erlang C  (queue prob): 6.84932
+  M/M/m    Normalized RT: 0.02153
+  M/M/m    No. in System: 0.21526

@@ -1,0 +1,82 @@
+**** APPROX ****:
+
+
+		***************************************
+		****** Pretty Damn Quick REPORT *******
+		***************************************
+		***  of : Tue Apr 04 12:16:54 2006  ***
+		***  for: Closed Queue              ***
+		***  Ver: PDQ Analyzer v3.0 111904  ***
+		***************************************
+		***************************************
+
+
+
+		***************************************
+		******    PDQ Model INPUTS      *******
+		***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  node       w1         TERML     0.1000
+
+
+
+Queueing Circuit Totals:
+
+	Clients:    3.00
+	Streams:      1
+	Nodes:        1
+
+
+
+WORKLOAD Parameters
+
+
+Client       Number       Demand   Thinktime 
+----         ------       ------   --------- 
+w1             3.00        0.1000     0.10
+
+
+
+
+
+		***************************************
+		******   PDQ Model OUTPUTS      *******
+		***************************************
+
+
+Solution Method: APPROX	(Iterations: 5; Accuracy: 0.1000%)
+
+		******   SYSTEM Performance     *******
+
+
+Metric              	     Value	Unit      
+-----------------   	     -----	----      
+Workload: "w1"
+Mean Throughput  	    8.7857   	Job/Sec
+Response Time    	    0.2415   	Sec
+Mean Concurrency 	    2.1214   	Job
+Stretch Factor  	    2.4146
+
+Bounds Analysis:
+Max Throughput  	   10.0000   	Job/Sec
+Min Response    	    0.1000   	Sec
+Max Demand      	    0.1000   	Sec
+Tot Demand      	    0.1000   	Sec
+Think time      	    0.1000   	Sec
+Optimal Clients 	    2.0000   	Clients
+
+
+		******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit   
+---------       ------       ----              -----   ----   
+Throughput      node         w1               8.7857   Job/Sec
+Utilization     node         w1              87.8571   Percent
+Queue Length    node         w1               2.1214   Job    
+Residence Time  node         w1               0.2415   Sec    
+
+

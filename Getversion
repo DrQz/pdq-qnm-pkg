@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# Created by NJG on Thu May  9 11:43:50  2002
+#
+#  $Id$
+#
+
+cat lib/PDQ_Lib.h | awk '
+/static char \*version/ {sub(/^\"/, "", $5); sub(/\";/, "", $8); print "PDQ " $5 " " $6 " " $7 " " $8} '
+
+ls -lT lib | awk '
+/libpdq/ { print "Compiled on " $6 " " $7 " " $8 " " $9} '
+
+exit 0

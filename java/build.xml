@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<!-- build.xml - a simple Ant buildfile to compile and create PDQ JAR file -->
+<!-- $Id$ -->
+
+<project name="PDQ Buildfile" default="jar" basedir=".">
+
+<!-- Project directories -->
+
+<property name="bin.dir" value="bin"/>
+<property name="doc.dir" value="doc"/>
+<property name="src.dir" value="src"/>
+<property name="lib.dir" value="lib"/>
+<property name="classes.dir" value="classes"/>
+
+<!-- Temporary build directories -->
+
+<property name="build.dir" value="build"/>
+<property name="build.classes" value="${build.dir}/classes"/>
+<property name="build.lib" value="${build.dir}/lib"/>
+<property name="dist.dir" value="dist"/>
+
+<path id="classpath">
+   <fileset dir="${lib.dir}">
+      <include name="braju.jar"/>
+   </fileset>
+</path>
+
+<!-- Target to create the build directories prior to the -->
+<!-- compile target. -->
+
+<target name="prepare">
+   <mkdir dir="${build.dir}"/>
+   <mkdir dir="${build.classes}"/>
+   <mkdir dir="${build.lib}"/>
+   <tstamp/>
+   <echo message="${TSTAMP}"/>
+</target>
+
+<target name="compile" depends="prepare" description="Compiles all source code.">
+   <javac srcdir="${src.dir}" destdir="${build.classes}">
+      <classpath refid="classpath"/>
+      <exclude name="**/Ch*.java"/>
+   </javac>
+</target>
+
+<target name="clean" description="Cleans build directories.">
+   <delete>
+      <fileset dir="${build.classes}" includes="**/*.class"/>
+      <fileset dir="${build.lib}" includes="**/*.jar"/>
+   </delete>
+   <tstamp/>
+   <echo message="${TSTAMP}"/>
+</target>
+
+<target name="cleanbuild" description="Removes all generated files.">
+   <delete dir="${build.dir}"/>
+</target>
+
+<target name="cleanall" depends="clean" description="Removes build directories.">
+   <delete dir="${build.dir}"/>
+   <delete dir="${dist.dir}"/>
+   <delete dir="${doc.dir}/misc"/>
+</target>
+
+<target name="jar" depends="compile" description="Generates pdq.jar in the 'dist' directory.">
+   <!-- Exclude unit tests from the final JAR file -->
+   <jar jarfile="${build.lib}/pdq.jar" basedir="${build.classes}" excludes="**/*Test.class"/>
+</target>
+
+<target name="deploy" depends="compile,jar" description="Copies built PDQ jar file to lib directory.">
+   <copy todir="${lib.dir}">
+      <fileset dir="${build.lib}" includes="**/pdq.jar"/>
+   </copy>
+</target>
+
+<target name="javadoc" depends="compile">
+   <mkdir dir="${doc.dir}/api"/>
+   <javadoc packagenames="com.*"
+            sourcepath="${src.dir}"
+            destdir="${doc.dir}/api"
+            author="true"
+            version="true"
+            use="true">
+      <classpath refid="classpath"/>
+   </javadoc>
+</target>
+
+<target name="all" depends="clean,jar" description="Cleans, compiles, then builds the JAR file."/>
+
+</project>

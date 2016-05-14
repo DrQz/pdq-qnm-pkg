@@ -1,0 +1,117 @@
+
+
+		***************************************
+		****** Pretty Damn Quick REPORT *******
+		***************************************
+		***  of : Fri May  3 18:48:31 2002  ***
+		***  for: CPU Scheduler - No Pri    ***
+		***  Rel: PDQ Analyzer v2.6 032202  ***
+		***************************************
+		***************************************
+
+
+
+		***************************************
+		******    PDQ Model INPUTS      *******
+		***************************************
+
+
+Node Sched Resource   Workload   Class     Demand
+---- ----- --------   --------   -----     ------
+CEN  FCFS  CPU        Production TERML     0.3000
+CEN  FCFS  DK1        Production TERML     0.0800
+CEN  FCFS  DK2        Production TERML     0.1000
+
+CEN  FCFS  CPU        Developmnt TERML     1.0000
+CEN  FCFS  DK1        Developmnt TERML     0.0500
+CEN  FCFS  DK2        Developmnt TERML     0.0600
+
+
+
+Queueing Circuit Totals:
+
+	Generators: 35.00
+	Streams   :   2
+	Nodes     :   3
+
+
+
+WORKLOAD Parameters
+
+
+Gens         Number       Demand   Thinktime 
+----         ------       ------   --------- 
+Production    20.00        0.4800    20.00
+Developmnt    15.00        1.1100    15.00
+
+
+
+
+
+		***************************************
+		******   PDQ Model OUTPUTS      *******
+		***************************************
+
+
+Solution Method: APPROX	(Iterations: 15; Accuracy: 0.1000%)
+
+		******   SYSTEM Performance     *******
+
+
+Metric              	     Value	Unit      
+-----------------   	     -----	----      
+Workload: "Production"
+Mean Throughput  	    0.8813   	Job/Sec
+Response Time    	    2.6944   	Sec
+Mean Concurrency 	    2.3745   	Job
+Stretch Factor  	    5.6134
+Bounds Analysis:
+Max Throughput  	    3.3333   	Job/Sec
+Min Response    	    0.4800   	Sec
+
+Workload: "Developmnt"
+Mean Throughput  	    0.6468   	Job/Sec
+Response Time    	    8.1914   	Sec
+Mean Concurrency 	    5.2981   	Job
+Stretch Factor  	    7.3796
+Bounds Analysis:
+Max Throughput  	    1.0000   	Job/Sec
+Min Response    	    1.1100   	Sec
+
+
+		******   RESOURCE Performance   *******
+
+
+Metric          Resource     Work              Value   Unit   
+---------       ------       ----              -----   ----   
+Throughput      CPU          Production       0.8813   Job/Sec
+Utilization     CPU          Production      26.4382   Percent
+Queue Length    CPU          Production       2.1958   Job    
+Residence Time  CPU          Production       2.4916   Sec    
+
+Throughput      DK1          Production       0.8813   Job/Sec
+Utilization     DK1          Production       7.0502   Percent
+Queue Length    DK1          Production       0.0783   Job    
+Residence Time  DK1          Production       0.0888   Sec    
+
+Throughput      DK2          Production       0.8813   Job/Sec
+Utilization     DK2          Production       8.8127   Percent
+Queue Length    DK2          Production       0.1004   Job    
+Residence Time  DK2          Production       0.1140   Sec    
+
+Throughput      CPU          Developmnt       0.6468   Job/Sec
+Utilization     CPU          Developmnt      64.6792   Percent
+Queue Length    CPU          Developmnt       5.2179   Job    
+Residence Time  CPU          Developmnt       8.0673   Sec    
+
+Throughput      DK1          Developmnt       0.6468   Job/Sec
+Utilization     DK1          Developmnt       3.2340   Percent
+Queue Length    DK1          Developmnt       0.0360   Job    
+Residence Time  DK1          Developmnt       0.0556   Sec    
+
+Throughput      DK2          Developmnt       0.6468   Job/Sec
+Utilization     DK2          Developmnt       3.8808   Percent
+Queue Length    DK2          Developmnt       0.0443   Job    
+Residence Time  DK2          Developmnt       0.0685   Sec    
+
+
