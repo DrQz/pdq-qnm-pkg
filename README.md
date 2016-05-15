@@ -37,7 +37,7 @@ int main(void) {
 	PDQ_Report();   
 }
 ```
-Predicted performance metrics that result from solving a PDQ model can easily be displayed
+How long can a customer arriving at the bank expect to wait for a teller? Predicted performance metrics that result from solving a PDQ model can easily be displayed
 using the generic `Report()` function:
 ```
                         PRETTY DAMN QUICK REPORT         
