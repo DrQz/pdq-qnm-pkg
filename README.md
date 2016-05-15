@@ -29,7 +29,7 @@ using the generic `Report()` function:
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on   Sat May 14 17:47:25 2016     ***
+               ***  on   Sat May 14 17:51:56 2016     ***
                ***  for  Bank Model                   ***
                ***  PDQ  Version 7.x.x Build 051116   ***
                ==========================================
@@ -39,6 +39,7 @@ using the generic `Report()` function:
                ==========================================
 
 WORKLOAD Parameters:
+
 Node Sched Resource   Workload   Class     Demand
 ---- ----- --------   --------   -----     ------
   4  MSQ   server     work       Open      1.0000
@@ -47,9 +48,10 @@ Queueing Circuit Totals
 Streams:   1
 Nodes:     1
 
-Arrivals       per Sec       Demand 
+Arrivals       per Minute     Demand 
 --------       --------     -------
 work           0.7500        1.0000
+
 
                ==========================================
                ********   PDQ Model OUTPUTS      ********
@@ -63,13 +65,13 @@ Metric                     Value    Unit
 ------                     -----    ----
 Workload: "work"
 Number in system          0.7518    Trans
-Mean throughput           0.7500    Trans/Sec
-Response time             1.0024    Sec
+Mean throughput           0.7500    Trans/Minute
+Response time             1.0024    Minute
 Stretch factor            1.0024
 
 Bounds Analysis:
-Max throughput            4.0000    Trans/Sec
-Min response              1.0000    Sec
+Max throughput            4.0000    Trans/Minute
+Min response              1.0000    Minute
 
 
                ********   RESOURCE Performance   ********
@@ -77,16 +79,16 @@ Min response              1.0000    Sec
 Metric          Resource     Work              Value   Unit
 ------          --------     ----              -----   ----
 Capacity        server       work                  4   Servers
-Throughput      server       work             0.7500   Trans/Sec
+Throughput      server       work             0.7500   Trans/Minute
 In service      server       work             0.7500   Trans
 Utilization     server       work            18.7500   Percent
 Queue length    server       work             0.7518   Trans
 Waiting line    server       work             0.0018   Trans
-Waiting time    server       work             0.0024   Sec
-Residence time  server       work             1.0024   Sec
+Waiting time    server       work             0.0024   Minute
+Residence time  server       work             1.0024   Minute
 ```
 
-or creating customized reports based on 
+Alternatively, customized reports can be created using  
 [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
 
