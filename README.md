@@ -23,7 +23,6 @@ int main(void) {
 	PDQ_Report();   
 }
 ```
-
 Predicted performance metrics that result from solving a PDQ model can easily be displayed
 using the generic `Report()` function:
 ```
@@ -87,9 +86,7 @@ Waiting line    server       work             0.0018   Trans
 Waiting time    server       work             0.0024   Minute
 Residence time  server       work             1.0024   Minute
 ```
-
-Alternatively, customized reports can be created using  
-[specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
+Alternatively, customized reports can be created using [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
 
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
