@@ -31,6 +31,7 @@ int main(void) {
 	PDQ_CreateOpen("Customers", 0.75);
 	PDQ_CreateMultiNode(4, "Tellers", CEN, FCFS);
 	PDQ_SetDemand("Tellers", "Customers", 1.0);
+	PDQ_SetWUnit("Customers");
 	SetTUnit("Minutes");
 	PDQ_Solve(CANON);
 	PDQ_Report();   
@@ -39,9 +40,10 @@ int main(void) {
 Predicted performance metrics that result from solving a PDQ model can easily be displayed
 using the generic `Report()` function:
 ```
+
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on   Sat May 14 17:51:56 2016     ***
+               ***  on   Sat May 14 20:40:50 2016     ***
                ***  for  Bank Model                   ***
                ***  PDQ  Version 7.x.x Build 051116   ***
                ==========================================
@@ -54,7 +56,7 @@ WORKLOAD Parameters:
 
 Node Sched Resource   Workload   Class     Demand
 ---- ----- --------   --------   -----     ------
-  4  MSQ   server     work       Open      1.0000
+  4  MSQ   Tellers    Customers  Open      1.0000
 
 Queueing Circuit Totals
 Streams:   1
@@ -62,7 +64,7 @@ Nodes:     1
 
 Arrivals       per Minute     Demand 
 --------       --------     -------
-work           0.7500        1.0000
+Customers      0.7500        1.0000
 
 
                ==========================================
@@ -75,14 +77,14 @@ Solution Method: CANON
 
 Metric                     Value    Unit
 ------                     -----    ----
-Workload: "work"
-Number in system          0.7518    Trans
-Mean throughput           0.7500    Trans/Minute
+Workload: "Customers"
+Number in system          0.7518    Customers
+Mean throughput           0.7500    Customers/Minute
 Response time             1.0024    Minute
 Stretch factor            1.0024
 
 Bounds Analysis:
-Max throughput            4.0000    Trans/Minute
+Max throughput            4.0000    Customers/Minute
 Min response              1.0000    Minute
 
 
@@ -90,14 +92,14 @@ Min response              1.0000    Minute
 
 Metric          Resource     Work              Value   Unit
 ------          --------     ----              -----   ----
-Capacity        server       work                  4   Servers
-Throughput      server       work             0.7500   Trans/Minute
-In service      server       work             0.7500   Trans
-Utilization     server       work            18.7500   Percent
-Queue length    server       work             0.7518   Trans
-Waiting line    server       work             0.0018   Trans
-Waiting time    server       work             0.0024   Minute
-Residence time  server       work             1.0024   Minute
+Capacity        Tellers      Customers             4   Servers
+Throughput      Tellers      Customers        0.7500   Customers/Minute
+In service      Tellers      Customers        0.7500   Customers
+Utilization     Tellers      Customers       18.7500   Percent
+Queue length    Tellers      Customers        0.7518   Customers
+Waiting line    Tellers      Customers        0.0018   Customers
+Waiting time    Tellers      Customers        0.0024   Minute
+Residence time  Tellers      Customers        1.0024   Minute
 ```
 Alternatively, customized reports can be created using [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
