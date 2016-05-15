@@ -40,7 +40,6 @@ int main(void) {
 Predicted performance metrics that result from solving a PDQ model can easily be displayed
 using the generic `Report()` function:
 ```
-
                         PRETTY DAMN QUICK REPORT         
                ==========================================
                ***  on   Sat May 14 20:40:50 2016     ***
