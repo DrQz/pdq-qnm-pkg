@@ -32,7 +32,7 @@ int main(void) {
 	PDQ_CreateMultiNode(4, "Tellers", CEN, FCFS);
 	PDQ_SetDemand("Tellers", "Customers", 1.0);
 	PDQ_SetWUnit("Customers");
-	SetTUnit("Minutes");
+	PDQ_SetTUnit("Minutes");
 	PDQ_Solve(CANON);
 	PDQ_Report();   
 }
