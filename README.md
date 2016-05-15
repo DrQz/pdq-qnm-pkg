@@ -7,6 +7,19 @@ Perl is the language used in the book
 [Analyzing Computer System Performance with Perl::PDQ](http://www.perfdynamics.com/iBook/ppa_new.html), 
 which explains the fundamental concepts with example models for computer system performance.
 
+**Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
+
+**Languages:**	[C](https://en.wikibooks.org/wiki/C_Programming), 
+[Perl](http://www.perfdynamics.com/Tools/PDQperl.html), 
+[Python](http://www.perfdynamics.com/Tools/PDQpython.html), 
+[R](http://www.perfdynamics.com/Tools/PDQ-R.html)
+
+**Platforms:**	Linux, OS X, and Windows
+
+**Maintainers:** Neil Gunther, Paul Puglia
+
+**Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
+
 Here is simple PDQ model of four bank tellers serving a single waiting-line of customers, 
 written in the C language:
 ```C
@@ -88,17 +101,3 @@ Residence time  server       work             1.0024   Minute
 ```
 Alternatively, customized reports can be created using [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
-
-**Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
-
-**Languages:**	[C](https://en.wikibooks.org/wiki/C_Programming), 
-[Perl](http://www.perfdynamics.com/Tools/PDQperl.html), 
-[Python](http://www.perfdynamics.com/Tools/PDQpython.html), 
-[R](http://www.perfdynamics.com/Tools/PDQ-R.html)
-
-**Platforms:**	Linux, OS X, and Windows
-
-**Maintainers:** Neil Gunther, Paul Puglia
-
-**Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
-
