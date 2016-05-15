@@ -20,7 +20,7 @@ which explains the fundamental concepts with example models for computer system 
 
 **Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
 
-Here is simple PDQ model of four bank tellers serving a single waiting-line of customers, 
+Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
 written in the C language:
 ```C
 #include <stdio.h>
