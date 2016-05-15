@@ -5,7 +5,7 @@ systems, manufacturing systems, and data networks, that can be written
 optionally in a variety of conventional programming languages (see below). 
 Perl is the language used in the book 
 [Analyzing Computer System Performance with Perl::PDQ](http://www.perfdynamics.com/iBook/ppa_new.html), 
-which explains the fundamental concepts with example models for computer system performance.
+which explains the fundamental queue-theoretic concepts with example PDQ models for computer system performance.
 
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
 
