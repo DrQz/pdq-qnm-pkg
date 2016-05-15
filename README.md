@@ -7,17 +7,18 @@ Perl is the language used in the book
 [Analyzing Computer System Performance with Perl::PDQ](http://www.perfdynamics.com/iBook/ppa_new.html), 
 which explains the fundamental concepts with example models for computer system performance.
 
+Here is simple PDQ model of four bank tellers serving a single waiting-line of customers, 
+written in the C language:
 ```C
 #include <stdio.h>
 #include "PDQ_Lib.h"
 
-int main() {
-	PDQ_Init("Bank Tellers");
-
-	PDQ_CreateOpen("Customers", aRate);
+int main(void) {
+	PDQ_Init("Bank Model");
+	PDQ_CreateOpen("Customers", 0.75);
 	PDQ_CreateMultiNode(4, "Tellers", CEN, FCFS);
-	PDQ_SetDemand("Tellers", "Customers", sTime);
-
+	PDQ_SetDemand("Tellers", "Customers", 1.0);
+	SetTUnit("Minutes");
 	PDQ_Solve(CANON);
 	PDQ_Report();   
 }
