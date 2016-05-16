@@ -83,7 +83,7 @@ void PDQ_Report(void)
 {
 	extern char     model[];
 	extern char     s1[], s2[], s3[], s4[];
-	extern int      streams, nodes, PDQ_DEBUG;
+	extern int      streams, nodes, demands, PDQ_DEBUG;
 	extern JOB_TYPE *job;
 
 	int             c;
@@ -151,13 +151,13 @@ void PDQ_Report(void)
 
 	PRINTF("\n");
 	
-    // Following was moved to PDQ_Solve() by NJG on Sunday, May 15, 2016
-    // Added by NJG on Wednesday, August 19, 2015
+    // The following logic was moved to Solve() by NJG on Sunday, May 15, 2016
+    // NJG on Wednesday, August 19, 2015 Added incomplete PDQ circuit detection.
 	//if (!streams) PRINTF("PDQ_Report warning: No PDQ workload defined.\n");
 	//if (!nodes) PRINTF("PDQ_Report warning: No PDQ nodes defined.\n");
 	//if (!demands) PRINTF("PDQ_Report warning: No PDQ service demands defined.\n");
 
-	// Append any user comments
+    // Append any user comments
     if (strlen(Comment)) {
 		PRINTF("COMMENT: ");
 		PRINTF("%s\n\n", Comment);  // Is defined as a global!
