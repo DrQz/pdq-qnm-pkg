@@ -19,6 +19,7 @@
  * Revised by NJG: 20:05:52  7/28/95
  * Updated by NJG: 6:28:39 PM Mon, Apr 2, 2007
  * Updated by NJG: Wednesday, February 6, 2013 - flag MSQ node if CLOSED network
+ * NJG on Sunday, May 15, 2016 moved incomplete circuit detection from PDQ_Report()
  * 
  *  $Id$
  */
@@ -53,6 +54,28 @@ void PDQ_Solve(int meth)
         debug(p, "Entering");
 
     /* There'd better be a job[0] or you're in trouble !!!  */
+    
+    // NJG on Sunday, May 15, 2016 moved warning from Report() to halt execution here.
+    // This action was promised in the 6.2.0 release of PDQ.
+    if (!streams) {
+        //PRINTF("PDQ_Solve warning: No PDQ workload defined.\n");
+        sprintf(s1, "PDQ_Solve: No PDQ workload defined.\n");
+        errmsg(p, s1);
+    }
+    
+    if (!nodes) {
+        //PRINTF("PDQ_Solve warning: No PDQ nodes defined.\n");
+        sprintf(s1, "PDQ_Solve: No PDQ nodes defined.\n");
+        errmsg(p, s1);
+    }
+    
+    if (!demands) {
+        //PRINTF("PDQ_Solve warning: No PDQ service demands defined.\n");
+        sprintf(s1, "PDQ_Solve: No PDQ service demands defined.\n");
+        errmsg(p, s1);
+    }
+        
+
 
     method = meth;
 
