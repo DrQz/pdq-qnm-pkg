@@ -20,6 +20,9 @@ which explains the fundamental queue-theoretic concepts with example PDQ models 
 
 **Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
 
+**Copyright:** PDQ is distributed freely under the terms of the 
+[MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
+
 Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
 written in the C language:
 ```C
@@ -103,5 +106,3 @@ Residence time  Tellers      Customers        1.0024   Minute
 Alternatively, customized reports can be created using [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
 
-**Copyright:**
-PDQ is distributed freely under the terms of the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
