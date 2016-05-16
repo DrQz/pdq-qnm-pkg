@@ -33,7 +33,7 @@
  *    o Fixed wUnit to be tUnit in WORKLOAD Parameters section
  *    o Queue was sometimes wrong for MSQ (too many divides by m)
  * NJG on Monday, February 25, 2013 removed blank line b/w Workload parameters
- * NJG on Sunday, May 15, 2016 moved incomplete circuit warning (line 154 ff.) to PDQ_Solve()
+ * NJG on Sunday, May 15, 2016 moved incomplete circuit warning (line 154 ff.) to Solve()
  *
  */
 
