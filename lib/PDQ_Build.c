@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -81,7 +81,7 @@ void PDQ_Init(char *name)
 	extern void              allocate_jobs();
 	char                    *p = "PDQ_Init()";
 
-	int             cc, kk;
+	int                     cc, kk;
 	
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
