@@ -5,7 +5,8 @@ systems, manufacturing systems, and data networks, that can be written
 optionally in a variety of conventional programming languages (see below). 
 Perl is the language used in the book 
 [Analyzing Computer System Performance with Perl::PDQ](http://www.perfdynamics.com/iBook/ppa_new.html), 
-which explains the fundamental queue-theoretic concepts with example PDQ models for computer system performance.
+which explains the fundamental queue-theoretic concepts with example PDQ models for 
+computer performance analysis.
 
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
 
@@ -14,13 +15,13 @@ which explains the fundamental queue-theoretic concepts with example PDQ models 
 [Python](http://www.perfdynamics.com/Tools/PDQpython.html), 
 [R](http://www.perfdynamics.com/Tools/PDQ-R.html)
 
-**Platforms:**	Linux, OS X, and Windows
+**Platforms:**	Linux, OS X, Windows
 
-**Maintainers:** Neil Gunther, Paul Puglia
+**Maintainers:** Neil Gunther and Paul Puglia
 
 **Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
 
-**Copyright:** PDQ is distributed freely under the terms of the 
+**Copyright:** PDQ is distributed freely under the  
 [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
 
 Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
