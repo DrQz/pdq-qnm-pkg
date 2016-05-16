@@ -103,5 +103,5 @@ Residence time  Tellers      Customers        1.0024   Minute
 Alternatively, customized reports can be created using [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
 
-**Copyright**
-PDQ is distributed under the terms of the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
+**Copyright:**
+PDQ is distributed freely under the terms of the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
