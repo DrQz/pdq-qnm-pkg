@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -32,8 +32,9 @@
  * Updated by NJG on Saturday, January 12, 2013: 
  *    o Fixed wUnit to be tUnit in WORKLOAD Parameters section
  *    o Queue was sometimes wrong for MSQ (too many divides by m)
- * Updated by NJG on Monday, February 25, 2013: Removed blank line b/w Workload parameters
- * 
+ * NJG on Monday, February 25, 2013 removed blank line b/w Workload parameters
+ * NJG on Sunday, May 15, 2016 moved incomplete circuit warning (line 154 ff.) to PDQ_Solve()
+ *
  */
 
 #include <stdio.h>
@@ -150,10 +151,11 @@ void PDQ_Report(void)
 
 	PRINTF("\n");
 	
-	// Added by NJG on Wednesday, August 19, 2015
-	if (!streams) PRINTF("PDQ_Report warning: No PDQ workload defined.\n");
-	if (!nodes) PRINTF("PDQ_Report warning: No PDQ nodes defined.\n");
-	if (!demands) PRINTF("PDQ_Report warning: No PDQ service demands defined.\n");
+    // Following was moved to PDQ_Solve() by NJG on Sunday, May 15, 2016
+    // Added by NJG on Wednesday, August 19, 2015
+	//if (!streams) PRINTF("PDQ_Report warning: No PDQ workload defined.\n");
+	//if (!nodes) PRINTF("PDQ_Report warning: No PDQ nodes defined.\n");
+	//if (!demands) PRINTF("PDQ_Report warning: No PDQ service demands defined.\n");
 
 	// Append any user comments
     if (strlen(Comment)) {
