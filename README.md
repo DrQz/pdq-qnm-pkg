@@ -21,8 +21,7 @@ computer performance analysis.
 
 **Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
 
-**Copyright:** PDQ is distributed freely under the  
-[MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
+**Copyright:** PDQ is distributed freely under the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
 
 Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
 written in the C language:
