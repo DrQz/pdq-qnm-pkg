@@ -34,7 +34,7 @@
 
 void PDQ_Solve(int meth)
 {
-    extern int        PDQ_DEBUG, method, streams, nodes;
+    extern int        PDQ_DEBUG, method, streams, nodes, demands; //in PDQ_Global.h
     extern int        centers_declared, streams_declared;
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
