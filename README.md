@@ -34,7 +34,7 @@ written in the C language:
 int main() {
     int    tellers = 4;
     double aRate   = 0.35; // customers per minute
-    double sTime   = 10.0; // minutes
+    double sTime   = 10.0; // minutes per customer
 
     PDQ_Init("Bank Model");
     PDQ_CreateMultiNode(tellers, "Tellers", CEN, FCFS);
