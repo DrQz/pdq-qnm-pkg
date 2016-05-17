@@ -109,6 +109,8 @@ Waiting line    Tellers      Customers        5.1650   Customers
 Waiting time    Tellers      Customers       14.7572   Minute
 Residence time  Tellers      Customers       24.7572   Minute
 ```
+PDQ predicts the average customer waiting time to be 14.7572 minutes.
+
 Alternatively, customized reports can be created using [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
 
