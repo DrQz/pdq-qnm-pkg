@@ -27,11 +27,11 @@ computer performance analysis.
 
 Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
 written in the C language:
-```C
+```
 #include <stdio.h>
 #include "PDQ_Lib.h"
 
-int main() {
+int main(void) {
     int    tellers = 4;
     double aRate   = 0.35; // customers per minute
     double sTime   = 10.0; // minutes per customer
