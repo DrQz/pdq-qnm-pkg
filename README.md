@@ -32,9 +32,9 @@ written in the C language:
 #include "PDQ_Lib.h"
 
 int main() {
-    int tellers = 4;
-    double aRate = 0.35;
-    double sTime = 10.0;
+    int    tellers = 4;
+    double aRate   = 0.35; // customers per minute
+    double sTime   = 10.0; // minutes
 
     PDQ_Init("Bank Model");
     PDQ_CreateMultiNode(tellers, "Tellers", CEN, FCFS);
