@@ -21,12 +21,12 @@ computer performance analysis.
 
 **Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
 
-**License:** PDQ is distributed freely under the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
+**License:** PDQ is distributed as OSS under the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
 
 **Example:**
 
 Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
-written in the C language:
+written in C:
 ```
 #include <stdio.h>
 #include "PDQ_Lib.h"
