@@ -1,6 +1,6 @@
 Copyright (c) 1998 - 2016
 
-The 'ppa' prefix refers to The Practical Performance Analyst book (1998).
+'ppa_1998' refers to The Practical Performance Analyst book first published in 1998.
 
 These directories refer to the PDQ models associated with chapters in the book entitled, 
 "The Practical Performance Analyst: Performance-By-Design Techniques for Distributed Systems" 
