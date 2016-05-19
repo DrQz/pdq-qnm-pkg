@@ -35,7 +35,7 @@ ln:
 	ln ../../../java/examples/Ch6_*.out .
 
 clean:
-	-/bin/rm -f ${PGM} *.o *.exe *~ *.log *.tst Ch6_*.out
+	-/bin/rm -f ${PGM} *.o *.exe *~ *.log *.tst *.out
 
 #--------------------------------------------------------------------------
 
