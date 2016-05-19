@@ -4,10 +4,12 @@ bookstore.c    C language implementation
 bookstore.py   Python version of same
 
 PDQ model of a brick-and-mortar bookstore, like Barnes & Noble, which involves
-two stages: browsing and buying. Browsing does not incur any waiting time, while
-buying typically does. The key concept is to represent the browsing stage by a
-PDQ MutliNode with a large number of servers, sufficient to avoid forming any 
-waiting line at all. This is how we represent an "infinite service center".
+two very different stages of customer activity: browsing and buying. Browsing
+has the longest mean service time but does not incur any waiting, while buying
+typically does, even though it has a relatively shorter mean service time. The
+key concept is to represent the browsing stage by a PDQ MutliNode with a large
+number of servers, sufficient to avoid forming any waiting line at all. This is
+how we represent an "infinite service center".
 --------------
 
 
