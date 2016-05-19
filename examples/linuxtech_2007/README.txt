@@ -1,6 +1,6 @@
 Copyright (c) 2007 - 2016
 
-'linuxmag_2007' refers to an article in the German Linux Technical Review published 
+'linuxtech_2007' refers to an article in the German Linux Technical Review published 
 (in German) in 2007.
 
 See 
