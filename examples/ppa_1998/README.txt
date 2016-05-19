@@ -1,5 +1,7 @@
 Copyright (c) 1998 - 2016
 
+The 'ppa' suffix refers to The Practical Performance Analyst book (1998).
+
 These directories refer to the PDQ models associated with chapters in the book entitled, 
 "The Practical Performance Analyst: Performance-By-Design Techniques for Distributed Systems" 
 (McGraw-Hill 1998). Second Printing (iUniverse 2000). 
