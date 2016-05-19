@@ -1,0 +1,20 @@
+Copyright (c) 1998 - 2016 Performance Dynamics Company
+
+Folders containing PDQ models corresponding to book chapters and published technical articles.
+
+gcap_2007/			Guerrilla Capacity Planning book (Springer 2007)
+					http://www.perfdynamics.com/iBook/gcap.html
+
+linuxmag_2007/		Linux Technical Review journal (Germany 2007)
+
+misc_models/		A collection of PDQ models used in Guerrilla training classes
+					http://www.perfdynamics.com/Classes/schedule.html
+
+ppa_1998/			The Practical Performance Analyst book (McGraw-Hill 1998)
+					http://www.perfdynamics.com/iBook/ppa.html
+
+ppdq_2005/			Perl PDQ book (Springer 2005)
+					http://www.perfdynamics.com/iBook/ppa_new.html
+
+Created by NJG on Thu May 19 08:00:36 PDT 2016
+
