@@ -48,7 +48,7 @@ diff:
 	diff iis.out Ch9_IIS.out
 
 clean:
-	-/bin/rm -f *.o *.exe ${PGM} *~ *.log *.tst Ch9_*.out
+	-/bin/rm -f *.o *.exe ${PGM} *~ *.log *.tst *.out
 
 #--------------------------------------------------------------------------
 
