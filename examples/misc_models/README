@@ -1,0 +1,67 @@
+Copyright (c) 2016 Performance Dynamics Company
+
+bookstore.c    C language implementation
+bookstore.py   Python version of same
+
+PDQ model of a brick-and-mortar bookstore, like Barnes & Nobel, which involves
+two stages: browsing and buying. Browsing does not incur any waiting time, while
+buying typically does. The key concept is to represent the browsing stage by a
+PDQ MutliNode with a large number of servers, sufficient to avoid forming a
+waiting line. This is how we represent a so-called "infinite service center".
+--------------
+
+
+diskoptim.pl   Perl PDQ model
+
+An old performance chestnut that many queueing theory experts get wrong. It's
+essentially a load-balancing problem involving how to apportion IO requests
+across a fast and slow disk.
+--------------
+
+
+floggit.py     Python PDQ model
+
+A simple M/M/1 implemented in PyDQ.
+--------------
+
+
+gross_pdq42.c   C language implementation
+gross_te42.py   Python version of same
+gross_te43.py   Python version of Example 4.3
+
+Examples 4.2 and 4.3 in Gross and Harris (p. 181, 3rd edn).
+http://www.amazon.com/Fundamentals-Queueing-Theory-3rd-Third/dp/B0047T5TMO
+--------------
+
+
+jackpdq.py     Python PDQ model
+jacksim.py     Python simulator model
+
+A PyDQ model of the SimPy simulator example described on this page 
+http://www.perfdynamics.com/Tools/PDQpython.html#tth_sEc4.2
+This model is a Jackson network comprised of three queueing centers and a set of branching  
+probabilities for the three workload streams. 
+--------------
+
+
+passport.py    Python PDQ model
+
+Python PDQ model in PPA book Example 3-3 on p. 96 ff. See ppa_1998/chap3/passport.c
+--------------
+
+
+spamcan.pl     Perl PDQ model
+
+Queueing model of an email-spam analyzer system comprising a battery of 4-way
+multicore servers essentially running in batch mode. The performance metric of
+interest was the mean queue length.
+--------------
+
+
+threadapp.pl   Perl PDQ model
+
+Flow-equivalent Service Center (FESC) mode of a threaded application.
+--------------
+
+Created by NJG on Thursday, May 19, 2016
+
