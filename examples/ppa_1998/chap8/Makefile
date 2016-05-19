@@ -41,10 +41,10 @@ upgrade2: upgrade2.c upgrade2.o
 #--------------------------------------------------------------------------
 
 ln:
-	ln ../../../java/examples/Ch8_*.out .
+	ln ../../../java/examples/*.out .
 
 clean:
-	-/bin/rm -f ${PGM} *.o *.exe *.log *~ *.tst
+	-/bin/rm -f ${PGM} *.o *.exe *.log *~ *.tst *.out
 
 #--------------------------------------------------------------------------
 
