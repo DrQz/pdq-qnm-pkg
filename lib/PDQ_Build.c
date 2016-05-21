@@ -26,7 +26,8 @@
  * Updated by NJG on Fri, Apr 6, 2007 Error if SetWUnit or SetTUnit before calling Create circuit
  * Updated by NJG on Wed Feb 25, 2009 Added CreateMultiNode function
  * Updated by PJP on Sat Nov 3, 2012  Added support for R
- * Updated by NJG on Saturday, January 12, 2013 Removed Create count returns
+ * Updated by NJG on Saturday, January 12, 2013 Set CreateXXX count returns to zero
+ * Updated by NJG on Saturday, May 21, 2016     Set all Create procs to voids
  *
  */
 
@@ -42,7 +43,7 @@
 #define MAXSUFF 10
 
 //-------------------------------------------------------------------------
-
+// Global loop counters used to index all procedures in this module.
 static int      k = 0;
 static int      c = 0;
 
@@ -81,7 +82,7 @@ void PDQ_Init(char *name)
 	extern void              allocate_jobs();
 	char                    *p = "PDQ_Init()";
 
-	int                     cc, kk;
+	//int                     cc, kk; // remove
 	
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
@@ -125,7 +126,7 @@ void PDQ_Init(char *name)
 				PDQ_FREE(job[c].trans);
 				job[c].trans = NULL;
 			}
-		}                         /* over c */
+		}   // over c loop
 
 		if (job) {
 			PDQ_FREE(job);
@@ -212,7 +213,8 @@ char*  PDQ_GetComment(void)
 
 //-------------------------------------------------------------------------
 
-int PDQ_CreateNode(char *name, int device, int sched)
+//int PDQ_CreateNode(char *name, int device, int sched)
+void PDQ_CreateNode(char *name, int device, int sched)
 {
 	extern NODE_TYPE *node;
 	extern char     s1[], s2[];
@@ -268,10 +270,11 @@ int PDQ_CreateNode(char *name, int device, int sched)
 	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 
-	k =  ++nodes;
+    // update global node count
+    k = ++nodes;
 
 	//return nodes;
-	return(0); // silence gcc warnings
+	//return(0); // silence gcc warnings
 	
 }  /* PDQ_CreateNode */
 
@@ -279,13 +282,15 @@ int PDQ_CreateNode(char *name, int device, int sched)
 //-------------------------------------------------------------------------
 // Prototype as defined in Chapter 6 of the "Perl::PDQ" book
 
-int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
+void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 {
 	extern NODE_TYPE *node;
 	extern char     s1[], s2[];
 	extern int      nodes;
 	extern int      PDQ_DEBUG;
+    
 	char           *p = "PDQ_CreateMultiNode";
+
 	FILE*			out_fd;
 
     // hack to force MSQ (Multi Server Queue) node type
@@ -339,10 +344,11 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 
-	k =  ++nodes;
+    // update global node count
+	k = ++nodes;
 
 	//return nodes;
-	return(0); // silence gcc warnings
+	//return(0); // silence gcc warnings
 	
 }  /* PDQ_CreateMultiNode */
 
@@ -350,9 +356,9 @@ int PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 
 
 
-int PDQ_CreateClosed(char *name, int should_be_class, double pop, double think)
+void PDQ_CreateClosed(char *name, int should_be_class, double pop, double think)
 {
-	return PDQ_CreateClosed_p(name, should_be_class, &pop, &think);
+	int foo = PDQ_CreateClosed_p(name, should_be_class, &pop, &think);
 }
 
 //-------------------------------------------------------------------------
@@ -363,7 +369,9 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 	extern char     tUnit[];
 	extern char     wUnit[];
 	extern int      PDQ_DEBUG;
+    
 	char           *p = "PDQ_CreateClosed()";
+
 	FILE           *out_fd;
 
 	if (PDQ_DEBUG)
@@ -430,9 +438,9 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 
 //-------------------------------------------------------------------------
 
-int PDQ_CreateOpen(char *name, double lambda)
+void PDQ_CreateOpen(char *name, double lambda)
 {
-	return PDQ_CreateOpen_p(name, &lambda);
+	int foo = PDQ_CreateOpen_p(name, &lambda);
 }
 
 //-------------------------------------------------------------------------
