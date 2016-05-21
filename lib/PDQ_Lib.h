@@ -37,7 +37,7 @@
 // Do not modify order of fields
 // Must not contain more than 26 characters for Report() header
 //
-static char *version = "Version 7.x.x Build 051116";
+static char *version = "Version 7.0.0 Build 052116";
 
 
 //---- TYPES --------------------------------------------------------------
