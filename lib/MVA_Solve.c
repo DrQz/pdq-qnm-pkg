@@ -19,8 +19,9 @@
  * Revised by NJG: 20:05:52  7/28/95
  * Updated by NJG: 6:28:39 PM Mon, Apr 2, 2007
  * Updated by NJG: Wednesday, February 6, 2013 - flag MSQ node if CLOSED network
- * NJG on Sunday, May 15, 2016 moved incomplete circuit detection from PDQ_Report()
- * 
+ * NJG on Sunday, May 15, 2016   - Moved incomplete circuit detection from PDQ_Report()
+ * NJG on Saturday, May 21, 2016 - Tested incomplete PDQ circuit detection
+ *
  *  $Id$
  */
 
@@ -74,9 +75,7 @@ void PDQ_Solve(int meth)
         sprintf(s1, "PDQ_Solve: No PDQ service demands defined.\n");
         errmsg(p, s1);
     }
-        
-
-
+    
     method = meth;
 
     switch (method) {
@@ -185,7 +184,7 @@ void PDQ_Solve(int meth)
                 maxTP = maxXX;
 			}
             
-        }  // loop over k 
+        }   // loop over k
         
         
         if(job[c].network == CLOSED && mservers != 0) { //bail !!
@@ -229,7 +228,7 @@ void PDQ_Solve(int meth)
                 break;
         }
         
-    }  // loop over c 
+    }   // loop over c
 
     if (PDQ_DEBUG)
         debug(p, "Exiting");
