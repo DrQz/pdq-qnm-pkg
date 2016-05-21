@@ -9,6 +9,11 @@ ECHO_MESSAGE := "\n\nMaking chapter $@ PDQ files ...\n"
 
 
 PDQ_VERSION=$(shell tools/getversion)
+DISTRIB_BUILD_TMP := /tmp/pdq-dists
+DISTRIB_FULL := $(DISTRIB_BUILD_TMP)/FULL
+DISTRIB_R := $(DISTRIB_BUILD_TMP)/R
+DISTRIB_PYTHON := $(DISTRIB_BUILD_TMP)/python
+DISTRIB_PERL5 := $(DISTRIB_BUILD_TMP)/perl5
 
 
 all:	lib perl5 R python examples
@@ -37,21 +42,9 @@ swig:
 	make --directory=perl5 -f setup.mk swig
 	make --directory=python swig
 	make --directory=R swig
-#	-(cd perl5; swig -perl5 -o pdq_wrap.c ../pdq.i)
-#	-(cd python; swig -python -o pdq_wrap.c ../pdq.i)
-#	-(cd R; swig -r -o pdq/src/pdq.c ../pdq.i; mv pdq/src/pdq.R pdq/R)
 
 #---------------------------------------------------------------------
 
-#test:
-#	-(cd examples; make test)
-
-# test:
-# 	for num in $(CHPLIST); do\
-# 		echo;echo; \
-# 		echo "Making chapter $$num PDQ files ..."; \
-# 		(cd examples/ppa_1998/chap$$num; make -f Makefile all);\
-# 	done
 test:
 	make --directory=examples test
 
@@ -61,24 +54,30 @@ clean:
 	-/bin/rm *~ 
 	make --directory=lib clean
 	make --directory=perl5 -f setup.mk clean
-	make --directory=examples clean
 	make --directory=python clean
 	make --directory=R clean
+	make --directory=examples clean
 
 #---------------------------------------------------------------------
 
 dist: swig
 	@echo $(PDQ_VERSION)
-	-rm -rf /tmp/pdq /tmp/pdq.tar /tmp/pdq.tar.gz
-	-mkdir /tmp/pdq
-	-cp -r . /tmp/pdq
-	-(cd /tmp/pdq; find . -name CVS -exec rm -rf \{\} \;)
-	-(cd /tmp/pdq; rm headache.cfg header.txt)
-	-(cd /tmp; tar cvf pdq.tar pdq; gzip pdq.tar)
-	-rm -rf /tmp/pdq
-	-mv /tmp/pdq.tar.gz ../PDQ-$(PDQ_VERSION).tar.gz
-	make --directory=R dist
+	-rm -rf $(DISTRIB_BUILD_TMP)
+	-mkdir -p $(DISTRIB_FULL)/pdq
+	-tar -cf - --exclude=.git . | (cd $(DISTRIB__FULL)/pdq; tar -xf - )
+#	-(cd /tmp/pdq; rm headache.cfg header.txt)
+	-(cd $(DISTRIB_FULL); tar cvf pdq.tar pdq; gzip pdq.tar)
+	-rm -rf $(DISTRIB_FULL)/pdq
+	-mv $(DISTRIB_FULL)/pdq.tar.gz $(DISTRIB_FULL)/PDQ-$(PDQ_VERSION).tar.gz
+	make --directory=R dist	
+	-mkdir -p $(DISTRIB_R)
+	-cp R/*.tar.gz $(DISTRIB_R)/
 	make --directory=perl5 -f setup.mk dist
+	-mkdir -p $(DISTRIB_PERL5)
+	-cp perl5/*.tar.gz $(DISTRIB_PERL5)/
 	make --directory=python dist
+	-mkdir -p $(DISTRIB_PYTHON)
+	-cp python/dist/*.tar.gz $(DISTRIB_PYTHON)/
+	make clean
 
 #---------------------------------------------------------------------

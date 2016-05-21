@@ -5,10 +5,24 @@
 #  $Id$
 #
 
-cat lib/PDQ_Lib.h | awk '
-/static char \*version/ {sub(/^\"/, "", $5); sub(/\";/, "", $8); print "PDQ " $5 " " $6 " " $7 " " $8} '
+export OS=`uname -s`
 
-ls -lT lib | awk '
-/libpdq/ { print "Compiled on " $6 " " $7 " " $8 " " $9} '
+#On OSX use "stat cmd
+#On Linux us date with -r option
+
+export STATCMD="stat -f%Sm"
+
+case $OS in 
+    Linux) STATCMD="date -r" 
+esac 
+
+if [ -f lib/PDQ_Lib.h ]; then
+  awk ' /static char \*version/ {sub(/^\"/, "", $5); sub(/\";/, "", $8); print "PDQ " $5 " " $6 " " $7 " " $8} ' lib/PDQ_Lib.h
+fi
+
+if [ -f lib/libpdq* ]; then
+  COMPILETIME=`$STATCMD lib/libpdq*`
+  printf "Compiled on %s\n" "$COMPILETIME"
+fi
 
 exit 0
