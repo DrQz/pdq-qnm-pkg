@@ -154,23 +154,29 @@ typedef struct {
 
 // ************************************
 // Do NOT convert to 'void' or will conflict with SWIG compile
+// Updated for PDQ 7 by NJG on Saturday, May 21, 2016
+// Converted all PDQ Create prototypes to void
 // ************************************
 
-int     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
-int     PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *think);
 // Define the workload for a closed-circuit queueing model
+//int     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
+void     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
+int     PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *think);
 
-int     PDQ_CreateOpen(char *name, double lambda);
-int     PDQ_CreateOpen_p(char *name, double *lambda);
 // Define the workload in an open-circuit queueing * model.
+//int     PDQ_CreateOpen(char *name, double lambda);
+void     PDQ_CreateOpen(char *name, double lambda);
+int     PDQ_CreateOpen_p(char *name, double *lambda);
 
-int     PDQ_CreateNode(char *name, int device, int sched); 
 // Define a single queueing center in either a closed or open circuit
+//int     PDQ_CreateNode(char *name, int device, int sched);
+void     PDQ_CreateNode(char *name, int device, int sched);
 
-// New in PDQ v5.0. Added by NJG on Wed Feb 25, 2009
-int     PDQ_CreateMultiNode(int servers, char *name, int device, int sched); 
 // Define multiserver queueing center in either a closed or open circuit
 // Prototype as defined in Chapter 6 of the "Perl::PDQ" book
+// New in PDQ v5.0. Added by NJG on Wed Feb 25, 2009
+//int     PDQ_CreateMultiNode(int servers, char *name, int device, int sched);
+void     PDQ_CreateMultiNode(int servers, char *name, int device, int sched);
 
 //------------------------------------------------------
 // Next 2 functions will be used when current PDQ Create functions become procedures
