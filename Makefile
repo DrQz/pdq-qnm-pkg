@@ -64,7 +64,7 @@ dist: swig
 	@echo $(PDQ_VERSION)
 	-rm -rf $(DISTRIB_BUILD_TMP)
 	-mkdir -p $(DISTRIB_FULL)/pdq
-	-tar -cf - --exclude=.git . | (cd $(DISTRIB__FULL)/pdq; tar -xf - )
+	-export DISTRIB_FULL=$(DISTRIB_FULL) ; tar -cf - --exclude=.git . | (cd ${DISTRIB_FULL}/pdq; tar -xf - )
 #	-(cd /tmp/pdq; rm headache.cfg header.txt)
 	-(cd $(DISTRIB_FULL); tar cvf pdq.tar pdq; gzip pdq.tar)
 	-rm -rf $(DISTRIB_FULL)/pdq
