@@ -46,3 +46,4 @@ PDQ_SP = 20
 PDQ_MP = 21
 TOL = 0.0010
 
+loadModule("pdq",TRUE)

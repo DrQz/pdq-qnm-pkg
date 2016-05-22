@@ -30,4 +30,5 @@ clean:
 	$(RM)  $(SOURCES) 
 	$(RM) $(HEADERS)
 	$(RM)  -r pdq/src-i386 pdq/src-x86_64
+	$(RM)  -f pdq/src/*.o pdq/src/*.so pdq/src/*.a
 	$(RM)  -f *.tar.gz

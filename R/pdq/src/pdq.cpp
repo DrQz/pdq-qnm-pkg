@@ -26,47 +26,37 @@ extern "C" {
 #include "PDQ_Global.h"
 };
 
-//using namespace std;
 
-int CreateClosed(std::string pdq_name,int should_be_class, double pop, double think) {
+void CreateClosed(std::string pdq_name,int should_be_class, double pop, double think) {
     char *name = new char[ pdq_name.size() +1 ];
-    int result;
     std::copy(pdq_name.begin(), pdq_name.end(),name);
     name[pdq_name.size()] = '\0';
-    result = PDQ_CreateClosed(name,should_be_class,pop,think);
+    PDQ_CreateClosed(name,should_be_class,pop,think);
     delete[] name;                          
-    return(result);
-
 }
 
-int CreateOpen( std::string pdq_name, double lambda ) {
+void CreateOpen( std::string pdq_name, double lambda ) {
     char *name = new char[ pdq_name.size() +1 ];
-    int result;
     std::copy(pdq_name.begin(), pdq_name.end(),name);
     name[pdq_name.size()] = '\0';
-    result = PDQ_CreateOpen(name,lambda);
+    PDQ_CreateOpen(name,lambda);
     delete[] name;
-    return(result);
 }
 
-int CreateNode( std::string pdq_name, int device, int sched ) {
+void CreateNode( std::string pdq_name, int device, int sched ) {
     char *name = new char[ pdq_name.size() +1 ];
-    int result;
     std::copy(pdq_name.begin(), pdq_name.end(),name);
     name[pdq_name.size()] = '\0';
-    result = PDQ_CreateNode(name,device,sched);
+    PDQ_CreateNode(name,device,sched);
     delete[] name;
-    return(result);
 }
 
-int CreateMultiNode(int servers, std::string pdq_name, int device, int sched ) {
+void CreateMultiNode(int servers, std::string pdq_name, int device, int sched ) {
     char *name = new char[ pdq_name.size() +1 ];
-    int result;
     std::copy(pdq_name.begin(), pdq_name.end(),name);
     name[pdq_name.size()] = '\0';
-    result = PDQ_CreateMultiNode(servers,name,device,sched);
+    PDQ_CreateMultiNode(servers,name,device,sched);
     delete[] name;
-    return(result);
 }
 
 int GetStreamsCount(void) {
@@ -320,5 +310,4 @@ RCPP_MODULE(pdq){
     function( "GetComment" , &GetComment  , "documentation for GetComment " );
         
 }                     
-
 
