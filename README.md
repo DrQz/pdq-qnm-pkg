@@ -23,6 +23,8 @@ computer performance analysis.
 
 **License:** PDQ is distributed as OSS under the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
 
+**Synopsis:** [PDQ library functions](http://www.perfdynamics.com/Tools/PDQman.html)
+
 **Examples:** See the `examples/` [directory](https://github.com/DrQz/pdq-qnm-pkg/tree/master/examples).
 
 Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
