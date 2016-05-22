@@ -11,21 +11,14 @@ CreateOpen(name, lambda)
   \item{name}{ The string used to identify the workload in reports and as an argument to other functions }
   \item{lambda}{ The arrival rate per unit time into the queueing circuit. }
 }
-\details{
-}
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
 \author{
 Neil Gunther <njgunther@perfdynamics.com, with
 }
-\note{ 
-}
-\seealso{ }
 \examples{
 library("pdq")
 Init("server")
 CreateOpen("IO_Cmds", 10.0)
 }
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

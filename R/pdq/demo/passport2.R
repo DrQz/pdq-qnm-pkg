@@ -13,7 +13,7 @@
 #*  KIND, either express or implied.                                          */
 #******************************************************************************/
 
-# $Id$
+# $Id: passport2.R,v 1.2 2012/11/13 07:40:24 earl-lang Exp $
 
 #* From passport2.c
 #* Jackson network with feedback.

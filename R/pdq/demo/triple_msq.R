@@ -13,7 +13,7 @@
 #/*  KIND, either express or implied.                                           */
 #/*******************************************************************************/
 
-# $Id$
+# $Id: triple_msq.R,v 1.2 2012/11/13 07:18:58 earl-lang Exp $
 
 # * From triple_msq.c
 # * Test case for 3 M/M/m queues in tandem

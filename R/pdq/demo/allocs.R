@@ -27,7 +27,7 @@
 # Ported to R by PJP on Wed, Aug 1, 2012
 # Updated by NJG on Monday, November 12, 2012
 #
-# $Id$
+# $Id: allocs.R,v 1.3 2012/11/13 05:18:17 earl-lang Exp $
 
 guests      <- 8
 guestsHi    <- 3

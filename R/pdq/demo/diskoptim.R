@@ -18,7 +18,7 @@
 # Solve fast-slow disk I/O optimization problem
 # by searching for lowest mean response time.
 #
-# $Id$
+# $Id: diskoptim.R,v 1.3 2012/11/13 18:36:42 earl-lang Exp $
 
 require(pdq)
 

@@ -19,9 +19,7 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 \author{
 Neil Gunther <njgunther@perfdynamics.com, with
 }
-\note{ 
-}
-\seealso{ }
+
 \examples{
 library("pdq")
 clients = 200
@@ -46,5 +44,3 @@ for (i in 1:clients) {
     nopt<-(20*stime+think)/stime
  }
 }
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

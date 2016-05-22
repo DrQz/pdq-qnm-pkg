@@ -13,17 +13,12 @@ SetVisits(nodename, workname, visits, service)
   \item{visits}{ Number of visits to that node. }
   \item{service}{ Service time the workload requires at that node (in timebase units). }
 }
-\details{
-}
 \author{
 Neil Gunther <njgunther@perfdynamics.com
 }
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library(pdq)
 Init("ClosedCircuit")
@@ -31,7 +26,3 @@ CreateClosed("DB_Workers", TERM, 57.4, 31.6)
 CreateNode("cpu", CEN, FCFS)
 SetVisits("cpu", "DB_Workers", 10.0, 0.013)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

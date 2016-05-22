@@ -13,7 +13,7 @@
 #  KIND, either express or implied.
 ############################################################################
 
-#  $Id$
+#  $Id: florida.R,v 1.8 2012/11/18 07:25:19 earl-lang Exp $
 
 # From florida.pl
 require(pdq)

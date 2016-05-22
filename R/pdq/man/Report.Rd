@@ -8,17 +8,12 @@ Report generates a formatted report that includes the total number of nodes and 
 \usage{
 Report()
 }
-\details{
-}
 \author{
 Neil Gunther <njgunther@perfdynamics.com
 }
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library(pdq)
 
@@ -33,5 +28,3 @@ SetDemand("server", "work", service_time)
 Solve(CANON)
 Report()
 }
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

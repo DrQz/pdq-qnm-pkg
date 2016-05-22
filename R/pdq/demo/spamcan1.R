@@ -25,7 +25,7 @@
 # This simple M/M/4 model gave results that were in surprisingly
 # good agreement with monitored queue lengths.
 #
-# $Id$
+# $Id: spamcan1.R,v 1.2 2013/02/13 03:04:58 pjpuglia Exp $
 
 
 # Measured performance parameters

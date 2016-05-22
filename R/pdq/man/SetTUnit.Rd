@@ -19,16 +19,9 @@ Neil Gunther <njgunther@perfdynamics.com
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library(pdq)
 Init("PDQ Model")
 CreateOpen("work", 0.75)
 SetTUnit("Minutes")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

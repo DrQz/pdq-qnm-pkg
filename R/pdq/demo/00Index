@@ -14,7 +14,6 @@ mm1                     From examples/ppdq_2005/pdq_models/mm1.pl
 mmm                     From examples/MultiServer/mmm.py
 moreq                   Example script 1 from original package
 morez                   Example script 2 from original package
-mwl-open				Multiclass workload on open network with single server
 orca                    From examples/Linux Magazine/orca.py
 passport2               From examples/Passport/passport2.c
 spamcan1                From examples/Linux Magazine/spamcan1.py

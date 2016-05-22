@@ -10,24 +10,15 @@ SetWUnit(unitName)
 \arguments{
   \item{unitName}{ ~~Describe \code{unitName} here~~ }
 }
-\details{
-}
 \author{
 Neil Gunther <njgunther@perfdynamics.com
 }
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library(pdq)
 Init("OpenCircuit")
 CreateOpen("SAN_controller", 200)
 SetWUnit("I/O_Reqs")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

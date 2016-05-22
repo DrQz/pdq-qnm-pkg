@@ -43,7 +43,7 @@
 #	The only only parameter that might be made more realistic for this
 #	bookstore example, is the browsing time, e.g., increase to 65 mins.
 #		
-#	$Id$
+#	$Id: bookstore.R,v 1.3 2012/11/13 05:41:43 earl-lang Exp $
 # 
 
 

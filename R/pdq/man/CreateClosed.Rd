@@ -26,9 +26,6 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 \author{
 Neil Gunther <njgunther@perfdynamics.com, with
 }
-\note{ 
-}
-\seealso{ }
 \examples{
 library("pdq")
 clients <- 200

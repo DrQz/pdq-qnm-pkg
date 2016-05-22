@@ -41,7 +41,6 @@ $(EXAMPLES):
 swig:
 	make --directory=perl5 -f setup.mk swig
 	make --directory=python swig
-	make --directory=R swig
 
 #---------------------------------------------------------------------
 

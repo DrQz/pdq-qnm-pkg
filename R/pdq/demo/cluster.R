@@ -13,7 +13,7 @@
 #  KIND, either express or implied.
 ###############################################################################
 
-# $Id$
+# $Id: cluster.R,v 1.2 2012/11/13 05:48:20 earl-lang Exp $
 
 #cluster.pl
 think <- 10.0

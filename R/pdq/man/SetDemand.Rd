@@ -13,17 +13,12 @@ SetDemand(nodename, workname, time)
   \item{time}{ Service demand (in units of time) required by the workload at
 that node. }
 }
-\details{
-}
 \author{
 Neil Gunther <njgunther@perfdynamics.com
 }
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library(pdq)
 Init("ClosedCircuit")
@@ -35,7 +30,3 @@ CreateNode("cpu", CEN, FCFS);
 SetDemand("cpu", "DB_Workers", 0.130);
 SetDemand("cpu", "Fax_Report", 3.122);
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

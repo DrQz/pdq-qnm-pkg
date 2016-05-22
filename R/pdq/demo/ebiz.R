@@ -15,7 +15,7 @@
 
 # From ebiz.pl
 #
-# $Id$
+# $Id: ebiz.R,v 1.3 2013/02/13 03:04:58 pjpuglia Exp $
 
 require(pdq)
 

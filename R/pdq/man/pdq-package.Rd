@@ -9,12 +9,12 @@ The PDQ performance analyzer uses queueing-theory concepts to represent computer
 \details{
 \tabular{ll}{
 Package: \tab pdq\cr
-Version: \tab \Sexpr[stage=render]{packageVersion("pdq")}\cr
-Date: \tab \Sexpr[stage=render]{packageDescription("pdq")$Date}\cr
+Version: \tab \Sexpr[stage=render]{utils:::packageDescription("pdq")$Version}\cr
+Date: \tab \Sexpr[stage=render]{utils:::packageDescription("pdq")$Date}\cr
 License: \tab MIT\cr
 URL: \tab http://www.perfdynamics.com/Tools/PDQ.html\cr
 \tab http://sourceforge.net/projects/pdq-qnm-pkg/\cr
-Built: \tab \Sexpr[stage=render]{packageDescription("pdq")$Built}\cr
+Built: \tab \Sexpr[stage=render]{utils:::packageDescription("pdq")$Built}\cr
 }
 }
 
@@ -31,8 +31,6 @@ Gunther, N. J. (2000) \emph{The Practical Performance Analyst }. Lincoln, Nebras
 Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ (2nd edn.)}. Berlin, Heidelberg: Springer.
 }
 \keyword{ package }
-\seealso{
-}
 \examples{
 library(pdq)
 # Model globals

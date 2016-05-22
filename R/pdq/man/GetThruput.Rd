@@ -28,14 +28,9 @@ Neil Gunther <njgunther@perfdynamics.com
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library("pdq")
 Init("server")
 CreateOpen("IO_Cmds", 10.0)
 tp = GetThruput(TRANS, "IO_Cmds")
 }
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

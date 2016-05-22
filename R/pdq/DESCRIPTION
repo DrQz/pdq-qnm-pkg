@@ -1,12 +1,16 @@
 Package: pdq
-Version: 6.2-0
-Date: 2013-01-10
+Type: Package
 Title: PDQ
-Author: Neil Gunther <njgunther@perfdynamics.com, with
- contributions from Phil Feller <phil@philfeller.com>.
-Maintainer: Phil Feller <phil@philfeller.com>
+Version: 7.0-0
+Date: 2016-05-21
+Author: Neil Gunther <njgunther@perfdynamics.com>, with
+ contributions from Paul Puglia <pjpuglia@sourceforge.net>
+Maintainer: Neil Gunther <njgunther@perfdynamics.com>, with
 Description: The PDQ performance analyzer uses queueing-theory concepts to represent computer systems and analyze their performance characteristics.  It is a queueing model solver, not a simulator.  The queueing-theory models discussed in \emph{Analyzing Computer System Performance with Perl::PDQ} are incorporated into the solution methods used by PDQ.
 License: MIT
 URL: http://www.perfdynamics.com/Tools/PDQ.html,
- http://sourceforge.net/projects/pdq-qnm-pkg/
-
+       https://github.com/DrQz/pdq-qnm-pkg 
+Depends: methods, Rcpp (>= 0.10.2)
+LinkingTo: Rcpp
+NeedsCompilation: yes
+Packaged: 2016-05-21 23:32:05 UTC; puglia

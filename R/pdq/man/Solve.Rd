@@ -24,9 +24,6 @@ Neil Gunther <njgunther@perfdynamics.com
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library("pdq")
 Init("Server")
@@ -36,7 +33,3 @@ CreateClosed("IOs", TERM, 100, think)
 SetDemand("disk","IOs",0.5)
 Solve(APPROX)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

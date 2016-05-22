@@ -29,9 +29,6 @@ Neil Gunther <njgunther@perfdynamics.com
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library("pdq")
 Init("server")
@@ -42,5 +39,3 @@ SetDemand("disk","IO_Cmds",0.5)
 Solve(EXACT);
 ut <- GetUtilization("disk", "IO_Cmds", TERM)
 }
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line

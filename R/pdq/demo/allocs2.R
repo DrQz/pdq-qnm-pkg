@@ -25,7 +25,7 @@
 # Ported to R PJP on Wed, Aug 1, 2012
 # Updated by NJG on Monday, November 12, 2012
 
-# $Id$
+# $Id: allocs2.R,v 1.2 2012/11/13 05:22:31 earl-lang Exp $
 
 
 guests <- 8

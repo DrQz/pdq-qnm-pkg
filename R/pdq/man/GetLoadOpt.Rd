@@ -27,9 +27,6 @@ Neil Gunther <njgunther@perfdynamics.com
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
-\note{
-}
-\seealso{ }
 \examples{
 library("pdq")
 clients <- 200
@@ -38,5 +35,3 @@ Init("")
 CreateClosed("work", TERM, clients, think)
 nopt <- GetLoadOpt(TERM, "work")
 }
-\keyword{ }
-\keyword{ }% __ONLY ONE__ keyword per line
