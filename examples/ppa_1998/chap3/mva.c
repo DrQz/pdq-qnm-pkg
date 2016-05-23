@@ -35,8 +35,6 @@ int             N;              // no. of customers
 
 int main()
 {
-   int              noNodes;
-   int              noStreams;
 	int             k;
 	char            input[8];
 	double          atof();

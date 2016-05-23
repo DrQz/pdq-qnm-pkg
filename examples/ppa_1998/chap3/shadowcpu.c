@@ -16,8 +16,9 @@
 /*
  * shadowcpu.c
  *
- * Created by NJG: Fri May  3 18:41:04  2002
- *
+ * Created by NJG on Fri May  3 18:41:04  2002
+ * Updated by NJG on Sunday, May 22, 2016
+*
  * Taken from p.254 of "Capacity Planning and Performance Modeling," 
  * by Menasce, Almeida, and Dowdy, Prentice-Hall, 1994. 
  * 
@@ -33,8 +34,6 @@
 
 int main()
 {
-   int              noNodes;
-   int              noStreams;
    char *noPri = "CPU Scheduler - No Pri";
    char *priOn = "CPU Scheduler - Pri On";
    float Ucpu_prod;
@@ -48,19 +47,19 @@ int main()
 
    // workloads ...
 
-   noStreams = PDQ_CreateClosed("Production", TERM, 20.0, 20.0);
-   noStreams = PDQ_CreateClosed("Developmnt", TERM, 15.0, 15.0);
+   PDQ_CreateClosed("Production", TERM, 20.0, 20.0);
+   PDQ_CreateClosed("Developmnt", TERM, 15.0, 15.0);
 
    // queueing noNodes ...
 
-   noNodes = PDQ_CreateNode("CPU", CEN, FCFS);
+   PDQ_CreateNode("CPU", CEN, FCFS);
 
    if (PRIORITY) { 
-   	noNodes = PDQ_CreateNode("shadCPU", CEN, FCFS);
+   	PDQ_CreateNode("shadCPU", CEN, FCFS);
    }
 
-   noNodes = PDQ_CreateNode("DK1", CEN, FCFS);
-   noNodes = PDQ_CreateNode("DK2", CEN, FCFS);
+   PDQ_CreateNode("DK1", CEN, FCFS);
+   PDQ_CreateNode("DK2", CEN, FCFS);
 
    // service demands at each node ...
 
@@ -89,15 +88,12 @@ int main()
 
 
 float GetProdU(void) {
-   int              noNodes;
-   int              noStreams;
-
    PDQ_Init("");
 
-   noStreams = PDQ_CreateClosed("Production", TERM, 20.0, 20.0);
-   noNodes = PDQ_CreateNode("CPU", CEN, FCFS);
-   noNodes = PDQ_CreateNode("DK1", CEN, FCFS);
-   noNodes = PDQ_CreateNode("DK2", CEN, FCFS);
+   PDQ_CreateClosed("Production", TERM, 20.0, 20.0);
+   PDQ_CreateNode("CPU", CEN, FCFS);
+   PDQ_CreateNode("DK1", CEN, FCFS);
+   PDQ_CreateNode("DK2", CEN, FCFS);
 
    PDQ_SetDemand("CPU", "Production", 0.30);
    PDQ_SetDemand("DK1", "Production", 0.08);

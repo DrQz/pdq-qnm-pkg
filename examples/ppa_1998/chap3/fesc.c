@@ -44,9 +44,6 @@ int main()
 	/****************************
 	 * Model specific variables *
 	 ****************************/
-
-   int              noNodes;
-   int              noStreams;
 	int              j;
 	int              n;
 	int              max_pgm = 3;
@@ -127,11 +124,11 @@ void mem_model(int n, int m)
 
 			PDQ_Init("");
 
-			noNodes = PDQ_CreateNode("CPU", CEN, FCFS);
-			noNodes = PDQ_CreateNode("DK1", CEN, FCFS);
-			noNodes = PDQ_CreateNode("DK2", CEN, FCFS);
+			PDQ_CreateNode("CPU", CEN, FCFS);
+			PDQ_CreateNode("DK1", CEN, FCFS);
+			PDQ_CreateNode("DK2", CEN, FCFS);
 
-			noStreams = PDQ_CreateClosed("work", TERM, (float) i, 0.0);
+			PDQ_CreateClosed("work", TERM, (float) i, 0.0);
 
 			PDQ_SetDemand("CPU", "work", 3.0);
 			PDQ_SetDemand("DK1", "work", 4.0);

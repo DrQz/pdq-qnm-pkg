@@ -30,9 +30,6 @@ int main()
    extern JOB_TYPE *job;
    extern NODE_TYPE *node;
 
-   int              noNodes;
-   int              noStreams;
-
    double           arrivals = 16.0 / 3600;	/* 16 applns per hour */
 
    /* Branching probabilities and weights */
@@ -47,12 +44,12 @@ int main()
    /* Initialize and solve the model */
    PDQ_Init("Passport Office");
 
-   noStreams = PDQ_CreateOpen("Applicant", 0.00427);
+   PDQ_CreateOpen("Applicant", 0.00427);
 
-   noNodes = PDQ_CreateNode("Window1", CEN, FCFS);
-   noNodes = PDQ_CreateNode("Window2", CEN, FCFS);
-   noNodes = PDQ_CreateNode("Window3", CEN, FCFS);
-   noNodes = PDQ_CreateNode("Window4", CEN, FCFS);
+   PDQ_CreateNode("Window1", CEN, FCFS);
+   PDQ_CreateNode("Window2", CEN, FCFS);
+   PDQ_CreateNode("Window3", CEN, FCFS);
+   PDQ_CreateNode("Window4", CEN, FCFS);
 
    PDQ_SetDemand("Window1", "Applicant", 20.0);
    PDQ_SetDemand("Window2", "Applicant", 600.0 * w2);
