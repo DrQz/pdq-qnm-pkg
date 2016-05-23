@@ -30,8 +30,6 @@
 
 int main(int argc, char *argv[])
 {
-   extern int       nodes;
-   extern int       streams;
    extern JOB_TYPE *job;
 
    int              k;
@@ -42,8 +40,7 @@ int main(int argc, char *argv[])
    void             nullit();
    void             itoa();
 
-   /* input parameters */
-
+   // input parameters
    double           think = 10.0;
    /*int             users = 800;*/
    int              users = 300;
@@ -68,14 +65,13 @@ int main(int argc, char *argv[])
 
    PDQ_Init("Teradata DBC-10/12");
 
-   /* Create parallel centers */
-
+   //Create parallel centers
    for (k = 0; k < Nifp; k++) {
       // itoa(k, nstr);
       // strcpy(name, "IFP");
       // strcat(name, nstr);
       sprintf(name, "IFP%d", k);
-      nodes = PDQ_CreateNode(name, CEN, FCFS);
+      PDQ_CreateNode(name, CEN, FCFS);
       // nullit(name);
       // nullit(nstr);
    }
@@ -85,7 +81,7 @@ int main(int argc, char *argv[])
       // strcpy(name, "AMP");
       // strcat(name, nstr);
       sprintf(name, "AMP%d", k);
-      nodes = PDQ_CreateNode(name, CEN, FCFS);
+      PDQ_CreateNode(name, CEN, FCFS);
       // nullit(name);
       // nullit(nstr);
    }
@@ -95,14 +91,12 @@ int main(int argc, char *argv[])
       // strcpy(name, "DSU");
       // strcat(name, nstr);
       sprintf(name, "DSU%d", k);
-      nodes = PDQ_CreateNode(name, CEN, FCFS);
+      PDQ_CreateNode(name, CEN, FCFS);
       // nullit(name);
       // nullit(nstr);
    }
 
-   streams = PDQ_CreateClosed("query", TERM, (double) users, think);
-
-   /*PDQ_SetGraph("query", 100); - unsupported call */
+   PDQ_CreateClosed("query", TERM, (double) users, think);
 
    for (k = 0; k < Nifp; k++) {
       // itoa(k, nstr);
@@ -115,37 +109,23 @@ int main(int argc, char *argv[])
    }
 
    for (k = 0; k < Namp; k++) {
-      // itoa(k, nstr);
-      // strcpy(name, "AMP");
-      // strcat(name, nstr);
       sprintf(name, "AMP%d", k);
       PDQ_SetDemand(name, "query", Samp / Namp);
-      // nullit(name);
-      // nullit(nstr);
    }
 
    for (k = 0; k < Ndsu; k++) {
-      // itoa(k, nstr);
-      // strcpy(name, "DSU");
-      // strcat(name, nstr);
       sprintf(name, "DSU%d", k);
       PDQ_SetDemand(name, "query", Sdsu / Ndsu);
-      // nullit(name);
-      // nullit(nstr);
    }
 
-   /* 300 nodes takes about a minute to solve on a PowerMac */
+   // 300 nodes takes about a minute to solve on a PowerMac
 
    fprintf(stdout, "Solving %s... ", sol_name);
    fflush(stdout);
 
    PDQ_Solve(sol_mode);
    printf("Done.\n");
-   /* PDQ_PrintXLS(); */
-   PDQ_Report();
-
-   return 0;
-   
+   PDQ_Report();   
 }  
 
 

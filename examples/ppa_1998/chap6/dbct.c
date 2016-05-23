@@ -28,9 +28,7 @@
 
 //-------------------------------------------------------------------------
 
-int main()
-{
-   extern int       nodes, streams;
+int main() {
    extern JOB_TYPE *job;
 
    int              k;
@@ -55,13 +53,12 @@ int main()
 
    PDQ_Init("Teradata DBC-10/12");
 
-   /* Create parallel centers */
-
+   // Create parallel centers
    for (k = 0; k < Nifp; k++) {
       itoa(k, nstr);
       strcpy(name, "IFP");
       strcat(name, nstr);
-      nodes = PDQ_CreateNode(name, CEN, FCFS);
+      PDQ_CreateNode(name, CEN, FCFS);
       nullit(name);
       nullit(nstr);
    }
@@ -70,7 +67,7 @@ int main()
       itoa(k, nstr);
       strcpy(name, "AMP");
       strcat(name, nstr);
-      nodes = PDQ_CreateNode(name, CEN, FCFS);
+      PDQ_CreateNode(name, CEN, FCFS);
       nullit(name);
       nullit(nstr);
    }
@@ -79,14 +76,13 @@ int main()
       itoa(k, nstr);
       strcpy(name, "DSU");
       strcat(name, nstr);
-      nodes = PDQ_CreateNode(name, CEN, FCFS);
+      PDQ_CreateNode(name, CEN, FCFS);
       nullit(name);
       nullit(nstr);
    }
 
-   streams = PDQ_CreateClosed("query", TERM, (double) users, think);
+   PDQ_CreateClosed("query", TERM, (double) users, think);
 
-   /*PDQ_SetGraph("query", 100); - unsupported call */
 
    for (k = 0; k < Nifp; k++) {
       itoa(k, nstr);
@@ -115,14 +111,13 @@ int main()
       nullit(nstr);
    }
 
-   /* 300 nodes takes about a minute to solve on a PowerMac */
+   // 300 nodes takes about a minute to solve on a PowerMac
 
    printf("Solving ... ");
    fflush(NULL);
 
    PDQ_Solve(APPROX);
    printf("Done.\n");
-   /* PDQ_PrintXLS(); */
    PDQ_Report();
 }
 
