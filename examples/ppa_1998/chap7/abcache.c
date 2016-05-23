@@ -16,8 +16,9 @@
 /*
  * abcache.c  -  Cache protocol scaling
  * 
- * Created by NJG: 13:03:53  07-19-96 
- * Revised by NJG: 18:58:44  04-02-99
+ * Created by NJG on 13:03:53  07-19-96
+ * Revised by NJG on 18:58:44  04-02-99
+ * Updated by NJG on Sunday, May 22, 2016 for PDQ 7.0.0
  * 
  *  $Id$
  */
@@ -126,29 +127,26 @@ int main()
    double          Ucwr = 0.0;
    double          Ucin = 0.0;
 
-	int             nodes;
-	int             streams;
-
    char            *model = "ABC Model";
 
    PDQ_Init(model);
 
    /* create single bus queueing center */
 
-   nodes = PDQ_CreateNode(BUS, CEN, FCFS);
+   PDQ_CreateNode(BUS, CEN, FCFS);
 
    /* create per CPU cache queueing centers */
 
    for (i = 0; i < MAXCPU; i++) {
       namex(i, L2C, cname);
-      nodes = PDQ_CreateNode(cname, CEN, FCFS);
+      PDQ_CreateNode(cname, CEN, FCFS);
    }
 
    /* create CPU nodes, workloads, and demands */
 
    for (i = 0; i < intwt(Nrwht, &Wrwht); i++) {
       namex(i, RWHT, wname);
-      streams = PDQ_CreateClosed(wname, TERM, Nrwht, Zrwht);
+      PDQ_CreateClosed(wname, TERM, Nrwht, Zrwht);
       namex(i, L2C, cname);
       PDQ_SetDemand(cname, wname, 1.0);
       PDQ_SetDemand(BUS, wname, 0.0);	/* no bus activity */
@@ -156,7 +154,7 @@ int main()
 
    for (i = 0; i < intwt(Nrdop, &Wrdop); i++) {
       namex(i, RDOP, wname);
-      streams = PDQ_CreateClosed(wname, TERM, Nrdop, Zrdop);
+      PDQ_CreateClosed(wname, TERM, Nrdop, Zrdop);
       namex(i, L2C, cname);
       PDQ_SetDemand(cname, wname, gen);	/* generate bus request */
       PDQ_SetDemand(BUS, wname, Srdop);	/* req + async data return */
@@ -165,7 +163,7 @@ int main()
    if (WBACK) {
       for (i = 0; i < intwt(Nwbop, &Wwbop); i++) {
 	 		namex(i, WROP, wname);
-	 		streams = PDQ_CreateClosed(wname, TERM, Nwbop, Zwbop);
+	 		PDQ_CreateClosed(wname, TERM, Nwbop, Zwbop);
 	 		namex(i, L2C, cname);
 	 		PDQ_SetDemand(cname, wname, gen);
 	 		PDQ_SetDemand(BUS, wname, Swbop);	/* asych write to memory ? */
@@ -173,7 +171,7 @@ int main()
    } else {			/* write-thru */
       for (i = 0; i < intwt(Nwthr, &Wwthr); i++) {
 	 		namex(i, WROP, wname);
-	 		streams = PDQ_CreateClosed(wname, TERM, Nwthr, Zwthr);
+	 		PDQ_CreateClosed(wname, TERM, Nwthr, Zwthr);
 	 		namex(i, L2C, cname);
 	 		PDQ_SetDemand(cname, wname, gen);
 	 		PDQ_SetDemand(BUS, wname, Swthr);
@@ -183,7 +181,7 @@ int main()
    if (WBACK) {
       for (i = 0; i < intwt(Ninvl, &Winvl); i++) {
 	 		namex(i, INVL, wname);
-	 		streams = PDQ_CreateClosed(wname, TERM, Ninvl, Zinvl);
+	 		PDQ_CreateClosed(wname, TERM, Ninvl, Zinvl);
 	 		namex(i, L2C, cname);
 	 		PDQ_SetDemand(cname, wname, gen);	/* gen + intervene */
 	 		PDQ_SetDemand(BUS, wname, 1.0);
@@ -253,7 +251,7 @@ int main()
    }
 
    printf("\n**** %s Results ****\n", model);
-   printf("PDQ nodes: %d  PDQ streams: %d\n", nodes, streams);
+   printf("PDQ nodes: %d  PDQ streams: %d\n", PDQ_GetNodesCount(), PDQ_GetStreamsCount());
    printf("Memory Mode: %s\n", WBACK ? "WriteBack" : "WriteThru");
    printf("Ncpu:  %2d\n", MAXCPU);
    printf("Nrwht: %5.2f (N:%2d  W:%5.2f)\n",
@@ -289,8 +287,7 @@ int main()
    printf("Uca%d[inval]: %5.2f %%\n", i, Ucin * 100.0);
    printf("Uca%d[total]: %5.2f %%\n", i, (Ucht + Ucrd + Ucwr + Ucin) * 100.0);
 
-   return 0;
-} 
+}
 
 
 void itoa(int n, char *s)
@@ -321,6 +318,7 @@ void itoa(int n, char *s)
 }
 
 
+
 void namex(int i, char *s, char *r)
 /* append index i to string s and return it in r */
 {
@@ -335,6 +333,7 @@ void namex(int i, char *s, char *r)
    strcat(s1, s2);
    strcpy(r, s1);
 }
+
 
 
 int intwt(double N, double *W)
