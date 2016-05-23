@@ -116,7 +116,7 @@ typedef struct {
 
 
 
-int main()
+int main(void)
 {
    extern int      nodes, streams;
    extern JOB_TYPE *job;
@@ -224,17 +224,17 @@ int main()
    strcpy(nodeMF, "MFRAME");
    strcpy(nodeTR, "TRLAN");
 
-   nodes = PDQ_CreateNode(nodePC, CEN, FCFS);
-   nodes = PDQ_CreateNode(nodeFS, CEN, FCFS);
-   nodes = PDQ_CreateNode(nodeGW, CEN, FCFS);
-   nodes = PDQ_CreateNode(nodeMF, CEN, FCFS);
+   PDQ_CreateNode(nodePC, CEN, FCFS);
+   PDQ_CreateNode(nodeFS, CEN, FCFS);
+   PDQ_CreateNode(nodeGW, CEN, FCFS);
+   PDQ_CreateNode(nodeMF, CEN, FCFS);
 
    for (i = 0; i < FS_DISKS; i++) {
-      nodes = PDQ_CreateNode(FDarray[i].label, CEN, FCFS);
+      PDQ_CreateNode(FDarray[i].label, CEN, FCFS);
    }
 
    for (i = 0; i < MF_DISKS; i++) {
-      nodes = PDQ_CreateNode(MDarray[i].label, CEN, FCFS);
+      PDQ_CreateNode(MDarray[i].label, CEN, FCFS);
    }
 
    /*
@@ -243,7 +243,7 @@ int main()
     * in the original CMG 1993 paper.
     */
 
-   nodes = PDQ_CreateNode(nodeTR, CEN, FCFS);
+   PDQ_CreateNode(nodeTR, CEN, FCFS);
 
    /*
     * Because the desktop PCs are all of the same type and emitting the same
@@ -263,12 +263,12 @@ int main()
    strcpy(dummyRQ, "RemQuotAgg");
    strcpy(dummySU, "StatUpdAgg");
 
-   streams = PDQ_CreateOpen(transCD, 1 * 4.0 * TPS);
-   streams = PDQ_CreateOpen(transRQ, 1 * 8.0 * TPS);
-   streams = PDQ_CreateOpen(transSU, 1 * 1.0 * TPS);
-   streams = PDQ_CreateOpen(dummyCD, (USERS - 1) * 4.0 * TPS);
-   streams = PDQ_CreateOpen(dummyRQ, (USERS - 1) * 8.0 * TPS);
-   streams = PDQ_CreateOpen(dummySU, (USERS - 1) * 1.0 * TPS);
+   PDQ_CreateOpen(transCD, 1 * 4.0 * TPS);
+   PDQ_CreateOpen(transRQ, 1 * 8.0 * TPS);
+   PDQ_CreateOpen(transSU, 1 * 1.0 * TPS);
+   PDQ_CreateOpen(dummyCD, (USERS - 1) * 4.0 * TPS);
+   PDQ_CreateOpen(dummyRQ, (USERS - 1) * 8.0 * TPS);
+   PDQ_CreateOpen(dummySU, (USERS - 1) * 1.0 * TPS);
 
    /*
    Define the service demands on each physical resource.
