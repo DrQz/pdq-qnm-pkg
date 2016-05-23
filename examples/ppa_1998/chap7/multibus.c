@@ -107,8 +107,6 @@ int main()
 void multiserver(int m, double stime)
 {
 	int              i;
-	int              nodes;
-	int              streams;
 	double           x;
 	char            *work = "reqs";
 	char            *node = "bus";
@@ -118,8 +116,8 @@ void multiserver(int m, double stime)
 
 		if (i <= m) {
 	 		PDQ_Init("multibus");
-	 		streams = PDQ_CreateClosed(work, TERM, (double) i, 0.0);
-	 		nodes = PDQ_CreateNode(node, CEN, ISRV);
+	 		PDQ_CreateClosed(work, TERM, (double) i, 0.0);
+	 		PDQ_CreateNode(node, CEN, ISRV);
 	 		PDQ_SetDemand(node, work, stime);
 	 		PDQ_Solve(EXACT);
 	 		x = PDQ_GetThruput(TERM, work);
