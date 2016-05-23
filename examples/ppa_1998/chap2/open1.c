@@ -31,10 +31,6 @@
 
 int main()
 {
-   //----- Deprecated since PDQ 6 -----
-   int              nodes;
-   int              streams;
-   
    //----- Model specific variables -----
    double           arrivRate    = 0.75;
    double           service_time = 1.0;
@@ -45,10 +41,10 @@ int main()
    
 
    //----- Define the queueing center -----
-   nodes = PDQ_CreateNode("server", CEN, FCFS);
+   PDQ_CreateNode("server", CEN, FCFS);
 
    //----- Define the workload and circuit type -----
-   streams = PDQ_CreateOpen("work", arrivRate);
+   PDQ_CreateOpen("work", arrivRate);
 
    //----- Define service demand due to workload on the queueing center ------
    PDQ_SetDemand("server", "work", service_time);
