@@ -28,9 +28,6 @@
 
 int main()
 {
-   //----- Deprecated since PDQ release 6
-   int              nodes;
-   int              streams;
    
    //----- Model-specific variables
    double           pop   = 100.0;
@@ -42,10 +39,10 @@ int main()
    PDQ_SetComment("This is a M/M/1/N/N/FCFS queue.");
 
    // Define the workload and circuit type
-   streams = PDQ_CreateClosed("compile", TERM, pop, think);
+   PDQ_CreateClosed("compile", TERM, pop, think);
 
    // Define the queueing center
-   nodes = PDQ_CreateNode("CPU", CEN, FCFS);
+   PDQ_CreateNode("CPU", CEN, FCFS);
 
    // Define service demand
    PDQ_SetDemand("CPU", "compile", servt);
