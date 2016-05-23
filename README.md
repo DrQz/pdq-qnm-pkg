@@ -19,7 +19,7 @@ computer performance analysis.
 
 **Maintainers:** Neil Gunther and Paul Puglia
 
-**Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia
+**Contributors:** Denny Chen, Phil Feller, Neil Gunther, Peter Harding, Paul Puglia, Samuel Zallocco
 
 **License:** PDQ is distributed as OSS under the [MIT license](https://en.wikipedia.org/wiki/MIT_License#License_terms).
 
