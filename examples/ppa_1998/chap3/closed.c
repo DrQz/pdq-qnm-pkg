@@ -45,8 +45,6 @@ int main()
    /****************************
     * Model specific variables *
     ****************************/
-   int              noNodes;
-	int              noStreams;
    int              solve_as;
    int              pop = 3.0;
    double           think = 0.1;
@@ -66,11 +64,11 @@ int main()
 
 	/* Define the workload and circuit type */
 
-	noStreams = PDQ_CreateClosed("w1", TERM, 1.0 * pop, think);
+	PDQ_CreateClosed("w1", TERM, 1.0 * pop, think);
 
 	/* Define the queueing center */
 
-	noNodes = PDQ_CreateNode("node", CEN, FCFS);
+	PDQ_CreateNode("node", CEN, FCFS);
 
 	/* Define service demand */
 
