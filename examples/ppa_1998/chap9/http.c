@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -28,9 +28,9 @@
 
 //-------------------------------------------------------------------------
 
-int main()
+int main(void)
 {
-   extern JOB_TYPE *job;
+   extern           JOB_TYPE *job;
    extern double    getjob_pop();
    extern int       getjob_index();
    extern double    PDQ_GetResponse();
@@ -40,9 +40,6 @@ int main()
    /****************************
 	* Model specific variables *
 	****************************/
-
-   int              noNodes;
-	int              noStreams;
    int              pop, servers = 2;
    int              s, w;
 
@@ -95,12 +92,13 @@ int main()
 
 		PDQ_Init("HTTPd_Server");
 
-		noStreams = PDQ_CreateClosed(work[w], TERM, 1.0 * pop, 0.0);
-		noNodes = PDQ_CreateNode("master", CEN, FCFS);
+		PDQ_CreateClosed(work[w], TERM, 1.0 * pop, 0.0);
+        
+		PDQ_CreateNode("master", CEN, FCFS);
 
 #ifdef PREFORK
 		for (s = 0; s < servers; s++) {
-			noNodes = PDQ_CreateNode(slave[s], CEN, FCFS);
+			PDQ_CreateNode(slave[s], CEN, FCFS);
 		}
 
 		PDQ_SetDemand("master", work[w], 0.0109);
@@ -109,7 +107,7 @@ int main()
 			PDQ_SetDemand(slave[s], work[w], time[w] / servers);
 		}
 #else				/* FORKING */
-	noNodes = PDQ_CreateNode("forks", CEN, ISRV);
+	PDQ_CreateNode("forks", CEN, ISRV);
 
 	PDQ_SetDemand("master", work[w], 0.0165);
 	PDQ_SetDemand("forks", work[w], time[w]);
@@ -122,8 +120,6 @@ int main()
 		 PDQ_GetThruput(TERM, work[w]),
 		 PDQ_GetResponse(TERM, work[w]));
    }
-
-   return(0);
 }
 
 

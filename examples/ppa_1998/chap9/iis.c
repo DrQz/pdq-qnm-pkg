@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -27,19 +27,18 @@
 #include "PDQ_Lib.h"
 
 
-int main()
+int main(void)
 {
 	extern double    getjob_pop();
 	extern int       getjob_index();
 	extern double    PDQ_GetResponse();
 	extern double    PDQ_GetThruput();
 	extern double    PDQ_GetUtilization();
-	extern JOB_TYPE *job;
+	extern           JOB_TYPE *job;
 
-	int              noNodes;
-	int              noStreams;
 	int              users;
 	int              delta;
+    
 	char            *model = "IIS Server";
 	char            *work = "http GET 20KB";
 	char            *node1 = "CPU";
@@ -80,12 +79,12 @@ int main()
 	for (users = 1; users <= 10; users++) {
 		PDQ_Init(model);
 
-		noStreams = PDQ_CreateClosed(work, TERM, (float) users, think);
+		PDQ_CreateClosed(work, TERM, (float) users, think);
 
-		noNodes = PDQ_CreateNode(node1, CEN, FCFS);
-		noNodes = PDQ_CreateNode(node2, CEN, FCFS);
-		noNodes = PDQ_CreateNode(node3, CEN, FCFS);
-		noNodes = PDQ_CreateNode(node4, CEN, FCFS);
+		PDQ_CreateNode(node1, CEN, FCFS);
+		PDQ_CreateNode(node2, CEN, FCFS);
+        PDQ_CreateNode(node3, CEN, FCFS);
+		PDQ_CreateNode(node4, CEN, FCFS);
 
 		// NOTE: timebase is seconds
 

@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -18,8 +18,10 @@
  *
  *  $Id$
  *
- * Created by NJG: Wed May  8 22:29:36  2002
- * Created by NJG: Fri Aug  2 08:57:31  2002
+ * Created by NJG on Wed May  8 22:29:36  2002
+ * Updated by NJG on Fri Aug  2 08:57:31  2002
+ * Updated by NJG on Sunday, May 22, 2016
+ *
  *
  * Based on D. Buch and V. Pentkovski, "Experience of Characterization of
  * Typical Multi-tier e-Business Systems Using Operational Analysis,"
@@ -31,7 +33,7 @@
  * is measured.  Transaction details are not specified in the paper.
  *
  * Thinktime Z should be zero by virtue of N = XR assumption in paper.
- * We find that a Z~27 mSecs is needed to calibrate thruputs and utilizations.
+ * We find that a Z ~ 27 milliseconds is needed to calibrate thruputs and utilizations.
  *
  */
 
@@ -48,7 +50,7 @@ int main()
 	extern double    PDQ_GetResponse();
 	extern double    PDQ_GetThruput();
 	extern double    PDQ_GetUtilization();
-	extern JOB_TYPE *job;
+	extern           JOB_TYPE *job;
 
 #define MAXUSERS  20
 
@@ -65,8 +67,6 @@ int main()
 
 	// User loads employed in WAS tool ...
 
-	int              noNodes;
-	int              noStreams;
 	int              users;
 
 	double           u1pdq[MAXUSERS+1];
@@ -105,13 +105,13 @@ int main()
 
 		PDQ_Init(model);
 
-		noStreams = PDQ_CreateClosed(work, TERM, (float) users, think);
+		PDQ_CreateClosed(work, TERM, (float) users, think);
 
-		noNodes = PDQ_CreateNode(node1, CEN, FCFS);
-		noNodes = PDQ_CreateNode(node2, CEN, FCFS);
-		noNodes = PDQ_CreateNode(node3, CEN, FCFS);
+		PDQ_CreateNode(node1, CEN, FCFS);
+		PDQ_CreateNode(node2, CEN, FCFS);
+		PDQ_CreateNode(node3, CEN, FCFS);
 
-		noNodes = PDQ_CreateNode(node4, CEN, FCFS);
+		PDQ_CreateNode(node4, CEN, FCFS);
 		//noNodes = PDQ_CreateNode(node5, CEN, FCFS);
 		//noNodes = PDQ_CreateNode(node6, CEN, FCFS);
 
