@@ -358,7 +358,8 @@ void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 
 void PDQ_CreateClosed(char *name, int should_be_class, double pop, double think)
 {
-	int foo = PDQ_CreateClosed_p(name, should_be_class, &pop, &think);
+    int foo;
+    foo = PDQ_CreateClosed_p(name, should_be_class, &pop, &think);
 }
 
 //-------------------------------------------------------------------------
@@ -440,7 +441,8 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 
 void PDQ_CreateOpen(char *name, double lambda)
 {
-	int foo = PDQ_CreateOpen_p(name, &lambda);
+    int foo;
+    foo = PDQ_CreateOpen_p(name, &lambda);
 }
 
 //-------------------------------------------------------------------------

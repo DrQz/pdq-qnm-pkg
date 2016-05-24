@@ -51,8 +51,8 @@ static double    qlen[MAXPOP1][MAXPOP2][MAXDEVS];
 void exact(void)
 {
 	extern int        streams, nodes;
-	extern NODE_TYPE *node;
-	extern JOB_TYPE  *job;
+	extern            NODE_TYPE *node;
+	extern            JOB_TYPE  *job;
 	extern char       s1[], s2[], s3[], s4[];
 	extern double     getjob_pop();
 
@@ -68,9 +68,8 @@ void exact(void)
 	if (streams > MAXCLASS) {
 		PRINTF("Streams = %d", streams);
 		sprintf(s1, "%d workload streams exceeds maximum of 3.\n", streams);
-		sprintf(s2, "(At workload: \"%s\" with population: %3.2f)\n",
-			s3, getjob_pop(c));
-		strcat(s1, s2);
+		//sprintf(s2, "(At workload: \"%s\" with population: %3.2f)\n", s3, getjob_pop(c));
+		//strcat(s1, s2);
 		errmsg(p, s1);
 	}
 

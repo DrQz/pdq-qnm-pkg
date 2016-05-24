@@ -25,7 +25,8 @@
  * Updated by NJG on Saturday, May 7, 2016.      Added approximate multiclass multiserver
  * Updated by NJG on Sunday, May 8, 2016.        Must choose APPROX solution method with
  *                                               multiclass multiserver MSQ nodes
- *
+ * Updated by NJG on Tuesday, May 24, 2016.      Cleaned up compiler wornings about unused variables
+*
  *  $Id$
  */
 
@@ -192,18 +193,18 @@ double sumU(int k)
 	// Compute the total utilization for device k
 	
     extern int        PDQ_DEBUG, streams, nodes;
-    extern JOB_TYPE  *job;
-    extern NODE_TYPE *node;
+    extern            JOB_TYPE  *job;
+    extern            NODE_TYPE *node;
 
 
     int               c;
     double            sum = 0.0;
-    char             *p = "sumU()";
+    //char             *p = "sumU()";
 
     for (c = 0; c < streams; c++) {
     	// NJG on Sunday, June 28, 2009 7:29:45 PM
         // The following if-else is a hack b/c multi-class workloads
-        // and multi-servers are currently incompatible. (I think)
+        // and multi-servers are currently incompatible.
          if (node[k].sched == MSQ) {
          	sum += node[k].utiliz[c];
          } else {

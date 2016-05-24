@@ -34,6 +34,7 @@
  *    o Queue was sometimes wrong for MSQ (too many divides by m)
  * NJG on Monday, February 25, 2013 removed blank line b/w Workload parameters
  * NJG on Sunday, May 15, 2016 moved incomplete circuit warning (line 154 ff.) to Solve()
+ * NJG on Tuesday, May 24, 2016. Cleaned up compiler wornings about unused variables
  *
  */
 
@@ -48,12 +49,12 @@
 
 //-------------------------------------------------------------------------
 
-int             syshdr;
-int             jobhdr;
-int             nodhdr;
-int             devhdr;
+int            syshdr;
+int            jobhdr;
+int            nodhdr;
+int            devhdr;
 
-extern char     *version;
+extern  char  *version;
 
 //----- Prototypes of internal print layout routins -----------------------
 
@@ -84,17 +85,17 @@ void PDQ_Report(void)
 	extern char     model[];
 	extern char     s1[], s2[], s3[], s4[];
 	extern int      streams, nodes, demands, PDQ_DEBUG;
-	extern JOB_TYPE *job;
+	extern          JOB_TYPE *job;
 
 	int             c;
-	int             prevclass;
+	//int             prevclass;
 	time_t          clock;
-	char           *pc;
+	//char           *pc;
 	char           *tstamp;
-	int             fillbase = 26; // was 25
-	int             fill;
+	size_t          fillbase = 26; // was 25
+	size_t          fill;
 	char           *pad = "                        "; // 24 was 23
-	FILE           *fp;
+	//FILE           *fp;
 	double          allusers = 0.0;
 	char           *p = "PDQ_Report()";
 
