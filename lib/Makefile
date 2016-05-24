@@ -27,7 +27,7 @@ OBJ     = \
 	PDQ_Utils.o
 
 ifeq ($(MACH),x86_64)
-CFLAGS	= -fPIC
+CFLAGS	= -fPIC -Wunused-variable -Wuninitialized -Wc++11-compat-deprecated-writable-strings
 endif
 
 #-----------------------------------------------------------
