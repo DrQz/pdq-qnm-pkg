@@ -54,7 +54,6 @@ int            jobhdr;
 int            nodhdr;
 int            devhdr;
 
-extern  char  *version;
 
 //----- Prototypes of internal print layout routins -----------------------
 
@@ -131,8 +130,8 @@ void PDQ_Report(void)
 	strcpy(s2, model);
 	strncat(s2, pad, fill);
 
-	fill = fillbase - strlen(version);
-	strcpy(s3, version);
+	fill = fillbase - strlen(VERSION);
+	strcpy(s3, VERSION);
 	strncat(s3, pad, fill);
 
 	PRINTF("\n");
