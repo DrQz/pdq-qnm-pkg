@@ -33,11 +33,13 @@
  *  $Id$
  */
 
-// The following string is read by the GetVersion and Report()
-// Do not modify order of fields
-// Must not contain more than 26 characters for Report() header
-//
-static char *version = "Version 7.0.0 Build 052116";
+// The following string constant is read by the GetVersion and Report()
+// Updated by NJG on Tuesday, May 24, 2016 from string literal to #define constant
+// to suppress compiler warnings.
+// Do not modify order of fields.
+// Must not contain more than 26 characters for Report() header.
+
+#define VERSION    "Version 7.0.0 Build 052116"
 
 
 //---- TYPES --------------------------------------------------------------
