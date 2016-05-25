@@ -34,7 +34,9 @@
  *    o Queue was sometimes wrong for MSQ (too many divides by m)
  * NJG on Monday, February 25, 2013 removed blank line b/w Workload parameters
  * NJG on Sunday, May 15, 2016 moved incomplete circuit warning (line 154 ff.) to Solve()
- * NJG on Tuesday, May 24, 2016. Cleaned up compiler wornings about unused variables
+ * NJG on Tuesday, May 24, 2016. 
+      o Cleaned up compiler wornings about unused variables
+      o VERSION is now a #defined comstant in PDQ_Lib.h
  *
  */
 
@@ -87,14 +89,11 @@ void PDQ_Report(void)
 	extern          JOB_TYPE *job;
 
 	int             c;
-	//int             prevclass;
 	time_t          clock;
-	//char           *pc;
 	char           *tstamp;
 	size_t          fillbase = 26; // was 25
 	size_t          fill;
 	char           *pad = "                        "; // 24 was 23
-	//FILE           *fp;
 	double          allusers = 0.0;
 	char           *p = "PDQ_Report()";
 
@@ -130,6 +129,7 @@ void PDQ_Report(void)
 	strcpy(s2, model);
 	strncat(s2, pad, fill);
 
+    // VERSION is now a #defined comstant in PDQ_Lib.h
 	fill = fillbase - strlen(VERSION);
 	strcpy(s3, VERSION);
 	strncat(s3, pad, fill);
@@ -798,10 +798,8 @@ void print_node_stats(int c, int should_be_class)
 			default:
 				// NJG on Friday, July 10, 2009
 				// devU = node[k].utiliz[c];
-				// node[k].utiliz[c] is not updated in either EXACT 
-				// or APPROX methods.
-				// Rather than implementing it in every relevant module, 
-				// we just use Little's law here.	
+				// node[k].utiliz[c] is not updated in either EXACT or APPROX methods.
+				// Rather than implementing it in all relevant modules, just use Little's law.
 				devU = X * node[k].demand[c];
 				devQ = X * node[k].resit[c];
 				devW = node[k].resit[c] - node[k].demand[c];
