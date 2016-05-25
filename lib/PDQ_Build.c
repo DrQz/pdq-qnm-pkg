@@ -20,12 +20,12 @@
  *
  * Created by NJG on 18:19:02  04-28-95 
  * Revised by NJG on 09:33:05  31-03-99
- * Updated by NJG on Mon, Apr 2, 2007 Added MSQ multiserver hack
- * Updated by NJG on Tue, Apr 3, 2007 Removed nested loops in Init
- * Updated by NJG on Wed, Apr 4, 2007 Changed MSQ -> devtype and m -> sched
- * Updated by NJG on Fri, Apr 6, 2007 Error if SetWUnit or SetTUnit before calling Create circuit
- * Updated by NJG on Wed Feb 25, 2009 Added CreateMultiNode function
- * Updated by PJP on Sat Nov 3, 2012  Added support for R
+ * Updated by NJG on Mon, Apr 2, 2007           Added MSQ multiserver hack
+ * Updated by NJG on Tue, Apr 3, 2007           Removed nested loops in Init
+ * Updated by NJG on Wed, Apr 4, 2007           Changed MSQ -> devtype and m -> sched
+ * Updated by NJG on Fri, Apr 6, 2007           Error if SetWUnit or SetTUnit before calling Create circuit
+ * Updated by NJG on Wed Feb 25, 2009           Added CreateMultiNode function
+ * Updated by PJP on Sat Nov 3, 2012            Added support for R
  * Updated by NJG on Saturday, January 12, 2013 Set CreateXXX count returns to zero
  * Updated by NJG on Saturday, May 21, 2016     Set all Create procs to voids
  *
@@ -81,8 +81,6 @@ void PDQ_Init(char *name)
 	extern void              allocate_nodes();
 	extern void              allocate_jobs();
 	char                    *p = "PDQ_Init()";
-
-	//int                     cc, kk; // remove
 	
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
@@ -202,21 +200,21 @@ void PDQ_Init(char *name)
 void  PDQ_SetComment(char *comment)
 {
    strncpy(Comment, comment, MAXBUF);
-}  /* PDQ_SetComment */
+}
 
 //-------------------------------------------------------------------------
 
 char*  PDQ_GetComment(void)
 {
    return Comment;
-}  /* PDQ_GetComment */
+}
 
 //-------------------------------------------------------------------------
 
 //int PDQ_CreateNode(char *name, int device, int sched)
 void PDQ_CreateNode(char *name, int device, int sched)
 {
-	extern NODE_TYPE *node;
+	extern          NODE_TYPE *node;
 	extern char     s1[], s2[];
 	extern int      nodes;
 	extern int      PDQ_DEBUG;
@@ -272,11 +270,8 @@ void PDQ_CreateNode(char *name, int device, int sched)
 
     // update global node count
     k = ++nodes;
-
-	//return nodes;
-	//return(0); // silence gcc warnings
 	
-}  /* PDQ_CreateNode */
+}  // PDQ_CreateNode
 
 
 //-------------------------------------------------------------------------
@@ -346,11 +341,8 @@ void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 
     // update global node count
 	k = ++nodes;
-
-	//return nodes;
-	//return(0); // silence gcc warnings
 	
-}  /* PDQ_CreateMultiNode */
+}  // PDQ_CreateMultiNode
 
 //-------------------------------------------------------------------------
 
@@ -432,10 +424,9 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 
 	c =  ++streams;
 
-	//return streams;
 	return(0); // silence gcc warnings
 
-}  /* PDQ_CreateClosed */
+}  // PDQ_CreateClosed
 
 //-------------------------------------------------------------------------
 
@@ -479,11 +470,9 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 
 	c =  ++streams;
 
-	//return streams;
 	return(0); // silence gcc warnings
-
 	
-}  /* PDQ_CreateOpen */
+}  // PDQ_CreateOpen
 
 //-------------------------------------------------------------------------
 
@@ -560,7 +549,7 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 		debug(p, "Exiting");
 	}
 		
-}  /* PDQ_SetDemand */
+}  // PDQ_SetDemand
 
 //-------------------------------------------------------------------------
 
@@ -590,7 +579,8 @@ void PDQ_SetVisits_p(char *nodename, char *workname, double *visits, double *ser
 		demand_ext = VISITS;
 	} else
 		errmsg(p, "Extension conflict");
-}  /* PDQ_SetVisits */
+
+}  // PDQ_SetVisits
 
 //-------------------------------------------------------------------------
 
@@ -611,7 +601,8 @@ void PDQ_SetWUnit(char* unitName)
 
 	resets(wUnit);
 	strcpy(wUnit, unitName);
-}  /* PDQ_SetWUnit */
+
+}  // PDQ_SetWUnit
 
 //-------------------------------------------------------------------------
 
@@ -631,7 +622,8 @@ void PDQ_SetTUnit(char* unitName)
 
 	resets(tUnit);
 	strcpy(tUnit, unitName);
-}  /* PDQ_SetTUnit */
+
+}  // PDQ_SetTUnit
 
 //----- Internal Functions ------------------------------------------------
 
@@ -664,7 +656,8 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 
 	if (PDQ_DEBUG)
 		debug(p, "Exiting");
-}  /* create_term_stream */
+
+}  // create_term_stream
 
 //-------------------------------------------------------------------------
 
@@ -695,7 +688,8 @@ void create_batch_stream(int net, char* label, double number)
 
 	if (PDQ_DEBUG)
 		debug(p, "Exiting");
-}  /* create_batch_stream */
+
+}  // create_batch_stream
 
 //-------------------------------------------------------------------------
 // Subroutines
@@ -718,7 +712,8 @@ void create_transaction(int net, char* label, double lambda)
 		  c, s1, job[c].trans->name, job[c].trans->arrival_rate);
 		resets(s1);
 	}
-}  /* create_transaction */
+    
+}  // create_transaction
 
 //-------------------------------------------------------------------------
 
@@ -726,7 +721,7 @@ void writetmp(FILE* fp, char* s)
 {
 	fprintf(fp, "%s", s);
 	PRINTF("%s", s);
-}  /* writetmp */
+}
 
 //-------------------------------------------------------------------------
 
