@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2013, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -68,8 +68,6 @@ void exact(void)
 	if (streams > MAXCLASS) {
 		PRINTF("Streams = %d", streams);
 		sprintf(s1, "%d workload streams exceeds maximum of 3.\n", streams);
-		//sprintf(s2, "(At workload: \"%s\" with population: %3.2f)\n", s3, getjob_pop(c));
-		//strcat(s1, s2);
 		errmsg(p, s1);
 	}
 
@@ -179,10 +177,10 @@ void exact(void)
 						}
 					}
 				}
-			}  /* over n2 */
-		}  /* over n1 */
-	}  /* over n0 */
-}  /* exact */
+			}  // loop over n2
+		}  // over n1
+	}  // over n0
+}  // function exact
 
 //-------------------------------------------------------------------------
 
