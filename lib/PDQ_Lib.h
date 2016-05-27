@@ -244,7 +244,6 @@ void    PDQ_SetWUnit(char *unitName);
 void    PDQ_SetTUnit(char *unitName);
 
 void    PDQ_SetComment(char *comment);
-char   *PDQ_GetComment(void);
 
 //----- Some utilities ----------------------------------------------------
 
