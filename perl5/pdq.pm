@@ -388,7 +388,7 @@ sub ACQUIRE {
 
 package pdq;
 
-*version = *pdqc::version;
+*VERSION = *pdqc::VERSION;
 *TRUE = *pdqc::TRUE;
 *FALSE = *pdqc::FALSE;
 *MAXNODES = *pdqc::MAXNODES;

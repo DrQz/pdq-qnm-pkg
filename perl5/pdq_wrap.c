@@ -1527,59 +1527,6 @@ SWIGEXPORT void SWIG_init (CV *cv, CPerlObj *);
 
 
 
-SWIGINTERN swig_type_info*
-SWIG_pchar_descriptor(void)
-{
-  static int init = 0;
-  static swig_type_info* info = 0;
-  if (!init) {
-    info = SWIG_TypeQuery("_p_char");
-    init = 1;
-  }
-  return info;
-}
-
-
-SWIGINTERN int
-SWIG_AsCharPtrAndSize(SV *obj, char** cptr, size_t* psize, int *alloc)
-{
-  if (SvMAGICAL(obj)) {
-     SV *tmp = sv_newmortal();
-     SvSetSV(tmp, obj);
-     obj = tmp;
-  }
-  if (SvPOK(obj)) {
-    STRLEN len = 0;
-    char *cstr = SvPV(obj, len); 
-    size_t size = len + 1;
-    if (cptr)  {
-      if (alloc) {
-	if (*alloc == SWIG_NEWOBJ) {
-	  *cptr = (char *)memcpy((char *)malloc((size)*sizeof(char)), cstr, sizeof(char)*(size));
-	} else {
-	  *cptr = cstr;
-	  *alloc = SWIG_OLDOBJ;
-	}
-      }
-    }
-    if (psize) *psize = size;
-    return SWIG_OK;
-  } else {
-    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-    if (pchar_descriptor) {
-      char* vptr = 0; 
-      if (SWIG_ConvertPtr(obj, (void**)&vptr, pchar_descriptor, 0) == SWIG_OK) {
-	if (cptr) *cptr = vptr;
-	if (psize) *psize = vptr ? (strlen(vptr) + 1) : 0;
-	if (alloc) *alloc = SWIG_OLDOBJ;
-	return SWIG_OK;
-      }
-    }
-  }
-  return SWIG_TypeError;
-}
-
-
 SWIGINTERNINLINE SV *
 SWIG_FromCharPtrAndSize(const char* carray, size_t size)
 {
@@ -1650,6 +1597,59 @@ SWIG_AsVal_double SWIG_PERL_DECL_ARGS_2(SV *obj, double *val)
 	  if (val) *val = v;
 	  return SWIG_Str2NumCast(SWIG_OK);
 	}
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(SV *obj, char** cptr, size_t* psize, int *alloc)
+{
+  if (SvMAGICAL(obj)) {
+     SV *tmp = sv_newmortal();
+     SvSetSV(tmp, obj);
+     obj = tmp;
+  }
+  if (SvPOK(obj)) {
+    STRLEN len = 0;
+    char *cstr = SvPV(obj, len); 
+    size_t size = len + 1;
+    if (cptr)  {
+      if (alloc) {
+	if (*alloc == SWIG_NEWOBJ) {
+	  *cptr = (char *)memcpy((char *)malloc((size)*sizeof(char)), cstr, sizeof(char)*(size));
+	} else {
+	  *cptr = cstr;
+	  *alloc = SWIG_OLDOBJ;
+	}
+      }
+    }
+    if (psize) *psize = size;
+    return SWIG_OK;
+  } else {
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      char* vptr = 0; 
+      if (SWIG_ConvertPtr(obj, (void**)&vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = vptr;
+	if (psize) *psize = vptr ? (strlen(vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
       }
     }
   }
@@ -1809,33 +1809,6 @@ SWIGCLASS_STATIC int swig_magic_readonly(pTHX_ SV *SWIGUNUSEDPARM(sv), MAGIC *SW
     croak("Value is read-only.");
     return 0;
 }
-SWIGCLASS_STATIC int _wrap_version_set(pTHX_ SV* sv, MAGIC * SWIGUNUSEDPARM(mg)) {
-  MAGIC_PPERL
-  {
-    char *cptr = 0; size_t csize = 0; int alloc = SWIG_NEWOBJ;
-    int res = SWIG_AsCharPtrAndSize(sv, &cptr, &csize, &alloc);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""version""' of type '""char *""'");
-    }
-    if (version) free((char*)version);
-    if (alloc == SWIG_NEWOBJ) {
-      version = cptr;
-    } else {
-      version = csize ? (char *)(char *)memcpy((char *)malloc((csize)*sizeof(char)), cptr, sizeof(char)*(csize)) : 0;
-    }
-  }
-fail:
-  return 1;
-}
-
-
-SWIGCLASS_STATIC int _wrap_version_get(pTHX_ SV *sv, MAGIC *SWIGUNUSEDPARM(mg)) {
-  MAGIC_PPERL
-  sv_setsv(sv,SWIG_FromCharPtr(version))  ;
-  return 1;
-}
-
-
 SWIGCLASS_STATIC int _wrap_nodes_set(pTHX_ SV* sv, MAGIC * SWIGUNUSEDPARM(mg)) {
   MAGIC_PPERL
   {
@@ -6159,7 +6132,6 @@ static swig_constant_info swig_constants[] = {
 }
 #endif
 static swig_variable_info swig_variables[] = {
-    { "pdqc::version", MAGIC_CLASS _wrap_version_set, MAGIC_CLASS _wrap_version_get,0 },
     { "pdqc::nodes", MAGIC_CLASS _wrap_nodes_set, MAGIC_CLASS _wrap_nodes_get,0 },
     { "pdqc::streams", MAGIC_CLASS _wrap_streams_set, MAGIC_CLASS _wrap_streams_get,0 },
     { "pdqc::method", MAGIC_CLASS _wrap_method_set, MAGIC_CLASS _wrap_method_get,0 },
@@ -6591,6 +6563,11 @@ XS(SWIG_init) {
     SvREADONLY_on(sv);
   }
   
+  /*@SWIG:/usr/share/swig2.0/perl5/perltypemaps.swg,65,%set_constant@*/ do {
+    SV *sv = get_sv((char*) SWIG_prefix "VERSION", TRUE | 0x2 | GV_ADDMULTI);
+    sv_setsv(sv, SWIG_FromCharPtr("Version 7.0.0 Build 052116"));
+    SvREADONLY_on(sv);
+  } while(0) /*@SWIG@*/;
   /*@SWIG:/usr/share/swig2.0/perl5/perltypemaps.swg,65,%set_constant@*/ do {
     SV *sv = get_sv((char*) SWIG_prefix "TRUE", TRUE | 0x2 | GV_ADDMULTI);
     sv_setsv(sv, SWIG_From_int  SWIG_PERL_CALL_ARGS_1((int)(1)));
