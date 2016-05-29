@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2013, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -35,9 +35,9 @@
 double 
 ErlangR(double arrivrate, double servtime, int servers) {
 
-	extern int        PDQ_DEBUG;
-	extern char       s1[];
-	extern JOB_TYPE  *job;
+	extern int   PDQ_DEBUG;
+	extern char  s1[];
+	extern       JOB_TYPE  *job;
 
 	double		erlangs;
 	double		erlangB;

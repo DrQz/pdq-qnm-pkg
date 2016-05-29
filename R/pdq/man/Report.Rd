@@ -1,30 +1,50 @@
 \name{Report}
 \alias{Report}
-\title{ Generate Formatted Report }
+\title{ Generate a PDQ report }
 \description{
-Report generates a formatted report that includes the total number of nodes and workloads created in the model, system level performance measures such as throughput and response time for each workload, and service node performance measures such as node utilization and queue lengths.  A comment field is available to audit input parameter variations across multiple runs of the same model.
-
+Report produces a formatted summary of all modeling results. }
+\details{
+\describe{
+A PDQ report is comprised of several sections.
+\item{Model INPUTS}{
+\itemize{
+\item{Name of the PDQ model.}
+\item{Date when the model was executed.}
+\item{Version of PDQ used.}
+\item{A comment field is included if SetComment is called. }
+\item{A summary of all workload parameters. }
+}
+}
+\item{Model OUTPUTS}{
+\itemize{
+\item{Solution method used.}
+\item{System-level performance metrics. }
+\item{Node-level performance metrics such as: Capacity, Utilization, and Waiting time. }
+}
+}
+}
 }
 \usage{
-Report()
+Report() displays the formatted text in the R console.
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com
+Neil J. Gunther
 }
 \references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
+}
+\seealso{ 
+  \code{\link{SetComment}}
 }
 \examples{
 library(pdq)
-
-arrivRate    <- 0.75
-service_time <- 1.0
-
-Init("OpenCircuit")
+arate <- 0.75
+srate <- 1.0
+Init("Report Example")
+SetComment("This is just an toy example.")
 CreateNode("server", CEN, FCFS)
-CreateOpen("work", arrivRate)
-SetDemand("server", "work", service_time)
-
+CreateOpen("work", arate)
+SetDemand("server", "work", 1/srate)
 Solve(CANON)
 Report()
 }

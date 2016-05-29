@@ -1,27 +1,31 @@
 \name{SetTUnit}
 \alias{SetTUnit}
-\title{ Change Name of Time Unit }
+\title{ Change time unit }
 \description{
-Change the name of the time unit that appears in the PDQ report.  The default time unit is Seconds.
+Change the time unit label that appears in PDQ Report.  The default time unit is seconds.
 }
 \usage{
 SetTUnit(unitName)
 }
 \arguments{
-  \item{unitName}{ String with the name of the time unit to appear on the report. }
+  \item{unitName}{ Character string containing the name of the time unit as it will appear in  the Report output. }
 }
 \details{
 Cannot be invoked prior to calling CreateOpen or CreateClosed.
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com
+Neil J. Gunther
 }
 \references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \examples{
 library(pdq)
-Init("PDQ Model")
-CreateOpen("work", 0.75)
+Init("SetTUnit Example")
+CreateOpen("Customers", 0.75)
+CreateMultiNode(3, "Bank Tellers", CEN, FCFS)
+SetDemand("Bank Tellers", "Customers", 1.0)
 SetTUnit("Minutes")
+Solve(CANON)
+Report()
 }
