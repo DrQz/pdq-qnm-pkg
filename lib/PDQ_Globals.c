@@ -47,7 +47,7 @@ char                s1[MAXBUF];
 char                s2[MAXBUF];
 char                s3[MAXBUF];
 char                s4[MAXBUF];
-char                Comment[MAXBUF];
+char                Comment[1024];
 
 NODE_TYPE          *node;
 JOB_TYPE           *job;

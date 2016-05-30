@@ -1,6 +1,6 @@
 \name{CreateMultiNode}
 \alias{CreateMultiNode}
-\title{ Define Multi-server Node }
+\title{ Create a multiple server queueing node }
 \description{
 Define a multi-server queueing service node for either a closed or open circuit model.  A multi-server node consists of a single queue feeding into more than one server, and is characterized by the number of servers, their type, and the queue disciplne.  A separate call is required for each queueing node.
 }
@@ -8,33 +8,47 @@ Define a multi-server queueing service node for either a closed or open circuit 
 CreateMultiNode(servers, name, device, sched)
 }
 \arguments{
-  \item{servers}{ The integer number of servers }
-  \item{name}{ The string used to identify the node in reports and as an argument to other functions }
-  \item{device}{ The type of server: CEN or DLY }
-  \item{sched}{ The queue discipline: MSQ }
+  \item{servers}{ The number of servers (treated as an integer) }
+  \item{name}{ The character string used to identify the node name in a PDQ report and as an argument to other PDQ functions }
+  \item{device}{ The type of queueing facility }
+  \item{sched}{ The queueing discipline }
 }
 \details{
-The two types of servers are:
+There are possibe  types of servers:
 \itemize{
-\item{CEN}{ Generic queueing center }
-\item{DLY}{ Generic delay center: a delay without a queue }
+\item{CEN}{ or generic queueing center }
+\item{DLY}{ or  delay center, i.e.,  no waiting line (not applicable for CreateMultiNode) }
 }
 The only valid type of queue discipline is:
 \itemize{
-\item{MSQ}{ Multi-server queue }
+\item{FCFS}{ or first-come first-served }
+}
+Solution methods:
+\itemize{
+\item{Single PDQ workstream}{ use the CANON solution method with Solve }
+\item{Multiple PDQ workstreams}{ use the APPROXMSQ solution method with Solve}
 }
 }
 \references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com, with
+Neil J. Gunther
+}
+\seealso{ 
+  \code{\link{CreateNode}, \link{Solve}}
 }
 \examples{
-library("pdq")
-Init("Airport")
-CreateMultiNode(3, "Tickets", CEN, MSQ)
+library(pdq)
+Init("CreateMultiNode Example")
+CreateOpen("Customers", 0.75)
+CreateMultiNode(3, "Bank Tellers", CEN, FCFS)
+SetDemand("Bank Tellers", "Customers", 1.0)
+Solve(CANON)
+Report()
 }
+\keyword{ Open }
+\keyword{ Queue }
 \keyword{ CEN }
 \keyword{ DLY }
 \keyword{ MSQ }

@@ -1,6 +1,6 @@
 \name{GetResponse}
 \alias{GetResponse}
-\title{ Get Response Time for Workload }
+\title{ Get the system response time  }
 \description{
 Determine the system response time for the specified workload.
 }
@@ -9,31 +9,35 @@ GetResponse(class, wname)
 }
 \arguments{
   \item{class}{ TRANS, TERM, or BATCH type. }
-  \item{wname}{ String containing the name of the workload. }
+  \item{wname}{ Character string containing the name of the workload. }
 }
 \details{
 The classes of workloads are:
-\describe{
+\itemize{
 \item{ TRANS }{ a workload that is defined by arrival rate, not think time; only valid for an open circuit }
 \item{ TERM }{ a workload with non-zero think time: there will be \code{think} delay before requests re-enter the system; only valid for a closed circuit }
 \item{ BATCH }{ a workload with no think time: requests immediately re-enter the system; only valid for a closed circuit }
 }
+GetResponse should only be called after the PDQ model has been solved.
 }
 \value{
-  System response time as a decimal number.
+  System response time as a numeric type.
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com
+Neil J. Gunther
 }
 \references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \examples{
-library("pdq")
-Init("Server")
-think <- 8 * 10^(-3) # ms as seconds
-CreateNode("disk", CEN, FCFS)
-CreateClosed("IOs", TERM, 100, think)
-SetDemand("disk","IOs",0.5)
-resptime <- GetResponse(TERM, "IOs")
+library(pdq)
+
+Init("GetResponse Example")
+CreateClosed("DB Users", TERM, 500.0, 30.5)
+CreateNode("DB Server", CEN, FCFS)
+SetDemand("DB Server", "DB Users", 1.0)
+Solve(EXACT)
+
+rt <- GetResponse(TERM, "DB Users")
+rt
 }

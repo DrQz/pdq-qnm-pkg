@@ -1,6 +1,6 @@
 \name{GetUtilization}
 \alias{GetUtilization}
-\title{ Get Utilization for Node }
+\title{ Get the utilization of a node }
 \description{
 Determine the utilization of the designated service node by the specified workload.  It should only be called after the PDQ model has been solved.
 }
