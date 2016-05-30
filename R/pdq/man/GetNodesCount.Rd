@@ -23,7 +23,7 @@ library(pdq)
 Init("GetNodesCount Example") 
 CreateClosed("work", TERM, 100, 10) 
 for (k in 1:4) {
-    nname <- paste("n", sep="", k)
+    nname <- paste("node", k, sep="")
     CreateNode(nname, CEN, FCFS)
     SetDemand(nname, "work", 500)
 }
