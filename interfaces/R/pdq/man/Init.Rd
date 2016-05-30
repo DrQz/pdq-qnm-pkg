@@ -43,3 +43,4 @@ for (i in 1:users) {
     yc[i] <- GetThruput(TERM, work)
 }
 plot(xc, yc, type="l", col="blue", xlab="Users", ylab="Throughput")
+}

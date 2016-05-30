@@ -6,8 +6,8 @@ COPY := cp
 SWIG := swig
 SOURCETARGET := .
 HEADERSTARGET := .
-PDQSOURCES := $(wildcard ../lib/*.c)
-PDQHEADERS := $(wildcard ../lib/*.h)
+PDQSOURCES := $(wildcard ../../lib/*.c)
+PDQHEADERS := $(wildcard ../../lib/*.h)
 SOURCES := $(notdir $(PDQSOURCES))
 HEADERS := $(notdir $(PDQHEADERS))
 
@@ -29,10 +29,10 @@ swig: pdq_wrap.c
 Makefile:
 	perl Makefile.PL
 
-$(SOURCES): %.c:../lib/%.c
+$(SOURCES): %.c:../../lib/%.c
 	$(COPY) $< $@
 
-$(HEADERS): %.h:../lib/%.h
+$(HEADERS): %.h:../../lib/%.h
 	$(COPY) $< $@
 
 pdq_wrap.c: ../pdq.i

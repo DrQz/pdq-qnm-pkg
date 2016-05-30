@@ -7,7 +7,6 @@ Determine the number of workload streams that have been assigned in the PDQ mode
 \usage{
 GetStreamsCount()
 }
-}
 \value{
   Integer value of numeric type.
 }
@@ -34,5 +33,4 @@ if(GetStreamsCount() > 3) {
    Solve(APPROX)
    Report()
 }
-
-
+}

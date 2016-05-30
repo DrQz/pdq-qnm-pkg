@@ -22,13 +22,13 @@ lib:
 	make --directory=$@
 
 perl5:
-	make --directory=$@ -f ./setup.mk
+	make --directory=interfaces $@ 
 
 python:
-	make --directory=$@
+	make --directory=intefaces $@
 
 R:
-	make --directory=$@
+	make --directory=intefaces $@
 
 examples: $(EXAMPLES)
 
@@ -38,28 +38,20 @@ $(EXAMPLES):
 
 #---------------------------------------------------------------------
 
-swig:
-	make --directory=perl5 -f setup.mk swig
-	make --directory=python swig
-
-#---------------------------------------------------------------------
-
 test:
 	make --directory=examples test
 
 #---------------------------------------------------------------------
 
 clean:
-	-/bin/rm *~ 
+	-/bin/rm -f *~ 
 	make --directory=lib clean
-	make --directory=perl5 -f setup.mk clean
-	make --directory=python clean
-	make --directory=R clean
+	make --directory=interfaces clean
 	make --directory=examples clean
 
 #---------------------------------------------------------------------
 
-dist: swig
+dist: 
 	@echo $(PDQ_VERSION)
 	-rm -rf $(DISTRIB_BUILD_TMP)
 	-mkdir -p $(DISTRIB_FULL)/pdq
@@ -68,15 +60,7 @@ dist: swig
 	-(cd $(DISTRIB_FULL); tar cvf pdq.tar pdq; gzip pdq.tar)
 	-rm -rf $(DISTRIB_FULL)/pdq
 	-mv $(DISTRIB_FULL)/pdq.tar.gz $(DISTRIB_FULL)/PDQ-$(PDQ_VERSION).tar.gz
-	make --directory=R dist	
-	-mkdir -p $(DISTRIB_R)
-	-cp R/*.tar.gz $(DISTRIB_R)/
-	make --directory=perl5 -f setup.mk dist
-	-mkdir -p $(DISTRIB_PERL5)
-	-cp perl5/*.tar.gz $(DISTRIB_PERL5)/
-	make --directory=python dist
-	-mkdir -p $(DISTRIB_PYTHON)
-	-cp python/dist/*.tar.gz $(DISTRIB_PYTHON)/
+	-make --directory=interfaces dist
 	make clean
 
 #---------------------------------------------------------------------

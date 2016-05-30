@@ -7,7 +7,6 @@ Determine the number of queueing nodes that have been assigned in the PDQ model.
 \usage{
 GetNodesCount()
 }
-}
 \value{
   Integer value of numeric type.
 }
@@ -35,4 +34,5 @@ if(GetNodesCount() > 3) {
    Report()
 }
 
+}
 
