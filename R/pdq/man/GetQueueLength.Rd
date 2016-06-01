@@ -1,9 +1,8 @@
 \name{GetQueueLength}
 \alias{GetQueueLength}
-\title{ Get Length of Queue at Node }
+\title{ Get the queue length at a particular node }
 \description{
-Determine the queue length (number of requests waiting plus the number in service) of the designated service node by the specified workload.  It should only be called after the PDQ model has been solved.
-
+Determine the queue length (number of requests waiting plus the number in service) of the designated node servicing a specified workload.
 }
 \usage{
 GetQueueLength(device, work, class)
@@ -15,28 +14,31 @@ GetQueueLength(device, work, class)
 }
 \details{
 The classes of workloads are:
-\describe{
+\itemize{
 \item{ TRANS }{ a workload that is defined by arrival rate, not think time; only valid for an open circuit }
 \item{ TERM }{ a workload with non-zero think time: there will be \code{think} delay before requests re-enter the system; only valid for a closed circuit }
 \item{ BATCH }{ a workload with no think time: requests immediately re-enter the system; only valid for a closed circuit }
 }
+GetQueueLength should only be called after the PDQ model has been solved.
 }
 \value{
-  Queue length as a decimal number.
+  Queue length as a numeric type.
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com
+Neil J. Gunther
 }
 \references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \examples{
-library("pdq")
-Init("Server")
-think <- 8 * 10^(-3) # ms as seconds
-CreateNode("disk", CEN, FCFS)
-CreateClosed("IOs", TERM, 100, think)
-SetDemand("disk","IOs",0.5)
-Solve(APPROX)
-qlength <- GetQueueLength("disk", "IOs", TERM)
+library(pdq)
+
+Init("GetQueueLength Example")
+CreateClosed("DB Users", TERM, 500.0, 30.5)
+CreateNode("DB Server", CEN, FCFS)
+SetDemand("DB Server", "DB Users", 1.0)
+Solve(EXACT)
+
+qsize <- GetQueueLength("DB Server", "DB Users", TERM)
+qsize
 }

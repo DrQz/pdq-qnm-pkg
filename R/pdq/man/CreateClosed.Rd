@@ -1,37 +1,44 @@
 \name{CreateClosed}
 \alias{CreateClosed}
-\title{ Define Workload for Closed Queuing Circuit }
+\title{ Create a source of work for a closed queueing network }
 \description{
-Define the workload for a closed queueing circuit. A closed circuit has a fixed population of customers: no new customers enter the system and none exit. The workload is characterized by the number of customers and the amount of time between requests (the "think time"). Separate calls are required for workload streams having different characteristics.
+Define the workload for a closed queueing network. A closed circuit has a fixed population of customers: no new customers enter the system and none exit. The workload is characterized by the number of customers and the amount of time between requests (the "think time"). Separate calls are required for workload streams having different characteristics.
 }
 \usage{
 CreateClosed(name, class, pop, think)
 }
 \arguments{
-  \item{name}{ The string used to identify the workload in reports and as an argument to other functions }
-  \item{class}{ The type of workload: either TERM or BATCH }
-  \item{pop}{ The number of active user processes in the closed circuit. This argument is a float to accommodate  measured activity e.g., 57.4 average active users. }
-  \item{think}{ The user delay or "think time" before a request re-enters the queueing system; not needed for a BATCH workload. }
+  \item{name}{ A character string used to identify the workload by name in a PDQ Report and as an argument to other PDQ functions }
+  \item{class}{ The type of PDQ workload: TERM or BATCH }
+  \item{pop}{ The customer "population" or total number of requests in the closed circuit. Since pop can be a statistical average arising from measurements, it is a numeric type. Often used to represent users in a time-share computer system or load generators in a load-test system. }
+  \item{think}{ The user or generator delay known as the "think time" that occurs between the completion of the previous request and the start of the next request in a TERM workload. Set to zero for a BATCH workload. Numeric type. }
 }
 \details{
-The two types of closed-circuit workloads are:
+There are two types of closed-circuit workloads:
 \describe{
-\item{ TERM }{ a workload with non-zero think time: there will be \code{think} delay before requests re-enter the system }
-\item{ BATCH }{ a workload with no think time: requests immediately re-enter the system }
+\item{ TERM }{ A workload with non-zero think time that causes a \code{think} delay to occur before a new request enters the closed system }
+\item{ BATCH }{ A workload without any think time. Requests immediately re-enter the closed system }
 }
-}
-\references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com, with
+Neil J. Gunther
+}
+\references{
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
+}
+\seealso{ 
+  \code{\link{CreateOpen}}
 }
 \examples{
-library("pdq")
-clients <- 200
-think <- 8 * 10^(-3) # ms as seconds
-Init("")
-CreateClosed("work", TERM, clients, think)
+library(pdq)
+Init("CreateClosed Example")
+CreateClosed("DB Users", TERM, 500.0, 30.5)
+CreateNode("DB Server", CEN, FCFS)
+SetDemand("DB Server", "DB Users", 1.0)
+Solve(EXACT)
+Report()
 }
+\keyword{ Closed }
+\keyword{ Queue }
 \keyword{ TERM }
 \keyword{ BATCH } % __ONLY ONE__ keyword per line

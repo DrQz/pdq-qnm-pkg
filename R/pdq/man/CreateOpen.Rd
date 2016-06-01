@@ -19,6 +19,10 @@ Neil Gunther <njgunther@perfdynamics.com, with
 }
 \examples{
 library("pdq")
-Init("server")
-CreateOpen("IO_Cmds", 10.0)
+Init("CreateOpen Example")
+CreateOpen("Customers", 0.75)
+CreateMultiNode(3, "Bank Tellers", CEN, FCFS)
+SetDemand("Bank Tellers", "Customers", 1.0)
+Solve(CANON)
+Report()
 }

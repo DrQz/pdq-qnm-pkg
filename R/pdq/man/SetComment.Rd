@@ -1,23 +1,30 @@
 \name{SetComment}
 \alias{SetComment}
-\title{ Define Report Comment }
+\title{ Include a comment in a PDQ Report }
 \description{
-Define a comment to be printed at the top of the report.
+Useful for keeping track of parameter variations across the same or similar PDQ models. Appears near the top of the Report ouput.
 }
 \usage{
 SetComment(comment)
 }
 \arguments{
-  \item{comment}{ Comment to be printed at the top of the report. }
+  \item{comment}{ A character string. }
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com
+Neil J. Gunther
 }
 \references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \examples{
 library(pdq)
-Init("OpenCircuit")
-SetComment("A simple M/M/1 queue")
+arate <- 0.75
+srate <- 1.0
+Init("SetComment Example")
+SetComment("This is just an toy example.")
+CreateNode("server", CEN, FCFS)
+CreateOpen("work", arate)
+SetDemand("server", "work", 1/srate)
+Solve(CANON)
+Report()
 }

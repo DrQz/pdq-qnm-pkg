@@ -199,14 +199,9 @@ void PDQ_Init(char *name)
 
 void  PDQ_SetComment(char *comment)
 {
-   strncpy(Comment, comment, MAXBUF);
-}
-
-//-------------------------------------------------------------------------
-
-char*  PDQ_GetComment(void)
-{
-   return Comment;
+   //char *Comment = malloc(1024);
+   strncpy(Comment, comment, 1024);
+    //strcpy(Comment, comment);
 }
 
 //-------------------------------------------------------------------------

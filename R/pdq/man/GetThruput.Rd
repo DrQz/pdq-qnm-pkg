@@ -1,6 +1,6 @@
 \name{GetThruput}
 \alias{GetThruput}
-\title{ Get System Throughput for Workload }
+\title{ Get the system throughput }
 \description{
 Determine the system throughput for the specified workload.
 }
@@ -9,11 +9,11 @@ GetThruput(class, wname)
 }
 \arguments{
   \item{class}{ TRANS, TERM, or BATCH type. }
-  \item{wname}{ String containing the name of the workload. }
+  \item{wname}{ Character string containing the name of the workload. }
 }
 \details{
 The classes of workloads are:
-\describe{
+\itemize{
 \item{ TRANS }{ a workload that is defined by arrival rate, not think time; only valid for an open circuit }
 \item{ TERM }{ a workload with non-zero think time: there will be \code{think} delay before requests re-enter the system; only valid for a closed circuit }
 \item{ BATCH }{ a workload with no think time: requests immediately re-enter the system; only valid for a closed circuit }
@@ -23,14 +23,20 @@ The classes of workloads are:
   System throughput as a decimal number.
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com
+Neil J. Gunther
 }
 \references{
-Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
+Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \examples{
-library("pdq")
-Init("server")
-CreateOpen("IO_Cmds", 10.0)
-tp = GetThruput(TRANS, "IO_Cmds")
+library(pdq)
+
+Init("GetThruput Example")
+CreateClosed("DB Users", TERM, 500.0, 30.5)
+CreateNode("DB Server", CEN, FCFS)
+SetDemand("DB Server", "DB Users", 1.0)
+Solve(EXACT)
+
+tp <- GetThruput(TRANS, "DB Users")
+tp
 }

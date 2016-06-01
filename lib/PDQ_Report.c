@@ -153,14 +153,14 @@ void PDQ_Report(void)
 	
     // The following logic was moved to Solve() by NJG on Sunday, May 15, 2016
     // NJG on Wednesday, August 19, 2015 Added incomplete PDQ circuit detection.
-	//if (!streams) PRINTF("PDQ_Report warning: No PDQ workload defined.\n");
-	//if (!nodes) PRINTF("PDQ_Report warning: No PDQ nodes defined.\n");
-	//if (!demands) PRINTF("PDQ_Report warning: No PDQ service demands defined.\n");
+	//    if (!streams) PRINTF("PDQ_Report warning: No PDQ workload defined.\n");
+	//    if (!nodes) PRINTF("PDQ_Report warning: No PDQ nodes defined.\n");
+	//    if (!demands) PRINTF("PDQ_Report warning: No PDQ service demands defined.\n");
 
     // Append any user comments
     if (strlen(Comment)) {
 		PRINTF("COMMENT: ");
-		PRINTF("%s\n\n", Comment);  // Is defined as a global!
+		PRINTF("%s\n\n", Comment);  // In PDQ_Global.c
 	}
 		
 
