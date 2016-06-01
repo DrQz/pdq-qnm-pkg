@@ -25,10 +25,10 @@ perl5:
 	make --directory=interfaces $@ 
 
 python:
-	make --directory=intefaces $@
+	make --directory=interfaces $@
 
 R:
-	make --directory=intefaces $@
+	make --directory=interfaces $@
 
 examples: $(EXAMPLES)
 
