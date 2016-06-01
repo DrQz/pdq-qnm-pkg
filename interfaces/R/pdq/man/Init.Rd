@@ -25,15 +25,16 @@ library(pdq)
 users <- 100
 think <- 8e-3   # milliseconds as seconds
 stime <- 500e-3 # milliseconds as seconds
-work    = "SQL query"
+work  <- "SQL query"
 xc <- 0
 yc <- 0
+# Solve sucessive model instances of 'users' to plot a throughput curve
 for (i in 1:users) {
     Init("Multiple Init Example")   # re-initialize PDQ variables
     CreateClosed(work, TERM, as.double(i), think) 
     # create a 20-node PDQ queueing network
     for (j in 1:20) {
-        nname <- paste("n", sep="", j)   # add j index onto node name
+        nname <- paste("node", sep="", j)   # add j index onto node name
         CreateNode(nname, CEN, FCFS)
         SetDemand(nname, work, stime)
     }
