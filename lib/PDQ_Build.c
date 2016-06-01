@@ -561,6 +561,10 @@ void PDQ_SetVisits_p(char *nodename, char *workname, double *visits, double *ser
 	extern int demand_ext;
 	extern int PDQ_DEBUG;
 	char           *p = "PDQ_SetVisits()";
+    
+    // Added by NJG on Wednesday, June 1, 2016
+    // Needed in case SetVisits used instead of SetDemand
+    demands = 1; // non-zero since SetDemand equivalent now called
 
 	if (PDQ_DEBUG)
 	{
