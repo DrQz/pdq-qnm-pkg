@@ -13,6 +13,9 @@ SetVisits(nodename, workname, visits, service)
   \item{visits}{ Number of visits to that node. }
   \item{service}{ Service time the workload demands at that node (in time units). }
 }
+\seealso{ 
+  \code{\link{SetDemand}}
+}
 \author{
 Neil J. Gunther
 }
@@ -21,8 +24,10 @@ Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PD
 }
 \examples{
 library(pdq)
-Init("ClosedCircuit")
-CreateClosed("DB_Workers", TERM, 57.4, 31.6)
-CreateNode("cpu", CEN, FCFS)
-SetVisits("cpu", "DB_Workers", 10.0, 0.013)
+Init("SetVisits Example")
+CreateClosed("DB Users", TERM, 10.0, 30.5)
+CreateNode("DB Server", CEN, FCFS)
+SetVisits("DB Server", "DB Users", 10.0, 0.13)
+Solve(EXACT)
+Report()
 }
