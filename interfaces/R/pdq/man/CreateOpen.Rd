@@ -11,14 +11,17 @@ CreateOpen(name, lambda)
   \item{name}{ The string used to identify the workload in reports and as an argument to other functions }
   \item{lambda}{ The arrival rate per unit time into the queueing circuit. }
 }
+\seealso{ 
+  \code{\link{CreateClosed}}
+}
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com, with
+Neil Gunther
 }
 \examples{
-library("pdq")
+library(pdq)
 Init("CreateOpen Example")
 CreateOpen("Customers", 0.75)
 CreateMultiNode(3, "Bank Tellers", CEN, FCFS)
