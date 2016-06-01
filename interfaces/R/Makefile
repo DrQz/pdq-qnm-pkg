@@ -6,10 +6,10 @@ COPY := cp
 MV := mv
 SOURCETARGET := pdq/src
 HEADERSTARGET := pdq/src
-PDQSOURCES := $(wildcard ../lib/*.c)
-PDQHEADERS := $(wildcard ../lib/*.h)
-SOURCES := $(subst ../lib,pdq/src,$(PDQSOURCES))
-HEADERS := $(subst ../lib,pdq/src,$(PDQHEADERS))
+PDQSOURCES := $(wildcard ../../lib/*.c)
+PDQHEADERS := $(wildcard ../../lib/*.h)
+SOURCES := $(subst ../../lib,pdq/src,$(PDQSOURCES))
+HEADERS := $(subst ../../lib,pdq/src,$(PDQHEADERS))
 
 
 install: set_up_package
@@ -20,10 +20,10 @@ dist: set_up_package
 
 set_up_package: $(HEADERS) $(SOURCES) 
 
-$(SOURCES): pdq/src/%.c:../lib/%.c
+$(SOURCES): pdq/src/%.c:../../lib/%.c
 	$(COPY) $< $@
 
-$(HEADERS): pdq/src/%.h:../lib/%.h
+$(HEADERS): pdq/src/%.h:../../lib/%.h
 	$(COPY) $< $@
 
 clean:
