@@ -31,13 +31,11 @@ Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PD
 }
 \examples{
 library(pdq)
-
 Init("GetResponse Example")
 CreateClosed("DB Users", TERM, 500.0, 30.5)
 CreateNode("DB Server", CEN, FCFS)
 SetDemand("DB Server", "DB Users", 1.0)
 Solve(EXACT)
-
 rt <- GetResponse(TERM, "DB Users")
 rt
 }

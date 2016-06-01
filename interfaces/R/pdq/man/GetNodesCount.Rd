@@ -18,7 +18,6 @@ Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PD
 }
 \examples{
 library(pdq)
-
 Init("GetNodesCount Example") 
 CreateClosed("work", TERM, 100, 10) 
 for (k in 1:4) {
@@ -26,13 +25,11 @@ for (k in 1:4) {
     CreateNode(nname, CEN, FCFS)
     SetDemand(nname, "work", 500)
 }
-
 if(GetNodesCount() > 3) { 
    stop("This model has too many nodes!") 
 } else {
    Solve(EXACT)
    Report()
 }
-
 }
 

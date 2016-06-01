@@ -30,12 +30,12 @@ Neil Gunther <njgunther@perfdynamics.com
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
 }
 \examples{
-library("pdq")
-Init("server")
-think <- 8 * 10^(-3)
-CreateClosed("IO_Cmds", TERM, 100, think)
-CreateNode("disk", CEN, FCFS)
-SetDemand("disk","IO_Cmds",0.5)
+library(pdq)
+Init("GetUtilization Example")
+CreateClosed("DB Users", TERM, 500.0, 30.5)
+CreateNode("DB Server", CEN, FCFS)
+SetDemand("DB Server", "DB Users", 1.0)
 Solve(EXACT);
-ut <- GetUtilization("disk", "IO_Cmds", TERM)
+ut <- GetUtilization("disk", "DB Users", TERM)
+ut
 }

@@ -18,15 +18,13 @@ Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PD
 }
 \examples{
 library(pdq)
-
-Init("GetNodesCount Example") 
+Init("GetStreamsCount Example") 
 CreateNode("node", CEN, FCFS) 
 for (strm in 1:4) {
     wname <- paste("work", strm, sep="")
     CreateClosed(wname, TERM, 10, 30)
     SetDemand("node", wname, strm)
 }
-
 if(GetStreamsCount() > 3) { 
    stop("This model has too much work to do!") 
 } else {
