@@ -18,7 +18,7 @@ if [ -f lib/PDQ_Lib.h ]; then
   # awk ' /VERSION/ {sub(/^\"/, "", $5); sub(/\";/, "", $8); print "PDQ " $5 " " $6 " " $7 " " $8} ' lib/PDQ_Lib.h
   # Changed to #define constant for PDQ 7.0.0
   # #define VERSION    "Version 7.0.0 Build 052116"
-  awk ' /VERSION/ {sub(/^\"/, "", $3); sub(/\"/, "", $6); print "PDQ " $3 " " $4 " " $5 " " $6} ' lib/PDQ_Lib.h
+  awk ' /PDQ_VERSION/ {sub(/^\"/, "", $3); sub(/\"/, "", $6); print "PDQ " $3 " " $4 " " $5 " " $6} ' lib/PDQ_Lib.h
 fi
 
 if [ -f lib/libpdq* ]; then

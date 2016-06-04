@@ -36,7 +36,7 @@
  * NJG on Sunday, May 15, 2016 moved incomplete circuit warning (line 154 ff.) to Solve()
  * NJG on Tuesday, May 24, 2016. 
       o Cleaned up compiler wornings about unused variables
-      o VERSION is now a #defined comstant in PDQ_Lib.h
+      o PDQ_VERSION is now a #defined comstant in PDQ_Lib.h
  *
  */
 
@@ -130,8 +130,8 @@ void PDQ_Report(void)
 	strncat(s2, pad, fill);
 
     // VERSION is now a #defined comstant in PDQ_Lib.h
-	fill = fillbase - strlen(VERSION);
-	strcpy(s3, VERSION);
+	fill = fillbase - strlen(PDQ_VERSION);
+	strcpy(s3, PDQ_VERSION);
 	strncat(s3, pad, fill);
 
 	PRINTF("\n");
