@@ -26,7 +26,9 @@ Neil J. Gunther
 Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \seealso{ 
-  \code{\link{CreateClosed, CreateMultiNode, CreateNode }}
+  \code{\link{CreateClosed}},
+  \code{\link{CreateMultiNode}},
+  \code{\link{CreateNode}}
 }
 \examples{
 library(pdq)
