@@ -237,10 +237,10 @@ void SetComment( std::string pdq_name ) {
 }
 
 
-/* std::string GetComment(void) {
+ std::string GetComment(void) {
     return(PDQ_GetComment());
 }
-*/
+
 
 
 using namespace Rcpp ;
@@ -308,7 +308,7 @@ RCPP_MODULE(pdq){
     function( "SetComment" , &SetComment  , 
               List::create(_["comment"]),
               "documentation for SetComment " );
-//    function( "GetComment" , &GetComment  , "documentation for GetComment " );
+    function( "GetComment" , &GetComment  , "documentation for GetComment " );
         
 }                     
 
