@@ -24,7 +24,7 @@
 extern "C" {
 #include "PDQ_Lib.h"
 #include "PDQ_Global.h"
-};
+}
 
 
 void CreateClosed(std::string pdq_name,int should_be_class, double pop, double think) {
