@@ -33,7 +33,7 @@ Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PD
 \examples{
 library(pdq)
 Init("GetResidenceTime Example")
-CreateClosed("DB Users", TERM, 500.0, 30.5)
+CreateClosed("DB Users", TERM, 10.0, 30.5)
 CreateNode("DB Server", CEN, FCFS)
 SetDemand("DB Server", "DB Users", 1.0)
 Solve(EXACT)
