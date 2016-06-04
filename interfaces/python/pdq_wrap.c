@@ -6364,6 +6364,19 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GetComment(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  char *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":GetComment")) SWIG_fail;
+  result = (char *)PDQ_GetComment();
+  resultobj = SWIG_FromCharPtr((const char *)result);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_PrintNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   
@@ -6940,6 +6953,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SetWUnit", _wrap_SetWUnit, METH_VARARGS, NULL},
 	 { (char *)"SetTUnit", _wrap_SetTUnit, METH_VARARGS, NULL},
 	 { (char *)"SetComment", _wrap_SetComment, METH_VARARGS, NULL},
+	 { (char *)"GetComment", _wrap_GetComment, METH_VARARGS, NULL},
 	 { (char *)"PrintNodes", _wrap_PrintNodes, METH_VARARGS, NULL},
 	 { (char *)"GetNode", _wrap_GetNode, METH_VARARGS, NULL},
 	 { (char *)"getjob", _wrap_getjob, METH_VARARGS, NULL},
@@ -7681,7 +7695,7 @@ SWIG_init(void) {
   
   SWIG_InstallConstants(d,swig_const_table);
   
-  SWIG_Python_SetConstant(d, "VERSION",SWIG_FromCharPtr("Version 7.0.0 Build 052116"));
+  SWIG_Python_SetConstant(d, "PDQ_VERSION",SWIG_FromCharPtr("Version 7.0.0 Build 052116"));
   SWIG_Python_SetConstant(d, "TRUE",SWIG_From_int((int)(1)));
   SWIG_Python_SetConstant(d, "FALSE",SWIG_From_int((int)(0)));
   SWIG_Python_SetConstant(d, "MAXNODES",SWIG_From_int((int)(1024)));

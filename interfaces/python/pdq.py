@@ -69,7 +69,7 @@ except AttributeError:
     _newclass = 0
 
 
-VERSION = _pdq.VERSION
+PDQ_VERSION = _pdq.PDQ_VERSION
 TRUE = _pdq.TRUE
 FALSE = _pdq.FALSE
 MAXNODES = _pdq.MAXNODES
@@ -401,6 +401,10 @@ SetTUnit = _pdq.SetTUnit
 def SetComment(*args):
   return _pdq.SetComment(*args)
 SetComment = _pdq.SetComment
+
+def GetComment():
+  return _pdq.GetComment()
+GetComment = _pdq.GetComment
 
 def PrintNodes():
   return _pdq.PrintNodes()
