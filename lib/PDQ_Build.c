@@ -206,6 +206,13 @@ void  PDQ_SetComment(char *comment)
 
 //-------------------------------------------------------------------------
 
+char*  PDQ_GetComment(void)
+{
+    return Comment;
+}  /* PDQ_GetComment */
+
+//-------------------------------------------------------------------------
+
 //int PDQ_CreateNode(char *name, int device, int sched)
 void PDQ_CreateNode(char *name, int device, int sched)
 {

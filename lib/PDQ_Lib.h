@@ -244,6 +244,7 @@ void    PDQ_SetWUnit(char *unitName);
 void    PDQ_SetTUnit(char *unitName);
 
 void    PDQ_SetComment(char *comment);
+char   *PDQ_GetComment(void); // NJG Friday, June 3, 2016: Returned for python test and possible unit testing
 
 //----- Some utilities ----------------------------------------------------
 
