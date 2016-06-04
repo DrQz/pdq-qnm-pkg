@@ -1,6 +1,6 @@
 \name{GetUtilization}
 \alias{GetUtilization}
-\title{ Get the utilization of a node }
+\title{ Get the utilization of a service node }
 \description{
 Determine the utilization of the designated service node by the specified workload.  It should only be called after the PDQ model has been solved.
 }
@@ -21,10 +21,10 @@ The classes of workloads are:
 }
 }
 \value{
-  Utilization as a decimal fraction in the range 0.0 to 1.0.
+  Utilization as a decimal fraction in the range 0.0 to 1.0 (i.e. 100\%).
 }
 \author{
-Neil Gunther <njgunther@perfdynamics.com
+Neil Gunther
 }
 \references{
 Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}. Berlin, Heidelberg: Springer.
@@ -32,10 +32,10 @@ Gunther, N. J. 2005 \emph{Analyzing computer systems performance with PERL::PDQ}
 \examples{
 library(pdq)
 Init("GetUtilization Example")
-CreateClosed("DB Users", TERM, 500.0, 30.5)
+CreateClosed("DB Users", TERM, 10.0, 30.5)
 CreateNode("DB Server", CEN, FCFS)
 SetDemand("DB Server", "DB Users", 1.0)
 Solve(EXACT);
-ut <- GetUtilization("disk", "DB Users", TERM)
+ut <- GetUtilization("DB Server", "DB Users", TERM)
 ut
 }
