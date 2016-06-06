@@ -1,4 +1,5 @@
 # PDQ: Pretty Damn Quick 
+## (7.0.0-beta Not ready for prime time)
 
 PDQ is an analytic solver library for queueing-network models (QNM) of computer
 systems, manufacturing systems, and data networks, that can be written
