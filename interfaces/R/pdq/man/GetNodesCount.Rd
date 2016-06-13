@@ -17,6 +17,7 @@ Neil J. Gunther
 Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \examples{
+\donttest{
 library(pdq)
 Init("GetNodesCount Example") 
 CreateClosed("work", TERM, 100, 10) 
@@ -33,3 +34,4 @@ if(GetNodesCount() > 3) {
 }
 }
 
+}

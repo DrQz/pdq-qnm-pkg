@@ -17,6 +17,7 @@ Neil J. Gunther
 Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \examples{
+\donttest{
 library(pdq)
 Init("GetStreamsCount Example") 
 CreateNode("node", CEN, FCFS) 
@@ -30,5 +31,6 @@ if(GetStreamsCount() > 3) {
 } else {
    Solve(APPROX)
    Report()
+}
 }
 }

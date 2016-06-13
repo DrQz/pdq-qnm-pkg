@@ -2,7 +2,8 @@
 \alias{Report}
 \title{ Generate a PDQ report }
 \description{
-Report produces a formatted summary of all modeling results. }
+Report produces a formatted summary of all modeling results. 
+}
 \details{
 \describe{
 A PDQ report is comprised of several sections.
@@ -25,7 +26,7 @@ A PDQ report is comprised of several sections.
 }
 }
 \usage{
-Report() displays the formatted text in the R console.
+Report() 
 }
 \author{
 Neil J. Gunther
