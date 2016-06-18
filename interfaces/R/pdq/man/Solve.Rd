@@ -8,16 +8,11 @@ Solve is called after the PDQ queueing network model has been defined. An approp
 Solve(method)
 }
 \arguments{
-  \item{method}{ An appropriate solution name. }
-}
-\details{
-The available solution methods are:
-\describe{
-\item{APPROX}{ Approximate MVA technique.  Only valid for solving a closed queueing circuit.  An approximation to the EXACT solution method. }
-\item{APPROXMSQ}{ Required for solving a multi-node queueing center with multiple workloads. }
-\item{CANON}{ Canonical solution technique. Only valid for a open queueing circuit. }
-\item{EXACT}{ Iterative MVA (Mean Value Analysis) solution technique.  Only valid for a closed queueing circuit. }
-}
+Available methods are:
+\item{APPROX}{ An approximation to the EXACT solution method when there is a large number of requests in the system. Only valid for solving a closed queueing circuit. }
+\item{APPROXMSQ}{ Required for solving a multiple server queueing center(using CreateMultiNode)  with multiple open-circuit workloads. }
+\item{CANON}{ Canonical solution technique. Only valid for an open queueing circuit. }
+\item{EXACT}{ Iterative mean value analysis (MVA) solution technique.  Only valid for a closed queueing circuit. }
 }
 \author{
 Neil J. Gunther
