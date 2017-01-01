@@ -18,6 +18,7 @@
 #	Created by NJG on Wed, Apr 4, 2007
 #   Ported to R by Paul Puglia on Wed Aug 1, 2012
 #	Updated by NJG on Monday, November 12, 2012
+#	Updated by NJG on Sunday, January 1, 2017    --Added missing 'library(pdq)'
 #
 #	PDQ model using 2 MSQ multi-server nodes in tandem.
 #   Here, prototype MSQ node is replaced by documented CreateMultiNode function.
@@ -31,7 +32,7 @@
 #
 #	The PDQ model parameters are taken from Example 4.1 (p.170) in Gross
 #	and Harris, "Fundamentals of Queueing Theory," 3rd edn. (1998) which
-#	discusses a grocery store with a "lounge". (??)
+#	discusses a grocery store with a "lounge". (???)
 #	
 #	The capacity planning question is:
 #		Currently, only 3 employees are paid to act as cashiers.
@@ -44,12 +45,13 @@
 #	bookstore example, is the browsing time, e.g., increase to 65 mins.
 #		
 #	$Id: bookstore.R,v 1.3 2012/11/13 05:41:43 earl-lang Exp $
-# 
 
+
+library(pdq)
 
 
 # cust per mins
-arrivalRate  <- 40.0/60.0	
+arrivalRate  <- 40.0 / 60.0
 # times in mins
 browseTime  <- 45.0		
 buyingTime  <-  4.0	

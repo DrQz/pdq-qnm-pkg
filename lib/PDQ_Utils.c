@@ -270,7 +270,7 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 	double          Dsum = 0.0;
 	double          Nopt = 0.0;
 	double             Z = 0.0;
-	int job_index = getjob_index(wname);
+	int             job_index = getjob_index(wname);
    
    	// Added by NJG on Wednesday, August 19, 2015
 	if (!streams) PRINTF("PDQ_GetLoadOpt warning: No PDQ workload defined.\n");
