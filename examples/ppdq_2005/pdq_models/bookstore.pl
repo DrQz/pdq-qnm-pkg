@@ -46,7 +46,7 @@
 #		Currently, only 3 employees are paid to act as cashiers.
 #		If the store mgr pays a 4th cashier, what happens to the:
 #		1. waiting time at the checkout? (G&H: 1.14 mins)
-#		2. length of the waiting line? (G&H: 3.44 cust)
+#		2. number of people at the checkout? (G&H: 3.44 cust)
 #		3. mean number of people in the store (G&H: 30 + 3.44 = 33.44 cust)
 #
 #	The only only parameter that might be made more realistic for the
@@ -57,7 +57,7 @@ use POSIX;
 
 # Timebase in minutes
 $arrivalRate = 40.0 / 60;
-$browseTime  = 0.75 / 60;
+$browseTime  = 0.75 * 60;
 $buyingTime  = 4.0;
 $cashiers    = 4;
 
