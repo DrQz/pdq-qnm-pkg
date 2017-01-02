@@ -30,19 +30,24 @@
 #	waiting line serviced by multiple cashiers. Such a big book store can
 #	be modeled as M/M/inf (browsing) and M/M/m (checkout).
 #
-#	The PDQ model parameters are taken from Example 4.1 (p.170) in Gross
-#	and Harris, "Fundamentals of Queueing Theory," 3rd edn. (1998) which
-#	discusses a grocery store with a "lounge". (???)
-#	
-#	The capacity planning question is:
+#	The PDQ model parameters are taken from Example 4.1 (p.170) in Gross and Harris,
+#   "Fundamentals of Queueing Theory," 3rd edn. (1998) for a grocery store with a
+#   "lounge". (???)
+#
+#   Input parameters:
+#       Arrival rate = 40 per hr
+#       Lounge time  = 3/4 hr
+#       Service time = 4 mins
+#
+#	The capacity planning questions are:
 #		Currently, only 3 employees are paid to act as cashiers.
 #		If the store mgr pays a 4th cashier, what happens to the:
-#		1. waiting time at the checkout?
-#		2. length of the waiting line?
-#		3. mean number of people in the store 
-#		
+#		1. waiting time at the checkout? (G&H: 1.14 mins)
+#		2. number of people at the checkout? (G&H: 3.44 cust)
+#		3. mean number of people in the store (G&H: 30 + 3.44 = 33.44 cust)
+#
 #	The only only parameter that might be made more realistic for this
-#	bookstore example, is the browsing time, e.g., increase to 65 mins.
+#	bookstore example is the browsing time, e.g., increase to 65 mins.
 #		
 #	$Id: bookstore.R,v 1.3 2012/11/13 05:41:43 earl-lang Exp $
 
@@ -51,11 +56,11 @@ library(pdq)
 
 
 # cust per mins
-arrivalRate  <- 40.0 / 60.0
+arrivalRate <- 40.0 / 60.0
 # times in mins
-browseTime  <- 45.0		
+browseTime  <- 0.75 * 60
 buyingTime  <-  4.0	
-cashiers    <-  3.0
+cashiers    <-  4
 		
 Init("Big Book Store Model")
 		
