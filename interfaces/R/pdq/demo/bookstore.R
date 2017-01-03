@@ -1,5 +1,5 @@
 #*******************************************************************************
-#*  Copyright (C) 2007 - 2013, Performance Dynamics Company                    *
+#*  Copyright (C) 2007 - 2017, Performance Dynamics Company                    *
 #*                                                                             *
 #*  This software is licensed as described in the file COPYING, which          *
 #*  you should have received as part of this distribution. The terms           *
@@ -12,13 +12,14 @@
 #*  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  *
 #*  KIND, either express or implied.                                           *
 #*******************************************************************************
-#*
+#
 #	bookstore.R
 #	
 #	Created by NJG on Wed, Apr 4, 2007
 #   Ported to R by Paul Puglia on Wed Aug 1, 2012
 #	Updated by NJG on Monday, November 12, 2012
 #	Updated by NJG on Sunday, January 1, 2017    --Added missing 'library(pdq)'
+#	Updated by NJG on Monday, January 2, 2017    --m=4 cashiers to match G&H Ex
 #
 #	PDQ model using 2 MSQ multi-server nodes in tandem.
 #   Here, prototype MSQ node is replaced by documented CreateMultiNode function.
