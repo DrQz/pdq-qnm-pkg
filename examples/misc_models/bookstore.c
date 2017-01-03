@@ -17,6 +17,7 @@
 	bookstore.c
 	
 	Created by NJG on Wed, Apr 4, 2007
+	Updated by NJG on Monday, January 2, 2017
 
 	PDQ model using 2 MSQ nodes in tandem.
 	
@@ -30,13 +31,18 @@
 	and Harris, "Fundamentals of Queueing Theory," 3rd edn. (1998) which
 	discusses a grocery store with a "lounge". (??)
 	
-	The capacity planning question is:
-		Currently, only 3 employees are paid to act as cashiers.
+    Currently, only 3 employees are paid to act as cashiers.
+    Input parameters:
+        Arrival rate = 40 per hr
+        Lounge time  = 3/4 hr
+        Service time = 4 mins
+ 
+    The capacity planning questions are:
 		If the store mgr pays a 4th cashier, what happens to the:
-		1. waiting time at the checkout?
-		2. length of the waiting line?
-		3. mean number of people in the store 
-		
+		1. waiting time at the checkout? (G&H: 1.14 mins)
+		2. queue length at the checkout? (G&H: 3.44 cust)
+		3. mean number of people in the store (G&H: 30 + 3.44 = 33.44 cust)
+ 
 		The only only parameter that might be made more realistic for this
 		bookstore example, is the browsing time, e.g., increase to 65 mins.
 		
@@ -57,7 +63,7 @@ int main(void) {
 	double           arrivalRate  	= 40.0/60;	// cust per min
 	double           browseTime   	= 45.0;		// mins 
 	double           buyingTime   	= 4.0;		// mins
-	int              cashiers 		= 3;
+	int              cashiers 		= 4;
 		
 	PDQ_Init("Big Book Store Model");
 		

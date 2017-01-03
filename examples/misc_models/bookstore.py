@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ###############################################################################
-#  Copyright (C) 1994 - 2013, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2017, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -20,6 +20,8 @@
     bookstore.py
     
     Created by NJG on Fri, Apr 13, 2007
+    Updated by NJG on Monday, January 2, 2017
+  
     
     PDQ model using 2 MSQ nodes in tandem.
 """
@@ -31,7 +33,7 @@ from math import *
 arrivalRate     = 40.0/60   # cust per min
 browseTime      = 45.0      # mins 
 buyingTime      = 4.0       # mins
-cashiers        = 3
+cashiers        = 4
     
 pdq.Init("Big Book Store Model")
     
