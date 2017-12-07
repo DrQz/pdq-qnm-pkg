@@ -37,7 +37,9 @@
  * NJG on Tuesday, May 24, 2016. 
       o Cleaned up compiler wornings about unused variables
       o PDQ_VERSION is now a #defined comstant in PDQ_Lib.h
- *
+ * NJG on Thursday, December 07, 2017
+      o Changed Demand field in WORKLOAD Parameters section to display small 
+        service times, e.g., micro-seconds
  */
 
 #include <stdio.h>
@@ -365,7 +367,7 @@ void print_nodes(void)
 
 			switch (demand_ext) {
 				case DEMAND:
-					PRINTF("%-4s %-5s %-10s %-10s %-5s %10.4lf\n",
+					PRINTF("%-4s %-5s %-10s %-10s %-5s %15.10lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
