@@ -16,10 +16,10 @@
 #	bookstore.R
 #	
 #	Created by NJG on Wed, Apr 4, 2007
-#   Ported to R by Paul Puglia on Wed Aug 1, 2012
+# Ported to R by Paul Puglia on Wed Aug 1, 2012
 #	Updated by NJG on Monday, November 12, 2012
 #	Updated by NJG on Sunday, January 1, 2017    --Added missing 'library(pdq)'
-#	Updated by NJG on Monday, January 2, 2017    --m=4 cashiers to match G&H Ex
+#	Updated by NJG on Monday, January 2, 2017    --cashiers=4 to match G&H Ex
 #
 #	PDQ model using 2 MSQ multi-server nodes in tandem.
 #   Here, prototype MSQ node is replaced by documented CreateMultiNode function.
