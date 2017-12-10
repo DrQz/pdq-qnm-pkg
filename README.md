@@ -28,34 +28,34 @@ computer performance analysis.
 
 **Examples:** See the `examples/` [directory](https://github.com/DrQz/pdq-qnm-pkg/tree/master/examples).
 
-Here is a simple PDQ model of four bank tellers serving a single waiting-line of customers, 
-written in C:
+Here is a simple PDQ model of Help Center serving a single waiting-line of customers, written in C:
 ```
 #include <stdio.h>
 #include "PDQ_Lib.h"
 
 int main(void) {
-    int    tellers = 4;
+    int    agents  = 4;    // available to take calls
     double aRate   = 0.35; // customers per minute
     double sTime   = 10.0; // minutes per customer
 
-    PDQ_Init("Bank Model");
-    PDQ_CreateMultiNode(tellers, "Tellers", CEN, FCFS);
+    PDQ_Init("Call Center ");
+    PDQ_CreateMultiNode(agents, "Agents", CEN, FCFS);
     PDQ_CreateOpen("Customers", aRate);
-    PDQ_SetDemand("Tellers", "Customers", sTime);
+    PDQ_SetDemand("Agents", "Customers", sTime);
     PDQ_SetWUnit("Customers");
     PDQ_SetTUnit("Minute");
     PDQ_Solve(CANON);
     PDQ_Report();
 }
 ```
-How long can a customer arriving at the bank expect to wait for a teller? Predicted performance metrics that result from solving a PDQ model can easily be displayed
+How long can a customer calling a Help Center expect to wait for a teller? 
+Predicted performance metrics that result from solving a PDQ model can easily be displayed
 using the generic `Report()` function:
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
                ***  on   Tue May 17 13:23:24 2016     ***
-               ***  for  Bank Model                   ***
+               ***  for  Call Center                  ***
                ***  PDQ  Version 7.x.x Build 051116   ***
                ==========================================
 
@@ -67,7 +67,7 @@ WORKLOAD Parameters:
 
 Node Sched Resource   Workload   Class     Demand
 ---- ----- --------   --------   -----     ------
-  4  MSQ   Tellers    Customers  Open     10.0000
+  4  MSQ   Agents    Customers  Open     10.0000
 
 Queueing Circuit Totals
 Streams:   1
@@ -103,14 +103,14 @@ Min response             10.0000    Minute
 
 Metric          Resource     Work              Value   Unit
 ------          --------     ----              -----   ----
-Capacity        Tellers      Customers             4   Servers
-Throughput      Tellers      Customers        0.3500   Customers/Minute
-In service      Tellers      Customers        3.5000   Customers
-Utilization     Tellers      Customers       87.5000   Percent
-Queue length    Tellers      Customers        8.6650   Customers
-Waiting line    Tellers      Customers        5.1650   Customers
-Waiting time    Tellers      Customers       14.7572   Minute
-Residence time  Tellers      Customers       24.7572   Minute
+Capacity        Agents      Customers             4   Servers
+Throughput      Agents      Customers        0.3500   Customers/Minute
+In service      Agents      Customers        3.5000   Customers
+Utilization     Agents      Customers       87.5000   Percent
+Queue length    Agents      Customers        8.6650   Customers
+Waiting line    Agents      Customers        5.1650   Customers
+Waiting time    Agents      Customers       14.7572   Minute
+Residence time  Agents      Customers       24.7572   Minute
 ```
 PDQ predicts the average customer waiting time will be 14.7572 minutes.
 
