@@ -1,51 +1,56 @@
-###############################################################################
-#  Copyright (C) 1994 - 2013, Performance Dynamics Company		      #
-#									      #
-#  This software is licensed as described in the file COPYING, which	      #
-#  you should have received as part of this distribution. The terms	      #
-#  are also available at http://www.perfdynamics.com/Tools/copyright.html.    #
-#									      #
-#  You may opt to use, copy, modify, merge, publish, distribute and/or sell   #
-#  copies of the Software, and permit persons to whom the Software is	      #
-#  furnished to do so, under the terms of the COPYING file.		      #
-#									      #
-#  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  #
-#  KIND, either express or implied.					      #
-###############################################################################
-
-# From ebiz.pl
+###########################################################################
+#  Copyright (C) 1994 - 2018, Performance Dynamics Company
+#  
+#  This software is licensed as described in the file COPYING, which
+#  you should have received as part of this distribution. The terms
+#  are also available at http://www.perfdynamics.com/Tools/copyright.html.
 #
+#  You may opt to use, copy, modify, merge, publish, distribute and/or sell 
+#  copies of the Software, and permit persons to whom the Software is
+#  furnished to do so, under the terms of the COPYING file.
+#
+#  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF 
+# ANY KIND, either express or implied.
+###########################################################################
+
+# Updated by NJG on Sun Dec 10 11:49:32 2017
 # $Id: ebiz.R,v 1.3 2013/02/13 03:04:58 pjpuglia Exp $
 
-require(pdq)
+library(pdq)
 
-model <- "Middleware"
+# PDQ model of a 3-tier business application.
+# See PPDQ book http://www.perfdynamics.com/books.html
+# Section 12.4.4 Preliminary PDQ Model
+
+model <- "3-tier Middleware Model"
 work  <- "eBiz-tx"
 node1 <- "WebServer"
 node2 <- "AppServer"
 node3 <- "DBMServer"
-think <-  0.0 * 1e-3  # treat as free param
+think <-  0.0 * 1e-3  # Pro-tip: treat Z as a free param
 
 # Add dummy node names here
 node4 <- "DummySvr"
 users <- 10
 
-Init(model)
+pdq::Init(model)
 
-CreateClosed(work, TERM, users, think)
+pdq::CreateClosed(work, TERM, users, think)
 
-CreateNode(node1, CEN, FCFS)
-CreateNode(node2, CEN, FCFS)
-CreateNode(node3, CEN, FCFS)
-CreateNode(node4, CEN, FCFS)
+pdq::CreateNode(node1, CEN, FCFS)
+pdq::CreateNode(node2, CEN, FCFS)
+pdq::CreateNode(node3, CEN, FCFS)
+pdq::CreateNode(node4, CEN, FCFS)
 
 #  NOTE: timebase is seconds
-SetDemand(node1, work, 9.8 * 1e-3)
-SetDemand(node2, work, 2.5 * 1e-3)
-SetDemand(node3, work, 0.72 * 1e-3)
+pdq::SetDemand(node1, work, 9.8 * 1e-3)
+pdq::SetDemand(node2, work, 2.5 * 1e-3)
+pdq::SetDemand(node3, work, 0.72 * 1e-3)
 
 #  dummy (network) service demand
-SetDemand(node4, work, 9.8 * 1e-3)
+pdq::SetDemand(node4, work, 9.8 * 1e-3)
 
-Solve(EXACT)
-Report()
+pdq::Solve(EXACT)
+pdq::Report()
+
+

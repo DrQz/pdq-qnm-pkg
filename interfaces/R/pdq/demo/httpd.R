@@ -1,43 +1,45 @@
-###############################################################################
-#  Copyright (C) 1994 - 2013, Performance Dynamics Company		      #
-#									      #
-#  This software is licensed as described in the file COPYING, which	      #
-#  you should have received as part of this distribution. The terms	      #
-#  are also available at http://www.perfdynamics.com/Tools/copyright.html.    #
-#									      #
-#  You may opt to use, copy, modify, merge, publish, distribute and/or sell   #
-#  copies of the Software, and permit persons to whom the Software is	      #
-#  furnished to do so, under the terms of the COPYING file.		      #
-#									      #
-#  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  #
-#  KIND, either express or implied.					      #
-###############################################################################
+###########################################################################
+#  Copyright (C) 1994 - 2018, Performance Dynamics Company
+#  
+#  This software is licensed as described in the file COPYING, which
+#  you should have received as part of this distribution. The terms
+#  are also available at http://www.perfdynamics.com/Tools/copyright.html.
+#
+#  You may opt to use, copy, modify, merge, publish, distribute and/or sell 
+#  copies of the Software, and permit persons to whom the Software is
+#  furnished to do so, under the terms of the COPYING file.
+#
+#  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF 
+# ANY KIND, either express or implied.
+###########################################################################
 
-# From httpd.pl
+# Updated by NJG on Sun Dec 10 13:55:00 2017
 # $Id: httpd.R,v 1.3 2013/02/13 03:04:58 pjpuglia Exp $
 
-require(pdq)
+library(pdq)
+
+# See PPDQ book http://www.perfdynamics.com/books.html
+# Section 12.2.2 HTTP Analysis Using PDQ
+# and Listing 12.3 httpd.pl
 
 clients <- 5
 smaster <- 0.0109 #seconds
 sdemon  <- 0.0044 #seconds
 work    <- "homepage"
-slave <- c("slave1", "slave2", "slave3", "slave4", "slave5",
-"slave6", "slave7", "slave8", "slave9", "slave10",
-"slave11", "slave12", "slave13", "slave14", "slave15",
-"slave16")
+slaves  <- c()
+nslaves <- 16
+sapply(1:nslaves, function(x) {slaves[x] <<- paste("slave", x, sep="")})
 
-Init("HTTPd Prefork")
+pdq::Init("HTTPd Prefork")
 
-CreateClosed(work, TERM, clients, 0.0)
-CreateNode("master", CEN, FCFS)
-SetDemand("master", work, smaster)
+pdq::CreateClosed(work, TERM, clients, 0.0)
+pdq::CreateNode("master", CEN, FCFS)
+pdq::SetDemand("master", work, smaster)
 
-nslaves <- length(slave)
-for( sname in slave) {
-   CreateNode(sname, CEN, FCFS)
-   SetDemand(sname, work, sdemon / nslaves)
+for(sname in slaves) {
+  pdq::CreateNode(sname, CEN, FCFS)
+  pdq::SetDemand(sname, work, sdemon / nslaves)
 }
 
-Solve(EXACT)
-Report()
+pdq::Solve(EXACT)
+pdq::Report()
