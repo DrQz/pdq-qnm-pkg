@@ -25,20 +25,20 @@ httpd.R
 	and Listing 12.3 httpd.pl
 
 mm1.R
-	Simple open queue.
+	Single server single open queue (waiting line).
 	M/M/1 queue in PDQ. See PPDQ book
 	http://www.perfdynamics.com/books.html
 	Section 4.6.1 Single Cashier Queue
 	Section 8.5.2 M/M/1 in PDQ
 
 mm1n.R
-	Simple closed queue.
+	Single server single closed queue (waiting line).
 	See PPDQ book http://www.perfdynamics.com/books.html
 	Section 4.8 Limited Request (Closed) Queues
 
 mmm.R
-	M/M/m open queue in PDQ. See PPDQ book
-	http://www.perfdynamics.com/books.html
+	Multiserver single open queue (waiting line). 
+	M/M/m in PPDQ book http://www.perfdynamics.com/books.html
 	Section 4.7 Multiserver Queue
 
 moreq.R
