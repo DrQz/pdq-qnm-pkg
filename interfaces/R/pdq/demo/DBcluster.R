@@ -16,7 +16,7 @@
 # Updated by NJG on Sun Dec 10 13:10:21 2017
 # $Id: cluster.R,v 1.2 2012/11/13 05:48:20 earl-lang Exp $
 
-# Thisis a PDQ model of a parallel DSS database cluster.
+# This is a PDQ model of a parallel DSS database cluster.
 # See PPDQ book http://www.perfdynamics.com/books.html
 # Section 9.4.1 Parallel Query Cluster
 # and Listing 9.2. Cluster model in PDQ

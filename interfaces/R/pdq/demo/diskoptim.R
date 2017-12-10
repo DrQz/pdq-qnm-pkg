@@ -16,9 +16,8 @@
 # $Id: diskoptim.R,v 1.3 2012/11/13 18:36:42 earl-lang Exp $
 # Updated by NJG on Sun Dec 10 10:44:11 2017
 
-# An performance gem. 
-# Optimizate the flow of IO requests between a fast and a slow disk.
-# This code also produces a plot of the solution.
+# An performance gem. Optimize the flow of IO requests between a fast and 
+# a slow disk. This code also produces a plot of the solution.
 
 library(pdq)
 

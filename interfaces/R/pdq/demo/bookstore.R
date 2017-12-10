@@ -18,7 +18,7 @@
 #	$Id: bookstore.R,v 1.3 2012/11/13 05:41:43 earl-lang Exp $
 # Updated by NJG on Sun Dec 10 11:28:27 2017
 #
-#	This PDQ model uses TWO multi-server nodess in tandem:
+#	This PDQ model uses TWO multiserver nodess in tandem:
 # 1. A delay center tp represent browsing time without queueing
 # 2. A checkout center that has a waiting line.
 #	
