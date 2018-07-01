@@ -1,7 +1,7 @@
 # PDQ: Pretty Damn Quick 
 ## (7.0.0-beta --- Not ready for prime time)
 
-This a **development** repository. The current release, **PDQ 6.2.0**, has its 
+This is a **development** repository. The current release, **PDQ 6.2.0**, has its 
 own [repository](http://www.perfdynamics.com/Tools/PDQcode.html) with separate download and installation instructions.
 
 PDQ is a library of functions for solving queueing-network models of 
@@ -10,6 +10,7 @@ and packet networks.
 PDQ models can be written optionally in a variety of conventional programming languages. 
 The book [Analyzing Computer System Performance with Perl::PDQ](http://www.perfdynamics.com/iBook/ppa_new.html) 
 presents example applications for computer system performance analysis written in Perl. 
+Another example below is written in Python. 
 
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
 
