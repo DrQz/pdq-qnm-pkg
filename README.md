@@ -1,13 +1,15 @@
 # PDQ: Pretty Damn Quick 
-## (7.0.0-beta Not ready for prime time)
+## (7.0.0-beta --- Not ready for prime time)
 
-PDQ is an analytic solver library for queueing-network models (QNM) of computer
-systems, manufacturing systems, and data networks, that can be written
-optionally in a variety of conventional programming languages (see below). 
-Perl is the language used in the book 
-[Analyzing Computer System Performance with Perl::PDQ](http://www.perfdynamics.com/iBook/ppa_new.html), 
-which explains the fundamental queue-theoretic concepts with example PDQ models for 
-computer performance analysis.
+This a **development** repository. The current release, **PDQ 6.2.0**, has its 
+own [repository](http://www.perfdynamics.com/Tools/PDQcode.html) with separate download and installation instructions.
+
+PDQ is a library of functions for solving queueing-network models of 
+systems of resources such as, distributed computer systems, manufacturing systems, 
+and packet networks. 
+PDQ models can be written optionally in a variety of conventional programming languages. 
+The book [Analyzing Computer System Performance with Perl::PDQ](http://www.perfdynamics.com/iBook/ppa_new.html) 
+presents example applications for computer system performance analysis written in Perl. 
 
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
 
@@ -16,7 +18,7 @@ computer performance analysis.
 [Python](http://www.perfdynamics.com/Tools/PDQpython.html), 
 [R](http://www.perfdynamics.com/Tools/PDQ-R.html)
 
-**Platforms:**	Linux, OS X, Windows
+**Platforms:**	Linux, MacOS, Windows
 
 **Maintainers:** Neil Gunther and Paul Puglia
 
@@ -28,25 +30,22 @@ computer performance analysis.
 
 **Examples:** See the `examples/` [directory](https://github.com/DrQz/pdq-qnm-pkg/tree/master/examples).
 
-Here is a simple PDQ model of Help Center serving a single waiting-line of customers, written in C:
+Here is a simple PDQ model of a Call Center serving a single waiting-line of customers, written in Python:
 ```
-#include <stdio.h>
-#include "PDQ_Lib.h"
+import pdq
 
-int main(void) {
-    int    agents  = 4;    // available to take calls
-    double aRate   = 0.35; // customers per minute
-    double sTime   = 10.0; // minutes per customer
+agents  = 4     # available to take calls
+aRate   = 0.35  # customers per minute
+sTime   = 10.0  # minutes per customer
 
-    PDQ_Init("Call Center ");
-    PDQ_CreateMultiNode(agents, "Agents", CEN, FCFS);
-    PDQ_CreateOpen("Customers", aRate);
-    PDQ_SetDemand("Agents", "Customers", sTime);
-    PDQ_SetWUnit("Customers");
-    PDQ_SetTUnit("Minute");
-    PDQ_Solve(CANON);
-    PDQ_Report();
-}
+pdq.Init("Call Center")
+pdq.CreateMultiNode(agents, "Agents", pdq.CEN, pdq.FCFS)
+pdq.CreateOpen("Customers", aRate)
+pdq.SetDemand("Agents", "Customers", sTime)
+pdq.SetWUnit("Customers")
+pdq.SetTUnit("Minute")
+pdq.Solve(pdq.CANON)
+pdq.Report()
 ```
 How long can a customer calling a Help Center expect to wait for a teller? 
 Predicted performance metrics that result from solving a PDQ model can easily be displayed
