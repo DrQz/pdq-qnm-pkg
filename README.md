@@ -33,6 +33,8 @@ Another example below is written in Python.
 
 Here is a simple PDQ model of a Call Center serving a single waiting-line of customers, written in Python:
 ```
+#!/usr/bin/env python
+
 import pdq
 
 agents  = 4     # available to take calls
