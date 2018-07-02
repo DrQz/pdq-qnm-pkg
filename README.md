@@ -113,6 +113,6 @@ Residence time  Agents      Customers       24.7572   Minute
 ```
 PDQ predicts the average customer waiting time will be 14.7572 minutes.
 
-Optionally, you can create customized reports by retrieving specific performance metrics [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
+Optionally, you can create customized reports by retrieving [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
 like, `GetUtilization()` or `GetThruput()`.
 
