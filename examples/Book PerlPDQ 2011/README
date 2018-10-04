@@ -1,0 +1,16 @@
+Copyright (c) 2007 - 2016
+
+'ppdq_2005/' refers to the book, "Analyzing Computer System Performance with
+Perl::PDQ," first published in 2005.
+
+See http://www.perfdynamics.com/iBook/ppa_new.html for details, as well as the 
+Springer site http://www.springer.com/gp/book/9783642225826 and Amazon 
+http://www.amazon.com/Analyzing-Computer-System-Performance-Perl/dp/3642225829
+
+The subdirectories are:
+pdq_models/       PDQ models written in Perl
+perl_examples/    Auxiliary Perl files that do not use PDQ
+
+Created by NJG on Thursday, May 19, 2016
+
+
