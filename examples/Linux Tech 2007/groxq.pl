@@ -11,6 +11,7 @@ $SeviceTime  = 1/$ServiceRate;
 $ServerName  = "Cashier";
 $Workload    = "Customers";
 
+
 #------------------------ PDQ Model -------------------
 # Initialize PDQ internal variables
 pdq::Init("Grocery Store Checkout");
