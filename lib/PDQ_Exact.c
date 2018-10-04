@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2018, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -24,9 +24,9 @@
  * Edited by NJG: Fri Feb  5 16:58:09 PST 1999
  * 	Fix N=1 stability problem
  * 
- * Updated by PJP: Sat Nov 3 2012: Added supported for R
+ * Updated by PJP: Sat Nov 3 2012
+ * 	Added support for R
  *
- *  $Id$
  */
 
 #include <stdio.h>
@@ -49,19 +49,19 @@ static double    qlen[MAXPOP1][MAXPOP2][MAXDEVS];
 //-------------------------------------------------------------------------
 
 void exact(void)
+// Select standard MVA or FESC models form node type
 {
 	extern int        streams, nodes;
 	extern            NODE_TYPE *node;
 	extern            JOB_TYPE  *job;
 	extern char       s1[], s2[], s3[], s4[];
 	extern double     getjob_pop();
-
+	extern void       MMmNN(void) ;
+	
+	void              mva_qnm(); // in this module
 	char             *p = "exact()";
 	int               c, k;
-	int               n0, n1, n2;
 	int               pop[MAXCLASS] = {0, 0, 0};	/* pop vector */
-	int               N[MAXCLASS] = {0, 0, 0};	/* temp counters */
-	double            sumR[MAXCLASS] = {0.0, 0.0, 0.0};
 
 #undef DMVA
 
@@ -85,6 +85,41 @@ void exact(void)
 			errmsg(p, s1);
 		}
 	}
+	
+	for (k = 0; k < nodes; k++) {
+		if (node[k].devtype == FESC) {
+			if (PDQ_GetNodesCount() > 1) { // bail
+				strcat(s1, "Only a single FESC queueing node is allowed\n");
+				errmsg(p, s1);
+			} else { 
+				MMmNN(); // in PDQ_MServer.c 
+				return;
+			}	
+		}
+	}
+
+	mva_qnm(); // exact MVA algorithm below
+	
+} // end of exact
+
+
+
+
+void mva_qnm(void)
+// MVA algorithm for network of PDQ nodes
+{
+	extern int        streams, nodes;
+	extern            NODE_TYPE *node;
+	extern            JOB_TYPE  *job;
+	extern char       s1[], s2[], s3[], s4[];
+	extern double     getjob_pop();
+
+	char             *p = "mva_qnm()";
+	int               c, k;
+	int               n0, n1, n2;
+	int               pop[MAXCLASS] = {0, 0, 0};	/* pop vector */
+	int               N[MAXCLASS] = {0, 0, 0};	/* temp counters */
+	double            sumR[MAXCLASS] = {0.0, 0.0, 0.0};
 
 
 	/* initialize lowest queue configs on each device */
@@ -180,7 +215,7 @@ void exact(void)
 			}  // loop over n2
 		}  // over n1
 	}  // over n0
-}  // function exact
+	
+}  // end of mva_qnm
 
-//-------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 bookstore.R
-	This PDQ model uses TWO multi-server nodess in tandem:
-	1. A delay center tp represent browsing time without queueing
-	2. A checkout center that has a waiting line.
+	This PDQ model uses TWO multiserver nodess in tandem:
+	1. A delay center to represent browsing time without queueing
+	2. A checkout center that has a single waiting line.
 
 DBcluster.R
 	This is a PDQ model of a parallel DSS database cluster.
@@ -11,7 +11,7 @@ DBcluster.R
 
 diskoptim.R
 	An performance gem. 
-	Optimizate the flow of IO requests between a fast and a slow disk.
+	Optimize the flow ratio of IO requests between a fast and a slow disk.
 	This code also produces a plot of the solution.
 
 ebiz.R

@@ -23,6 +23,7 @@ OBJ     = \
 	PDQ_Exact.o \
 	PDQ_Globals.o \
 	PDQ_MServer.o \
+	PDQ_MServer2.o \
 	PDQ_Report.o \
 	PDQ_Utils.o
 

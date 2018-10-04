@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2018, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -30,7 +30,6 @@
  * Also see separate disclaimers from the respective book publishers.
 ************************* DO NOT REMOVE ****************************
  *
- *  $Id$
  */
 
 // The following string constant is read by the GetVersion and Report()
@@ -62,10 +61,10 @@
 #define CLOSED  2
 
 // Queueing Node Types
-#define MEM     3
-#define CEN     4                /* unspecified queueing center */
+#define FESC    3                /* flow-equivalent service center */
+#define CEN     4                /* standard FCFS queueing center */
 #define DLY     5                /* unspecified delay center */
-#define MSQ     6                /* unspecified multi-server queue */
+#define MSQ     6                /* M/M/m multi-server queue */
 
 // Queueing Disciplines
 #define ISRV    7                /* infinite server */
@@ -139,7 +138,7 @@ typedef struct {
 } JOB_TYPE;
 
 typedef struct {
-   int               devtype;               /* CEN, ... */
+   int               devtype;               /* CEN, FESC, MSQ ... */
    int               sched;                 /* FCFS, ... */
    char              devname[MAXCHARS];
    double            visits[MAXSTREAMS];
@@ -267,16 +266,18 @@ JOB_TYPE  *getjob(int idx);
 extern void resets(char *s);
 extern void debug(char *proc, char *info);
 extern void errmsg(char *pname, char *msg);
-extern void approx(void);
-extern void canonical(void);
-extern void exact(void);
+
+extern void approx(void);    // in MVA_Approx.c
+extern void canonical(void); // in MVA_Canon.c
+extern void exact(void);     // in PDQ_Exact.c
+
 extern int  getjob_index(char *wname);
 extern void getjob_name(char *str, int c);
 extern int  getnode_index(char *name);
 extern void typetostr(char *str, int type);
 
 
-// Added by PJP Nov 3, 2012: Added support for R in the library 
+// Added by PJP Nov 3, 2012 as support for R in the library 
 #ifdef __R_PDQ
 #include <R.h>
 #define PRINTF Rprintf

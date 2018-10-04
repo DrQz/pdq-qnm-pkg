@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2018, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -21,8 +21,8 @@
  * Updated by NJG: Wednesday, February 6, 2013 - flag MSQ node if CLOSED network
  * NJG on Sunday, May 15, 2016   - Moved incomplete circuit detection from PDQ_Report()
  * NJG on Saturday, May 21, 2016 - Verified incomplete PDQ circuit detection works
+ * NJG on May 8, 2016 - Added APPROXMSQ for M/M/m queue 
  *
- *  $Id$
  */
 
 #include <stdio.h>
@@ -80,7 +80,7 @@ void PDQ_Solve(int meth)
 
     switch (method) {
         case EXACT:
-            if (job[0].network != CLOSED) { // bail !!
+            if (job[0].network != CLOSED) { // bail
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
                 sprintf(s1,
@@ -92,7 +92,7 @@ void PDQ_Solve(int meth)
             switch (job[0].should_be_class) {
                 case TERM:
                 case BATCH:
-                    exact();
+                    exact(); // in PDQ_Exact.c
                     break;
                 default:
                     break;
@@ -100,7 +100,7 @@ void PDQ_Solve(int meth)
             break;
 
         case APPROX:
-            if (job[0].network != CLOSED) { // bail !! 
+            if (job[0].network != CLOSED) { // bail 
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
                 sprintf(s1,
@@ -111,7 +111,7 @@ void PDQ_Solve(int meth)
             switch (job[0].should_be_class) {
                 case TERM:
                 case BATCH:
-                    approx();
+                    approx(); // in MVA_Approx.c
                     break;
                 default:
                     break;
@@ -127,19 +127,19 @@ void PDQ_Solve(int meth)
                     s2, s3);
                 errmsg(p, s1);
             }
-            canonical();
+            canonical(); // in MVA_Canon.c
             break;
 
-        case APPROXMSQ:
-            if (job[0].network != OPEN) {   // bail !!
+        case APPROXMSQ: // Added by NJG on May 8, 2016
+            if (job[0].network != OPEN) { 
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
                 sprintf(s1,
                         "Network should_be_class \"%s\" is incompatible with \"%s\" method",
-                        s2, s3);
+                        s2, s3);   // bail
                 errmsg(p, s1);
             }
-            canonical();
+            canonical(); // in MVA_Canon.c
             break;
             
         default:
@@ -233,7 +233,5 @@ void PDQ_Solve(int meth)
     if (PDQ_DEBUG)
         debug(p, "Exiting");
         
-}  // PDQ_Solve
-
-//-------------------------------------------------------------------------
+}  // end of PDQ_Solve
 

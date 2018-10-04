@@ -22,7 +22,6 @@
  * (only one function so far)
  * 		- ErlangR returns the residence for an M/M/m queue.
  *
- *  $Id$
  */
  
 #include <stdio.h>
@@ -34,6 +33,7 @@
  
 double 
 ErlangR(double arrivrate, double servtime, int servers) {
+// Called from MVA_Canon.c 
 
 	extern int   PDQ_DEBUG;
 	extern char  s1[];
