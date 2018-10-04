@@ -1,0 +1,16 @@
+#  $Id$
+
+../ppa_1998/chap2 
+
+What's here?
+
+Makefile	Compile these PDQ models.
+
+README		This here file.
+
+open1.c		OPEN circuit queue with a single server.
+
+closed1.c	Single CLOSED circuit queue with single server and fixed number of requests.
+
+erlang.c	Single queue with multiple servers. 
+			This is the exact solution calculated using the algorithms in the book.
