@@ -14,7 +14,7 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-#
+
 # gross_te42.py
 #
 # Exercise 4.2 on p. 181 of Gross & Harris

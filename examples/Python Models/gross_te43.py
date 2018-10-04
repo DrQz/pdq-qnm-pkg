@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#
 ###############################################################################
 #  Copyright (C) 1994 - 2007, Performance Dynamics Company                    #
 #                                                                             #
@@ -14,7 +15,7 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-#
+
 # gross_te43.py
 #
 # Exercise 4.3 on p. 182 of Gross & Harris

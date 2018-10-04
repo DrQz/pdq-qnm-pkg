@@ -1,6 +1,7 @@
 #!/usr/bin/env python
+#
 ###############################################################################
-#  Copyright (C) 1994 - 2007, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2018, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -14,7 +15,7 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-#
+
 # traffqns.py
 #
 # Created by NJG on Thu, Apr 19, 2007
@@ -26,7 +27,7 @@ from numpy.linalg import solve
 """ Solve traffic equations numerically using NumPy 
 """
 
-# Traffic equations from PPA p.95:
+# The following are the traffic equations from PPA p.95:
 """
 L0 = 15.36/3600    ... external arrival rate into system
 L1 = 0.3L0 + 0.1L3
@@ -76,12 +77,12 @@ D = array([v[0]*S[0], v[1]*S[1], v[2]*S[2], v[3]*S[3]])
 # Initialize and solve the model 
 pdq.Init("Passport Office");
 
-numStreams = pdq.CreateOpen("Applicant", L[0]);
+pdq.CreateOpen("Applicant", L[0]);
 
-numNodes = pdq.CreateNode("Window0", pdq.CEN, pdq.FCFS);
-numNodes = pdq.CreateNode("Window1", pdq.CEN, pdq.FCFS);
-numNodes = pdq.CreateNode("Window2", pdq.CEN, pdq.FCFS);
-numNodes = pdq.CreateNode("Window3", pdq.CEN, pdq.FCFS);
+pdq.CreateNode("Window0", pdq.CEN, pdq.FCFS);
+pdq.CreateNode("Window1", pdq.CEN, pdq.FCFS);
+pdq.CreateNode("Window2", pdq.CEN, pdq.FCFS);
+pdq.CreateNode("Window3", pdq.CEN, pdq.FCFS);
 
 pdq.SetDemand("Window0", "Applicant", D[0]);
 pdq.SetDemand("Window1", "Applicant", D[1]);
@@ -99,3 +100,4 @@ print "U0: %6.2f\tQ0: %6.2f" % (r[0]*100, r[0] / (1 - r[0]))
 print "U1: %6.2f\tQ1: %6.2f" % (r[1]*100, r[1] / (1 - r[1]))
 print "U2: %6.2f\tQ2: %6.2f" % (r[2]*100, r[2] / (1 - r[2]))
 print "U3: %6.2f\tQ3: %6.2f" % (r[3]*100, r[3] / (1 - r[3]))
+

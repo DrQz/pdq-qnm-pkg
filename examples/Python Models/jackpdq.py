@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#
 ###############################################################################
 #  Copyright (C) 1994 - 2013, Performance Dynamics Company                    #
 #                                                                             #
@@ -22,6 +23,8 @@
 #
 # Created by NJG on Thu Oct 28 10:16:59 PDT 2004
 # Updated by NJG on Fri Oct 29 17:53:04 PDT 2004
+# Updated by NJG on Thursday, October 04, 2018
+
 
 import pdq
 import sys 
@@ -79,11 +82,11 @@ jNet = JackNet("SimPy Jackson Network", 0) # create an instance
 pdq.Init(jNet.name)
 
 # Create PDQ context and workload for the network
-streams = pdq.CreateOpen(jNet.work, jNet.arrivRate)
+pdq.CreateOpen(jNet.work, jNet.arrivRate)
 
 # Create PDQ queues 
 for i in range(len(jNet.router)):
-   nodes = pdq.CreateNode(jNet.router[i], pdq.CEN, pdq.FCFS)
+   pdq.CreateNode(jNet.router[i], pdq.CEN, pdq.FCFS)
    pdq.SetVisits(jNet.router[i], jNet.work, jNet.visitRatio[i], \
       jNet.servTime[i])
 

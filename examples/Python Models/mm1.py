@@ -1,6 +1,9 @@
 #!/usr/bin/env python
+#
+# M/M/1 queue in PyDQ 
+
 ###############################################################################
-#  Copyright (C) 1994 - 2009, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2018, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -14,17 +17,17 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-#
-# M/M/1 in PyDQ 
-
 import pdq
 
-pdq.Init("Python Test Script")
-pdq.nodes = pdq.CreateNode("Deadhorse", pdq.CEN, pdq.FCFS)
-pdq.streams = pdq.CreateOpen("Floggit", 0.75)
+pdq.Init("Grox Store Model")
+
+pdq.CreateOpen("Customers", 0.75)
+pdq.CreateNode("Checkout", pdq.CEN, pdq.FCFS)
+pdq.SetDemand("Checkout", "Customers", 1.0)
+
 pdq.SetWUnit("Cust")
-pdq.SetTUnit("Min")
-pdq.SetDemand("Deadhorse", "Floggit", 1.0)
+pdq.SetTUnit("Mins")
+
 pdq.Solve(pdq.CANON)
 pdq.Report()
 
