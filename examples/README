@@ -4,20 +4,20 @@ Folders containing example PDQ models that correspond to various book chapters,
 technical articles and training classes.
 
 Book GCAP 2007/         Guerrilla Capacity Planning book (Springer 2007)
-                   http://www.perfdynamics.com/iBook/gcap.html
+						http://www.perfdynamics.com/iBook/gcap.html
 
-Book PerlPDQ 2011/         Perl PDQ book (Springer 2011, 2nd edition)
-                   http://www.perfdynamics.com/iBook/ppa_new.html
+Book PerlPDQ 2011/      Perl PDQ book (Springer 2011, 2nd edition)
+						http://www.perfdynamics.com/iBook/ppa_new.html
 
 Book PPA 1998/          The Practical Performance Analyst book (McGraw-Hill 1998)
-                   http://www.perfdynamics.com/iBook/ppa.html
+						http://www.perfdynamics.com/iBook/ppa.html
 
-Linux Tech 2007/    Linux Technical Review journal (Germany 2007)
+Linux Tech 2007/		Linux Technical Review journal models (Germany 2007)
 
-Linux Pro 2007/     Linux Pro Magazine (2007)
+Linux Pro 2007/			Linux Pro Magazine models (2007)
 
-Misc Models/       A collection of PDQ models used in Guerrilla training classes
-                   http://www.perfdynamics.com/Classes/schedule.html
+Misc Models/			A collection of PDQ models used in Guerrilla training classes
+						http://www.perfdynamics.com/Classes/schedule.html
 
 
 Created by NJG on Thursday, May 19, 2016
