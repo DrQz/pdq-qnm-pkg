@@ -16,7 +16,8 @@
 
 # cs_baseline.pl
 #
-# Updated by NJG on Sat, Apr 8, 2006 per erratum p. 324
+# Updated by NJG on Saturday, Apr 8, 2006      --- per erratum p.324
+# Updated by NJG on Thursday, October 04, 2018 --- removed local nodes and streams
 
 use pdq;
 
@@ -138,19 +139,21 @@ for ($i = 0; $i < $DB_DISKS; $i++) {
 pdq::Init($scenario);
 
 #  Define physical resources as queues
-$nodes = pdq::CreateNode("PC", $pdq::CEN, $pdq::FCFS);
-$nodes = pdq::CreateNode("LB", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("PC", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("LB", $pdq::CEN, $pdq::FCFS);
 for ($i = 0; $i < $WEB_SERVS; $i++) {
-   $nodes = pdq::CreateNode($FDarray[$i]->{label}, 
+   pdq::CreateNode($FDarray[$i]->{label}, 
         $pdq::CEN, $pdq::FCFS);
 }
-$nodes = pdq::CreateNode("AS", $pdq::CEN, $pdq::FCFS);
-$nodes = pdq::CreateNode("DB", $pdq::CEN, $pdq::FCFS);
+
+pdq::CreateNode("AS", $pdq::CEN, $pdq::FCFS);
+pdq::CreateNode("DB", $pdq::CEN, $pdq::FCFS);
 for ($i = 0; $i < $DB_DISKS; $i++) {
-   $nodes = pdq::CreateNode($MDarray[$i]->{label}, $pdq::CEN, 
+   pdq::CreateNode($MDarray[$i]->{label}, $pdq::CEN, 
         $pdq::FCFS);
 }
-$nodes = pdq::CreateNode("LAN", $pdq::CEN, $pdq::FCFS);
+
+pdq::CreateNode("LAN", $pdq::CEN, $pdq::FCFS);
 
 #  Assign transaction names 
 $txCD =  "CatDsply";
@@ -161,14 +164,16 @@ $dumRQ  = "RQbkgnd ";
 $dumSU  = "SUbkgnd ";
 
 #  Define focal PC load generator
-$streams = pdq::CreateOpen($txCD, 1 * 4.0 / 60.0);
-$streams = pdq::CreateOpen($txRQ, 1 * 8.0 / 60.0);
-$streams = pdq::CreateOpen($txSU, 1 * 1.0 / 60.0);
+pdq::CreateOpen($txCD, 1 * 4.0 / 60.0);
+pdq::CreateOpen($txRQ, 1 * 8.0 / 60.0);
+pdq::CreateOpen($txSU, 1 * 1.0 / 60.0);
+
 
 #  Define the aggregate background workload 
-$streams = pdq::CreateOpen($dumCD, ($USERS - 1) * 4.0 / 60.0);
-$streams = pdq::CreateOpen($dumRQ, ($USERS - 1) * 8.0 / 60.0);
-$streams = pdq::CreateOpen($dumSU, ($USERS - 1) * 1.0 / 60.0);
+pdq::CreateOpen($dumCD, ($USERS - 1) * 4.0 / 60.0);
+pdq::CreateOpen($dumRQ, ($USERS - 1) * 8.0 / 60.0);
+pdq::CreateOpen($dumSU, ($USERS - 1) * 1.0 / 60.0);
+
 #----------------------------------------------------
 # CategoryDisplay request + reply chain  from workflow diagram
 #----------------------------------------------------
