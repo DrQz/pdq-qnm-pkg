@@ -2,7 +2,7 @@ Copyright (c) 2005 - 2018 Performance Dynamics Company
 
 These directories correspond to the chapters in the book entitled,
 "Analyzing Computer System Performance with Perl::PDQ" (Springer 2005 and 2011).
-Hence, these PDQ models are written in the Perl language. 
+Thus, all these PDQ models are written in the Perl language. 
 See http://www.perfdynamics.com/iBook/ppa_new.html for details
 
 
