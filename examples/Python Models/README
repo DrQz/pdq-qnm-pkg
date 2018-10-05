@@ -28,10 +28,10 @@ bookstore.py
 --------------
 
 
-gross_te42.py   Python version of Example 4.2
-gross_te43.py   Python version of Example 4.3
+gross_ex42.py   Example 4.2 for comparison with PyDQ model
+gross_pdq42.py  PyDQ model of Example 4.2 
 
-    Examples in Gross and Harris (p. 181, 3rd edn).
+    Example in Gross and Harris (p. 181, 3rd edn).
     http://www.amazon.com/Fundamentals-Queueing-Theory-3rd-Third/dp/B0047T5TMO
 --------------
 

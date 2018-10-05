@@ -1,6 +1,7 @@
 #!/usr/bin/env python
+#
 ###############################################################################
-#  Copyright (C) 1994 - 2007, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2018, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -18,7 +19,7 @@
 # gross_te42.py
 #
 # Exercise 4.2 on p. 181 of Gross & Harris
-# Solved using traffic eqns and NumPy, rather than PDQ-MSQ
+# Solved using traffic eqns and NumPy, rather than CreateMultiNode in PDQ
 #
 # Created by NJG on Sun, Aug 26, 2007
 
