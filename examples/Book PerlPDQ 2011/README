@@ -1,16 +1,13 @@
-Copyright (c) 2007 - 2016
+Copyright (c) 2007 - 2018 Performance Dynamics Company
 
-'ppdq_2005/' refers to the book, "Analyzing Computer System Performance with
-Perl::PDQ," first published in 2005.
+These subdirectories refer to the book, "Analyzing Computer System Performance with
+Perl::PDQ," (Springer, 2nd edn. 2011).
+See http://www.perfdynamics.com/iBook/ppa_new.html 
 
-See http://www.perfdynamics.com/iBook/ppa_new.html for details, as well as the 
-Springer site http://www.springer.com/gp/book/9783642225826 and Amazon 
-http://www.amazon.com/Analyzing-Computer-System-Performance-Perl/dp/3642225829
+PDQ Models/       PDQ models written in Perl
 
-The subdirectories are:
-pdq_models/       PDQ models written in Perl
-perl_examples/    Auxiliary Perl files that do not use PDQ
+Perl Programs/    Auxiliary Perl files that do not use PDQ
+
 
 Created by NJG on Thursday, May 19, 2016
-
-
+Updated by NJG on Thursday, October 04, 2018

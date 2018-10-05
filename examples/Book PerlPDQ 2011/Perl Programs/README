@@ -1,10 +1,11 @@
-Copyright (c) 2005 - 2016 Performance Dynamics Company
+Copyright (c) 2005 - 2018 Performance Dynamics Company
 
-These are auxiliary Perl files presented in the book entitled, 
+These subdirectories refer to chapters in the book entitled, 
 "Analyzing Computer System Performance with Perl::PDQ" (Springer 2005 and 2011)
 See http://www.perfdynamics.com/iBook/ppa_new.html
 
-These files are ***not PDQ models***. For those, go to the pdq_models/ folder.
+These files are auxiliary Perl programs that are used in the above book.
+They are not Perl PDQ models. For those, see the PDQ Models/ directory.
 
 
 Created by NJG on Thursday, May 19, 2016
