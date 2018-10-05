@@ -15,24 +15,13 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
-# servtime.pl
 
-# Array of measured busy periods (min)
-@busyData = (1.23, 2.01, 3.11, 1.02, 1.54, 2.69, 3.41, 2.87, 
-    2.22, 2.83);
+$B_server = 917;                    # Busy time
+$C_server = 2500;                   # Server completions
+$S_server = $B_server / $C_server;  # Service time
+$S_visits = 2;
+$D = $S_server * $S_visits;
+printf("Service demand (D): %6.2f s\n", $D);
 
-# Compute the aggregate busy time
-foreach $busy (@busyData) {
-    $B_server += $busy;
-}
-
-$C_server = @busyData;              # Completions
-$S_time = $B_server / $C_server;    # Service time (mins)
-printf("Number of completions (C): %6d \n", $C_server);
-printf("Aggregate busy time   (B): %6.2f min\n", $B_server);
-printf("Mean Service time     (S): %6.2f min\n", $S_time);
-
-# Output ...
-# Number of completions (C):     10
-# Aggregate busy time   (B):  22.93 mins
-# Mean Service time     (S):   2.29 mins
+# Output should be ...
+# Service demand (D):   0.73 s
