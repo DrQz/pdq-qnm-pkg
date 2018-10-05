@@ -7,15 +7,14 @@ Python PDQ (PyDQ) model descriptions:
 
 mm1.py
 
-    A simple M/M/1 implemented in PyDQ.
+    A simple M/M/1 queue implemented in PyDQ.
 --------------
 
 call-center.py
 
-   Multiserver model of a Customer Help Center that use CreateMultiNode in PDQ.
-
-
+   Multiserver model of a Customer Help Center that uses CreateMultiNode in PDQ.
 --------------
+
 
 bookstore.py
 
