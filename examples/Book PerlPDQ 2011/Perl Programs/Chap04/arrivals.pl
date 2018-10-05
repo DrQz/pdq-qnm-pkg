@@ -1,6 +1,7 @@
 #! /usr/bin/perl
+#
 ###############################################################################
-#  Copyright (C) 1994 - 2009, Performance Dynamics Company                    #
+#  Copyright (C) 1994 - 2018, Performance Dynamics Company                    #
 #                                                                             #
 #  This software is licensed as described in the file COPYING, which          #
 #  you should have received as part of this distribution. The terms           #
@@ -14,13 +15,19 @@
 #  KIND, either express or implied.                                           #
 ###############################################################################
 
+# arrivals.pl
 
-$B_server = 917;                    # Busy time
-$C_server = 2500;                   # Server completions
-$S_server = $B_server / $C_server;  # Service time
-$S_visits = 2;
-$D = $S_server * $S_visits;
-printf("Service demand (D): %6.2f s\n", $D);
+# Array of measured busy periods (min)
+@busyData = (1.23, 2.01, 3.11, 1.02, 1.54, 2.69, 3.41, 2.87, 
+    2.22, 2.83);
+
+$T_period = 30;                 # Measurement period (min)
+$A_count = @busyData;           # Steady-state assumption
+$A_rate = $A_count / $T_period; # Arrival rate
+
+printf("Arrival count     (A): %6d \n", $A_count);
+printf("Arrival rate (lambda): %6.2f Cust/min\n", $A_rate);
 
 # Output ...
-# Service demand (D):   0.73 s
+# Arrival count     (A):     10
+# Arrival rate (lambda):   0.33 Cust/min
