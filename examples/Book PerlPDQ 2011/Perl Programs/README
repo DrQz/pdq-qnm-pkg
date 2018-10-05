@@ -5,7 +5,8 @@ These subdirectories refer to chapters in the book entitled,
 See http://www.perfdynamics.com/iBook/ppa_new.html
 
 These files are auxiliary Perl programs that are used in the above book.
-They are not Perl PDQ models. For those, see the PDQ Models/ directory.
+They are not Perl PDQ models. For those programs, go up to the subdirectory 
+../Book PerlPDQ 2011/PDQ Models/
 
 
 Created by NJG on Thursday, May 19, 2016
