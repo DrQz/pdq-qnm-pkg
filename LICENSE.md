@@ -1,4 +1,4 @@
-# PDQ (Pretty Damn Quick) software is released under the [MIT License](https://en.wikipedia.org/wiki/MIT_License#License_terms).
+### PDQ (Pretty Damn Quick) software is released under the [MIT License](https://en.wikipedia.org/wiki/MIT_License#License_terms).
 
 > Copyright (c) 1994--2018 Performance Dynamics Company
 > 
