@@ -1,5 +1,5 @@
 # PDQ: Pretty Damn Quick 
-## (7.0.0-beta --- Not ready for prime time)
+## (version 7.0.0-beta &mdash;- Not ready for prime time)
 
 This is a **development** repository. The current release, **PDQ 6.2.0**, has its 
 own [repository](http://www.perfdynamics.com/Tools/PDQcode.html) with separate download and installation instructions.
