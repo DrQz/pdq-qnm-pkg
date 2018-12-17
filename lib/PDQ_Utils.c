@@ -26,6 +26,8 @@
  * 		Removed floor() in GetLoadOpt() return
  *		Added tests for PDQ circuit existence
  * Updated by NJG on Wed, August 19, 2015  Use PRINTF from PDQ_Lib.h for R
+ * Updated by NJG on Sunday, December 16, 2018 TYPE_TABLE for M/M/n/N/N FESC node
+
  *
  *  $Id$
  */
@@ -72,7 +74,7 @@ TYPE_TABLE
 		{"VOID",    VOID},
 		{"OPEN",    OPEN},
 		{"CLOSED",  CLOSED},
-		{"MEM",     MEM},
+		{"FESC",    FESC},   //Edited by NJG for M/M/n/N/N FESC on Dec 16, 2018
 		{"CEN",     CEN},
 		{"DLY",     DLY},
 		{"MSQ",     MSQ},
