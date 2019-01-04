@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2018, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -34,11 +34,12 @@
 
 // The following string constant is read by the GetVersion and Report()
 // Updated by NJG on Tuesday, May 24, 2016 from string literal to #define constant
-// to suppress compiler warnings.
-// Do not modify order of fields.
+// thereby suppressing compiler warnings.
+//
+// Modifying the order of TYPE fields ramifies into PDQ_Utils.c TYPE_TABLE
 // Must not contain more than 26 characters for Report() header.
 
-#define PDQ_VERSION    "Version 7.0.0 Build 052116"
+#define PDQ_VERSION    "Version 7.0.0 Build 123118"
 
 
 //---- TYPES --------------------------------------------------------------
@@ -50,40 +51,44 @@
 #define   FALSE 0
 #endif /* FALSE */
 
+// Size limits
 #define MAXNODES    1024        /* Max queueing nodes */
 #define MAXBUF       128        /* Biggest buffer */
 #define MAXSTREAMS    64        /* Max job streams */
 #define MAXCHARS      64        /* Max chars in param fields */
 
-// Queueing Network Types
+#define MAX_USERS 1200       // needs to be big to model threads 
+#define MAXCLASS  3          // max PDQ stream types
+
+// Queueing network model types
 #define VOID    0				// Changed per PDQ_Init code (NJG on Apr 4, 2007)
 #define OPEN    1
 #define CLOSED  2
 
-// Queueing Node Types
-#define FESC    3                /* flow-equivalent service center */
-#define CEN     4                /* standard FCFS queueing center */
-#define DLY     5                /* unspecified delay center */
-#define MSQ     6                /* M/M/m multi-server queue */
+// Queueing node device types
+#define CEN     3                /* standard queueing center */
+#define DLY     4                /* unspecified delay center */
+#define MSO     5                /* multi-server open queue M/M/m */
+#define MSC     6                /* multi-server closed queue M/M/m/N/N  FESC algorithm */
 
-// Queueing Disciplines
+// Queueing node sched types
 #define ISRV    7                /* infinite server */
 #define FCFS    8                /* first-come first-serve */
 #define PSHR    9                /* processor sharing */
 #define LCFS    10               /* last-come first-serve */
 
-// Queueing Job Types
+// Queueing stream job types
 #define TERM   11
 #define TRANS  12
 #define BATCH  13
 
-// Solution Methods
+// Solution methods
 #define EXACT  14		// for moderate TERM workloads
 #define APPROX 15		// for large TERM workloads
 #define CANON  16		// for TRANS workloads
-#define APPROXMSQ 17	// multiclass MSQ workloads (NJG on May 8, 2016)
+#define APXMSO 17	// multiclass MSO workloads (NJG on May 8, 2016)
 
-// Service Time and Demand Types
+// Service time and Demand types
 #define VISITS 18
 #define DEMAND 19
 
@@ -137,9 +142,12 @@ typedef struct {
    TRANSACTION_TYPE *trans;
 } JOB_TYPE;
 
+
+// Node attributes
 typedef struct {
-   int               devtype;               /* CEN, FESC, MSQ ... */
-   int               sched;                 /* FCFS, ... */
+   int               devtype;               // CEN, MSO, MSC,  ... 
+   int               sched;                 // FCFS, PSHR, ... 
+   int               servers;               // Added by NJG on Dec 29, 2018
    char              devname[MAXCHARS];
    double            visits[MAXSTREAMS];
    double            service[MAXSTREAMS];
@@ -163,21 +171,35 @@ typedef struct {
 //int     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
 void     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
 int     PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *think);
+// Added by NJG on Sunday, December 30, 2018 for PDQ 7.0
+void PDQ_CreateWorkloadClosed(char *name, int should_be_class, double pop, double think);
+
 
 // Define the workload in an open-circuit queueing * model.
 //int     PDQ_CreateOpen(char *name, double lambda);
 void     PDQ_CreateOpen(char *name, double lambda);
 int     PDQ_CreateOpen_p(char *name, double *lambda);
+// Added by NJG on Sunday, December 30, 2018 for PDQ 7.0
+void PDQ_CreateWorkloadOpen(char *name, double lambdak);
+
 
 // Define a single queueing center in either a closed or open circuit
-//int     PDQ_CreateNode(char *name, int device, int sched);
-void     PDQ_CreateNode(char *name, int device, int sched);
+//int PDQ_CreateNode(char *name, int device, int sched);
+void PDQ_CreateNode(char *name, int device, int sched);
 
-// Define multiserver queueing center in either a closed or open circuit
+// Define open network multiserver MSQ queueing device
 // Prototype as defined in Chapter 6 of the "Perl::PDQ" book
-// New in PDQ v5.0. Added by NJG on Wed Feb 25, 2009
-//int     PDQ_CreateMultiNode(int servers, char *name, int device, int sched);
-void     PDQ_CreateMultiNode(int servers, char *name, int device, int sched);
+// New in PDQ 5.0. Added by NJG on Wed Feb 25, 2009
+// Will be deprecated beyond PDQ 7.0
+void PDQ_CreateMultiNode(int servers, char *name, int device, int sched);
+// Alternative defined in PDQ 7.0
+void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched);
+
+
+// Define closed network multiserver FESC queueing device
+// Added  by NJG on Thursday, December 27, 2018 for PDQ v7.0.0
+void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched);
+
 
 //------------------------------------------------------
 // Next 2 functions will be used when current PDQ Create functions become procedures
@@ -191,7 +213,8 @@ int		PDQ_GetNodesCount();
 //------------------------------------------------------
 
 
-double  PDQ_GetResponse(int should_be_class, char *wname);
+//Changed by NIG on Monday, December 31, 2018
+double  PDQ_GetResponseTime(int should_be_class, char *wname);
 // Returns the system response time for the specified workload
 
 double  PDQ_GetResidenceTime(char *device, char *work, int should_be_class);
@@ -200,7 +223,8 @@ double  PDQ_GetResidenceTime(char *device, char *work, int should_be_class);
 double  PDQ_GetThruput(int should_be_class, char *wname);
 // Returns the system throughput for the specified workload
 
-double  PDQ_GetLoadOpt(int should_be_class, char *wname);
+//Changed by NIG on Monday, December 31, 2018
+double  PDQ_GetOptimalLoad(int should_be_class, char *wname);
 // Returns the optimal user load for the specified workload
 
 double  PDQ_GetUtilization(char *device, char *work, int should_be_class);
@@ -211,7 +235,8 @@ double  PDQ_GetQueueLength(char *device, char *work, int should_be_class);
 // Returns the queue length at the designated queueing node due to the
 // specified workload.
 
-double  PDQ_GetThruMax(int should_be_class, char *wname);
+//Changed by NIG on Monday, December 31, 2018
+double  PDQ_GetThruputMax(int should_be_class, char *wname);
 // Return the maximum available throughput
 
 //double PDQ_GetTotalDemand(int should_be_class, char *wname);
@@ -270,6 +295,7 @@ extern void errmsg(char *pname, char *msg);
 extern void approx(void);    // in MVA_Approx.c
 extern void canonical(void); // in MVA_Canon.c
 extern void exact(void);     // in PDQ_Exact.c
+
 
 extern int  getjob_index(char *wname);
 extern void getjob_name(char *str, int c);

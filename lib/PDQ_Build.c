@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -15,19 +15,24 @@
 
 /*
  * PDQ_Build.c
- * 
- *  $Id$
  *
  * Created by NJG on 18:19:02  04-28-95 
  * Revised by NJG on 09:33:05  31-03-99
- * Updated by NJG on Mon, Apr 2, 2007           Added MSQ multiserver hack
- * Updated by NJG on Tue, Apr 3, 2007           Removed nested loops in Init
- * Updated by NJG on Wed, Apr 4, 2007           Changed MSQ -> devtype and m -> sched
- * Updated by NJG on Fri, Apr 6, 2007           Error if SetWUnit or SetTUnit before calling Create circuit
- * Updated by NJG on Wed Feb 25, 2009           Added CreateMultiNode function
- * Updated by PJP on Sat Nov 3, 2012            Added support for R
- * Updated by NJG on Saturday, January 12, 2013 Set CreateXXX count returns to zero
- * Updated by NJG on Saturday, May 21, 2016     Set all Create procs to voids
+ * Updated by NJG on Mon, Apr 2, 2007             Added MSQ multiserver node
+ * Updated by NJG on Tue, Apr 3, 2007             Removed nested loops in Init
+ * Updated by NJG on Wed, Apr 4, 2007             Changed MSQ -> devtype and m -> sched
+ * Updated by NJG on Fri, Apr 6, 2007             Error if SetWUnit or SetTUnit before 
+ *                                                  calling Create circuit
+ * Updated by NJG on Wed Feb 25, 2009             Added CreateMultiNode function
+ * Updated by PJP on Sat Nov 3, 2012              Added support for R
+ * Updated by NJG on Saturday, January 12, 2013   Set CreateXXX count returns to zero
+ * Updated by NJG on Saturday, May 21, 2016       Set all Create procs to voids
+ * Updated by NJG on Thursday, December 27, 2018  Added M/M/m/N/N queueing FESC  node
+ *                                                see CreateClosedMultiserver()
+ * Updated by NJG on Saturday, December 29, 2018  New MSO, MSC multi-server devtypes
+ * Updated by NJG on Sunday, December 30, 2018    Added new replacement function names 
+ *                                                   CreateOpenWorkload() and 
+ *                                                   CreateClosedWorkload()
  *
  */
 
@@ -213,8 +218,11 @@ char*  PDQ_GetComment(void)
 
 //-------------------------------------------------------------------------
 
+
+
 //int PDQ_CreateNode(char *name, int device, int sched)
 void PDQ_CreateNode(char *name, int device, int sched)
+// Create single server node
 {
 	extern          NODE_TYPE *node;
 	extern char     s1[], s2[];
@@ -247,11 +255,11 @@ void PDQ_CreateNode(char *name, int device, int sched)
 
 	strcpy(node[k].devname, name);
 
-	
-	if (sched == MSQ && device < 0) { 
+
+	if (device == MSO && device < 0) { 
 		// interpret node as multiserver and
 		// number of servers must be positive integer
-		sprintf(s1, "Must specify MSQ node with CEN equal to positive number of servers");
+		sprintf(s1, "Must specify as MSO node");
 		errmsg(p, s1);
 	} 
 	
@@ -277,22 +285,31 @@ void PDQ_CreateNode(char *name, int device, int sched)
 
 
 //-------------------------------------------------------------------------
-// Prototype as defined in Chapter 6 of the "Perl::PDQ" book
+// Function defined in Chapter 6 of the "Perl::PDQ" book
+// PDQ_CreateMultiNode will be deprecated after PDQ 7.0
+// and replaced by PDQ_CreateOpenMultiserver (see next function)
 
 void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
+{
+	void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched);
+	
+	PDQ_CreateMultiserverOpen(servers, name, device, sched);
+
+}  // PDQ_CreateMultiNode
+
+
+
+// New version of PDQ_CreateMultiNode for PDQ 7.0 December 2018
+void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched)
 {
 	extern NODE_TYPE *node;
 	extern char     s1[], s2[];
 	extern int      nodes;
 	extern int      PDQ_DEBUG;
     
-	char           *p = "PDQ_CreateMultiNode";
+	char           *p = "PDQ_CreateMultiserverOpen";
 
 	FILE*			out_fd;
-
-    // hack to force MSQ (Multi Server Queue) node type
-	sched = MSQ; 
-	device = servers;
 
 	if (PDQ_DEBUG)
 	{
@@ -327,7 +344,8 @@ void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 	
 	
 	node[k].devtype = device;
-	node[k].sched = sched;
+	node[k].sched   = sched;
+	node[k].servers = servers; // Added by NJG on Dec 29, 2018
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, node[k].devtype);
@@ -344,16 +362,100 @@ void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
     // update global node count
 	k = ++nodes;
 	
-}  // PDQ_CreateMultiNode
+}  // end of PDQ_CreateMultiserverOpen
+
+
+//-------------------------------------------------------------------------
+// Function for M/M/m/N/N FESC node
+// Added by NJG on Thursday, December 27, 2018
+
+void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched) {
+	
+	extern NODE_TYPE *node;
+	extern char     s1[], s2[];
+	extern int      nodes;
+	extern int      PDQ_DEBUG;
+	
+	FILE*			out_fd;
+    
+	char           *p = "PDQ_CreateMultiserverClosed";
+    
+    // hack to force FESC node type
+	//sched = FESC; 
+	//device = servers;
+
+	if (PDQ_DEBUG)
+	{
+		debug(p, "Entering");
+		out_fd = fopen("PDQ.out", "a");
+		fprintf(out_fd, "name : %s  device : %d  sched : %d\n", name, device, sched);
+		//The following should really be fclose
+		//		close(out_fd);
+		fclose(out_fd);
+	}
+	
+	if (streams > 1) {
+		sprintf(s1, "Only single workload allowed with CreateMultiserverClosed()\n");
+		errmsg(p, s1);
+	} 
+
+	if (k > 1) {
+		sprintf(s1, "Allocating \"%s\" exceeds %d max nodes", name, MAXNODES);
+		errmsg(p, s1);
+	}
+
+	if (strlen(name) >= MAXCHARS) {
+		sprintf(s1, "Nodename \"%s\" is longer than %d characters",
+			name, MAXCHARS);
+		errmsg(p, s1);
+	}
+
+	strcpy(node[k].devname, name);
+
+	if (servers <= 0) { 
+		// number of servers must be positive integer
+		sprintf(s1, "Must specify a positive number of servers");
+		errmsg(p, s1);
+	} 
+	
+	// Added by NJG on Dec 29, 2018
+	node[k].devtype = device;
+	node[k].sched   = sched;
+	node[k].servers = servers;
+
+	if (PDQ_DEBUG) {
+		typetostr(s1, node[k].devtype);
+		typetostr(s2, node[k].sched);
+		PRINTF("\tNode[%d]: %s %s \"%s\"\n",
+		  k, s1, s2, node[k].devname);
+		resets(s1);
+		resets(s2);
+	};
+
+	if (PDQ_DEBUG)
+		debug(p, "Exiting");
+
+    // update global node count
+	k = ++nodes;
+	
+} // PDQ_CreateMultiserverClosed
 
 //-------------------------------------------------------------------------
 
+// New for PDQ 7.0 - placeholder for now
+// Added by NJG on Sunday, December 30, 2018
+void PDQ_CreateWorkloadClosed(char *name, int should_be_class, double pop, double think)
+{
+    int dump; //no longer return integer stream count this way
+    dump = PDQ_CreateClosed_p(name, should_be_class, &pop, &think);
+}
 
 
+// This original function will be deprecated beyond PDQ 7.0 
 void PDQ_CreateClosed(char *name, int should_be_class, double pop, double think)
 {
-    int foo;
-    foo = PDQ_CreateClosed_p(name, should_be_class, &pop, &think);
+    int dump; //no longer return integer stream count this way
+    dump = PDQ_CreateClosed_p(name, should_be_class, &pop, &think);
 }
 
 //-------------------------------------------------------------------------
@@ -432,10 +534,21 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 
 //-------------------------------------------------------------------------
 
+
+// New for PDQ 7.0 - placeholder for now
+// Added by NJG on Sunday, December 30, 2018
+void PDQ_CreateWorkloadOpen(char *name, double lambdak)
+{
+    int dump; //no longer return integer stream count this way
+    dump = PDQ_CreateOpen_p(name, &lambdak);
+}
+
+
+// This original function will be deprecated beyond PDQ 7.0 
 void PDQ_CreateOpen(char *name, double lambda)
 {
-    int foo;
-    foo = PDQ_CreateOpen_p(name, &lambda);
+    int dump; //no longer return integer stream count this way
+    dump = PDQ_CreateOpen_p(name, &lambda);
 }
 
 //-------------------------------------------------------------------------
@@ -497,11 +610,11 @@ void PDQ_SetDemand_p(char *nodename, char *workname, double *time)
 	extern int        PDQ_DEBUG;
 
 	int               node_index;
-	int               job_index;
+	int               job_index; 
 
 	FILE             *out_fd;
 	
-	demands = 1; // non-zero since SetDemand now called
+	demands = 1; // count is non-zero since SetDemand now called
 
 	if (PDQ_DEBUG)
 	{
@@ -631,7 +744,12 @@ void PDQ_SetTUnit(char* unitName)
 
 }  // PDQ_SetTUnit
 
-//----- Internal Functions ------------------------------------------------
+
+
+//*************************************
+//  Internal Functions 
+//*************************************
+
 
 void create_term_stream(int circuit, char *label, double pop, double think)
 {

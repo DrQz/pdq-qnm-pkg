@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (c) 1994 - 2016, Performance Dynamics Company                    */
+/*  Copyright (c) 1994 - 2019, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -26,8 +26,8 @@
  * Updated by NJG on Sunday, May 8, 2016.        Must choose APPROX solution method with
  *                                               multiclass multiserver MSQ nodes
  * Updated by NJG on Tuesday, May 24, 2016.      Cleaned up compiler wornings about unused variables
-*
- *  $Id$
+ * Updated by NJG on Saturday, December 29, 2018 New MSO, MSC multi-server devtypes
+ *
  */
 
 #include <stdio.h>
@@ -44,7 +44,9 @@ void canonical(void)
     extern char       s1[], s2[], s3[], s4[];
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
-    extern double     ErlangR(double arrivrate, double servtime, int servers); // ANSI
+    
+    extern double     ErlangR(double arrivrate, double servtime, int servers); 
+    // in PDQ_MServer2.c
 
     int               k;
     int               m; // servers in MSQ case
@@ -74,16 +76,16 @@ void canonical(void)
         for (k = 0; k < nodes; k++) {
         	// Hope to remove single class restriction eventually
             // And today is the day: Sun May  8 18:34:27 PDT 2016
-        	if (node[k].sched == MSQ && streams > 1) {
+        	if (node[k].devtype == MSO && streams > 1) {
                 if (method == CANON) {
-                    //sprintf(s1, "Only single PDQ stream allowed with MSQ nodes.");
-                    sprintf(s1, "Must use APPROXMSQ method with multi-stream MSQ nodes.");
+                    //sprintf(s1, "Only single PDQ stream allowed with MSO nodes.");
+                    sprintf(s1, "Must use APXMSO method with multi-stream MSO nodes.");
                     errmsg(p, s1);
                 }
             }
             Ddev = node[k].demand[c];
-            if (node[k].sched == MSQ) { // multiserver case
-                m = node[k].devtype;	// contains m > 1 servers
+            if (node[k].devtype == MSO) { // multiserver case
+                m = node[k].servers;	// contains m > 1 servers
                 Ddev /= m;
             }
             if (Ddev > Dsat) {
@@ -113,8 +115,8 @@ void canonical(void)
         
         for (k = 0; k < nodes; k++) {
             node[k].utiliz[c] = X * node[k].demand[c];
-            if (node[k].sched == MSQ) { // multiserver case
-                m = node[k].devtype;    // recompute m in each k-iteration
+            if (node[k].devtype == MSO) { // multiserver OPEN queue case
+                m = node[k].servers;    // recompute m in each k-iteration
                 node[k].utiliz[c] /= m; // per server
             }
 
@@ -141,7 +143,7 @@ void canonical(void)
                     node[k].resit[c] = node[k].demand[c] / (1.0 - perServerU);
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
-                case MSQ:  // This denotes M/M/m type node
+                case MSO:  // This denotes M/M/m type node
                     if (streams == 1) {
                         // Added by NJG on Monday, Apr 2, 2007
                         // Use exact solution
@@ -205,7 +207,7 @@ double sumU(int k)
     	// NJG on Sunday, June 28, 2009 7:29:45 PM
         // The following if-else is a hack b/c multi-class workloads
         // and multi-servers are currently incompatible.
-         if (node[k].sched == MSQ) {
+         if (node[k].devtype == MSO) {
          	sum += node[k].utiliz[c];
          } else {
          	sum += (job[c].trans->arrival_rate * node[k].demand[c]);

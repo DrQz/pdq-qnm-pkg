@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -17,8 +17,8 @@
  * PDQ_Globals.c
  * 
  * Revised by NJG: 17:56:22  07-18-96
+ * Edited by NJG on Thursday, December 27, 2018  Added FESC submodel thruput sm_x[] 
  * 
- *  $Id$
  */
 
 #include "PDQ_Lib.h"
@@ -57,6 +57,12 @@ TRANSACTION_TYPE   *tx;
 SYSTAT_TYPE        *sys;
 
 char                fname[MAXBUF];
+
+
+
+// Added by NJG on Thursday, December 27, 2018
+double  sm_x[MAX_USERS + 1]; // FESC submodel thruput
+
 
 //-------------------------------------------------------------------------
 

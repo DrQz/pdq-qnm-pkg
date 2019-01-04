@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -40,6 +40,8 @@
  * NJG on Thursday, December 07, 2017
       o Changed Demand field in WORKLOAD Parameters section to display small 
         service times, e.g., micro-seconds
+ * Updated by NJG on Saturday, December 29, 2018  New MSO, MSC multi-server devtypes
+ *
  */
 
 #include <stdio.h>
@@ -265,9 +267,16 @@ void PDQ_Report(void)
 
 	if (PDQ_DEBUG)
 		debug(p, "Exiting");
-}  /* PDQ_Report */
+		
+}  /* end of PDQ_Report() */
 
-//----- Internal print layout routines ------------------------------------
+
+
+
+
+//=======================================
+//   Internal print layout routines 
+//=======================================
 
 void print_node_head(void)
 {
@@ -287,6 +296,9 @@ void print_node_head(void)
 	
 	PRINTF("WORKLOAD Parameters:\n\n");
 
+    //Edited by NJG on Saturday, December 29, 2018
+    // for new constant defs in PDQ_Lib.h
+    // Column head "Sched" now called Node "Type"
 	switch (demand_ext) {
 	case DEMAND:
 		PRINTF(dmdfmt,
@@ -334,20 +346,28 @@ void print_nodes(void)
 			resets(s3);
 			resets(s4);
 
+            //Edited by NJG on Saturday, December 29, 2018
+            // for new constant defs in PDQ_Lib.h
+			typetostr(s1, node[k].devtype);
 			typetostr(s3, node[k].sched);
-			if (node[k].sched == MSQ) {
-			// In CreateMultiNode() function, number of MSQ servers is in node.devtype
-				sprintf(s1, "%3d", node[k].devtype); 
-			} else {
-			// NJG: Friday, January 11, 2013
-			// In CreateNode() function, node.devtype == CEN
-			// To be consistent with MSQ reporting that shows number of servers under "Node"
-            // column in the WORKLOAD Parameters section of Report(), show single server from
-            // CreateNode() as a numeric 1 in "Node" column.
-			// node.sched still displays as FCFS
-				//typetostr(s1, node[k].devtype);
-				sprintf(s1, "%3d", 1);
-			}
+			
+			/* 
+			* The following MSQ hackery was disabled on Saturday, December 29, 2018
+			*
+            * NJG: Friday, January 11, 2013
+			* if (node[k].devtype == MSQ) {
+			* Function CreateMultiNode(), number of MSO servers is in node.servers
+			*	sprintf(s1, "%3d", node[k].devtype); 
+			*} else {
+			* In CreateNode() function, node.devtype == CEN
+			* To be consistent with MSQ reporting that shows number of servers under "Node"
+            * column in the WORKLOAD Parameters section of Report(), show single server from
+            * CreateNode() as a numeric 1 in "Node" column.
+			* node.sched still displays as FCFS
+			*	typetostr(s1, node[k].devtype);
+		    *  sprintf(s1, "%3d", 1);
+			*}
+			*/
 
 			getjob_name(s2, c);
 
@@ -484,8 +504,8 @@ void print_sys_head(void)
 	banner_chars("   SYSTEM Performance");
 	PRINTF("\n");
 
-	PRINTF("Metric                     Value    Unit\n");
-	PRINTF("------                     -----    ----\n");
+	PRINTF("Metric                   Value      Unit\n");
+	PRINTF("------                  -------     ----\n");
 
 	syshdr = TRUE;
 
@@ -544,8 +564,8 @@ void print_dev_head(void)
 {
 	banner_chars("   RESOURCE Performance");
 	PRINTF("\n");
-	PRINTF("Metric          Resource     Work              Value   Unit\n");
-	PRINTF("------          --------     ----              -----   ----\n");
+	PRINTF("Metric          Resource     Work               Value    Unit\n");
+	PRINTF("------          --------     ----              -------   ----\n");
 
 	devhdr = TRUE;
 }  /* print_dev_head */
@@ -574,7 +594,7 @@ void print_system_stats(int c, int should_be_class)
 	switch (should_be_class) {
 		case TERM:
 			if (job[c].term->sys->thruput == 0) {
-				sprintf(s1, "X = %10.4f for stream = %d",
+				sprintf(s1, "\nX = %10.4f for stream = %d",
 		 	job[c].term->sys->thruput, c);
 				errmsg(p, s1);
 			}
@@ -637,9 +657,9 @@ void print_system_stats(int c, int should_be_class)
 		  		job[c].term->sys->maxTP, wUnit, tUnit);
 			PRINTF("Min response          %10.4lf    %s\n",
 		  		job[c].term->sys->minRT, tUnit);
-			PRINTF("Max Demand            %10.4lf    %s\n",
+			PRINTF("Max demand            %10.4lf    %s\n",
 		  		1 / job[c].term->sys->maxTP,  tUnit);
-			PRINTF("Tot demand            %10.4lf    %s\n",
+			PRINTF("Total demand          %10.4lf    %s\n",
 		  		job[c].term->sys->minRT, tUnit);
 			PRINTF("Think time            %10.4lf    %s\n",
 		  		job[c].term->think, tUnit);
@@ -657,10 +677,9 @@ void print_system_stats(int c, int should_be_class)
 		  		job[c].batch->sys->maxTP, wUnit, tUnit);
 			PRINTF("Min response          %10.4lf    %s\n",
 		  		job[c].batch->sys->minRT, tUnit);
-	
 			PRINTF("Max demand            %10.4lf    %s\n",
 		  		1 / job[c].batch->sys->maxTP,  tUnit);
-			PRINTF("Tot demand            %10.4lf    %s\n",
+			PRINTF("Total demand          %10.4lf    %s\n",
 		  		job[c].batch->sys->minRT, tUnit);
 			PRINTF("Optimal jobs          %10.4f    %s\n",
 				job[c].batch->sys->minRT * 
@@ -750,19 +769,18 @@ void print_node_stats(int c, int should_be_class)
 			strcat(s4, tUnit);
 		}
 
-// NJG: Friday, January 11, 2013 
-// New metric: MSQ server capacity; the 'm' in M/M/m
+// Updated by NJG on Saturday, December 29, 2018
+// Removed hack of using sched type carrying server number (of Friday, January 11, 2013) 
+// New metrics: MSO and MSC for server capacity; the 'm' in M/M/m
 			resets(s3);
-			typetostr(s3, node[k].sched);
-			if (node[k].sched == MSQ) {
-			// This is a hack until the multiserver data types are consistent
-			// number of MSQ servers
-				mservers = node[k].devtype; 
+			typetostr(s3, node[k].devtype);
+			if (node[k].devtype == MSO || node[k].devtype == MSC) {
+				mservers = node[k].servers; 
 			} else {
 				mservers = 1;
 			}
 		// Now, display mservers metric	
-		PRINTF("%-14s  %-10s   %-10s   %10d   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12d   %s\n",
 		  "Capacity",
 		  node[k].devname,
 		  s1,
@@ -771,7 +789,7 @@ void print_node_stats(int c, int should_be_class)
 		);
 
 
-		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 		  "Throughput",
 		  node[k].devname,
 		  s1,
@@ -788,15 +806,16 @@ void print_node_stats(int c, int should_be_class)
 				devW = node[k].demand[c];
 				devL = 0.0;
 				break;
-			case MSQ:
+			case MSO:
 			 	// devU is per-server from U<1 test in MVA_Canon.c
 			 	devU = node[k].utiliz[c];
-				mservers = node[k].devtype;
+				mservers = node[k].servers;
 				// X is total arrival rate into PDQ network
 				devQ = X * node[k].resit[c]; // Little's law
 				devW = node[k].resit[c] - node[k].demand[c];
 				devL = X * devW;
 				break;
+			case MSC: //Added by NJG on Saturday, December 29, 2018
 			default:
 				// NJG on Friday, July 10, 2009
 				// devU = node[k].utiliz[c];
@@ -810,7 +829,7 @@ void print_node_stats(int c, int should_be_class)
 		}
 
 // NJG: Friday, January 11, 2013 
-		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 		  "In service",
 		  node[k].devname,
 		  s1,
@@ -818,7 +837,7 @@ void print_node_stats(int c, int should_be_class)
 		  wUnit
 		);
 			
-		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 		  "Utilization",
 		  node[k].devname,
 		  s1,
@@ -826,7 +845,7 @@ void print_node_stats(int c, int should_be_class)
 		  "Percent"
 		);
 	
-		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 		  "Queue length",
 		  node[k].devname,
 		  s1,
@@ -834,7 +853,7 @@ void print_node_stats(int c, int should_be_class)
 		  wUnit
 		);
 		
-		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 			"Waiting line",
 			node[k].devname,
 			s1,
@@ -842,7 +861,7 @@ void print_node_stats(int c, int should_be_class)
 			wUnit
 		);
 		
-		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 			"Waiting time",
 			node[k].devname,
 			s1,
@@ -850,7 +869,7 @@ void print_node_stats(int c, int should_be_class)
 			tUnit
 		);
 		
-		PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+		PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 			"Residence time",
 			node[k].devname,
 			s1,
@@ -864,7 +883,7 @@ void print_node_stats(int c, int should_be_class)
 			devD = node[k].demand[c];
 			devR = node[k].resit[c];
 
-			PRINTF("%-14s  %-10s   %-10s   %10.4lf   %s\n",
+			PRINTF("%-14s  %-10s   %-10s   %12.4lf   %s\n",
 				"Waiting time",
 				node[k].devname,
 				s1,
@@ -879,6 +898,9 @@ void print_node_stats(int c, int should_be_class)
 		debug(p, "Exiting");
 		
 }  // print_node_stats
+
+
+
 
 //-------------------------------------------------------------------------
 
