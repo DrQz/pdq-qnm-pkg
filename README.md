@@ -56,9 +56,9 @@ All the resulting queueing metrics are displayed in a default format using the `
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on   Tue May 17 13:23:24 2016     ***
-               ***  for  Call Center                  ***
-               ***  PDQ  Version 7.x.x Build 051116   ***
+               ***  on  Mon Nov  9 06:06:34 PST 2020     ***
+               ***  for  Call Center  model             ***
+               ***  PDQ  Version 6.3.0 Build 110920   ***
                ==========================================
 
                ==========================================
