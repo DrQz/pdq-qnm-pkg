@@ -1,7 +1,8 @@
 # PDQ: Pretty Damn Quick 
-## (version 7.0.0-beta &mdash;- Not ready for prime time)
+## Version 6.3.0
 
-This is a **development** repository. The current release, **PDQ 6.2.0**, has its 
+This is a **development** repository. 
+The current release, **PDQ 6.2.0**, has its 
 own [repository](http://www.perfdynamics.com/Tools/PDQcode.html) with separate download and installation instructions.
 
 PDQ is a library of functions for solving queueing-network models of 

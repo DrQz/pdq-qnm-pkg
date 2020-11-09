@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -39,7 +39,7 @@
 // Modifying the order of TYPE fields ramifies into PDQ_Utils.c TYPE_TABLE
 // Must not contain more than 26 characters for Report() header.
 
-#define PDQ_VERSION    "Version 7.0.0 Build 123118"
+#define PDQ_VERSION    "Version 6.3.0 Build 110920"
 
 
 //---- TYPES --------------------------------------------------------------
@@ -167,20 +167,20 @@ typedef struct {
 // Converted all PDQ Create prototypes to void
 // ************************************
 
-// Define the workload for a closed-circuit queueing model
+// Define an OPEN workload 
+//int     PDQ_CreateOpen(char *name, double lambda);
+void     PDQ_CreateOpen(char *name, double lambda);
+int     PDQ_CreateOpen_p(char *name, double *lambda);
+// Added by NJG on Sunday, December 30, 2018 for PDQ 7.0
+void PDQ_CreateWorkloadOpen(char *name, double lambdak);
+
+// Define a CLOSED workload
 //int     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
 void     PDQ_CreateClosed(char *name, int should_be_class, double pop, double think);
 int     PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *think);
 // Added by NJG on Sunday, December 30, 2018 for PDQ 7.0
 void PDQ_CreateWorkloadClosed(char *name, int should_be_class, double pop, double think);
 
-
-// Define the workload in an open-circuit queueing * model.
-//int     PDQ_CreateOpen(char *name, double lambda);
-void     PDQ_CreateOpen(char *name, double lambda);
-int     PDQ_CreateOpen_p(char *name, double *lambda);
-// Added by NJG on Sunday, December 30, 2018 for PDQ 7.0
-void PDQ_CreateWorkloadOpen(char *name, double lambdak);
 
 
 // Define a single queueing center in either a closed or open circuit
@@ -196,9 +196,14 @@ void PDQ_CreateMultiNode(int servers, char *name, int device, int sched);
 void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched);
 
 
-// Define closed network multiserver FESC queueing device
-// Added  by NJG on Thursday, December 27, 2018 for PDQ v7.0.0
+// *********  This is the key new function added in PDQ 6.3.0 ********
+// Define closed network multiserver FESC queueing facility
+// Implemented in PDQ_MServer.c
+// 
+// Created by NJG on Thursday, December 27, 2018 
+// Added by NJG on Mon Nov  9 05:17:46 PST 2020
 void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched);
+
 
 
 //------------------------------------------------------
@@ -213,6 +218,7 @@ int		PDQ_GetNodesCount();
 //------------------------------------------------------
 
 
+double  PDQ_GetResponse(int should_be_class, char *wname);
 //Changed by NIG on Monday, December 31, 2018
 double  PDQ_GetResponseTime(int should_be_class, char *wname);
 // Returns the system response time for the specified workload
@@ -223,7 +229,8 @@ double  PDQ_GetResidenceTime(char *device, char *work, int should_be_class);
 double  PDQ_GetThruput(int should_be_class, char *wname);
 // Returns the system throughput for the specified workload
 
-//Changed by NIG on Monday, December 31, 2018
+double  PDQ_GetLoadOpt(int should_be_class, char *wname);
+// Name change by NIG on Monday, December 31, 2018
 double  PDQ_GetOptimalLoad(int should_be_class, char *wname);
 // Returns the optimal user load for the specified workload
 
@@ -235,7 +242,8 @@ double  PDQ_GetQueueLength(char *device, char *work, int should_be_class);
 // Returns the queue length at the designated queueing node due to the
 // specified workload.
 
-//Changed by NIG on Monday, December 31, 2018
+double  PDQ_GetThruMax(int should_be_class, char *wname);
+// Name change by NIG on Monday, December 31, 2018
 double  PDQ_GetThruputMax(int should_be_class, char *wname);
 // Return the maximum available throughput
 

@@ -78,8 +78,8 @@ void canonical(void)
             // And today is the day: Sun May  8 18:34:27 PDT 2016
         	if (node[k].devtype == MSO && streams > 1) {
                 if (method == CANON) {
-                    //sprintf(s1, "Only single PDQ stream allowed with MSO nodes.");
-                    sprintf(s1, "Must use APXMSO method with multi-stream MSO nodes.");
+                    //sprintf(s1, "Only single PDQ stream allowed with MSQ nodes.");
+                    sprintf(s1, "Must use APPROXMSQ method with multi-stream MSQ nodes.");
                     errmsg(p, s1);
                 }
             }

@@ -1,7 +1,5 @@
 /*******************************************************************************
- *  Copyright (C) 2007 - 2019, Performance Dynamics Company                    
- *
- * PDQ_MServer2.c
+ *  Copyright (C) 2007 - 2021, Performance Dynamics Company                    
  *
  * Collection of subroutines to solve multiserver queues:
  * 		+ ErlangR returns the residence for an M/M/m queue.

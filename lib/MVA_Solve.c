@@ -21,9 +21,8 @@
  * Updated by NJG: Wednesday, February 6, 2013 - flag MSQ node if CLOSED network
  * NJG on Sunday, May 15, 2016   - Moved incomplete circuit detection from PDQ_Report()
  * NJG on Saturday, May 21, 2016 - Verified incomplete PDQ circuit detection works
- * NJG on May 8, 2016 - Added APPROXMSQ (now APXMSO) for M/M/m queue 
+ * NJG on May 8, 2016 - Added APPROXMSQ for M/M/m queue 
  * Updated by NJG on Saturday, December 29, 2018 New MSO, MSC multi-server devtypes
- * Edited by NJG on Friday, Jan 04, 2019 - APXMSO not enabled in PDQ 7.0.0
  *
  */
 
@@ -133,9 +132,6 @@ void PDQ_Solve(int meth)
             break;
 
         case APXMSO: // Added by NJG on May 8, 2016
-         	// Not released in PDQ 7.0.0
-         	errmsg(p, "APXMSO method is not yet available");
-        	
             if (job[0].network != OPEN) { 
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
