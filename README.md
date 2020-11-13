@@ -32,33 +32,48 @@ Another example below is written in Python.
 
 **Examples:** See the `examples/` [directory](https://github.com/DrQz/pdq-qnm-pkg/tree/master/examples).
 
-Here is a simple PDQ model of a Call Center serving a single waiting-line of customers, written in Python:
+The following PDQ code, written in C, is a  model of an AWS cloud application that uses the new `CreateMultiserverClosed` function:
+
+```C
+#include <string.h> 
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <math.h>
+#include "PDQ_Lib.h"  
+
+int main(void) {
+
+	int      threads;
+	int      requests;
+	float    stime;
+	float    think;
+	
+	threads  = 350;
+	stime    = 0.444;
+	requests = 500;
+	think    = 0.0;
+
+	PDQ_Init("AWS Cloud Model");  
+	
+	PDQ_CreateClosed("Requests", TERM, requests, think); 
+	PDQ_CreateMultiserverClosed(350, "Threads", MSC, FCFS); 
+        PDQ_SetDemand("Threads", "Requests", stime); 
+	PDQ_SetWUnit("Reqs");
+	PDQ_SetTUnit("Sec");
+	PDQ_Solve(EXACT);
+	PDQ_Report();
+
+} // end main
 ```
-#!/usr/bin/env python
 
-import pdq
+In this model, the 350 Tomcat threads play the role of queueing servers.
 
-agents  = 4     # available to take calls
-aRate   = 0.35  # customers per minute
-sTime   = 10.0  # minutes per customer
-
-pdq.Init("Call Center")
-pdq.CreateMultiNode(agents, "Agents", pdq.CEN, pdq.FCFS)
-pdq.CreateOpen("Customers", aRate)
-pdq.SetDemand("Agents", "Customers", sTime)
-pdq.SetWUnit("Customers")
-pdq.SetTUnit("Minute")
-pdq.Solve(pdq.CANON)
-pdq.Report()
-```
-How long can a calling customer expect to wait to speak with an agent?  To answer that question, you simply run the PDQ model. 
-All the resulting queueing metrics are displayed in a default format using the `Report()` function:
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on  Mon Nov  9 06:06:34 PST 2020     ***
-               ***  for  Call Center  model             ***
-               ***  PDQ  Version 6.3.0 Build 110920   ***
+               ***  on   Fri Nov 13 10:24:00 2020     ***
+               ***  for  AWS-Tomcat Cloud Model       ***
+               ***  PDQ  Version 6.3.0 Build 111220   ***
                ==========================================
 
                ==========================================
@@ -69,53 +84,55 @@ WORKLOAD Parameters:
 
 Node Sched Resource   Workload   Class     Demand
 ---- ----- --------   --------   -----     ------
-  4  MSQ   Agents    Customers  Open     10.0000
+MSC  FCFS  Threads    Requests   Closed    0.4440000057
 
 Queueing Circuit Totals
 Streams:   1
 Nodes:     1
 
-Arrivals       per Minute     Demand 
---------       --------     -------
-Customers      0.3500       10.0000
+
+Client       Number        Demand   Thinktime
+------       ------        ------   ---------
+Requests     500.00        0.4440     0.00
 
 
                ==========================================
                ********   PDQ Model OUTPUTS      ********
                ==========================================
 
-Solution Method: CANON
+Solution Method: EXACT
 
                ********   SYSTEM Performance     ********
 
-Metric                     Value    Unit
-------                     -----    ----
-Workload: "Customers"
-Number in system          8.6650    Customers
-Mean throughput           0.3500    Customers/Minute
-Response time            24.7572    Minute
-Stretch factor            2.4757
+Metric                   Value      Unit
+------                  -------     ----
+Workload: "Requests"
+Mean concurrency          0.0000    Reqs
+Mean throughput         788.2883    Reqs/Sec
+Response time             0.6343    Sec
+Round trip time           0.6343    Sec
+Stretch factor            1.4286
 
 Bounds Analysis:
-Max throughput            0.4000    Customers/Minute
-Min response             10.0000    Minute
+Max throughput            2.2523    Reqs/Sec
+Min response              0.4440    Sec
+Max demand                0.4440    Sec
+Total demand              0.4440    Sec
+Think time                0.0000    Sec
+Optimal clients           1.0000    Clients
 
 
                ********   RESOURCE Performance   ********
 
-Metric          Resource     Work              Value   Unit
-------          --------     ----              -----   ----
-Capacity        Agents      Customers             4   Servers
-Throughput      Agents      Customers        0.3500   Customers/Minute
-In service      Agents      Customers        3.5000   Customers
-Utilization     Agents      Customers       87.5000   Percent
-Queue length    Agents      Customers        8.6650   Customers
-Waiting line    Agents      Customers        5.1650   Customers
-Waiting time    Agents      Customers       14.7572   Minute
-Residence time  Agents      Customers       24.7572   Minute
+Metric          Resource     Work               Value    Unit
+------          --------     ----              -------   ----
+Capacity        Threads      Requests              350   Servers
+Throughput      Threads      Requests         788.2883   Reqs/Sec
+In service      Threads      Requests      122500.0000   Reqs
+Utilization     Threads      Requests       35000.0000   Percent
+Queue length    Threads      Requests         500.0000   Reqs
+Waiting line    Threads      Requests         150.0000   Reqs
+Waiting time    Threads      Requests           0.1903   Sec
+Residence time  Threads      Requests           0.6343   Sec
 ```
-PDQ predicts the average customer waiting time will be 14.7572 minutes.
-
-Optionally, you can create customized reports by retrieving [specific performance metrics](http://www.perfdynamics.com/Tools/PDQman.html) 
-like, `GetUtilization()` or `GetThruput()`.
 
