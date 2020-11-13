@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -15,8 +15,6 @@
 
 /*
  * PDQ_Report.c
- * 
- *  $Id$
  *
  * Revised by NJG on Fri Aug  2 10:29:48  2002
  * Revised by NJG on Thu Oct  7 20:02:27 PDT 2004

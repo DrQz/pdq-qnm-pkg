@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -92,7 +92,7 @@ TYPE_TABLE
 		{"EXACT",   EXACT},
 		{"APPROX",  APPROX},
 		{"CANON",   CANON},
-        {"APXMSO",  APXMSO},
+        {"APPROXMSO",  APPROXMSO},
 		{"VISITS",  VISITS},
 		{"DEMAND",  DEMAND},
 		{"SP",      PDQ_SP},
@@ -224,17 +224,20 @@ PDQ_GetThruput(int should_be_class, char *wname)
 
 //-------------------------------------------------------------------------
 
-//Changed by NIG on Monday, December 31, 2018
-double PDQ_GetThruputMax(int should_be_class, char *wname)
+//Changed by NJG on Monday, December 31, 2018
+// double PDQ_GetThruputMax(int should_be_class, char *wname)
+// It's really a BOUND, not a MAXimum
+// Changed by NJG on Tue Nov 10 13:35:34 PST 2020
+double PDQ_GetThruputBound(int should_be_class, char *wname)
 {
-	char    *p = "PDQ_GetThruMax()";
+	char    *p = "PDQ_GetThruputBound()";
 	double   x = 0.0;
     int     job_index = getjob_index(wname);
 
 	// Added by NJG on Wednesday, August 19, 2015
-	if (!streams) PRINTF("PDQ_GetThruMax warning: No PDQ workload defined.\n");
-	if (!nodes) PRINTF("PDQ_GetThruMax warning: No PDQ nodes defined.\n");
-	if (!demands) PRINTF("PDQ_GetThruMax warning: No PDQ service demands defined.\n");
+	if (!streams) PRINTF("PDQ_GetThruputBound warning: No PDQ workload defined.\n");
+	if (!nodes) PRINTF("PDQ_GetThruputBound warning: No PDQ nodes defined.\n");
+	if (!demands) PRINTF("PDQ_GetThruputBound warning: No PDQ service demands defined.\n");
 
     if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -253,17 +256,17 @@ double PDQ_GetThruputMax(int should_be_class, char *wname)
 		}
 	} else {
 #ifndef __R_PDQ
-	fprintf(stderr, "[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+	fprintf(stderr, "[PDQ_GetThruputBound]  Invalid job index (%d)\n", job_index);
       exit(99);
 #else
       //	REprintf("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
-	error("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
+	error("[PDQ_GetThruputBound]  Invalid job index (%d)\n", job_index);
 #endif
 	}
 
 	return (x);
 	
-}  /* PDQ_GetThruputMax */
+}  /* PDQ_GetThruputBound */
 
 //-------------------------------------------------------------------------
 

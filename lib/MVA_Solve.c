@@ -131,7 +131,7 @@ void PDQ_Solve(int meth)
             canonical(); // in MVA_Canon.c
             break;
 
-        case APXMSO: // Added by NJG on May 8, 2016
+        case APPROXMSO: // Added by NJG on May 8, 2016
             if (job[0].network != OPEN) { 
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
