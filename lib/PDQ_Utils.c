@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2015, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -25,14 +25,9 @@
  * Updated by NJG on Tuesday, August 18, 2015 
  * 		Removed floor() in GetLoadOpt() return
  *		Added tests for PDQ circuit existence
- * Updated by NJG on Wed, August 19, 2015         Use PRINTF from PDQ_Lib.h for R
- * Updated by NJG on Sunday, December 16, 2018    TYPE_TABLE for M/M/n/N/N FESC node
- * Updated by NJG on Saturday, December 29, 2018  New MSO, MSC multi-server devtypes
- * Updated by NJG on Monday, December 31, 2018    Changed following function names:
- *													+ GetResponseTime
- *													+ PDQ_GetThruputMax
- *													+ PDQ_GetOptimalLoad
+ * Updated by NJG on Wed, August 19, 2015  Use PRINTF from PDQ_Lib.h for R
  *
+ *  $Id: PDQ_Utils.c,v 4.20 2015/08/20 22:36:41 earl-lang Exp $
  */
 
 #include <stdio.h>
@@ -77,11 +72,10 @@ TYPE_TABLE
 		{"VOID",    VOID},
 		{"OPEN",    OPEN},
 		{"CLOSED",  CLOSED},
+		{"MEM",     MEM},
 		{"CEN",     CEN},
 		{"DLY",     DLY},
-		{"MSO",     MSO},  //Edited by NJG on Saturday, December 29, 2018 (was MSQ)
-     /* {"FESC",    FESC}, Removed by NJG for M/M/n/N/N FESC on Dec 16, 2018 */
-		{"MSC",     MSC},  //Added by NJG on Saturday, December 29, 2018
+		{"MSQ",     MSQ},
 		{"ISRV",    ISRV},
 		{"FCFS",    FCFS},
 		{"PSHR",    PSHR},
@@ -92,7 +86,6 @@ TYPE_TABLE
 		{"EXACT",   EXACT},
 		{"APPROX",  APPROX},
 		{"CANON",   CANON},
-        {"APPROXMSO",  APPROXMSO},
 		{"VISITS",  VISITS},
 		{"DEMAND",  DEMAND},
 		{"SP",      PDQ_SP},
@@ -138,8 +131,9 @@ PDQ_GetNodesCount()
 
 //-------------------------------------------------------------------------
 
-//Changed by NIG on Monday, December 31, 2018
-double PDQ_GetResponseTime(int should_be_class, char *wname)
+
+double
+PDQ_GetResponse(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetResponse()";
 	double          r = 0.0;
@@ -177,8 +171,7 @@ double PDQ_GetResponseTime(int should_be_class, char *wname)
 	}
 	
 	return (r);
-	
-}  // PDQ_GetResponseTime 
+}  /* PDQ_GetResponse */
 
 //-------------------------------------------------------------------------
 
@@ -224,20 +217,17 @@ PDQ_GetThruput(int should_be_class, char *wname)
 
 //-------------------------------------------------------------------------
 
-//Changed by NJG on Monday, December 31, 2018
-// double PDQ_GetThruputMax(int should_be_class, char *wname)
-// It's really a BOUND, not a MAXimum
-// Changed by NJG on Tue Nov 10 13:35:34 PST 2020
-double PDQ_GetThruputBound(int should_be_class, char *wname)
+double
+PDQ_GetThruMax(int should_be_class, char *wname)
 {
-	char    *p = "PDQ_GetThruputBound()";
-	double   x = 0.0;
+	char           *p = "PDQ_GetThruMax()";
+	double          x = 0.0;
     int     job_index = getjob_index(wname);
 
 	// Added by NJG on Wednesday, August 19, 2015
-	if (!streams) PRINTF("PDQ_GetThruputBound warning: No PDQ workload defined.\n");
-	if (!nodes) PRINTF("PDQ_GetThruputBound warning: No PDQ nodes defined.\n");
-	if (!demands) PRINTF("PDQ_GetThruputBound warning: No PDQ service demands defined.\n");
+	if (!streams) PRINTF("PDQ_GetThruMax warning: No PDQ workload defined.\n");
+	if (!nodes) PRINTF("PDQ_GetThruMax warning: No PDQ nodes defined.\n");
+	if (!demands) PRINTF("PDQ_GetThruMax warning: No PDQ service demands defined.\n");
 
     if ((job_index >= 0) && (job_index < streams)) {
 		switch (should_be_class) {
@@ -256,22 +246,21 @@ double PDQ_GetThruputBound(int should_be_class, char *wname)
 		}
 	} else {
 #ifndef __R_PDQ
-	fprintf(stderr, "[PDQ_GetThruputBound]  Invalid job index (%d)\n", job_index);
+	fprintf(stderr, "[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
       exit(99);
 #else
       //	REprintf("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
-	error("[PDQ_GetThruputBound]  Invalid job index (%d)\n", job_index);
+	error("[PDQ_GetThruMax]  Invalid job index (%d)\n", job_index);
 #endif
 	}
 
 	return (x);
-	
-}  /* PDQ_GetThruputBound */
+}  /* PDQ_GetThruMax */
 
 //-------------------------------------------------------------------------
 
-//Changed by NIG on Monday, December 31, 2018
-double PDQ_GetOptimalLoad(int should_be_class, char *wname)
+double
+PDQ_GetLoadOpt(int should_be_class, char *wname)
 {
 	char           *p = "PDQ_GetLoadOpt()";
 	// Edited by NJG on Tuesday, August 18, 2015
@@ -280,7 +269,7 @@ double PDQ_GetOptimalLoad(int should_be_class, char *wname)
 	double          Dsum = 0.0;
 	double          Nopt = 0.0;
 	double             Z = 0.0;
-	int             job_index = getjob_index(wname);
+	int job_index = getjob_index(wname);
    
    	// Added by NJG on Wednesday, August 19, 2015
 	if (!streams) PRINTF("PDQ_GetLoadOpt warning: No PDQ workload defined.\n");
@@ -325,7 +314,7 @@ double PDQ_GetOptimalLoad(int should_be_class, char *wname)
 		
 	return (Nopt);
 	
-}  /* PDQ_GetOptimalLoad */
+}  /* PDQ_GetLoadOpt */
 
 //-------------------------------------------------------------------------
 
@@ -408,12 +397,11 @@ PDQ_GetUtilization(char *device, char *work, int should_be_class)
 				// X is total arrival rate for MSQ
 				u = node[k].demand[c] * x;
 				
-		        // Updated by NJG on Dec 29, 2018 with new NODE_TYPEs in PDQ_Lib.h
-				// Edited by NJG on September 10, 2009
-				// Divide by m to calculate per-server utilization
-				if (node[k].devtype == MSO) {
-					m = node[k].servers;
-					u = u / m;
+				// Edited by NJG on Thursday, September 10, 2009
+				// Calculate per-server utilization; divide by m
+				if (node[k].sched == MSQ) {
+					m = node[k].devtype;
+					u = u/m;
 				}
 				return (u);
 			}
