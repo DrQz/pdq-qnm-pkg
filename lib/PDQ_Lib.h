@@ -63,6 +63,7 @@
 
 
 // Queueing Network Types
+// Any changes here must be reflected in PDQ_Utils.c typetable
 #define VOID    0				// Changed per PDQ_Init code (NJG on Apr 4, 2007)
 #define OPEN    1
 #define CLOSED  2
