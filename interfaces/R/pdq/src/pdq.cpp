@@ -26,6 +26,13 @@ extern "C" {
 #include "PDQ_Global.h"
 }
 
+void CreateMultiserverClosed(int servers, std::string pdq_name,int server, int sched) {
+ char *name = new char[ pdq_name.size() +1 ];
+    std::copy(pdq_name.begin(), pdq_name.end(),name);
+    name[pdq_name.size()] = '\0';
+    PDQ_CreateMultiserverClosed(servers,name,server,sched);
+    delete[] name;                          
+}
 
 void CreateClosed(std::string pdq_name,int should_be_class, double pop, double think) {
     char *name = new char[ pdq_name.size() +1 ];
@@ -247,6 +254,9 @@ using namespace Rcpp ;
 
 RCPP_MODULE(pdq){
   
+    function( "CreateMultiserverClosed" , &CreateMultiserverClosed ,
+              List::create(_["servers"],_["name"],_["server"],_["sched"]),
+              "documentation for CreateMultiserverClosed " );
     function( "CreateClosed" , &CreateClosed  , 
               List::create(_["name"],_["class"],_["pop"],_["think"]),
               "documentation for CreateClosed " );
