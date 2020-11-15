@@ -1,9 +1,10 @@
 # PDQ: Pretty Damn Quick 
-## Version 6.3.0
+## Major release 7.0.0
 
 This is a **development** repository. 
 The current release, **PDQ 6.2.0**, has its 
 own [repository](http://www.perfdynamics.com/Tools/PDQcode.html) with separate download and installation instructions.
+
 
 PDQ is a library of functions for solving queueing-network models of 
 systems of resources such as, distributed computer systems, manufacturing systems, 
@@ -71,9 +72,9 @@ In this model, the 350 Tomcat threads play the role of queueing servers.
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on   Fri Nov 13 10:24:00 2020     ***
+               ***  on   Sat Nov 14 18:31:44 2020     ***
                ***  for  AWS-Tomcat Cloud Model       ***
-               ***  PDQ  Version 6.3.0 Build 111220   ***
+               ***  PDQ  Version 7.0.0 Build 111420   ***
                ==========================================
 
                ==========================================

@@ -39,7 +39,7 @@
 // Modifying the order of TYPE fields ramifies into PDQ_Utils.c TYPE_TABLE
 // Must not contain more than 26 characters for Report() header.
 
-#define PDQ_VERSION    "Version 6.3.0 Build 111220"
+#define PDQ_VERSION    "Version 7.0.0 Build 111420"
 
 
 //---- TYPES --------------------------------------------------------------
