@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -22,7 +22,8 @@
  * NJG on Sunday, May 15, 2016   - Moved incomplete circuit detection from PDQ_Report()
  * NJG on Saturday, May 21, 2016 - Verified incomplete PDQ circuit detection works
  * NJG on May 8, 2016 - Added APPROXMSQ for M/M/m queue 
- * Updated by NJG on Saturday, December 29, 2018 New MSO, MSC multi-server devtypes
+ * Updated by NJG on Sat, Dec 29, 2018 - New MSO, MSC multi-server devtypes
+ * Updated by NJG on Mon, Nov 16, 2020 - Added MServerFESC call for PDQ 7.0 release
  *
  */
 
@@ -41,6 +42,10 @@ void PDQ_Solve(int meth)
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
     extern char       s1[], s2[], s3[], s4[];
+    
+    extern void       exact(void);        // in PDQ_Exact.c
+    extern void       approx(void);       // in MVA_Approx.c
+    extern void       MServerFESC(void);  // in PDQ_MServer.c
 
     int               should_be_class;
     int               k, c;
@@ -49,7 +54,7 @@ void PDQ_Solve(int meth)
     double            maxTP = MAXTP;
     double            maxD  = 0.0;
     double            demand;
-    char             *p = "solve()";
+    char             *p = "PDQ_Solve()";
     extern double     sumD;
 
     if (PDQ_DEBUG)
@@ -61,19 +66,19 @@ void PDQ_Solve(int meth)
     // This action was promised in the 6.2.0 release of PDQ.
     if (!streams) {
         //PRINTF("PDQ_Solve warning: No PDQ workload defined.\n");
-        sprintf(s1, "PDQ_Solve: No PDQ workload defined.\n");
+        sprintf(s1, "No PDQ workload defined.\n");
         errmsg(p, s1);
     }
     
     if (!nodes) {
         //PRINTF("PDQ_Solve warning: No PDQ nodes defined.\n");
-        sprintf(s1, "PDQ_Solve: No PDQ nodes defined.\n");
+        sprintf(s1, "No PDQ nodes defined.\n");
         errmsg(p, s1);
     }
     
     if (!demands) {
         //PRINTF("PDQ_Solve warning: No PDQ service demands defined.\n");
-        sprintf(s1, "PDQ_Solve: No PDQ service demands defined.\n");
+        sprintf(s1, "No PDQ service demands defined.\n");
         errmsg(p, s1);
     }
     
@@ -81,7 +86,7 @@ void PDQ_Solve(int meth)
 
     switch (method) {
         case EXACT:
-            if (job[0].network != CLOSED) { // bail
+            if (job[0].network == OPEN) {
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
                 sprintf(s1,
@@ -89,7 +94,14 @@ void PDQ_Solve(int meth)
                     s2, s3);
                 errmsg(p, s1);
             }
+            
+            // Added by NJG on Sun Nov 15, 2020
+            // MSC queue devtype also uses EXACT solution method  
+            if (node[0].devtype == MSC) {
+				MServerFESC(); // in PDQ_MServer.c 
+            }
 
+			// Call the appropriate calculation method
             switch (job[0].should_be_class) {
                 case TERM:
                 case BATCH:
@@ -99,7 +111,6 @@ void PDQ_Solve(int meth)
                     break;
             }
             break;
-
         case APPROX:
             if (job[0].network != CLOSED) { // bail 
                 typetostr(s2, job[0].network);
@@ -107,7 +118,7 @@ void PDQ_Solve(int meth)
                 sprintf(s1,
                 "Network should_be_class \"%s\" is incompatible with \"%s\" method",
                     s2, s3);
-                errmsg("solve()", s1);
+                errmsg(p, s1);
             }
             switch (job[0].should_be_class) {
                 case TERM:
@@ -118,7 +129,6 @@ void PDQ_Solve(int meth)
                     break;
             }
             break;
-
         case CANON:
             if (job[0].network != OPEN) {   // bail !! 
                 typetostr(s2, job[0].network);

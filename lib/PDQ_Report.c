@@ -179,7 +179,7 @@ void PDQ_Report(void)
 		switch (job[c].should_be_class) {
 			case TERM:
 				allusers += job[c].term->pop;
-				break;
+				break;			
 			case BATCH:
 				allusers += job[c].batch->pop;
 				break;

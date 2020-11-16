@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2019, Performance Dynamics Company                    */
+/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -17,13 +17,11 @@
  * PDQ_Exact.c (not full MVA_Exact.c)
  * 
  * Updated by NJG on 02:44:17 AM  2/23/97
- * The book release only permits up to 3 classes of workload 
- * and thus, only a 3-deep loop.
- * Hence, PDQ_Exact and not MVA_Exact, which uses recurseration.
- * 
- * Edited by NJG: Fri Feb  5 16:58:09 PST 1999     Fix N=1 stability problem
- * Updated by PJP: Sat Nov 3 2012                  Added support for R
- * Updated by NJG on Saturday, December 29, 2018   New MSO, MSC multi-server devtypes
+ * 		The book release only permits up to 3 classes of workload 
+ * 		and thus, only a 3-deep loop.
+ * 		Hence, PDQ_Exact and not MVA_Exact, which uses recurseration.
+ * Updated by NJG: Fri Feb 5, 1999		Fix N=1 stability problem
+ * Updated by PJP: Sat Nov 3, 2012 		Added supported for R
  *
  */
 
@@ -47,28 +45,29 @@ static double    qlen[MAXPOP1][MAXPOP2][MAXDEVS];
 //-------------------------------------------------------------------------
 
 void exact(void)
-// Select standard MVA or FESC models form node type
 {
 	extern int        streams, nodes;
-	extern            NODE_TYPE *node;
-	extern            JOB_TYPE  *job;
+	extern NODE_TYPE *node;
+	extern JOB_TYPE  *job;
 	extern char       s1[], s2[], s3[], s4[];
-	
 	extern double     getjob_pop();
-	
-	extern void       MServerFESC(void); //in PDQ_MServer2.c
 
-	void              mva_qnm(); // in this module
 	char             *p = "exact()";
-	int               c, k;
+	int               c = 0; // initialize to silence compiler warnings
+	int               k = 0; // initialize to silence compiler warnings
+	int               n0, n1, n2;
 	int               pop[MAXCLASS] = {0, 0, 0};	/* pop vector */
-
+	int               N[MAXCLASS] = {0, 0, 0};	/* temp counters */
+	double            sumR[MAXCLASS] = {0.0, 0.0, 0.0};
 
 #undef DMVA
 
 	if (streams > MAXCLASS) {
 		PRINTF("Streams = %d", streams);
 		sprintf(s1, "%d workload streams exceeds maximum of 3.\n", streams);
+		sprintf(s2, "(At workload: \"%s\" with population: %3.2f)\n",
+			s3, getjob_pop(c));
+		strcat(s1, s2);
 		errmsg(p, s1);
 	}
 
@@ -86,41 +85,6 @@ void exact(void)
 			errmsg(p, s1);
 		}
 	}
-	
-	for (k = 0; k < nodes; k++) {
-		if (node[k].devtype == MSC) { //Edited by NJG on Saturday, December 29, 2018
-			if (PDQ_GetNodesCount() > 1) { // bail
-				strcat(s1, "Only a single MSC (FESC) queueing node is allowed\n");
-				errmsg(p, s1);
-			} else { 
-				MServerFESC(); // in PDQ_MServer2.c 
-				return;
-			}	
-		}
-	}
-
-	mva_qnm(); // exact MVA algorithm below
-	
-} // end of exact
-
-
-
-
-void mva_qnm(void)
-// MVA algorithm for network of PDQ nodes
-{
-	extern int        streams, nodes;
-	extern            NODE_TYPE *node;
-	extern            JOB_TYPE  *job;
-	extern char       s1[], s2[], s3[], s4[];
-	extern double     getjob_pop();
-
-	char             *p = "mva_qnm()";
-	int               c, k;
-	int               n0, n1, n2;
-	int               pop[MAXCLASS] = {0, 0, 0};	/* pop vector */
-	int               N[MAXCLASS] = {0, 0, 0};	/* temp counters */
-	double            sumR[MAXCLASS] = {0.0, 0.0, 0.0};
 
 
 	/* initialize lowest queue configs on each device */
@@ -213,10 +177,9 @@ void mva_qnm(void)
 						}
 					}
 				}
-			}  // loop over n2
-		}  // over n1
-	}  // over n0
-	
-}  // end of mva_qnm
+			}  /* over n2 */
+		}  /* over n1 */
+	}  /* over n0 */
+}  /* exact */
 
 
