@@ -6,13 +6,13 @@
  *      + MServerFESC solves single M/M/m/N/N queue
  *
  * NJG on Monday, December 18, 2017
- * This is prototype version of M/M/m/N/N FESC
- * Ultimately will be integrated into PDQ_MServer.c
+ * 		+ Prototype version of M/M/m/N/N FESC
+ * 		+ Ultimately will be integrated into PDQ_MServer.c
  * 
- * Created by NJG on Monday, April 2, 2007       - Implemented ErlangR
- * Updated by NJG on Monday, December 18, 2017   - Failed implementation of MServerFESC
- * Updated by NJG on Saturday, December 19, 2018 - Working implementation of MServerFESC
- *
+ * Created by NJG on Mon, Apr  2, 2007 - Implemented ErlangR
+ * Updated by NJG on Mon, Dec 18, 2017 - Failed implementation of MServerFESC
+ * Updated by NJG on Sat, Dec 19, 2018 - Working implementation of MServerFESC
+ * Updated by NJG on Mon, Nov 16, 2020 - Tweaked MServerFESC for PDQ 7.0 release
  *
  *******************************************************************************/
 
@@ -72,27 +72,32 @@ double ErlangR(double arrivrate, double servtime, int servers) {
 
 
 
+
+
 // Added by NJG on Thursday, December 27, 2018
 extern double sm_x[MAX_USERS + 1]; //declared in PDQ_Globals.c
 
 
 void MServerFESC(void) {
-// Called from exact() in PDQ_Exact.c
+// Updated by NJG on Mon, Nov 16, 2020
+// Now called from PDQ_Solve() in MVA_Solve.c
 
 	extern int        streams, nodes;
 	extern            NODE_TYPE *node;
 	extern            JOB_TYPE  *job;
 	extern char       s1[], s2[], s3[], s4[];
-	extern double     getjob_pop();
+	extern double     getjob_pop(void);
 
 	int i, j;
-	int c, k, c_fesc, k_fesc;
+	int c, k;
+	int c_fesc;
+	int k_fesc;
     int n;
     int m;
     int N;
-    double D;
-    double Z;
     
+    double D;      // service demand
+    double Z;      // think time 
     double R;      // residence time 
 	double Q;      // no. customers 
 	double X;      // mean thruput
@@ -102,20 +107,23 @@ void MServerFESC(void) {
     double          sumR[MAXCLASS] = {0.0, 0.0, 0.0};
 	char            *p = "MServerFESC()";
     
+    // Submodel defined below
 	void            MServers(int pop, int servers, float demand);
+	
+	
 	
 	//Added by NJG on Saturday, December 29, 2018
 	for (c = 0; c < streams; c++) {
 		c_fesc = c;
 		if (c_fesc > 0) {
-			sprintf(s1, "Streams=%d but only single workload allowed with MSC node", c_fesc);
+			sprintf(s1, "Streams=%d but only single workload allowed with FESC network", c_fesc);
 			errmsg(p, s1);
 		}
 	
 		for (k = 0; k < nodes; k++) {
 			k_fesc = k;
 			if (k_fesc > 0) {
-			sprintf(s1, "Node=%d but only single node allowed with MSC type", k_fesc);
+			sprintf(s1, "Node=%d but only single node allowed with FESC network", k_fesc);
 			errmsg(p, s1);
 			}
 		}
@@ -127,7 +135,7 @@ void MServerFESC(void) {
     Z = job[c_fesc].term->think;
 
 	if (N > MAX_USERS) {
-        sprintf(s1, "N=%d must not exceed %d\n", N, MAX_USERS);
+        sprintf(s1, "N=%d cannot exceed %d\n", N, MAX_USERS);
         errmsg(p, s1);		
 	}	
 	
@@ -193,10 +201,11 @@ void MServerFESC(void) {
 } // end of MServerFESC 
 
 
+
 void MServers(int pop, int servers, float demand) {
-//Multiple servers are a delay center with no waiting line
-//Called by MServerFESC() in this module
-//Submodel thruput declared in PDQ_Globals.c
+// Multiple servers are a delay center with no waiting line
+// Called by MServerFESC() in this module
+// Submodel throughput sm_x[] array declared in PDQ_Globals.c
 
     int             i;
     

@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
+/*  Copyright (c) 1994--2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -35,14 +35,15 @@
 // The following string constant is read by the GetVersion and Report()
 // Updated by NJG on Tuesday, May 24, 2016 from string literal to #define constant
 // thereby suppressing compiler warnings.
-//
-// Modifying the order of TYPE fields ramifies into PDQ_Utils.c TYPE_TABLE
-// Must not contain more than 26 characters for Report() header.
+// This string  must not contain more than 26 characters in order to satisfy the 
+// predefined width in the PDQ Report() banner.
 
-#define PDQ_VERSION    "Version 7.0.0 Build 111420"
+#define PDQ_VERSION    "Version 7.0.0 Build 111620"
+
 
 
 //---- TYPES --------------------------------------------------------------
+// Modifying the order of these TYPE fields ramifies into the TYPE_TABLE in PDQ_Utils.c 
 
 #ifndef   TRUE
 #define   TRUE  1
@@ -58,12 +59,12 @@
 #define MAXSTREAMS    64        /* Max job streams */
 #define MAXCHARS      64        /* Max chars in param fields */
 // Added by NJG on Thu Nov 12, 2020
-#define MAX_USERS   1200        // big to model threads with FESC
+#define MAX_USERS   1200        // biggish to model thread servers with FESC
 #define MAXCLASS       3        // max PDQ stream types
 
 
 // Queueing Network Types
-// Any changes here must be reflected in PDQ_Utils.c typetable
+// These define the queueing 'network' type in JOB_TYPE struct below
 #define VOID    0				// Changed per PDQ_Init code (NJG on Apr 4, 2007)
 #define OPEN    1
 #define CLOSED  2
@@ -72,8 +73,8 @@
 // #define FESC has been replaced below by MSO and MSC
 #define CEN     3                /* standard queueing center */
 #define DLY     4                /* unspecified delay center */
-#define MSO     5                /* multi-server open queue M/M/m - Was MSQ */
-#define MSC     6                /* multi-server closed queue M/M/m/N/N  FESC algorithm */
+#define MSO     5                /* Multi-Server Open queue M/M/m - Was MSQ in 6.2 */
+#define MSC     6                /* Multi-Server Closed M/M/m/N/N uses FESC algorithm */
 
 
 // Queueing Disciplines
@@ -83,15 +84,16 @@
 #define LCFS    10               /* last-come first-serve */
 
 // Queueing Job Types
+// These define the 'should_be_class' in JOB_TYPE struct below
 #define TERM   11
 #define TRANS  12
 #define BATCH  13
 
 // Solution Methods
-#define EXACT  14		// for moderate TERM workloads
-#define APPROX 15		// for large TERM workloads
-#define CANON  16		// for TRANS workloads
-#define APPROXMSO 17	// multiclass MSQ workloads (NJG on May 8, 2016)
+#define EXACT  14		// for TERM, BATCH & FESC workloads (NJG on Nov 16, 2020)
+#define APPROX 15		// for large TERM and BATCH workloads
+#define CANON  16		// for TRANS (OPEN) workloads
+#define APPROXMSO 17	// for multiclass MSQ workloads (NJG on May 8, 2016)
 
 // Service Time and Demand Types
 #define VISITS 18
@@ -140,7 +142,7 @@ typedef struct {
 } TRANSACTION_TYPE;
 
 typedef struct {
-   int               should_be_class;  /* stream should_be_class */
+   int               should_be_class;  /* TERM, BATCH, TRANS */
    int               network;          /* OPEN, CLOSED */
    TERMINAL_TYPE    *term;
    BATCH_TYPE       *batch;
@@ -149,9 +151,15 @@ typedef struct {
 
 
 
-// Node attributes
+// *** Node attributes ***
+// Added by NJG on Mon Nov 16, 2020
+// 		+ MSC NODE_TYPE is the token that invokes the FESC solver 
+// 		  function MServerFESC() internally from PDQ_MServer.c
+// 		+ No explicit FESC type needs to be defined.
+// 		+ MSC devtype also uses EXACT solution method.  
+
 typedef struct {
-   int               devtype;               // CEN, MSO, MSC,  ... 
+   int               devtype;               // *** CEN, MSO, MSC *** 
    int               sched;                 // FCFS, PSHR, ... 
    int               servers;               // Added by NJG on Dec 29, 2018
    char              devname[MAXCHARS];
@@ -163,6 +171,7 @@ typedef struct {
    double            qsize[MAXSTREAMS];
    double            avqsize[MAXSTREAMS];
 } NODE_TYPE;
+
 
 
 

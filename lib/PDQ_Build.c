@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
+/*  Copyright (C) 1994-2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -33,6 +33,7 @@
  * Updated by NJG on Sunday, December 30, 2018    Added new replacement function names 
  *                                                   CreateOpenWorkload() and 
  *                                                   CreateClosedWorkload()
+ * Updated by NJG on Mon Nov 16, 2020             for PDQ release 7.0 
  *
  */
 
@@ -53,6 +54,9 @@ static int      k = 0;
 static int      c = 0;
 
 //----- Prototypes of internal functions ----------------------------------
+
+ // Added by NJG on Sun Nov 15,2020
+void create_fesc_stream(int circuit, char *label, double pop, double think);
 
 void create_term_stream(int circuit, char *label, double pop, double think);
 void create_batch_stream(int net, char* label, double number);
@@ -265,6 +269,7 @@ void PDQ_CreateNode(char *name, int device, int sched)
 	
 	node[k].devtype = device;
 	node[k].sched = sched;
+	node[k].servers = 1;
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, node[k].devtype);
@@ -370,6 +375,7 @@ void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched)
 // Added by NJG on Thursday, December 27, 2018
 
 void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched) {
+// device type must be MSC = Multi-Server Closed in PDQ 7.0
 	
 	extern NODE_TYPE *node;
 	extern char     s1[], s2[];
@@ -380,9 +386,6 @@ void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched)
     
 	char           *p = "PDQ_CreateMultiserverClosed";
     
-    // hack to force FESC node type
-	//sched = FESC; 
-	//device = servers;
 
 	if (PDQ_DEBUG)
 	{
@@ -419,8 +422,11 @@ void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched)
 	} 
 	
 	// Added by NJG on Dec 29, 2018
-	node[k].devtype = device;
-	node[k].sched   = sched;
+	// MSC node type is the token that invokes the FESC solver 
+	// MServerFESC() function internally from PDQ_MServer.c
+	// No explicit FESC type is needed
+	node[k].devtype = device;  // must be MSC as of PDQ 7.0
+	node[k].sched   = sched;   // usual default FCFS 
 	node[k].servers = servers;
 
 	if (PDQ_DEBUG) {
@@ -495,12 +501,13 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 	}
 
 	switch (should_be_class) {
-		case TERM:
+		case TERM:	
 			if (*pop == 0.0) {
 				resets(s1);
 				sprintf(s1, "Stream: \"%s\", has zero population", name);
 				errmsg(p, s1);
 			}
+		
 			create_term_stream(CLOSED, name, *pop, *think);
 			// Set default units 
 			strcpy(wUnit, "Users");
@@ -526,7 +533,7 @@ int PDQ_CreateClosed_p(char *name, int should_be_class, double *pop, double *thi
 	if (PDQ_DEBUG)
 		debug(p, "Exiting");
 
-	c =  ++streams;
+	c =  ++streams;  // global variable 
 
 	return(0); // silence gcc warnings
 
@@ -761,6 +768,7 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
+    // 'c' is a global variable 
 	strcpy(job[c].term->name, label);
 	job[c].should_be_class = TERM;
 	job[c].network = circuit;
@@ -784,6 +792,7 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 }  // create_term_stream
 
 //-------------------------------------------------------------------------
+
 
 void create_batch_stream(int net, char* label, double number)
 {
