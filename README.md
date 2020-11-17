@@ -44,37 +44,33 @@ The following PDQ code, written in C, is a  model of an AWS cloud application th
 
 int main(void) {
 
-	int      threads;
-	int      requests;
-	float    stime;
-	float    think;
+	int      requests = 400;
+	int      threads  = 300;
+	float    stime    = 0.444;
+	float    think    = 0.0;
+    
+	PDQ_Init("AWS-Tomcat Cloud Model");  
+	PDQ_CreateClosed("Requests", TERM, requests, think);
 	
-	threads  = 350;
-	stime    = 0.444;
-	requests = 500;
-	think    = 0.0;
-
-	PDQ_Init("AWS Cloud Model");  
-	
-	PDQ_CreateClosed("Requests", TERM, requests, think); 
-	PDQ_CreateMultiserverClosed(350, "Threads", MSC, FCFS); 
-        PDQ_SetDemand("Threads", "Requests", stime); 
+	PDQ_CreateMultiserverClosed(threads, "Threads", MSC, FCFS); 
+    
+    PDQ_SetDemand("Threads", "Requests", stime); 
 	PDQ_SetWUnit("Reqs");
 	PDQ_SetTUnit("Sec");
-	PDQ_Solve(EXACT);
+	PDQ_Solve(EXACT); // can't be APPROX for FESC
 	PDQ_Report();
 
-} // end main
+}
 ```
 
-In this model, the 350 Tomcat threads play the role of queueing servers.
+In this model, the Tomcat threads on AWS play the role of queueing servers.
 
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on   Sat Nov 14 18:31:44 2020     ***
+               ***  on   Tue Nov 17 10:37:36 2020     ***
                ***  for  AWS-Tomcat Cloud Model       ***
-               ***  PDQ  Version 7.0.0 Build 111420   ***
+               ***  PDQ  Version 7.0.0 Build 111720   ***
                ==========================================
 
                ==========================================
@@ -94,7 +90,7 @@ Nodes:     1
 
 Client       Number        Demand   Thinktime
 ------       ------        ------   ---------
-Requests     500.00        0.4440     0.00
+Requests     400.00        0.4440     0.00
 
 
                ==========================================
@@ -108,32 +104,32 @@ Solution Method: EXACT
 Metric                   Value      Unit
 ------                  -------     ----
 Workload: "Requests"
-Mean concurrency          0.0000    Reqs
-Mean throughput         788.2883    Reqs/Sec
-Response time             0.6343    Sec
-Round trip time           0.6343    Sec
-Stretch factor            1.4286
+Mean concurrency        400.0000    Reqs
+Mean throughput         675.6757    Reqs/Sec
+Response time             0.5920    Sec
+Round trip time           0.5920    Sec
+Stretch factor            1.3333
 
 Bounds Analysis:
-Max throughput            2.2523    Reqs/Sec
+Max throughput          675.6757    Reqs/Sec
 Min response              0.4440    Sec
-Max demand                0.4440    Sec
+Max demand                0.0015    Sec
 Total demand              0.4440    Sec
 Think time                0.0000    Sec
-Optimal clients           1.0000    Clients
+Optimal load            300.0000    Reqs
 
 
                ********   RESOURCE Performance   ********
 
 Metric          Resource     Work               Value    Unit
 ------          --------     ----              -------   ----
-Capacity        Threads      Requests              350   Servers
-Throughput      Threads      Requests         788.2883   Reqs/Sec
-In service      Threads      Requests      122500.0000   Reqs
-Utilization     Threads      Requests       35000.0000   Percent
-Queue length    Threads      Requests         500.0000   Reqs
-Waiting line    Threads      Requests         150.0000   Reqs
-Waiting time    Threads      Requests           0.1903   Sec
-Residence time  Threads      Requests           0.6343   Sec
+Capacity        Threads      Requests              300   Servers
+Throughput      Threads      Requests         675.6757   Reqs/Sec
+In service      Threads      Requests         300.0000   Reqs
+Utilization     Threads      Requests         100.0000   Percent
+Queue length    Threads      Requests         400.0000   Reqs
+Waiting line    Threads      Requests         399.0000   Reqs
+Waiting time    Threads      Requests           0.1480   Sec
+Residence time  Threads      Requests           0.5920   Sec
 ```
 
