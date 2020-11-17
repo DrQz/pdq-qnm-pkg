@@ -138,7 +138,7 @@ Throughput      Threads      Requests         675.6757   Reqs/Sec
 In service      Threads      Requests         300.0000   Reqs
 Utilization     Threads      Requests         100.0000   Percent
 Queue length    Threads      Requests         400.0000   Reqs
-Waiting line    Threads      Requests         399.0000   Reqs
+Waiting line    Threads      Requests         100.0000   Reqs
 Waiting time    Threads      Requests           0.1480   Sec
 Residence time  Threads      Requests           0.5920   Sec
 ```
