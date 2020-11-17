@@ -25,7 +25,7 @@ has introduced maintenance complications for PDQ.
 Python 3 may eventually be accommodated in future PDQ releases.
 
 [Perl](http://www.perfdynamics.com/Tools/PDQperl.html) maintenance has officially ended with 
-PDQ release 6.3 in order to remain compatible with the 2nd edition of the 
+PDQ release 6.2.0 in order to remain compatible with the 2nd edition of the 
 [Perl PDQ book](http://www.perfdynamics.com/iBook/ppa_new.html) (2011).
 
 **Platforms:**	Linux, MacOS, Windows
