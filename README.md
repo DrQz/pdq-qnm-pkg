@@ -31,7 +31,7 @@ Another example below is written in Python.
 
 **Synopsis:** [PDQ library functions](http://www.perfdynamics.com/Tools/PDQman.html)
 
-**Examples:** See the `examples/` [directory](https://github.com/DrQz/pdq-qnm-pkg/tree/master/examples).
+**Example:** 
 
 The following PDQ code, written in C, is a  model of an AWS cloud application that uses the new `CreateMultiserverClosed` function:
 
@@ -48,17 +48,20 @@ int main(void) {
 	int      threads  = 300;
 	float    stime    = 0.444;
 	float    think    = 0.0;
-    
+
 	PDQ_Init("AWS-Tomcat Cloud Model");  
 	PDQ_CreateClosed("Requests", TERM, requests, think);
-	
+
 	PDQ_CreateMultiserverClosed(threads, "Threads", MSC, FCFS); 
-    
-    PDQ_SetDemand("Threads", "Requests", stime); 
+
+	PDQ_SetDemand("Threads", "Requests", stime); 
 	PDQ_SetWUnit("Reqs");
 	PDQ_SetTUnit("Sec");
 	PDQ_Solve(EXACT); // can't be APPROX for FESC
 	PDQ_Report();
+
+	//printf("X = %6.4f\n", PDQ_GetThruput(TERM, "Requests"));
+	//printf("U = %6.4f\n", PDQ_GetUtilization("Threads",  "Requests", TERM));
 
 }
 ```
