@@ -16,10 +16,17 @@ Another example below is written in Python.
 
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
 
-**Languages:**	[C](https://en.wikibooks.org/wiki/C_Programming), 
-[Perl](http://www.perfdynamics.com/Tools/PDQperl.html), 
-[Python](http://www.perfdynamics.com/Tools/PDQpython.html), 
-[R](http://www.perfdynamics.com/Tools/PDQ-R.html)
+**Languages:**	
+This release supports the [C](https://en.wikibooks.org/wiki/C_Programming) and 
+[R](http://www.perfdynamics.com/Tools/PDQ-R.html) languages only.
+
+The migration of [Python from 2 to 3](https://wiki.python.org/moin/Python2orPython3) 
+has introduced maintenance complications for PDQ. 
+Python 3 may eventually be accommodated in future PDQ releases.
+
+[Perl](http://www.perfdynamics.com/Tools/PDQperl.html) maintenance has officially ended with 
+PDQ release 6.3 in order to remain compatible with the 2nd edition of the 
+[Perl PDQ book](http://www.perfdynamics.com/iBook/ppa_new.html) (2011).
 
 **Platforms:**	Linux, MacOS, Windows
 
