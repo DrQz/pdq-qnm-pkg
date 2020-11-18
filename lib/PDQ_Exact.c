@@ -51,6 +51,15 @@ void exact(void)
 	extern JOB_TYPE  *job;
 	extern char       s1[], s2[], s3[], s4[];
 	extern double     getjob_pop();
+	
+	// Added by NJG on Tue Nov 17, 2020
+	extern double     sumD;
+	double            maxD  = 0;
+	int               should_be_class;
+    double            maxXX;
+	double            maxTP = 0; // Edited by NJG on Tue Nov 17, 2020
+	double            demand;
+
 
 	char             *p = "exact()";
 	int               c = 0; // initialize to silence compiler warnings
@@ -59,6 +68,7 @@ void exact(void)
 	int               pop[MAXCLASS] = {0, 0, 0};	/* pop vector */
 	int               N[MAXCLASS] = {0, 0, 0};	/* temp counters */
 	double            sumR[MAXCLASS] = {0.0, 0.0, 0.0};
+	
 
 #undef DMVA
 
@@ -93,7 +103,7 @@ void exact(void)
 		qlen[0][0][k] = 0.0;
 	}
 
-	/* MVA loop starts here .... */
+	/**** MVA loop starts here  ****/
 
 	for (n0 = 0; n0 <= pop[0]; n0++) {
 		for (n1 = 0; n1 <= pop[1]; n1++) {
@@ -167,10 +177,12 @@ void exact(void)
 #ifdef DMVA
 								fprintf(stderr, "Q(%d)=%6.4f\n", c, node[k].qsize[c]);
 #endif
+								node[k].utiliz[c] = job[c].term->sys->thruput * node[k].demand[c];
 								break;
 							case BATCH:
 								qlen[n1][n2][k] += (job[c].batch->sys->thruput * node[k].resit[c]);
 								node[k].qsize[c] = qlen[n1][n2][k];
+								node[k].utiliz[c] = job[c].batch->sys->thruput * node[k].demand[c];
 								break;
 							default:
 								break;
@@ -180,6 +192,88 @@ void exact(void)
 			}  /* over n2 */
 		}  /* over n1 */
 	}  /* over n0 */
+	
+	/**** end of MVA loop  ****/
+	
+	
+	// Updated by NJG on Tue Nov 17, 2020
+	// Due to the introduction of MServerFESC in MServerFESC.c 
+	// these metric computations have been moved from MVA_Solve.c to exact(), here, 
+	// so as not to clobber the different MServerFESC() metric computations.
+	for (c = 0; c < streams; c++) {
+		sumD = maxD = 0.0;
+		should_be_class = job[c].should_be_class;
+		
+		for (k = 0; k < nodes; k++) {
+				
+		    demand = node[k].demand[c];
+
+            if (node[k].sched == ISRV && job[c].network == CLOSED)
+                demand /= (should_be_class == TERM) ? job[c].term->pop : job[c].batch->pop;
+
+			// Find largest demand across all nodes
+            if (demand > maxD) {
+                maxD = demand;
+			}
+			
+            sumD += node[k].demand[c];
+            
+            
+			// Added by NJG on Mon, Apr 2, 2007
+			// Find largest thruput across all nodes and multinodes
+			if (node[k].devtype == MSO) {
+				maxXX = node[k].servers / demand;
+            } else {
+                maxXX = 1 / demand;
+            }
+            
+            // The LEAST of these max X's will throttle the system-X
+			if (maxXX < maxTP) {
+                maxTP = maxXX;
+			}
+            
+        }   // loop over k
+		
+		
+	
+		switch (should_be_class) {
+			case TERM:
+				job[c].term->sys->maxN = (sumD + job[c].term->think) / maxD;
+				job[c].term->sys->maxTP = 1 / maxD;
+				job[c].term->sys->Nopt = 
+					(job[c].term->think + job[c].term->sys->minRT) * job[c].term->sys->maxTP;
+				job[c].term->sys->minRT = sumD;
+				if (sumD == 0) {
+					getjob_name(s1, c);
+					sprintf(s2, "Sum of demands is zero for workload \"%s\"", s1);
+					errmsg(p, s2);
+				}
+				break;
+			case BATCH:
+				job[c].batch->sys->maxN = sumD / maxD;
+				job[c].batch->sys->maxTP = 1 / maxD;
+				job[c].batch->sys->Nopt = job[c].term->sys->minRT * job[c].term->sys->maxTP;
+				job[c].batch->sys->minRT = sumD;
+				if (sumD == 0) {
+					getjob_name(s1, c);
+					sprintf(s2, "Sum of demands is zero for workload \"%s\"", s1);
+					errmsg(p, s2);
+				}
+				break;
+			case TRANS:
+				job[c].trans->sys->maxTP = maxTP;                          
+				job[c].trans->sys->minRT = sumD;
+				if (sumD == 0) {
+					getjob_name(s1, c);
+					sprintf(s2, "Sum of demands is zero for workload \"%s\"", s1);
+					errmsg(p, s2);
+				}
+				break;
+			default:
+				break;
+			}
+	}
+
 }  /* exact */
 
 

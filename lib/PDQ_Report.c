@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
+/*  Copyright (C) 1994--2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -38,7 +38,8 @@
  * NJG on Thursday, December 07, 2017
       o Changed Demand field in WORKLOAD Parameters section to display small 
         service times, e.g., micro-seconds
- * Updated by NJG on Saturday, December 29, 2018  New MSO, MSC multi-server devtypes
+ * Updated by NJG on Sat Dec 29, 2018  - Format changes for new MSO, MSC multi-server devtypes
+ * Updated by NJG on Tue Nov 17, 2020  - Formatting mods for PDQ release 7.0
  *
  */
 
@@ -184,7 +185,7 @@ void PDQ_Report(void)
 				allusers += job[c].batch->pop;
 				break;
 			case TRANS:
-				allusers = 0.0;
+				allusers = 0;
 				break;
 			default:
 				resets(s2);
@@ -195,9 +196,25 @@ void PDQ_Report(void)
 	}  /* loop over c */
 
 	PRINTF("\n");
-	PRINTF("Queueing Circuit Totals\n");
-	PRINTF("Streams: %3d\n", streams);
-	PRINTF("Nodes:   %3d\n\n", nodes);
+	//PRINTF("Queueing Network Parameters\n"); -- edited out by NJG on Tue Nov 17, 2020
+	
+	switch (job[0].should_be_class) { // can ony be one type of network
+			case TERM:
+			case BATCH:
+				typetostr(s1, CLOSED);
+				break;
+			case TRANS:
+				typetostr(s1, OPEN);
+				break;
+			case VOID:	
+			default:
+				typetostr(s1, VOID);
+				break;
+		}
+	
+	PRINTF("Network type: %8s\n", s1);
+	PRINTF("Workload streams: %4d\n", streams);
+	PRINTF("Queueing nodes:   %4d\n\n", nodes);
 
 	//PRINTF("WORKLOAD Parameters:\n");
 
@@ -283,8 +300,8 @@ void print_node_head(void)
 	extern char     s1[];
 	extern JOB_TYPE *job;
 
-	char           *dmdfmt = "%-4s %-5s %-10s %-10s %-5s %10s\n";
-	char           *visfmt = "%-4s %-5s %-10s %-10s %-5s %10s %10s %10s\n";
+	char           *dmdfmt = "%-4s %-5s %-10s %-10s %-5s    %12s\n";
+	char           *visfmt = "%-4s %-5s %-10s %-10s %-5s %10s %10s %12s\n";
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, job[0].network);
@@ -292,7 +309,8 @@ void print_node_head(void)
 		resets(s1);
 	}
 	
-	PRINTF("WORKLOAD Parameters:\n\n");
+	// was PRINTF("Workload Parameters\n"); - edited by NJG on Tue Nov 17, 2020
+	PRINTF("Queueing Network Parameters\n\n");
 
     //Edited by NJG on Saturday, December 29, 2018
     // for new constant defs in PDQ_Lib.h
@@ -300,9 +318,9 @@ void print_node_head(void)
 	switch (demand_ext) {
 	case DEMAND:
 		PRINTF(dmdfmt,
-		  "Node", "Sched", "Resource", "Workload", "Class", "Demand");
+		  "Node", "Sched", "Resource", "Workload", "Class", "Service time");
 		PRINTF(dmdfmt,
-		  "----", "-----", "--------", "--------", "-----", "------");
+		  "----", "-----", "--------", "--------", "-----", "------------");
 		break;
 	case VISITS:
 		PRINTF(visfmt,
@@ -371,21 +389,22 @@ void print_nodes(void)
 
 			switch (job[c].should_be_class) {
 				case TERM:
-					strcpy(s4, "Closed");
+					typetostr(s4, TERM);
 					break;
 				case BATCH:
-					strcpy(s4, "Batch");
+					typetostr(s4, BATCH);
 					break;
 				case TRANS:
-					strcpy(s4, "Open");
+					typetostr(s4, TRANS);
 					break;
 				default:
+					typetostr(s4, VOID);
 					break;
 			}
 
 			switch (demand_ext) {
 				case DEMAND:
-					PRINTF("%-4s %-5s %-10s %-10s %-5s %15.10lf\n",
+					PRINTF("%-4s %-5s %-10s %-10s %-5s %15.6lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -395,7 +414,7 @@ void print_nodes(void)
 					);
 					break;
 				case VISITS:
-					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %10.4lf\n",
+					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %8.4lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -436,7 +455,7 @@ void print_job(int c, int should_be_class)
 	switch (should_be_class) {
 		case TERM:
 			print_job_head(TERM);
-			PRINTF("%-10s   %6.2f    %10.4lf   %6.2f\n",
+			PRINTF("%-10s   %6.2f    %10.4lf         %6.2f\n",
 		  	job[c].term->name,
 		  	job[c].term->pop,
 		  	job[c].term->sys->minRT,
@@ -453,7 +472,7 @@ void print_job(int c, int should_be_class)
 			break;
 		case TRANS:
 			print_job_head(TRANS);
-			PRINTF("%-10s   %8.4f    %10.4lf\n",
+			PRINTF("%-10s     %10.4f    %10.4lf\n",
 		  	job[c].trans->name,
 		  	job[c].trans->arrival_rate,
 		  	job[c].trans->sys->minRT
@@ -478,7 +497,9 @@ void print_sys_head(void)
 {
 	extern double   tolerance;
 	extern char     s1[];
-	extern int      PDQ_DEBUG, method, iterations;
+	extern int      method;
+	extern int      iterations;
+	extern int      PDQ_DEBUG;
 	char           *p = "print_sys_head()";
 
 	if (PDQ_DEBUG)
@@ -490,7 +511,7 @@ void print_sys_head(void)
 	banner_dash();
 	PRINTF("\n");
 	typetostr(s1, method);
-	PRINTF("Solution Method: %s", s1);
+	PRINTF("Solution method: %s", s1);
 
 	if (method == APPROX)
 		PRINTF("        (Iterations: %d; Accuracy: %3.4lf%%)",
@@ -527,8 +548,8 @@ void print_job_head(int should_be_class)
 		case TERM:
 			if (!trmhdr) {
 				PRINTF("\n");
-				PRINTF("Client       Number        Demand   Thinktime\n");
-				PRINTF("------       ------        ------   ---------\n");
+				PRINTF("Workload      Users        Demand      Thinktime\n");
+				PRINTF("--------      -----        ------      ---------\n");
 				trmhdr = TRUE;
 				bathdr = trxhdr = FALSE;
 			}
@@ -536,16 +557,16 @@ void print_job_head(int should_be_class)
 		case BATCH:
 			if (!bathdr) {
 				PRINTF("\n");
-				PRINTF("Job             MPL        Demand\n");
-				PRINTF("---             ---        ------\n");
+				PRINTF("Workload       Jobs        Demand\n");
+				PRINTF("--------       ----        ------\n");
 				bathdr = TRUE;
 				trmhdr = trxhdr = FALSE;
 			}
 			break;
 		case TRANS:
 			if (!trxhdr) {
-				PRINTF("Arrivals       per %-5s     Demand \n", tUnit);
-				PRINTF("--------       --------     -------\n");
+				PRINTF("Arrivals          Rate           Demand\n");
+				PRINTF("--------       ----------       -------\n");
 				trxhdr = TRUE;
 				trmhdr = bathdr = FALSE;
 			}
@@ -651,6 +672,7 @@ void print_system_stats(int c, int should_be_class)
 				sprintf(s1, "X = %10.4f at N = %d", job[c].term->sys->thruput, c);
 				errmsg(p, s1);
 			}
+			// wUnit and tUnit defined in PDQ_Global.c
 			PRINTF("Max throughput        %10.4lf    %s/%s\n",
 		  		job[c].term->sys->maxTP, wUnit, tUnit);
 			PRINTF("Min response          %10.4lf    %s\n",
@@ -661,9 +683,11 @@ void print_system_stats(int c, int should_be_class)
 		  		job[c].term->sys->minRT, tUnit);
 			PRINTF("Think time            %10.4lf    %s\n",
 		  		job[c].term->think, tUnit);
-			PRINTF("Optimal clients       %10.4lf    %s\n",
-		  		(job[c].term->think + job[c].term->sys->minRT) * 
-		  		job[c].term->sys->maxTP, "Clients");
+			// PRINTF("Optimal load          %10.4lf    %s\n",
+// 		  		(job[c].term->think + job[c].term->sys->minRT) * 
+// 		  		job[c].term->sys->maxTP, wUnit); 
+			PRINTF("Optimal load          %10.4lf    %s\n",
+		  		job[c].term->sys->Nopt, wUnit); 
 			break;
 		case BATCH:
 			if (job[c].batch->sys->thruput == 0) {
@@ -680,8 +704,7 @@ void print_system_stats(int c, int should_be_class)
 			PRINTF("Total demand          %10.4lf    %s\n",
 		  		job[c].batch->sys->minRT, tUnit);
 			PRINTF("Optimal jobs          %10.4f    %s\n",
-				job[c].batch->sys->minRT * 
-				job[c].batch->sys->maxTP, "Jobs");
+				job[c].batch->sys->Nopt, "Jobs");
 			break;
 		case TRANS:
 			PRINTF("Max throughput        %10.4lf    %s/%s\n",
@@ -770,13 +793,13 @@ void print_node_stats(int c, int should_be_class)
 // Updated by NJG on Saturday, December 29, 2018
 // Removed hack of using sched type carrying server number (of Friday, January 11, 2013) 
 // New metrics: MSO and MSC for server capacity; the 'm' in M/M/m
-			resets(s3);
-			typetostr(s3, node[k].devtype);
-			if (node[k].devtype == MSO || node[k].devtype == MSC) {
-				mservers = node[k].servers; 
-			} else {
-				mservers = 1;
-			}
+		resets(s3);
+		typetostr(s3, node[k].devtype);
+		if (node[k].devtype == MSO || node[k].devtype == MSC) {
+			mservers = node[k].servers; 
+		} else {
+			mservers = 1;
+		}
 		// Now, display mservers metric	
 		PRINTF("%-14s  %-10s   %-10s   %12d   %s\n",
 		  "Capacity",
@@ -796,34 +819,36 @@ void print_node_stats(int c, int should_be_class)
 		);
 
 
-		// calculate other stats
-		switch (node[k].sched) {
-			case ISRV:
+		/******* Calculate other stats *******/
+		// Was switch (node[k].sched) { ... like FCFS, LCFS,etc.
+		// Now specified via node device type in 7.0 (NJG on Tue Nov 17, 2020)
+		switch (node[k].devtype) {
+			case MSO: // NJG added this devtype on Dec 29, 2018
+			 	// devU is per-server from U < 1 test in MVA_Canon.c
+			 	devU = node[k].utiliz[c];
+				//mservers = node[k].servers;
+				// X is aggregate arrival rate into queueing network
+				devQ = X * node[k].resit[c]; // Little's law
+				devW = node[k].resit[c] - node[k].demand[c];
+				devL = X * devW;
+				break;
+			case CEN:
+			case MSC: // NJG added this devtype on Dec 29, 2018
+				// Updated by NJG on Tue Nov 17, 2020
+				// These metrics are now computed and assigned to the appropriate 
+				// PDQ data structure by MServerFESC() in PDQ_MServer.c 
+				devU = node[k].utiliz[c]; // per-server utilization
+				devQ = node[k].qsize[c];
+				devW = node[k].resit[c] - node[k].demand[c];
+				devL = devQ - mservers * devU;
+                break;
+			case DLY:
+			default:
 				devU = 100.0;
 				devQ = 0.0;
 				devW = node[k].demand[c];
 				devL = 0.0;
 				break;
-			case MSO:
-			 	// devU is per-server from U<1 test in MVA_Canon.c
-			 	devU = node[k].utiliz[c];
-				mservers = node[k].servers;
-				// X is total arrival rate into PDQ network
-				devQ = X * node[k].resit[c]; // Little's law
-				devW = node[k].resit[c] - node[k].demand[c];
-				devL = X * devW;
-				break;
-			case MSC: //Added by NJG on Saturday, December 29, 2018
-			default:
-				// NJG on Friday, July 10, 2009
-				// devU = node[k].utiliz[c];
-				// node[k].utiliz[c] is not updated in either EXACT or APPROX methods.
-				// Rather than implementing it in all relevant modules, just use Little's law.
-				devU = X * node[k].demand[c];
-				devQ = X * node[k].resit[c];
-				devW = node[k].resit[c] - node[k].demand[c];
-				devL = X * devW;
-                break;
 		}
 
 // NJG: Friday, January 11, 2013 
@@ -831,7 +856,7 @@ void print_node_stats(int c, int should_be_class)
 		  "In service",
 		  node[k].devname,
 		  s1,
-		  devU * mservers,
+		  devU * mservers, // total utilization 
 		  wUnit
 		);
 			
@@ -839,7 +864,7 @@ void print_node_stats(int c, int should_be_class)
 		  "Utilization",
 		  node[k].devname,
 		  s1,
-		  devU * 100,
+		  devU * 100, // percent
 		  "Percent"
 		);
 	

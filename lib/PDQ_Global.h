@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2016, Performance Dynamics Company                    */
+/*  Copyright (C) 1994--2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -30,7 +30,6 @@
  * Also see separate disclaimers from the respective book publishers.
 ************************* DO NOT REMOVE ****************************
  *
- *  $Id$
  */
 
 

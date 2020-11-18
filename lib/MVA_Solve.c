@@ -24,6 +24,7 @@
  * NJG on May 8, 2016 - Added APPROXMSQ for M/M/m queue 
  * Updated by NJG on Sat, Dec 29, 2018 - New MSO, MSC multi-server devtypes
  * Updated by NJG on Mon, Nov 16, 2020 - Added MServerFESC call for PDQ 7.0 release
+ * Updated by NJG on Wed Nov 18, 2020  - Added EXACTMVA, APPROXMVA, STREAMING method names
  *
  */
 
@@ -49,10 +50,10 @@ void PDQ_Solve(int meth)
 
     int               should_be_class;
     int               k, c;
-    int               mservers = 0; // MSQ servers (added by NJG)
+    int               mservers = 0; // MSO servers (added by NJG)
     double            maxXX;
-    double            maxTP = MAXTP;
-    double            maxD  = 0.0;
+    double            maxTP = 0; // Edited by NJG on Tue Nov 17, 2020
+    double            maxD  = 0;
     double            demand;
     char             *p = "PDQ_Solve()";
     extern double     sumD;
@@ -86,38 +87,54 @@ void PDQ_Solve(int meth)
 
     switch (method) {
         case EXACT:
+        case EXACTMVA:
             if (job[0].network == OPEN) {
-                typetostr(s2, job[0].network);
-                typetostr(s3, method);
                 sprintf(s1,
-                   "Network should_be_class \"%s\" is incompatible with \"%s\" method",
-                    s2, s3);
+                   "Network class \"%s\" is incompatible with \"%s\" solution method",
+                    "OPEN", "EXACT");
                 errmsg(p, s1);
             }
             
-            // Added by NJG on Sun Nov 15, 2020
-            // MSC queue devtype also uses EXACT solution method  
-            if (node[0].devtype == MSC) {
-				MServerFESC(); // in PDQ_MServer.c 
-            }
-
-			// Call the appropriate calculation method
+			// Call the relevant solver function
+			// Updated by NJG on Mon Nov 16, 2020 to include MServerFESC call
             switch (job[0].should_be_class) {
                 case TERM:
                 case BATCH:
-                    exact(); // in PDQ_Exact.c
+                	if (node[0].devtype == MSO) { // shouldn't be here!
+                		sprintf(s1,
+                   		"Queueing node type \"%s\" is incompatible with \"%s\" solution method",
+                    	"MSO", "EXACT");
+                		errmsg(p, s1);
+                	}
+                	if (node[0].devtype == DLY) { // shouldn't be here!
+                		sprintf(s1,
+                   		"Queueing node type \"%s\" is incompatible with \"%s\" solution method",
+                    	"DLY", "EXACT");
+                		errmsg(p, s1);
+                	}
+					// Added by NJG on Sun Nov 15, 2020
+					if (node[0].devtype == MSC) {
+						// MSC queue devtype invokes 'MServerFESC' MVA   
+						MServerFESC(); // in PDQ_MServer.c 
+					} else {
+						// CEN queue devtype invokes 'exact' MVA  
+						exact(); // in PDQ_Exact.c
+					}
                     break;
                 default:
                     break;
             }
             break;
         case APPROX:
-            if (job[0].network != CLOSED) { // bail 
-                typetostr(s2, job[0].network);
-                typetostr(s3, method);
+        case APPROXMVA:
+            if (job[0].network == OPEN) { // bail 
                 sprintf(s1,
-                "Network should_be_class \"%s\" is incompatible with \"%s\" method",
-                    s2, s3);
+                "Network type \"%s\" is incompatible with \"%s\" solution method", "OPEN", "APPROX");
+                errmsg(p, s1);
+            }
+            if (node[0].devtype == MSC) { // bail 
+                sprintf(s1,
+                "Queueing node type \"%s\" is incompatible with \"%s\" solution method", "MSC", "APPROX");
                 errmsg(p, s1);
             }
             switch (job[0].should_be_class) {
@@ -130,6 +147,7 @@ void PDQ_Solve(int meth)
             }
             break;
         case CANON:
+        case STREAMING:
             if (job[0].network != OPEN) {   // bail !! 
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
@@ -140,7 +158,6 @@ void PDQ_Solve(int meth)
             }
             canonical(); // in MVA_Canon.c
             break;
-
         case APPROXMSO: // Added by NJG on May 8, 2016
             if (job[0].network != OPEN) { 
                 typetostr(s2, job[0].network);
@@ -151,8 +168,7 @@ void PDQ_Solve(int meth)
                 errmsg(p, s1);
             }
             canonical(); // in MVA_Canon.c
-            break;
-            
+            break;     
         default:
             typetostr(s3, method);
             sprintf(s1, "Unknown  method \"%s\"", s3);
@@ -160,7 +176,10 @@ void PDQ_Solve(int meth)
             break;
     };
 
-    /* Now compute bounds */
+
+    /***********************************/
+    /* Now compute the queueing bounds */
+    /***********************************/
 
     for (c = 0; c < streams; c++) {
         sumD = maxD = 0.0;
@@ -198,17 +217,23 @@ void PDQ_Solve(int meth)
         }   // loop over k
         
         
-        if(job[c].network == CLOSED && mservers != 0) { //bail !!
-        // Solving MSQ node in CLOSED network is not logically compatible
+        if(job[c].network == CLOSED && node[k].devtype == MSO) { //bail !!
+        // Solving MSO node in CLOSED network is not logically compatible
         	typetostr(s2, job[c].network);
             sprintf(s1, "Network class \"%s\" is incompatible with \"CreateMultiNode\" function", s2);
             errmsg(p, s1);
         } 
 
+
+		// ***************************************************************************
+		// Updated by NJG on Tue Nov 17, 2020
+		// Due to the introduction of MServerFESC in MServerFESC.c 
+		// these metric computations are moved to their respective calculational function. 
+		/*
         switch (should_be_class) {
             case TERM:
                 job[c].term->sys->maxN = (sumD + job[c].term->think) / maxD;
-                job[c].term->sys->maxTP = 1.0 / maxD;
+                job[c].term->sys->maxTP = 1 / maxD;
                 job[c].term->sys->minRT = sumD;
                 if (sumD == 0) {
                     getjob_name(s1, c);
@@ -218,7 +243,7 @@ void PDQ_Solve(int meth)
                 break;
             case BATCH:
                 job[c].batch->sys->maxN = sumD / maxD;
-                job[c].batch->sys->maxTP = 1.0 / maxD;
+                job[c].batch->sys->maxTP = 1 / maxD;
                 job[c].batch->sys->minRT = sumD;
                 if (sumD == 0) {
                     getjob_name(s1, c);
@@ -238,6 +263,7 @@ void PDQ_Solve(int meth)
             default:
                 break;
         }
+        */
         
     }   // loop over c
 

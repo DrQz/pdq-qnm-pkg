@@ -75,6 +75,7 @@ double ErlangR(double arrivrate, double servtime, int servers) {
 
 
 // Added by NJG on Thursday, December 27, 2018
+// MAX_USERS = 1200 defined in PDQ_Lib.h
 extern double sm_x[MAX_USERS + 1]; //declared in PDQ_Globals.c
 
 
@@ -86,59 +87,54 @@ void MServerFESC(void) {
 	extern            NODE_TYPE *node;
 	extern            JOB_TYPE  *job;
 	extern char       s1[], s2[], s3[], s4[];
-	extern double     getjob_pop(void);
+	extern double     getjob_pop(int c);
 
 	int i, j;
 	int c, k;
-	int c_fesc;
-	int k_fesc;
+	//int c_fesc;
+	//int k_fesc;
     int n;
-    int m;
-    int N;
+    int m = 0;
+    int N = 0;
     
-    double D;      // service demand
-    double Z;      // think time 
-    double R;      // residence time 
-	double Q;      // no. customers 
-	double X;      // mean thruput
-	double U;      // total utilization
+    double D = 0;      // service demand
+    double Z = 0;      // think time 
+    double R = 0;  // residence time 
+	double Q = 0;  // no. customers 
+	double X = 0;  // mean thruput
+	double U = 0;  // total utilization
+	
+	void 			MServers(int pop, int servers, float demand); // submodel
 	
     float           pq[MAX_USERS + 1][MAX_USERS + 1]; 
     double          sumR[MAXCLASS] = {0.0, 0.0, 0.0};
 	char            *p = "MServerFESC()";
     
-    // Submodel defined below
-	void            MServers(int pop, int servers, float demand);
-	
-	
 	
 	//Added by NJG on Saturday, December 29, 2018
-	for (c = 0; c < streams; c++) {
-		c_fesc = c;
-		if (c_fesc > 0) {
-			sprintf(s1, "Streams=%d but only single workload allowed with FESC network", c_fesc);
-			errmsg(p, s1);
-		}
+	// HARDCORE: we only allow a single stream and node in PDQ 7.0
+	c = streams - 1;
+	if (c > 0) {
+		sprintf(s1, "Streams=%d but only single workload allowed with FESC network", c);
+		errmsg(p, s1);
+	}
 	
-		for (k = 0; k < nodes; k++) {
-			k_fesc = k;
-			if (k_fesc > 0) {
-			sprintf(s1, "Node=%d but only single node allowed with FESC network", k_fesc);
-			errmsg(p, s1);
-			}
-		}
+	k = nodes - 1;
+	if (k > 0) {
+		sprintf(s1, "Node=%d but only single node allowed with FESC network", k);
+		errmsg(p, s1);
 	}
 
-    m = node[k_fesc].servers;  //Added by NJG on Saturday, December 29, 2018
-    N = job[c_fesc].term->pop;
-    D = node[k_fesc].demand[c_fesc];
-    Z = job[c_fesc].term->think;
-
+    m = node[k].servers;  //Added by NJG on Saturday, December 29, 2018
+    D = node[k].demand[c];
+    N = job[c].term->pop;
+    Z = job[c].term->think;
+        
 	if (N > MAX_USERS) {
         sprintf(s1, "N=%d cannot exceed %d\n", N, MAX_USERS);
         errmsg(p, s1);		
 	}	
-	
+		
 	for (i = 0; i <= N; i++) {
 		for (j = 0; j <= N; j++) {
 			pq[i][j] = 0;
@@ -147,8 +143,9 @@ void MServerFESC(void) {
 	
 	pq[0][0] = 1.0;
 	
-	// Solve the multiple servers submodel
+	// Call the submodel defined below to calculate sm_x[] array
     MServers(N, m, D);
+
 
 	// Solve the composite model
     for (n = 1; n <= N; n++) {
@@ -177,26 +174,35 @@ void MServerFESC(void) {
         
     } // loop over n
 
+	// This is the total utilization across all servers
     U = X * D;
     
     // collect queueing results
-	switch (job[c_fesc].should_be_class) {
+	switch (job[c].should_be_class) {
 		case TERM:
-			job[c_fesc].term->sys->thruput = X;
-			job[c_fesc].term->sys->response = R;
+			job[c].term->sys->thruput = X;
+			job[c].term->sys->response = R;
+			job[c].term->sys->residency = N;
+			job[c].term->sys->maxTP = m / D; 
+			job[c].term->sys->minRT = D;
+			job[c].term->sys->Nopt = (D + Z) * X;
 			break;
 		case BATCH:
-			job[c_fesc].batch->sys->thruput = X;
-			job[c_fesc].batch->sys->response = R;
+			job[c].batch->sys->thruput = X;
+			job[c].batch->sys->response = R;
+			job[c].batch->sys->residency = N;
+			job[c].batch->sys->maxTP = m / D;
+			job[c].batch->sys->minRT = D;
 			break;
 		default:
 			break;
 	}
 	
-	node[k_fesc].qsize[c_fesc] = Q;
-	node[k_fesc].resit[c_fesc] = R;
-	sumR[c_fesc] += node[k_fesc].resit[c_fesc];
-	node[k_fesc].utiliz[c_fesc] = U;
+	node[k].servers  = m;
+	node[k].qsize[c] = Q;
+	node[k].resit[c] = R;
+	node[k].utiliz[c] = U / m;  // PDQ_Report is expecting per-server utilization
+	sumR[c] += node[k].resit[c];
 		
 } // end of MServerFESC 
 

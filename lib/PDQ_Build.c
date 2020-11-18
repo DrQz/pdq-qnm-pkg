@@ -18,22 +18,22 @@
  *
  * Created by NJG on 18:19:02  04-28-95 
  * Revised by NJG on 09:33:05  31-03-99
- * Updated by NJG on Mon, Apr 2, 2007             Added MSQ multiserver node
- * Updated by NJG on Tue, Apr 3, 2007             Removed nested loops in Init
- * Updated by NJG on Wed, Apr 4, 2007             Changed MSQ -> devtype and m -> sched
- * Updated by NJG on Fri, Apr 6, 2007             Error if SetWUnit or SetTUnit before 
- *                                                  calling Create circuit
- * Updated by NJG on Wed Feb 25, 2009             Added CreateMultiNode function
- * Updated by PJP on Sat Nov 3, 2012              Added support for R
- * Updated by NJG on Saturday, January 12, 2013   Set CreateXXX count returns to zero
- * Updated by NJG on Saturday, May 21, 2016       Set all Create procs to voids
- * Updated by NJG on Thursday, December 27, 2018  Added M/M/m/N/N queueing FESC  node
- *                                                see CreateClosedMultiserver()
- * Updated by NJG on Saturday, December 29, 2018  New MSO, MSC multi-server devtypes
- * Updated by NJG on Sunday, December 30, 2018    Added new replacement function names 
- *                                                   CreateOpenWorkload() and 
- *                                                   CreateClosedWorkload()
- * Updated by NJG on Mon Nov 16, 2020             for PDQ release 7.0 
+ * Updated by NJG on Mon, Apr 2, 2007        Added MSQ multiserver node
+ * Updated by NJG on Tue, Apr 3, 2007        Removed nested loops in Init
+ * Updated by NJG on Wed, Apr 4, 2007        Changed MSQ -> devtype and m -> sched
+ * Updated by NJG on Fri, Apr 6, 2007        Error if SetWUnit or SetTUnit before 
+ *                                               calling Create circuit
+ * Updated by NJG on Wed Feb 25, 2009        Added CreateMultiNode function
+ * Updated by PJP on Sat Nov 3, 2012         Added support for R
+ * Updated by NJG on Sat, January 12, 2013   Set CreateXXX count returns to zero
+ * Updated by NJG on Sat, May 21, 2016       Set all Create procs to voids
+ * Updated by NJG on Sat, Dec 27, 2018       Added M/M/m/N/N queueing FESC  node
+ *                                               see CreateClosedMultiserver()
+ * Updated by NJG on Saturday, Dec 29, 2018  New MSO, MSC multi-server devtypes
+ * Updated by NJG on Sunday, Dec 30, 2018    Added new replacement function names 
+ *                                               CreateOpenWorkload() and 
+ *                                               CreateClosedWorkload()
+ * Updated by NJG on Wed Nov 18, 2020        Check CreateMultiserverOpen is MSO devtype
  *
  */
 
@@ -68,8 +68,8 @@ void PDQ_Init(char *name)
 {
 	extern char             model[];
 	extern char             s1[];
-	extern char     		tUnit[];
-	extern char     		wUnit[];
+	extern char     		tUnit[]; // defined in PDQ_Globals.c
+	extern char     		wUnit[]; // defined in PDQ_Globals.c
 	extern int              demand_ext;
 	extern int              method;
 	extern double           tolerance;
@@ -347,6 +347,10 @@ void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched)
 		errmsg(p, s1);
 	} 
 	
+	if (device != MSO) { // must be as of PDQ 7.0
+		sprintf(s1, "Multinode \"%s\" must an MSO device", name);
+		errmsg(p, s1);
+	} 
 	
 	node[k].devtype = device;
 	node[k].sched   = sched;

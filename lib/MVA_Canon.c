@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (c) 1994 - 2019, Performance Dynamics Company                    */
+/*  Copyright (c) 1994--2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -24,9 +24,10 @@
  * Updated by NJG on Saturday, January 12, 2013. Changed devU to perServerU
  * Updated by NJG on Saturday, May 7, 2016.      Added approximate multiclass multiserver
  * Updated by NJG on Sunday, May 8, 2016.        Must choose APPROX solution method with
- *                                               multiclass multiserver MSQ nodes
+ *                                               multiclass multiserver MSO nodes
  * Updated by NJG on Tuesday, May 24, 2016.      Cleaned up compiler wornings about unused variables
- * Updated by NJG on Saturday, December 29, 2018 New MSO, MSC multi-server devtypes
+ * Updated by NJG on Saturday, Dec 29, 2018      New MSO, MSC multi-server devtypes
+ * Updated by NJG on Wed Nov 18, 2020            Added STREAMING method name
  *
  */
 
@@ -40,11 +41,14 @@
 
 void canonical(void)
 {
-    extern int        PDQ_DEBUG, method, streams, nodes;
+    extern int        method; 
+    extern int        streams, nodes;
     extern char       s1[], s2[], s3[], s4[];
     extern JOB_TYPE  *job;
     extern NODE_TYPE *node;
-    
+    extern double     sumD;
+    extern int        PDQ_DEBUG;
+
     extern double     ErlangR(double arrivrate, double servtime, int servers); 
     // in PDQ_MServer2.c
 
@@ -67,6 +71,9 @@ void canonical(void)
 
     for (c = 0; c < streams; c++) {
         sumR[c] = 0.0;
+        
+        sumD = 0;
+        
         Dsat = 0.0; // Fix submitted by James Newsom, 23 Feb 2011
         //Otherwise, stream index can be compared to wrong (old) device index
 
@@ -77,7 +84,7 @@ void canonical(void)
         	// Hope to remove single class restriction eventually
             // And today is the day: Sun May  8 18:34:27 PDT 2016
         	if (node[k].devtype == MSO && streams > 1) {
-                if (method == CANON) {
+                if (method == CANON || method == STREAMING) {
                     //sprintf(s1, "Only single PDQ stream allowed with MSQ nodes.");
                     sprintf(s1, "Must use APPROXMSQ method with multi-stream MSQ nodes.");
                     errmsg(p, s1);
@@ -94,6 +101,9 @@ void canonical(void)
                 //keep device name in case of error msg
                 sprintf(satname, "%s", node[k].devname);
             }
+            
+            sumD += node[k].demand[c];
+            
         } // end of k-loop
         
         Xsat = 1.0 / Dsat;
@@ -139,7 +149,7 @@ void canonical(void)
             switch (node[k].sched) {
                 case FCFS:
                 case PSHR:
-                case LCFS: // All these denotes M/M/1 type nodes
+                case LCFS: // All these denote M/M/1 type nodes
                     node[k].resit[c] = node[k].demand[c] / (1.0 - perServerU);
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
@@ -173,6 +183,7 @@ void canonical(void)
         job[c].trans->sys->thruput = X;             // system throughput
         job[c].trans->sys->response = sumR[c];      // system response time 
         job[c].trans->sys->residency = X * sumR[c]; // total number in system
+        job[c].trans->sys->minRT = sumD;            // Added by NJG on Wed Nov 18, 2020
 
         if (PDQ_DEBUG) {
             getjob_name(jobname, c);

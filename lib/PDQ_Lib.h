@@ -1,44 +1,39 @@
-/*******************************************************************************/
-/*  Copyright (c) 1994--2021, Performance Dynamics Company                    */
-/*                                                                             */
-/*  This software is licensed as described in the file COPYING, which          */
-/*  you should have received as part of this distribution. The terms           */
-/*  are also available at http://www.perfdynamics.com/Tools/copyright.html.    */
-/*                                                                             */
-/*  You may opt to use, copy, modify, merge, publish, distribute and/or sell   */
-/*  copies of the Software, and permit persons to whom the Software is         */
-/*  furnished to do so, under the terms of the COPYING file.                   */
-/*                                                                             */
-/*  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  */
-/*  KIND, either express or implied.                                           */
-/*******************************************************************************/
-
-/*
- * PDQ_Lib.h
- * 
- * Header file for the PDQ (Pretty Damn Quick) performance analyzer.
- * 
-*******************  DISCLAIMER OF WARRANTY ************************
- * Performance Dynamics Company(SM) and Neil J. Gunther make no warranty,
- * express or implied, that the source code contained PDQ or in the  book
- * are free from error, or are consistent with any particular standard of
- * merchantability, or that they will meet your requirements for a
- * particular application. They should not be relied upon for solving a
- * problem whose correct solution could result in injury to a person or
- * loss of property. The author disclaims all liability for direct or
- * consequential damages resulting from your use of this source code.
- * Also see separate disclaimers from the respective book publishers.
-************************* DO NOT REMOVE ****************************
+/*******************************************************************************
+ *  Copyright (c) 1994--2021, Performance Dynamics Company                    
+ *                                                                             
+ * This software is licensed as described in the file COPYING, which you should 
+ * have received as part of this distribution. The terms are also available at 
+ * http://www.perfdynamics.com/Tools/copyright.html. You may opt to use, copy, 
+ * modify, merge, publish, distribute and/or sell copies of the Software, and 
+ * permit persons to whom the Software is furnished to do so, under the terms of 
+ * the COPYING file. This software is distributed on an "AS IS" basis, WITHOUT 
+ * WARRANTY OF ANY KIND, either express or implied.                                          
  *
- */
+ ===========================  DISCLAIMER OF WARRANTY =========================== 
+ * Performance Dynamics Company(SM) and Dr. Neil J. Gunther make no warranty,
+ * express or implied, that the source code contained PDQ or in the  book are free 
+ * from error, or are consistent with any particular standard of merchantability, 
+ * or that they will meet your requirements for a particular application. They 
+ * should not be relied upon for solving a problem whose correct solution could 
+ * result in injury to a person or loss of property. The author disclaims all 
+ * liability for direct or consequential damages resulting from your use of this 
+ * source code. Also see separate disclaimers from the respective book publishers.
+ ****************************** DO NOT REMOVE **********************************/
 
+// PDQ_Lib.h
+//
+// Header file for the PDQ (Pretty Damn Quick) performance analyzer.
 // The following string constant is read by the GetVersion and Report()
+
+#define PDQ_VERSION    "Version 7.0.0 Build 111820"
+
 // Updated by NJG on Tuesday, May 24, 2016 from string literal to #define constant
 // thereby suppressing compiler warnings.
-// This string  must not contain more than 26 characters in order to satisfy the 
+// This string must not contain more than 26 characters in order to satisfy the 
 // predefined width in the PDQ Report() banner.
-
-#define PDQ_VERSION    "Version 7.0.0 Build 111620"
+// 
+// REVISIONS:
+// Updated by NJG on Tue Nov 17, 2020 - modified SYSTAT_TYPE data structure 
 
 
 
@@ -92,33 +87,46 @@
 // Solution Methods
 #define EXACT  14		// for TERM, BATCH & FESC workloads (NJG on Nov 16, 2020)
 #define APPROX 15		// for large TERM and BATCH workloads
-#define CANON  16		// for TRANS (OPEN) workloads
-#define APPROXMSO 17	// for multiclass MSQ workloads (NJG on May 8, 2016)
+#define CANON  16		// for TRANS workloads (OPEN network) 
+#define APPROXMSO 17	// for multiclass MSO workloads (NJG on May 8, 2016)
 
 // Service Time and Demand Types
 #define VISITS 18
 #define DEMAND 19
 
-// Multiprocessor scalability
-#define PDQ_SP 20        // uniprocessor
-#define PDQ_MP 21        // multiprocessor
+// Removed the following never-used constants (NJG on Nov 18, 2020)
+//#define PDQ_SP 20        // uniprocessor
+//#define PDQ_MP 21        // multiprocessor
+
+
+// Alternative more accurate names for solver methods
+// Added here for easier enumeration in PDQ 7.0 (NJG on Nov 18, 2020)
+#define EXACTMVA  20 // EXACT alternative
+#define APPROXMVA 21 // APPROX alternative
+#define STREAMING 22 // CANON alternative (connotes 'continuous' workflow)
+
 
 #define TOL 0.0010
 
 
-//---- STRUCTS ------------------------------------------------------------
+//---- Metric data structures ------------------------------------------------------------
 
+// Removed the following never-used fields from SYSTAT_TYPE
+	//double            physmem;
+	//double            highwater;
+	//double            malloc;
+	//double            mpl;
 typedef struct {
-   double            response;
-   double            thruput;
-   double            residency;
-   double            physmem;
-   double            highwater;
-   double            malloc;
-   double            mpl;
-   double            maxN;
-   double            maxTP;
-   double            minRT;
+	double            response;
+	double            thruput;
+	double            residency; // number in the system = total Qs
+	double            maxN;
+	double            maxTP;
+	// Following fields were added by NJG on Tue Nov 17, 2020
+	double            Nopt; 
+	double            minRT;
+	double            RTT;
+	double            minRTT;
 } SYSTAT_TYPE;
 
 typedef struct {

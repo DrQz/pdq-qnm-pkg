@@ -26,7 +26,7 @@
  * 		Removed floor() in GetLoadOpt() return
  *		Added tests for PDQ circuit existence
  * Updated by NJG on Wed, August 19, 2015  Use PRINTF from PDQ_Lib.h for R
- * Updated by NJG on Sat Nov 14, 2020 for release 7.0
+ * Updated by NJG on Wed Nov 18, 2020 for release 7.0
  *
  */
 
@@ -42,7 +42,7 @@
 
 //-------------------------------------------------------------------------
 
-#define MAXVAL 21
+#define MAXVAL 23  //Updated by NJG on Wed Nov 18, 2020
 
 //-------------------------------------------------------------------------
 
@@ -69,7 +69,7 @@ typedef struct {
 
 TYPE_TABLE
 	typetable[] = {
-		{"VOID",    VOID},
+		{"UNKNOWN", VOID},
 		{"OPEN",    OPEN},
 		{"CLOSED",  CLOSED},
 		{"CEN",     CEN},
@@ -89,8 +89,9 @@ TYPE_TABLE
 		{"APPROXMSO",  APPROXMSO},
 		{"VISITS",  VISITS},
 		{"DEMAND",  DEMAND},
-		{"SP",      PDQ_SP},
-		{"MP",      PDQ_MP}
+		{"EXACTMVA", EXACTMVA},
+		{"APPROXMVA", APPROXMVA},
+		{"STREAMING", STREAMING}
 	};  /* typetable */
 
 char            prevproc[MAXBUF];
@@ -488,6 +489,7 @@ typetostr(char *str, int type)
 {
 	char            buf[MAXBUF];
 	int             i = 0;
+	char           *p = "typetostr()";
 
 	for (i = 0; i < MAXVAL; i++) {
 		if (type == typetable[i].value) {
@@ -497,9 +499,10 @@ typetostr(char *str, int type)
 	}
 
 	sprintf(buf, "Unknown type id for \"%s\"", str);
-	errmsg("typetostr()", buf);
+	errmsg(p, buf);
 
 	strcpy(str, "NONE");
+	
 }  /* typetostr */
 
 //-------------------------------------------------------------------------
