@@ -78,7 +78,7 @@ In this model, the Tomcat threads on AWS play the role of queueing servers.
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on   Tue Nov 17 10:37:36 2020     ***
+               ***  on   Wed Nov 18 05:59:19 2020     ***
                ***  for  AWS-Tomcat Cloud Model       ***
                ***  PDQ  Version 7.0.0 Build 111720   ***
                ==========================================
@@ -87,15 +87,15 @@ In this model, the Tomcat threads on AWS play the role of queueing servers.
                ********    PDQ Model INPUTS      ********
                ==========================================
 
-WORKLOAD Parameters:
+Queueing Network Parameters
 
 Node Sched Resource   Workload   Class     Demand
 ---- ----- --------   --------   -----     ------
-MSC  FCFS  Threads    Requests   Closed    0.4440000057
+MSC  FCFS  Threads    Requests   TERM     0.4440000057
 
-Queueing Circuit Totals
-Streams:   1
-Nodes:     1
+Network type:   CLOSED
+Workload streams:    1
+Queueing nodes:      1
 
 
 Client       Number        Demand   Thinktime
