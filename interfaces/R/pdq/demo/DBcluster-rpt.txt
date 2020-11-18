@@ -1,0 +1,1870 @@
+
+                        PRETTY DAMN QUICK REPORT         
+               ==========================================
+               ***  on   Sun Dec 10 13:31:57 2017     ***
+               ***  for  DB Query Cluster             ***
+               ***  PDQ  Version 7.0.0 Build 052116   ***
+               ==========================================
+
+               ==========================================
+               ********    PDQ Model INPUTS      ********
+               ==========================================
+
+WORKLOAD Parameters:
+
+Node Sched Resource   Workload   Class     Visits    Service     Demand
+---- ----- --------   --------   -----     ------    -------     ------
+  1  FCFS FEP1       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP2       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP3       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP4       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP5       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP6       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP7       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP8       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP9       query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP10      query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP11      query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP12      query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP13      query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP14      query      Closed     0.0667     0.1000     0.0067
+  1  FCFS FEP15      query      Closed     0.0667     0.1000     0.0067
+  1  FCFS BEP1       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP2       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP3       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP4       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP5       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP6       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP7       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP8       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP9       query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP10      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP11      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP12      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP13      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP14      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP15      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP16      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP17      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP18      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP19      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP20      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP21      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP22      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP23      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP24      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP25      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP26      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP27      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP28      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP29      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP30      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP31      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP32      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP33      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP34      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP35      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP36      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP37      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP38      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP39      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP40      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP41      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP42      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP43      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP44      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP45      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP46      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP47      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP48      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP49      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS BEP50      query      Closed     0.0200     0.6000     0.0120
+  1  FCFS DSU1       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU2       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU3       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU4       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU5       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU6       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU7       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU8       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU9       query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU10      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU11      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU12      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU13      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU14      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU15      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU16      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU17      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU18      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU19      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU20      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU21      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU22      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU23      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU24      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU25      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU26      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU27      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU28      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU29      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU30      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU31      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU32      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU33      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU34      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU35      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU36      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU37      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU38      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU39      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU40      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU41      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU42      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU43      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU44      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU45      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU46      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU47      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU48      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU49      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU50      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU51      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU52      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU53      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU54      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU55      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU56      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU57      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU58      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU59      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU60      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU61      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU62      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU63      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU64      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU65      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU66      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU67      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU68      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU69      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU70      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU71      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU72      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU73      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU74      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU75      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU76      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU77      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU78      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU79      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU80      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU81      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU82      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU83      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU84      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU85      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU86      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU87      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU88      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU89      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU90      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU91      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU92      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU93      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU94      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU95      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU96      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU97      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU98      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU99      query      Closed     0.0100     1.2000     0.0120
+  1  FCFS DSU100     query      Closed     0.0100     1.2000     0.0120
+
+Queueing Circuit Totals
+Streams:   1
+Nodes:   165
+
+query        800.00        1.9000    10.00
+
+
+               ==========================================
+               ********   PDQ Model OUTPUTS      ********
+               ==========================================
+
+Solution Method: APPROX        (Iterations: 10; Accuracy: 0.1000%)
+
+               ********   SYSTEM Performance     ********
+
+Metric                     Value    Unit
+------                     -----    ----
+Workload: "query"
+Mean concurrency        269.9270    Users
+Mean throughput          53.0073    Users/Sec
+Response time             5.0923    Sec
+Round trip time          15.0923    Sec
+Stretch factor            2.6801
+
+Bounds Analysis:
+Max throughput           83.3333    Users/Sec
+Min response              1.9000    Sec
+Max Demand                0.0120    Sec
+Tot demand                1.9000    Sec
+Think time               10.0000    Sec
+Optimal clients         991.6667    Clients
+
+
+               ********   RESOURCE Performance   ********
+
+Metric          Resource     Work              Value   Unit
+------          --------     ----              -----   ----
+Capacity        FEP1         query                 1   Servers
+Throughput      FEP1         query            3.5338   Visits/Sec
+In service      FEP1         query            0.3534   Users
+Utilization     FEP1         query           35.3382   Percent
+Queue length    FEP1         query            0.5460   Users
+Waiting line    FEP1         query            0.1927   Users
+Waiting time    FEP1         query            0.0036   Sec
+Residence time  FEP1         query            0.0103   Sec
+Waiting time    FEP1         query            0.0036   Sec
+
+Capacity        FEP2         query                 1   Servers
+Throughput      FEP2         query            3.5338   Visits/Sec
+In service      FEP2         query            0.3534   Users
+Utilization     FEP2         query           35.3382   Percent
+Queue length    FEP2         query            0.5460   Users
+Waiting line    FEP2         query            0.1927   Users
+Waiting time    FEP2         query            0.0036   Sec
+Residence time  FEP2         query            0.0103   Sec
+Waiting time    FEP2         query            0.0036   Sec
+
+Capacity        FEP3         query                 1   Servers
+Throughput      FEP3         query            3.5338   Visits/Sec
+In service      FEP3         query            0.3534   Users
+Utilization     FEP3         query           35.3382   Percent
+Queue length    FEP3         query            0.5460   Users
+Waiting line    FEP3         query            0.1927   Users
+Waiting time    FEP3         query            0.0036   Sec
+Residence time  FEP3         query            0.0103   Sec
+Waiting time    FEP3         query            0.0036   Sec
+
+Capacity        FEP4         query                 1   Servers
+Throughput      FEP4         query            3.5338   Visits/Sec
+In service      FEP4         query            0.3534   Users
+Utilization     FEP4         query           35.3382   Percent
+Queue length    FEP4         query            0.5460   Users
+Waiting line    FEP4         query            0.1927   Users
+Waiting time    FEP4         query            0.0036   Sec
+Residence time  FEP4         query            0.0103   Sec
+Waiting time    FEP4         query            0.0036   Sec
+
+Capacity        FEP5         query                 1   Servers
+Throughput      FEP5         query            3.5338   Visits/Sec
+In service      FEP5         query            0.3534   Users
+Utilization     FEP5         query           35.3382   Percent
+Queue length    FEP5         query            0.5460   Users
+Waiting line    FEP5         query            0.1927   Users
+Waiting time    FEP5         query            0.0036   Sec
+Residence time  FEP5         query            0.0103   Sec
+Waiting time    FEP5         query            0.0036   Sec
+
+Capacity        FEP6         query                 1   Servers
+Throughput      FEP6         query            3.5338   Visits/Sec
+In service      FEP6         query            0.3534   Users
+Utilization     FEP6         query           35.3382   Percent
+Queue length    FEP6         query            0.5460   Users
+Waiting line    FEP6         query            0.1927   Users
+Waiting time    FEP6         query            0.0036   Sec
+Residence time  FEP6         query            0.0103   Sec
+Waiting time    FEP6         query            0.0036   Sec
+
+Capacity        FEP7         query                 1   Servers
+Throughput      FEP7         query            3.5338   Visits/Sec
+In service      FEP7         query            0.3534   Users
+Utilization     FEP7         query           35.3382   Percent
+Queue length    FEP7         query            0.5460   Users
+Waiting line    FEP7         query            0.1927   Users
+Waiting time    FEP7         query            0.0036   Sec
+Residence time  FEP7         query            0.0103   Sec
+Waiting time    FEP7         query            0.0036   Sec
+
+Capacity        FEP8         query                 1   Servers
+Throughput      FEP8         query            3.5338   Visits/Sec
+In service      FEP8         query            0.3534   Users
+Utilization     FEP8         query           35.3382   Percent
+Queue length    FEP8         query            0.5460   Users
+Waiting line    FEP8         query            0.1927   Users
+Waiting time    FEP8         query            0.0036   Sec
+Residence time  FEP8         query            0.0103   Sec
+Waiting time    FEP8         query            0.0036   Sec
+
+Capacity        FEP9         query                 1   Servers
+Throughput      FEP9         query            3.5338   Visits/Sec
+In service      FEP9         query            0.3534   Users
+Utilization     FEP9         query           35.3382   Percent
+Queue length    FEP9         query            0.5460   Users
+Waiting line    FEP9         query            0.1927   Users
+Waiting time    FEP9         query            0.0036   Sec
+Residence time  FEP9         query            0.0103   Sec
+Waiting time    FEP9         query            0.0036   Sec
+
+Capacity        FEP10        query                 1   Servers
+Throughput      FEP10        query            3.5338   Visits/Sec
+In service      FEP10        query            0.3534   Users
+Utilization     FEP10        query           35.3382   Percent
+Queue length    FEP10        query            0.5460   Users
+Waiting line    FEP10        query            0.1927   Users
+Waiting time    FEP10        query            0.0036   Sec
+Residence time  FEP10        query            0.0103   Sec
+Waiting time    FEP10        query            0.0036   Sec
+
+Capacity        FEP11        query                 1   Servers
+Throughput      FEP11        query            3.5338   Visits/Sec
+In service      FEP11        query            0.3534   Users
+Utilization     FEP11        query           35.3382   Percent
+Queue length    FEP11        query            0.5460   Users
+Waiting line    FEP11        query            0.1927   Users
+Waiting time    FEP11        query            0.0036   Sec
+Residence time  FEP11        query            0.0103   Sec
+Waiting time    FEP11        query            0.0036   Sec
+
+Capacity        FEP12        query                 1   Servers
+Throughput      FEP12        query            3.5338   Visits/Sec
+In service      FEP12        query            0.3534   Users
+Utilization     FEP12        query           35.3382   Percent
+Queue length    FEP12        query            0.5460   Users
+Waiting line    FEP12        query            0.1927   Users
+Waiting time    FEP12        query            0.0036   Sec
+Residence time  FEP12        query            0.0103   Sec
+Waiting time    FEP12        query            0.0036   Sec
+
+Capacity        FEP13        query                 1   Servers
+Throughput      FEP13        query            3.5338   Visits/Sec
+In service      FEP13        query            0.3534   Users
+Utilization     FEP13        query           35.3382   Percent
+Queue length    FEP13        query            0.5460   Users
+Waiting line    FEP13        query            0.1927   Users
+Waiting time    FEP13        query            0.0036   Sec
+Residence time  FEP13        query            0.0103   Sec
+Waiting time    FEP13        query            0.0036   Sec
+
+Capacity        FEP14        query                 1   Servers
+Throughput      FEP14        query            3.5338   Visits/Sec
+In service      FEP14        query            0.3534   Users
+Utilization     FEP14        query           35.3382   Percent
+Queue length    FEP14        query            0.5460   Users
+Waiting line    FEP14        query            0.1927   Users
+Waiting time    FEP14        query            0.0036   Sec
+Residence time  FEP14        query            0.0103   Sec
+Waiting time    FEP14        query            0.0036   Sec
+
+Capacity        FEP15        query                 1   Servers
+Throughput      FEP15        query            3.5338   Visits/Sec
+In service      FEP15        query            0.3534   Users
+Utilization     FEP15        query           35.3382   Percent
+Queue length    FEP15        query            0.5460   Users
+Waiting line    FEP15        query            0.1927   Users
+Waiting time    FEP15        query            0.0036   Sec
+Residence time  FEP15        query            0.0103   Sec
+Waiting time    FEP15        query            0.0036   Sec
+
+Capacity        BEP1         query                 1   Servers
+Throughput      BEP1         query            1.0601   Visits/Sec
+In service      BEP1         query            0.6361   Users
+Utilization     BEP1         query           63.6088   Percent
+Queue length    BEP1         query            1.7449   Users
+Waiting line    BEP1         query            1.1088   Users
+Waiting time    BEP1         query            0.0209   Sec
+Residence time  BEP1         query            0.0329   Sec
+Waiting time    BEP1         query            0.0209   Sec
+
+Capacity        BEP2         query                 1   Servers
+Throughput      BEP2         query            1.0601   Visits/Sec
+In service      BEP2         query            0.6361   Users
+Utilization     BEP2         query           63.6088   Percent
+Queue length    BEP2         query            1.7449   Users
+Waiting line    BEP2         query            1.1088   Users
+Waiting time    BEP2         query            0.0209   Sec
+Residence time  BEP2         query            0.0329   Sec
+Waiting time    BEP2         query            0.0209   Sec
+
+Capacity        BEP3         query                 1   Servers
+Throughput      BEP3         query            1.0601   Visits/Sec
+In service      BEP3         query            0.6361   Users
+Utilization     BEP3         query           63.6088   Percent
+Queue length    BEP3         query            1.7449   Users
+Waiting line    BEP3         query            1.1088   Users
+Waiting time    BEP3         query            0.0209   Sec
+Residence time  BEP3         query            0.0329   Sec
+Waiting time    BEP3         query            0.0209   Sec
+
+Capacity        BEP4         query                 1   Servers
+Throughput      BEP4         query            1.0601   Visits/Sec
+In service      BEP4         query            0.6361   Users
+Utilization     BEP4         query           63.6088   Percent
+Queue length    BEP4         query            1.7449   Users
+Waiting line    BEP4         query            1.1088   Users
+Waiting time    BEP4         query            0.0209   Sec
+Residence time  BEP4         query            0.0329   Sec
+Waiting time    BEP4         query            0.0209   Sec
+
+Capacity        BEP5         query                 1   Servers
+Throughput      BEP5         query            1.0601   Visits/Sec
+In service      BEP5         query            0.6361   Users
+Utilization     BEP5         query           63.6088   Percent
+Queue length    BEP5         query            1.7449   Users
+Waiting line    BEP5         query            1.1088   Users
+Waiting time    BEP5         query            0.0209   Sec
+Residence time  BEP5         query            0.0329   Sec
+Waiting time    BEP5         query            0.0209   Sec
+
+Capacity        BEP6         query                 1   Servers
+Throughput      BEP6         query            1.0601   Visits/Sec
+In service      BEP6         query            0.6361   Users
+Utilization     BEP6         query           63.6088   Percent
+Queue length    BEP6         query            1.7449   Users
+Waiting line    BEP6         query            1.1088   Users
+Waiting time    BEP6         query            0.0209   Sec
+Residence time  BEP6         query            0.0329   Sec
+Waiting time    BEP6         query            0.0209   Sec
+
+Capacity        BEP7         query                 1   Servers
+Throughput      BEP7         query            1.0601   Visits/Sec
+In service      BEP7         query            0.6361   Users
+Utilization     BEP7         query           63.6088   Percent
+Queue length    BEP7         query            1.7449   Users
+Waiting line    BEP7         query            1.1088   Users
+Waiting time    BEP7         query            0.0209   Sec
+Residence time  BEP7         query            0.0329   Sec
+Waiting time    BEP7         query            0.0209   Sec
+
+Capacity        BEP8         query                 1   Servers
+Throughput      BEP8         query            1.0601   Visits/Sec
+In service      BEP8         query            0.6361   Users
+Utilization     BEP8         query           63.6088   Percent
+Queue length    BEP8         query            1.7449   Users
+Waiting line    BEP8         query            1.1088   Users
+Waiting time    BEP8         query            0.0209   Sec
+Residence time  BEP8         query            0.0329   Sec
+Waiting time    BEP8         query            0.0209   Sec
+
+Capacity        BEP9         query                 1   Servers
+Throughput      BEP9         query            1.0601   Visits/Sec
+In service      BEP9         query            0.6361   Users
+Utilization     BEP9         query           63.6088   Percent
+Queue length    BEP9         query            1.7449   Users
+Waiting line    BEP9         query            1.1088   Users
+Waiting time    BEP9         query            0.0209   Sec
+Residence time  BEP9         query            0.0329   Sec
+Waiting time    BEP9         query            0.0209   Sec
+
+Capacity        BEP10        query                 1   Servers
+Throughput      BEP10        query            1.0601   Visits/Sec
+In service      BEP10        query            0.6361   Users
+Utilization     BEP10        query           63.6088   Percent
+Queue length    BEP10        query            1.7449   Users
+Waiting line    BEP10        query            1.1088   Users
+Waiting time    BEP10        query            0.0209   Sec
+Residence time  BEP10        query            0.0329   Sec
+Waiting time    BEP10        query            0.0209   Sec
+
+Capacity        BEP11        query                 1   Servers
+Throughput      BEP11        query            1.0601   Visits/Sec
+In service      BEP11        query            0.6361   Users
+Utilization     BEP11        query           63.6088   Percent
+Queue length    BEP11        query            1.7449   Users
+Waiting line    BEP11        query            1.1088   Users
+Waiting time    BEP11        query            0.0209   Sec
+Residence time  BEP11        query            0.0329   Sec
+Waiting time    BEP11        query            0.0209   Sec
+
+Capacity        BEP12        query                 1   Servers
+Throughput      BEP12        query            1.0601   Visits/Sec
+In service      BEP12        query            0.6361   Users
+Utilization     BEP12        query           63.6088   Percent
+Queue length    BEP12        query            1.7449   Users
+Waiting line    BEP12        query            1.1088   Users
+Waiting time    BEP12        query            0.0209   Sec
+Residence time  BEP12        query            0.0329   Sec
+Waiting time    BEP12        query            0.0209   Sec
+
+Capacity        BEP13        query                 1   Servers
+Throughput      BEP13        query            1.0601   Visits/Sec
+In service      BEP13        query            0.6361   Users
+Utilization     BEP13        query           63.6088   Percent
+Queue length    BEP13        query            1.7449   Users
+Waiting line    BEP13        query            1.1088   Users
+Waiting time    BEP13        query            0.0209   Sec
+Residence time  BEP13        query            0.0329   Sec
+Waiting time    BEP13        query            0.0209   Sec
+
+Capacity        BEP14        query                 1   Servers
+Throughput      BEP14        query            1.0601   Visits/Sec
+In service      BEP14        query            0.6361   Users
+Utilization     BEP14        query           63.6088   Percent
+Queue length    BEP14        query            1.7449   Users
+Waiting line    BEP14        query            1.1088   Users
+Waiting time    BEP14        query            0.0209   Sec
+Residence time  BEP14        query            0.0329   Sec
+Waiting time    BEP14        query            0.0209   Sec
+
+Capacity        BEP15        query                 1   Servers
+Throughput      BEP15        query            1.0601   Visits/Sec
+In service      BEP15        query            0.6361   Users
+Utilization     BEP15        query           63.6088   Percent
+Queue length    BEP15        query            1.7449   Users
+Waiting line    BEP15        query            1.1088   Users
+Waiting time    BEP15        query            0.0209   Sec
+Residence time  BEP15        query            0.0329   Sec
+Waiting time    BEP15        query            0.0209   Sec
+
+Capacity        BEP16        query                 1   Servers
+Throughput      BEP16        query            1.0601   Visits/Sec
+In service      BEP16        query            0.6361   Users
+Utilization     BEP16        query           63.6088   Percent
+Queue length    BEP16        query            1.7449   Users
+Waiting line    BEP16        query            1.1088   Users
+Waiting time    BEP16        query            0.0209   Sec
+Residence time  BEP16        query            0.0329   Sec
+Waiting time    BEP16        query            0.0209   Sec
+
+Capacity        BEP17        query                 1   Servers
+Throughput      BEP17        query            1.0601   Visits/Sec
+In service      BEP17        query            0.6361   Users
+Utilization     BEP17        query           63.6088   Percent
+Queue length    BEP17        query            1.7449   Users
+Waiting line    BEP17        query            1.1088   Users
+Waiting time    BEP17        query            0.0209   Sec
+Residence time  BEP17        query            0.0329   Sec
+Waiting time    BEP17        query            0.0209   Sec
+
+Capacity        BEP18        query                 1   Servers
+Throughput      BEP18        query            1.0601   Visits/Sec
+In service      BEP18        query            0.6361   Users
+Utilization     BEP18        query           63.6088   Percent
+Queue length    BEP18        query            1.7449   Users
+Waiting line    BEP18        query            1.1088   Users
+Waiting time    BEP18        query            0.0209   Sec
+Residence time  BEP18        query            0.0329   Sec
+Waiting time    BEP18        query            0.0209   Sec
+
+Capacity        BEP19        query                 1   Servers
+Throughput      BEP19        query            1.0601   Visits/Sec
+In service      BEP19        query            0.6361   Users
+Utilization     BEP19        query           63.6088   Percent
+Queue length    BEP19        query            1.7449   Users
+Waiting line    BEP19        query            1.1088   Users
+Waiting time    BEP19        query            0.0209   Sec
+Residence time  BEP19        query            0.0329   Sec
+Waiting time    BEP19        query            0.0209   Sec
+
+Capacity        BEP20        query                 1   Servers
+Throughput      BEP20        query            1.0601   Visits/Sec
+In service      BEP20        query            0.6361   Users
+Utilization     BEP20        query           63.6088   Percent
+Queue length    BEP20        query            1.7449   Users
+Waiting line    BEP20        query            1.1088   Users
+Waiting time    BEP20        query            0.0209   Sec
+Residence time  BEP20        query            0.0329   Sec
+Waiting time    BEP20        query            0.0209   Sec
+
+Capacity        BEP21        query                 1   Servers
+Throughput      BEP21        query            1.0601   Visits/Sec
+In service      BEP21        query            0.6361   Users
+Utilization     BEP21        query           63.6088   Percent
+Queue length    BEP21        query            1.7449   Users
+Waiting line    BEP21        query            1.1088   Users
+Waiting time    BEP21        query            0.0209   Sec
+Residence time  BEP21        query            0.0329   Sec
+Waiting time    BEP21        query            0.0209   Sec
+
+Capacity        BEP22        query                 1   Servers
+Throughput      BEP22        query            1.0601   Visits/Sec
+In service      BEP22        query            0.6361   Users
+Utilization     BEP22        query           63.6088   Percent
+Queue length    BEP22        query            1.7449   Users
+Waiting line    BEP22        query            1.1088   Users
+Waiting time    BEP22        query            0.0209   Sec
+Residence time  BEP22        query            0.0329   Sec
+Waiting time    BEP22        query            0.0209   Sec
+
+Capacity        BEP23        query                 1   Servers
+Throughput      BEP23        query            1.0601   Visits/Sec
+In service      BEP23        query            0.6361   Users
+Utilization     BEP23        query           63.6088   Percent
+Queue length    BEP23        query            1.7449   Users
+Waiting line    BEP23        query            1.1088   Users
+Waiting time    BEP23        query            0.0209   Sec
+Residence time  BEP23        query            0.0329   Sec
+Waiting time    BEP23        query            0.0209   Sec
+
+Capacity        BEP24        query                 1   Servers
+Throughput      BEP24        query            1.0601   Visits/Sec
+In service      BEP24        query            0.6361   Users
+Utilization     BEP24        query           63.6088   Percent
+Queue length    BEP24        query            1.7449   Users
+Waiting line    BEP24        query            1.1088   Users
+Waiting time    BEP24        query            0.0209   Sec
+Residence time  BEP24        query            0.0329   Sec
+Waiting time    BEP24        query            0.0209   Sec
+
+Capacity        BEP25        query                 1   Servers
+Throughput      BEP25        query            1.0601   Visits/Sec
+In service      BEP25        query            0.6361   Users
+Utilization     BEP25        query           63.6088   Percent
+Queue length    BEP25        query            1.7449   Users
+Waiting line    BEP25        query            1.1088   Users
+Waiting time    BEP25        query            0.0209   Sec
+Residence time  BEP25        query            0.0329   Sec
+Waiting time    BEP25        query            0.0209   Sec
+
+Capacity        BEP26        query                 1   Servers
+Throughput      BEP26        query            1.0601   Visits/Sec
+In service      BEP26        query            0.6361   Users
+Utilization     BEP26        query           63.6088   Percent
+Queue length    BEP26        query            1.7449   Users
+Waiting line    BEP26        query            1.1088   Users
+Waiting time    BEP26        query            0.0209   Sec
+Residence time  BEP26        query            0.0329   Sec
+Waiting time    BEP26        query            0.0209   Sec
+
+Capacity        BEP27        query                 1   Servers
+Throughput      BEP27        query            1.0601   Visits/Sec
+In service      BEP27        query            0.6361   Users
+Utilization     BEP27        query           63.6088   Percent
+Queue length    BEP27        query            1.7449   Users
+Waiting line    BEP27        query            1.1088   Users
+Waiting time    BEP27        query            0.0209   Sec
+Residence time  BEP27        query            0.0329   Sec
+Waiting time    BEP27        query            0.0209   Sec
+
+Capacity        BEP28        query                 1   Servers
+Throughput      BEP28        query            1.0601   Visits/Sec
+In service      BEP28        query            0.6361   Users
+Utilization     BEP28        query           63.6088   Percent
+Queue length    BEP28        query            1.7449   Users
+Waiting line    BEP28        query            1.1088   Users
+Waiting time    BEP28        query            0.0209   Sec
+Residence time  BEP28        query            0.0329   Sec
+Waiting time    BEP28        query            0.0209   Sec
+
+Capacity        BEP29        query                 1   Servers
+Throughput      BEP29        query            1.0601   Visits/Sec
+In service      BEP29        query            0.6361   Users
+Utilization     BEP29        query           63.6088   Percent
+Queue length    BEP29        query            1.7449   Users
+Waiting line    BEP29        query            1.1088   Users
+Waiting time    BEP29        query            0.0209   Sec
+Residence time  BEP29        query            0.0329   Sec
+Waiting time    BEP29        query            0.0209   Sec
+
+Capacity        BEP30        query                 1   Servers
+Throughput      BEP30        query            1.0601   Visits/Sec
+In service      BEP30        query            0.6361   Users
+Utilization     BEP30        query           63.6088   Percent
+Queue length    BEP30        query            1.7449   Users
+Waiting line    BEP30        query            1.1088   Users
+Waiting time    BEP30        query            0.0209   Sec
+Residence time  BEP30        query            0.0329   Sec
+Waiting time    BEP30        query            0.0209   Sec
+
+Capacity        BEP31        query                 1   Servers
+Throughput      BEP31        query            1.0601   Visits/Sec
+In service      BEP31        query            0.6361   Users
+Utilization     BEP31        query           63.6088   Percent
+Queue length    BEP31        query            1.7449   Users
+Waiting line    BEP31        query            1.1088   Users
+Waiting time    BEP31        query            0.0209   Sec
+Residence time  BEP31        query            0.0329   Sec
+Waiting time    BEP31        query            0.0209   Sec
+
+Capacity        BEP32        query                 1   Servers
+Throughput      BEP32        query            1.0601   Visits/Sec
+In service      BEP32        query            0.6361   Users
+Utilization     BEP32        query           63.6088   Percent
+Queue length    BEP32        query            1.7449   Users
+Waiting line    BEP32        query            1.1088   Users
+Waiting time    BEP32        query            0.0209   Sec
+Residence time  BEP32        query            0.0329   Sec
+Waiting time    BEP32        query            0.0209   Sec
+
+Capacity        BEP33        query                 1   Servers
+Throughput      BEP33        query            1.0601   Visits/Sec
+In service      BEP33        query            0.6361   Users
+Utilization     BEP33        query           63.6088   Percent
+Queue length    BEP33        query            1.7449   Users
+Waiting line    BEP33        query            1.1088   Users
+Waiting time    BEP33        query            0.0209   Sec
+Residence time  BEP33        query            0.0329   Sec
+Waiting time    BEP33        query            0.0209   Sec
+
+Capacity        BEP34        query                 1   Servers
+Throughput      BEP34        query            1.0601   Visits/Sec
+In service      BEP34        query            0.6361   Users
+Utilization     BEP34        query           63.6088   Percent
+Queue length    BEP34        query            1.7449   Users
+Waiting line    BEP34        query            1.1088   Users
+Waiting time    BEP34        query            0.0209   Sec
+Residence time  BEP34        query            0.0329   Sec
+Waiting time    BEP34        query            0.0209   Sec
+
+Capacity        BEP35        query                 1   Servers
+Throughput      BEP35        query            1.0601   Visits/Sec
+In service      BEP35        query            0.6361   Users
+Utilization     BEP35        query           63.6088   Percent
+Queue length    BEP35        query            1.7449   Users
+Waiting line    BEP35        query            1.1088   Users
+Waiting time    BEP35        query            0.0209   Sec
+Residence time  BEP35        query            0.0329   Sec
+Waiting time    BEP35        query            0.0209   Sec
+
+Capacity        BEP36        query                 1   Servers
+Throughput      BEP36        query            1.0601   Visits/Sec
+In service      BEP36        query            0.6361   Users
+Utilization     BEP36        query           63.6088   Percent
+Queue length    BEP36        query            1.7449   Users
+Waiting line    BEP36        query            1.1088   Users
+Waiting time    BEP36        query            0.0209   Sec
+Residence time  BEP36        query            0.0329   Sec
+Waiting time    BEP36        query            0.0209   Sec
+
+Capacity        BEP37        query                 1   Servers
+Throughput      BEP37        query            1.0601   Visits/Sec
+In service      BEP37        query            0.6361   Users
+Utilization     BEP37        query           63.6088   Percent
+Queue length    BEP37        query            1.7449   Users
+Waiting line    BEP37        query            1.1088   Users
+Waiting time    BEP37        query            0.0209   Sec
+Residence time  BEP37        query            0.0329   Sec
+Waiting time    BEP37        query            0.0209   Sec
+
+Capacity        BEP38        query                 1   Servers
+Throughput      BEP38        query            1.0601   Visits/Sec
+In service      BEP38        query            0.6361   Users
+Utilization     BEP38        query           63.6088   Percent
+Queue length    BEP38        query            1.7449   Users
+Waiting line    BEP38        query            1.1088   Users
+Waiting time    BEP38        query            0.0209   Sec
+Residence time  BEP38        query            0.0329   Sec
+Waiting time    BEP38        query            0.0209   Sec
+
+Capacity        BEP39        query                 1   Servers
+Throughput      BEP39        query            1.0601   Visits/Sec
+In service      BEP39        query            0.6361   Users
+Utilization     BEP39        query           63.6088   Percent
+Queue length    BEP39        query            1.7449   Users
+Waiting line    BEP39        query            1.1088   Users
+Waiting time    BEP39        query            0.0209   Sec
+Residence time  BEP39        query            0.0329   Sec
+Waiting time    BEP39        query            0.0209   Sec
+
+Capacity        BEP40        query                 1   Servers
+Throughput      BEP40        query            1.0601   Visits/Sec
+In service      BEP40        query            0.6361   Users
+Utilization     BEP40        query           63.6088   Percent
+Queue length    BEP40        query            1.7449   Users
+Waiting line    BEP40        query            1.1088   Users
+Waiting time    BEP40        query            0.0209   Sec
+Residence time  BEP40        query            0.0329   Sec
+Waiting time    BEP40        query            0.0209   Sec
+
+Capacity        BEP41        query                 1   Servers
+Throughput      BEP41        query            1.0601   Visits/Sec
+In service      BEP41        query            0.6361   Users
+Utilization     BEP41        query           63.6088   Percent
+Queue length    BEP41        query            1.7449   Users
+Waiting line    BEP41        query            1.1088   Users
+Waiting time    BEP41        query            0.0209   Sec
+Residence time  BEP41        query            0.0329   Sec
+Waiting time    BEP41        query            0.0209   Sec
+
+Capacity        BEP42        query                 1   Servers
+Throughput      BEP42        query            1.0601   Visits/Sec
+In service      BEP42        query            0.6361   Users
+Utilization     BEP42        query           63.6088   Percent
+Queue length    BEP42        query            1.7449   Users
+Waiting line    BEP42        query            1.1088   Users
+Waiting time    BEP42        query            0.0209   Sec
+Residence time  BEP42        query            0.0329   Sec
+Waiting time    BEP42        query            0.0209   Sec
+
+Capacity        BEP43        query                 1   Servers
+Throughput      BEP43        query            1.0601   Visits/Sec
+In service      BEP43        query            0.6361   Users
+Utilization     BEP43        query           63.6088   Percent
+Queue length    BEP43        query            1.7449   Users
+Waiting line    BEP43        query            1.1088   Users
+Waiting time    BEP43        query            0.0209   Sec
+Residence time  BEP43        query            0.0329   Sec
+Waiting time    BEP43        query            0.0209   Sec
+
+Capacity        BEP44        query                 1   Servers
+Throughput      BEP44        query            1.0601   Visits/Sec
+In service      BEP44        query            0.6361   Users
+Utilization     BEP44        query           63.6088   Percent
+Queue length    BEP44        query            1.7449   Users
+Waiting line    BEP44        query            1.1088   Users
+Waiting time    BEP44        query            0.0209   Sec
+Residence time  BEP44        query            0.0329   Sec
+Waiting time    BEP44        query            0.0209   Sec
+
+Capacity        BEP45        query                 1   Servers
+Throughput      BEP45        query            1.0601   Visits/Sec
+In service      BEP45        query            0.6361   Users
+Utilization     BEP45        query           63.6088   Percent
+Queue length    BEP45        query            1.7449   Users
+Waiting line    BEP45        query            1.1088   Users
+Waiting time    BEP45        query            0.0209   Sec
+Residence time  BEP45        query            0.0329   Sec
+Waiting time    BEP45        query            0.0209   Sec
+
+Capacity        BEP46        query                 1   Servers
+Throughput      BEP46        query            1.0601   Visits/Sec
+In service      BEP46        query            0.6361   Users
+Utilization     BEP46        query           63.6088   Percent
+Queue length    BEP46        query            1.7449   Users
+Waiting line    BEP46        query            1.1088   Users
+Waiting time    BEP46        query            0.0209   Sec
+Residence time  BEP46        query            0.0329   Sec
+Waiting time    BEP46        query            0.0209   Sec
+
+Capacity        BEP47        query                 1   Servers
+Throughput      BEP47        query            1.0601   Visits/Sec
+In service      BEP47        query            0.6361   Users
+Utilization     BEP47        query           63.6088   Percent
+Queue length    BEP47        query            1.7449   Users
+Waiting line    BEP47        query            1.1088   Users
+Waiting time    BEP47        query            0.0209   Sec
+Residence time  BEP47        query            0.0329   Sec
+Waiting time    BEP47        query            0.0209   Sec
+
+Capacity        BEP48        query                 1   Servers
+Throughput      BEP48        query            1.0601   Visits/Sec
+In service      BEP48        query            0.6361   Users
+Utilization     BEP48        query           63.6088   Percent
+Queue length    BEP48        query            1.7449   Users
+Waiting line    BEP48        query            1.1088   Users
+Waiting time    BEP48        query            0.0209   Sec
+Residence time  BEP48        query            0.0329   Sec
+Waiting time    BEP48        query            0.0209   Sec
+
+Capacity        BEP49        query                 1   Servers
+Throughput      BEP49        query            1.0601   Visits/Sec
+In service      BEP49        query            0.6361   Users
+Utilization     BEP49        query           63.6088   Percent
+Queue length    BEP49        query            1.7449   Users
+Waiting line    BEP49        query            1.1088   Users
+Waiting time    BEP49        query            0.0209   Sec
+Residence time  BEP49        query            0.0329   Sec
+Waiting time    BEP49        query            0.0209   Sec
+
+Capacity        BEP50        query                 1   Servers
+Throughput      BEP50        query            1.0601   Visits/Sec
+In service      BEP50        query            0.6361   Users
+Utilization     BEP50        query           63.6088   Percent
+Queue length    BEP50        query            1.7449   Users
+Waiting line    BEP50        query            1.1088   Users
+Waiting time    BEP50        query            0.0209   Sec
+Residence time  BEP50        query            0.0329   Sec
+Waiting time    BEP50        query            0.0209   Sec
+
+Capacity        DSU1         query                 1   Servers
+Throughput      DSU1         query            0.5301   Visits/Sec
+In service      DSU1         query            0.6361   Users
+Utilization     DSU1         query           63.6088   Percent
+Queue length    DSU1         query            1.7449   Users
+Waiting line    DSU1         query            1.1088   Users
+Waiting time    DSU1         query            0.0209   Sec
+Residence time  DSU1         query            0.0329   Sec
+Waiting time    DSU1         query            0.0209   Sec
+
+Capacity        DSU2         query                 1   Servers
+Throughput      DSU2         query            0.5301   Visits/Sec
+In service      DSU2         query            0.6361   Users
+Utilization     DSU2         query           63.6088   Percent
+Queue length    DSU2         query            1.7449   Users
+Waiting line    DSU2         query            1.1088   Users
+Waiting time    DSU2         query            0.0209   Sec
+Residence time  DSU2         query            0.0329   Sec
+Waiting time    DSU2         query            0.0209   Sec
+
+Capacity        DSU3         query                 1   Servers
+Throughput      DSU3         query            0.5301   Visits/Sec
+In service      DSU3         query            0.6361   Users
+Utilization     DSU3         query           63.6088   Percent
+Queue length    DSU3         query            1.7449   Users
+Waiting line    DSU3         query            1.1088   Users
+Waiting time    DSU3         query            0.0209   Sec
+Residence time  DSU3         query            0.0329   Sec
+Waiting time    DSU3         query            0.0209   Sec
+
+Capacity        DSU4         query                 1   Servers
+Throughput      DSU4         query            0.5301   Visits/Sec
+In service      DSU4         query            0.6361   Users
+Utilization     DSU4         query           63.6088   Percent
+Queue length    DSU4         query            1.7449   Users
+Waiting line    DSU4         query            1.1088   Users
+Waiting time    DSU4         query            0.0209   Sec
+Residence time  DSU4         query            0.0329   Sec
+Waiting time    DSU4         query            0.0209   Sec
+
+Capacity        DSU5         query                 1   Servers
+Throughput      DSU5         query            0.5301   Visits/Sec
+In service      DSU5         query            0.6361   Users
+Utilization     DSU5         query           63.6088   Percent
+Queue length    DSU5         query            1.7449   Users
+Waiting line    DSU5         query            1.1088   Users
+Waiting time    DSU5         query            0.0209   Sec
+Residence time  DSU5         query            0.0329   Sec
+Waiting time    DSU5         query            0.0209   Sec
+
+Capacity        DSU6         query                 1   Servers
+Throughput      DSU6         query            0.5301   Visits/Sec
+In service      DSU6         query            0.6361   Users
+Utilization     DSU6         query           63.6088   Percent
+Queue length    DSU6         query            1.7449   Users
+Waiting line    DSU6         query            1.1088   Users
+Waiting time    DSU6         query            0.0209   Sec
+Residence time  DSU6         query            0.0329   Sec
+Waiting time    DSU6         query            0.0209   Sec
+
+Capacity        DSU7         query                 1   Servers
+Throughput      DSU7         query            0.5301   Visits/Sec
+In service      DSU7         query            0.6361   Users
+Utilization     DSU7         query           63.6088   Percent
+Queue length    DSU7         query            1.7449   Users
+Waiting line    DSU7         query            1.1088   Users
+Waiting time    DSU7         query            0.0209   Sec
+Residence time  DSU7         query            0.0329   Sec
+Waiting time    DSU7         query            0.0209   Sec
+
+Capacity        DSU8         query                 1   Servers
+Throughput      DSU8         query            0.5301   Visits/Sec
+In service      DSU8         query            0.6361   Users
+Utilization     DSU8         query           63.6088   Percent
+Queue length    DSU8         query            1.7449   Users
+Waiting line    DSU8         query            1.1088   Users
+Waiting time    DSU8         query            0.0209   Sec
+Residence time  DSU8         query            0.0329   Sec
+Waiting time    DSU8         query            0.0209   Sec
+
+Capacity        DSU9         query                 1   Servers
+Throughput      DSU9         query            0.5301   Visits/Sec
+In service      DSU9         query            0.6361   Users
+Utilization     DSU9         query           63.6088   Percent
+Queue length    DSU9         query            1.7449   Users
+Waiting line    DSU9         query            1.1088   Users
+Waiting time    DSU9         query            0.0209   Sec
+Residence time  DSU9         query            0.0329   Sec
+Waiting time    DSU9         query            0.0209   Sec
+
+Capacity        DSU10        query                 1   Servers
+Throughput      DSU10        query            0.5301   Visits/Sec
+In service      DSU10        query            0.6361   Users
+Utilization     DSU10        query           63.6088   Percent
+Queue length    DSU10        query            1.7449   Users
+Waiting line    DSU10        query            1.1088   Users
+Waiting time    DSU10        query            0.0209   Sec
+Residence time  DSU10        query            0.0329   Sec
+Waiting time    DSU10        query            0.0209   Sec
+
+Capacity        DSU11        query                 1   Servers
+Throughput      DSU11        query            0.5301   Visits/Sec
+In service      DSU11        query            0.6361   Users
+Utilization     DSU11        query           63.6088   Percent
+Queue length    DSU11        query            1.7449   Users
+Waiting line    DSU11        query            1.1088   Users
+Waiting time    DSU11        query            0.0209   Sec
+Residence time  DSU11        query            0.0329   Sec
+Waiting time    DSU11        query            0.0209   Sec
+
+Capacity        DSU12        query                 1   Servers
+Throughput      DSU12        query            0.5301   Visits/Sec
+In service      DSU12        query            0.6361   Users
+Utilization     DSU12        query           63.6088   Percent
+Queue length    DSU12        query            1.7449   Users
+Waiting line    DSU12        query            1.1088   Users
+Waiting time    DSU12        query            0.0209   Sec
+Residence time  DSU12        query            0.0329   Sec
+Waiting time    DSU12        query            0.0209   Sec
+
+Capacity        DSU13        query                 1   Servers
+Throughput      DSU13        query            0.5301   Visits/Sec
+In service      DSU13        query            0.6361   Users
+Utilization     DSU13        query           63.6088   Percent
+Queue length    DSU13        query            1.7449   Users
+Waiting line    DSU13        query            1.1088   Users
+Waiting time    DSU13        query            0.0209   Sec
+Residence time  DSU13        query            0.0329   Sec
+Waiting time    DSU13        query            0.0209   Sec
+
+Capacity        DSU14        query                 1   Servers
+Throughput      DSU14        query            0.5301   Visits/Sec
+In service      DSU14        query            0.6361   Users
+Utilization     DSU14        query           63.6088   Percent
+Queue length    DSU14        query            1.7449   Users
+Waiting line    DSU14        query            1.1088   Users
+Waiting time    DSU14        query            0.0209   Sec
+Residence time  DSU14        query            0.0329   Sec
+Waiting time    DSU14        query            0.0209   Sec
+
+Capacity        DSU15        query                 1   Servers
+Throughput      DSU15        query            0.5301   Visits/Sec
+In service      DSU15        query            0.6361   Users
+Utilization     DSU15        query           63.6088   Percent
+Queue length    DSU15        query            1.7449   Users
+Waiting line    DSU15        query            1.1088   Users
+Waiting time    DSU15        query            0.0209   Sec
+Residence time  DSU15        query            0.0329   Sec
+Waiting time    DSU15        query            0.0209   Sec
+
+Capacity        DSU16        query                 1   Servers
+Throughput      DSU16        query            0.5301   Visits/Sec
+In service      DSU16        query            0.6361   Users
+Utilization     DSU16        query           63.6088   Percent
+Queue length    DSU16        query            1.7449   Users
+Waiting line    DSU16        query            1.1088   Users
+Waiting time    DSU16        query            0.0209   Sec
+Residence time  DSU16        query            0.0329   Sec
+Waiting time    DSU16        query            0.0209   Sec
+
+Capacity        DSU17        query                 1   Servers
+Throughput      DSU17        query            0.5301   Visits/Sec
+In service      DSU17        query            0.6361   Users
+Utilization     DSU17        query           63.6088   Percent
+Queue length    DSU17        query            1.7449   Users
+Waiting line    DSU17        query            1.1088   Users
+Waiting time    DSU17        query            0.0209   Sec
+Residence time  DSU17        query            0.0329   Sec
+Waiting time    DSU17        query            0.0209   Sec
+
+Capacity        DSU18        query                 1   Servers
+Throughput      DSU18        query            0.5301   Visits/Sec
+In service      DSU18        query            0.6361   Users
+Utilization     DSU18        query           63.6088   Percent
+Queue length    DSU18        query            1.7449   Users
+Waiting line    DSU18        query            1.1088   Users
+Waiting time    DSU18        query            0.0209   Sec
+Residence time  DSU18        query            0.0329   Sec
+Waiting time    DSU18        query            0.0209   Sec
+
+Capacity        DSU19        query                 1   Servers
+Throughput      DSU19        query            0.5301   Visits/Sec
+In service      DSU19        query            0.6361   Users
+Utilization     DSU19        query           63.6088   Percent
+Queue length    DSU19        query            1.7449   Users
+Waiting line    DSU19        query            1.1088   Users
+Waiting time    DSU19        query            0.0209   Sec
+Residence time  DSU19        query            0.0329   Sec
+Waiting time    DSU19        query            0.0209   Sec
+
+Capacity        DSU20        query                 1   Servers
+Throughput      DSU20        query            0.5301   Visits/Sec
+In service      DSU20        query            0.6361   Users
+Utilization     DSU20        query           63.6088   Percent
+Queue length    DSU20        query            1.7449   Users
+Waiting line    DSU20        query            1.1088   Users
+Waiting time    DSU20        query            0.0209   Sec
+Residence time  DSU20        query            0.0329   Sec
+Waiting time    DSU20        query            0.0209   Sec
+
+Capacity        DSU21        query                 1   Servers
+Throughput      DSU21        query            0.5301   Visits/Sec
+In service      DSU21        query            0.6361   Users
+Utilization     DSU21        query           63.6088   Percent
+Queue length    DSU21        query            1.7449   Users
+Waiting line    DSU21        query            1.1088   Users
+Waiting time    DSU21        query            0.0209   Sec
+Residence time  DSU21        query            0.0329   Sec
+Waiting time    DSU21        query            0.0209   Sec
+
+Capacity        DSU22        query                 1   Servers
+Throughput      DSU22        query            0.5301   Visits/Sec
+In service      DSU22        query            0.6361   Users
+Utilization     DSU22        query           63.6088   Percent
+Queue length    DSU22        query            1.7449   Users
+Waiting line    DSU22        query            1.1088   Users
+Waiting time    DSU22        query            0.0209   Sec
+Residence time  DSU22        query            0.0329   Sec
+Waiting time    DSU22        query            0.0209   Sec
+
+Capacity        DSU23        query                 1   Servers
+Throughput      DSU23        query            0.5301   Visits/Sec
+In service      DSU23        query            0.6361   Users
+Utilization     DSU23        query           63.6088   Percent
+Queue length    DSU23        query            1.7449   Users
+Waiting line    DSU23        query            1.1088   Users
+Waiting time    DSU23        query            0.0209   Sec
+Residence time  DSU23        query            0.0329   Sec
+Waiting time    DSU23        query            0.0209   Sec
+
+Capacity        DSU24        query                 1   Servers
+Throughput      DSU24        query            0.5301   Visits/Sec
+In service      DSU24        query            0.6361   Users
+Utilization     DSU24        query           63.6088   Percent
+Queue length    DSU24        query            1.7449   Users
+Waiting line    DSU24        query            1.1088   Users
+Waiting time    DSU24        query            0.0209   Sec
+Residence time  DSU24        query            0.0329   Sec
+Waiting time    DSU24        query            0.0209   Sec
+
+Capacity        DSU25        query                 1   Servers
+Throughput      DSU25        query            0.5301   Visits/Sec
+In service      DSU25        query            0.6361   Users
+Utilization     DSU25        query           63.6088   Percent
+Queue length    DSU25        query            1.7449   Users
+Waiting line    DSU25        query            1.1088   Users
+Waiting time    DSU25        query            0.0209   Sec
+Residence time  DSU25        query            0.0329   Sec
+Waiting time    DSU25        query            0.0209   Sec
+
+Capacity        DSU26        query                 1   Servers
+Throughput      DSU26        query            0.5301   Visits/Sec
+In service      DSU26        query            0.6361   Users
+Utilization     DSU26        query           63.6088   Percent
+Queue length    DSU26        query            1.7449   Users
+Waiting line    DSU26        query            1.1088   Users
+Waiting time    DSU26        query            0.0209   Sec
+Residence time  DSU26        query            0.0329   Sec
+Waiting time    DSU26        query            0.0209   Sec
+
+Capacity        DSU27        query                 1   Servers
+Throughput      DSU27        query            0.5301   Visits/Sec
+In service      DSU27        query            0.6361   Users
+Utilization     DSU27        query           63.6088   Percent
+Queue length    DSU27        query            1.7449   Users
+Waiting line    DSU27        query            1.1088   Users
+Waiting time    DSU27        query            0.0209   Sec
+Residence time  DSU27        query            0.0329   Sec
+Waiting time    DSU27        query            0.0209   Sec
+
+Capacity        DSU28        query                 1   Servers
+Throughput      DSU28        query            0.5301   Visits/Sec
+In service      DSU28        query            0.6361   Users
+Utilization     DSU28        query           63.6088   Percent
+Queue length    DSU28        query            1.7449   Users
+Waiting line    DSU28        query            1.1088   Users
+Waiting time    DSU28        query            0.0209   Sec
+Residence time  DSU28        query            0.0329   Sec
+Waiting time    DSU28        query            0.0209   Sec
+
+Capacity        DSU29        query                 1   Servers
+Throughput      DSU29        query            0.5301   Visits/Sec
+In service      DSU29        query            0.6361   Users
+Utilization     DSU29        query           63.6088   Percent
+Queue length    DSU29        query            1.7449   Users
+Waiting line    DSU29        query            1.1088   Users
+Waiting time    DSU29        query            0.0209   Sec
+Residence time  DSU29        query            0.0329   Sec
+Waiting time    DSU29        query            0.0209   Sec
+
+Capacity        DSU30        query                 1   Servers
+Throughput      DSU30        query            0.5301   Visits/Sec
+In service      DSU30        query            0.6361   Users
+Utilization     DSU30        query           63.6088   Percent
+Queue length    DSU30        query            1.7449   Users
+Waiting line    DSU30        query            1.1088   Users
+Waiting time    DSU30        query            0.0209   Sec
+Residence time  DSU30        query            0.0329   Sec
+Waiting time    DSU30        query            0.0209   Sec
+
+Capacity        DSU31        query                 1   Servers
+Throughput      DSU31        query            0.5301   Visits/Sec
+In service      DSU31        query            0.6361   Users
+Utilization     DSU31        query           63.6088   Percent
+Queue length    DSU31        query            1.7449   Users
+Waiting line    DSU31        query            1.1088   Users
+Waiting time    DSU31        query            0.0209   Sec
+Residence time  DSU31        query            0.0329   Sec
+Waiting time    DSU31        query            0.0209   Sec
+
+Capacity        DSU32        query                 1   Servers
+Throughput      DSU32        query            0.5301   Visits/Sec
+In service      DSU32        query            0.6361   Users
+Utilization     DSU32        query           63.6088   Percent
+Queue length    DSU32        query            1.7449   Users
+Waiting line    DSU32        query            1.1088   Users
+Waiting time    DSU32        query            0.0209   Sec
+Residence time  DSU32        query            0.0329   Sec
+Waiting time    DSU32        query            0.0209   Sec
+
+Capacity        DSU33        query                 1   Servers
+Throughput      DSU33        query            0.5301   Visits/Sec
+In service      DSU33        query            0.6361   Users
+Utilization     DSU33        query           63.6088   Percent
+Queue length    DSU33        query            1.7449   Users
+Waiting line    DSU33        query            1.1088   Users
+Waiting time    DSU33        query            0.0209   Sec
+Residence time  DSU33        query            0.0329   Sec
+Waiting time    DSU33        query            0.0209   Sec
+
+Capacity        DSU34        query                 1   Servers
+Throughput      DSU34        query            0.5301   Visits/Sec
+In service      DSU34        query            0.6361   Users
+Utilization     DSU34        query           63.6088   Percent
+Queue length    DSU34        query            1.7449   Users
+Waiting line    DSU34        query            1.1088   Users
+Waiting time    DSU34        query            0.0209   Sec
+Residence time  DSU34        query            0.0329   Sec
+Waiting time    DSU34        query            0.0209   Sec
+
+Capacity        DSU35        query                 1   Servers
+Throughput      DSU35        query            0.5301   Visits/Sec
+In service      DSU35        query            0.6361   Users
+Utilization     DSU35        query           63.6088   Percent
+Queue length    DSU35        query            1.7449   Users
+Waiting line    DSU35        query            1.1088   Users
+Waiting time    DSU35        query            0.0209   Sec
+Residence time  DSU35        query            0.0329   Sec
+Waiting time    DSU35        query            0.0209   Sec
+
+Capacity        DSU36        query                 1   Servers
+Throughput      DSU36        query            0.5301   Visits/Sec
+In service      DSU36        query            0.6361   Users
+Utilization     DSU36        query           63.6088   Percent
+Queue length    DSU36        query            1.7449   Users
+Waiting line    DSU36        query            1.1088   Users
+Waiting time    DSU36        query            0.0209   Sec
+Residence time  DSU36        query            0.0329   Sec
+Waiting time    DSU36        query            0.0209   Sec
+
+Capacity        DSU37        query                 1   Servers
+Throughput      DSU37        query            0.5301   Visits/Sec
+In service      DSU37        query            0.6361   Users
+Utilization     DSU37        query           63.6088   Percent
+Queue length    DSU37        query            1.7449   Users
+Waiting line    DSU37        query            1.1088   Users
+Waiting time    DSU37        query            0.0209   Sec
+Residence time  DSU37        query            0.0329   Sec
+Waiting time    DSU37        query            0.0209   Sec
+
+Capacity        DSU38        query                 1   Servers
+Throughput      DSU38        query            0.5301   Visits/Sec
+In service      DSU38        query            0.6361   Users
+Utilization     DSU38        query           63.6088   Percent
+Queue length    DSU38        query            1.7449   Users
+Waiting line    DSU38        query            1.1088   Users
+Waiting time    DSU38        query            0.0209   Sec
+Residence time  DSU38        query            0.0329   Sec
+Waiting time    DSU38        query            0.0209   Sec
+
+Capacity        DSU39        query                 1   Servers
+Throughput      DSU39        query            0.5301   Visits/Sec
+In service      DSU39        query            0.6361   Users
+Utilization     DSU39        query           63.6088   Percent
+Queue length    DSU39        query            1.7449   Users
+Waiting line    DSU39        query            1.1088   Users
+Waiting time    DSU39        query            0.0209   Sec
+Residence time  DSU39        query            0.0329   Sec
+Waiting time    DSU39        query            0.0209   Sec
+
+Capacity        DSU40        query                 1   Servers
+Throughput      DSU40        query            0.5301   Visits/Sec
+In service      DSU40        query            0.6361   Users
+Utilization     DSU40        query           63.6088   Percent
+Queue length    DSU40        query            1.7449   Users
+Waiting line    DSU40        query            1.1088   Users
+Waiting time    DSU40        query            0.0209   Sec
+Residence time  DSU40        query            0.0329   Sec
+Waiting time    DSU40        query            0.0209   Sec
+
+Capacity        DSU41        query                 1   Servers
+Throughput      DSU41        query            0.5301   Visits/Sec
+In service      DSU41        query            0.6361   Users
+Utilization     DSU41        query           63.6088   Percent
+Queue length    DSU41        query            1.7449   Users
+Waiting line    DSU41        query            1.1088   Users
+Waiting time    DSU41        query            0.0209   Sec
+Residence time  DSU41        query            0.0329   Sec
+Waiting time    DSU41        query            0.0209   Sec
+
+Capacity        DSU42        query                 1   Servers
+Throughput      DSU42        query            0.5301   Visits/Sec
+In service      DSU42        query            0.6361   Users
+Utilization     DSU42        query           63.6088   Percent
+Queue length    DSU42        query            1.7449   Users
+Waiting line    DSU42        query            1.1088   Users
+Waiting time    DSU42        query            0.0209   Sec
+Residence time  DSU42        query            0.0329   Sec
+Waiting time    DSU42        query            0.0209   Sec
+
+Capacity        DSU43        query                 1   Servers
+Throughput      DSU43        query            0.5301   Visits/Sec
+In service      DSU43        query            0.6361   Users
+Utilization     DSU43        query           63.6088   Percent
+Queue length    DSU43        query            1.7449   Users
+Waiting line    DSU43        query            1.1088   Users
+Waiting time    DSU43        query            0.0209   Sec
+Residence time  DSU43        query            0.0329   Sec
+Waiting time    DSU43        query            0.0209   Sec
+
+Capacity        DSU44        query                 1   Servers
+Throughput      DSU44        query            0.5301   Visits/Sec
+In service      DSU44        query            0.6361   Users
+Utilization     DSU44        query           63.6088   Percent
+Queue length    DSU44        query            1.7449   Users
+Waiting line    DSU44        query            1.1088   Users
+Waiting time    DSU44        query            0.0209   Sec
+Residence time  DSU44        query            0.0329   Sec
+Waiting time    DSU44        query            0.0209   Sec
+
+Capacity        DSU45        query                 1   Servers
+Throughput      DSU45        query            0.5301   Visits/Sec
+In service      DSU45        query            0.6361   Users
+Utilization     DSU45        query           63.6088   Percent
+Queue length    DSU45        query            1.7449   Users
+Waiting line    DSU45        query            1.1088   Users
+Waiting time    DSU45        query            0.0209   Sec
+Residence time  DSU45        query            0.0329   Sec
+Waiting time    DSU45        query            0.0209   Sec
+
+Capacity        DSU46        query                 1   Servers
+Throughput      DSU46        query            0.5301   Visits/Sec
+In service      DSU46        query            0.6361   Users
+Utilization     DSU46        query           63.6088   Percent
+Queue length    DSU46        query            1.7449   Users
+Waiting line    DSU46        query            1.1088   Users
+Waiting time    DSU46        query            0.0209   Sec
+Residence time  DSU46        query            0.0329   Sec
+Waiting time    DSU46        query            0.0209   Sec
+
+Capacity        DSU47        query                 1   Servers
+Throughput      DSU47        query            0.5301   Visits/Sec
+In service      DSU47        query            0.6361   Users
+Utilization     DSU47        query           63.6088   Percent
+Queue length    DSU47        query            1.7449   Users
+Waiting line    DSU47        query            1.1088   Users
+Waiting time    DSU47        query            0.0209   Sec
+Residence time  DSU47        query            0.0329   Sec
+Waiting time    DSU47        query            0.0209   Sec
+
+Capacity        DSU48        query                 1   Servers
+Throughput      DSU48        query            0.5301   Visits/Sec
+In service      DSU48        query            0.6361   Users
+Utilization     DSU48        query           63.6088   Percent
+Queue length    DSU48        query            1.7449   Users
+Waiting line    DSU48        query            1.1088   Users
+Waiting time    DSU48        query            0.0209   Sec
+Residence time  DSU48        query            0.0329   Sec
+Waiting time    DSU48        query            0.0209   Sec
+
+Capacity        DSU49        query                 1   Servers
+Throughput      DSU49        query            0.5301   Visits/Sec
+In service      DSU49        query            0.6361   Users
+Utilization     DSU49        query           63.6088   Percent
+Queue length    DSU49        query            1.7449   Users
+Waiting line    DSU49        query            1.1088   Users
+Waiting time    DSU49        query            0.0209   Sec
+Residence time  DSU49        query            0.0329   Sec
+Waiting time    DSU49        query            0.0209   Sec
+
+Capacity        DSU50        query                 1   Servers
+Throughput      DSU50        query            0.5301   Visits/Sec
+In service      DSU50        query            0.6361   Users
+Utilization     DSU50        query           63.6088   Percent
+Queue length    DSU50        query            1.7449   Users
+Waiting line    DSU50        query            1.1088   Users
+Waiting time    DSU50        query            0.0209   Sec
+Residence time  DSU50        query            0.0329   Sec
+Waiting time    DSU50        query            0.0209   Sec
+
+Capacity        DSU51        query                 1   Servers
+Throughput      DSU51        query            0.5301   Visits/Sec
+In service      DSU51        query            0.6361   Users
+Utilization     DSU51        query           63.6088   Percent
+Queue length    DSU51        query            1.7449   Users
+Waiting line    DSU51        query            1.1088   Users
+Waiting time    DSU51        query            0.0209   Sec
+Residence time  DSU51        query            0.0329   Sec
+Waiting time    DSU51        query            0.0209   Sec
+
+Capacity        DSU52        query                 1   Servers
+Throughput      DSU52        query            0.5301   Visits/Sec
+In service      DSU52        query            0.6361   Users
+Utilization     DSU52        query           63.6088   Percent
+Queue length    DSU52        query            1.7449   Users
+Waiting line    DSU52        query            1.1088   Users
+Waiting time    DSU52        query            0.0209   Sec
+Residence time  DSU52        query            0.0329   Sec
+Waiting time    DSU52        query            0.0209   Sec
+
+Capacity        DSU53        query                 1   Servers
+Throughput      DSU53        query            0.5301   Visits/Sec
+In service      DSU53        query            0.6361   Users
+Utilization     DSU53        query           63.6088   Percent
+Queue length    DSU53        query            1.7449   Users
+Waiting line    DSU53        query            1.1088   Users
+Waiting time    DSU53        query            0.0209   Sec
+Residence time  DSU53        query            0.0329   Sec
+Waiting time    DSU53        query            0.0209   Sec
+
+Capacity        DSU54        query                 1   Servers
+Throughput      DSU54        query            0.5301   Visits/Sec
+In service      DSU54        query            0.6361   Users
+Utilization     DSU54        query           63.6088   Percent
+Queue length    DSU54        query            1.7449   Users
+Waiting line    DSU54        query            1.1088   Users
+Waiting time    DSU54        query            0.0209   Sec
+Residence time  DSU54        query            0.0329   Sec
+Waiting time    DSU54        query            0.0209   Sec
+
+Capacity        DSU55        query                 1   Servers
+Throughput      DSU55        query            0.5301   Visits/Sec
+In service      DSU55        query            0.6361   Users
+Utilization     DSU55        query           63.6088   Percent
+Queue length    DSU55        query            1.7449   Users
+Waiting line    DSU55        query            1.1088   Users
+Waiting time    DSU55        query            0.0209   Sec
+Residence time  DSU55        query            0.0329   Sec
+Waiting time    DSU55        query            0.0209   Sec
+
+Capacity        DSU56        query                 1   Servers
+Throughput      DSU56        query            0.5301   Visits/Sec
+In service      DSU56        query            0.6361   Users
+Utilization     DSU56        query           63.6088   Percent
+Queue length    DSU56        query            1.7449   Users
+Waiting line    DSU56        query            1.1088   Users
+Waiting time    DSU56        query            0.0209   Sec
+Residence time  DSU56        query            0.0329   Sec
+Waiting time    DSU56        query            0.0209   Sec
+
+Capacity        DSU57        query                 1   Servers
+Throughput      DSU57        query            0.5301   Visits/Sec
+In service      DSU57        query            0.6361   Users
+Utilization     DSU57        query           63.6088   Percent
+Queue length    DSU57        query            1.7449   Users
+Waiting line    DSU57        query            1.1088   Users
+Waiting time    DSU57        query            0.0209   Sec
+Residence time  DSU57        query            0.0329   Sec
+Waiting time    DSU57        query            0.0209   Sec
+
+Capacity        DSU58        query                 1   Servers
+Throughput      DSU58        query            0.5301   Visits/Sec
+In service      DSU58        query            0.6361   Users
+Utilization     DSU58        query           63.6088   Percent
+Queue length    DSU58        query            1.7449   Users
+Waiting line    DSU58        query            1.1088   Users
+Waiting time    DSU58        query            0.0209   Sec
+Residence time  DSU58        query            0.0329   Sec
+Waiting time    DSU58        query            0.0209   Sec
+
+Capacity        DSU59        query                 1   Servers
+Throughput      DSU59        query            0.5301   Visits/Sec
+In service      DSU59        query            0.6361   Users
+Utilization     DSU59        query           63.6088   Percent
+Queue length    DSU59        query            1.7449   Users
+Waiting line    DSU59        query            1.1088   Users
+Waiting time    DSU59        query            0.0209   Sec
+Residence time  DSU59        query            0.0329   Sec
+Waiting time    DSU59        query            0.0209   Sec
+
+Capacity        DSU60        query                 1   Servers
+Throughput      DSU60        query            0.5301   Visits/Sec
+In service      DSU60        query            0.6361   Users
+Utilization     DSU60        query           63.6088   Percent
+Queue length    DSU60        query            1.7449   Users
+Waiting line    DSU60        query            1.1088   Users
+Waiting time    DSU60        query            0.0209   Sec
+Residence time  DSU60        query            0.0329   Sec
+Waiting time    DSU60        query            0.0209   Sec
+
+Capacity        DSU61        query                 1   Servers
+Throughput      DSU61        query            0.5301   Visits/Sec
+In service      DSU61        query            0.6361   Users
+Utilization     DSU61        query           63.6088   Percent
+Queue length    DSU61        query            1.7449   Users
+Waiting line    DSU61        query            1.1088   Users
+Waiting time    DSU61        query            0.0209   Sec
+Residence time  DSU61        query            0.0329   Sec
+Waiting time    DSU61        query            0.0209   Sec
+
+Capacity        DSU62        query                 1   Servers
+Throughput      DSU62        query            0.5301   Visits/Sec
+In service      DSU62        query            0.6361   Users
+Utilization     DSU62        query           63.6088   Percent
+Queue length    DSU62        query            1.7449   Users
+Waiting line    DSU62        query            1.1088   Users
+Waiting time    DSU62        query            0.0209   Sec
+Residence time  DSU62        query            0.0329   Sec
+Waiting time    DSU62        query            0.0209   Sec
+
+Capacity        DSU63        query                 1   Servers
+Throughput      DSU63        query            0.5301   Visits/Sec
+In service      DSU63        query            0.6361   Users
+Utilization     DSU63        query           63.6088   Percent
+Queue length    DSU63        query            1.7449   Users
+Waiting line    DSU63        query            1.1088   Users
+Waiting time    DSU63        query            0.0209   Sec
+Residence time  DSU63        query            0.0329   Sec
+Waiting time    DSU63        query            0.0209   Sec
+
+Capacity        DSU64        query                 1   Servers
+Throughput      DSU64        query            0.5301   Visits/Sec
+In service      DSU64        query            0.6361   Users
+Utilization     DSU64        query           63.6088   Percent
+Queue length    DSU64        query            1.7449   Users
+Waiting line    DSU64        query            1.1088   Users
+Waiting time    DSU64        query            0.0209   Sec
+Residence time  DSU64        query            0.0329   Sec
+Waiting time    DSU64        query            0.0209   Sec
+
+Capacity        DSU65        query                 1   Servers
+Throughput      DSU65        query            0.5301   Visits/Sec
+In service      DSU65        query            0.6361   Users
+Utilization     DSU65        query           63.6088   Percent
+Queue length    DSU65        query            1.7449   Users
+Waiting line    DSU65        query            1.1088   Users
+Waiting time    DSU65        query            0.0209   Sec
+Residence time  DSU65        query            0.0329   Sec
+Waiting time    DSU65        query            0.0209   Sec
+
+Capacity        DSU66        query                 1   Servers
+Throughput      DSU66        query            0.5301   Visits/Sec
+In service      DSU66        query            0.6361   Users
+Utilization     DSU66        query           63.6088   Percent
+Queue length    DSU66        query            1.7449   Users
+Waiting line    DSU66        query            1.1088   Users
+Waiting time    DSU66        query            0.0209   Sec
+Residence time  DSU66        query            0.0329   Sec
+Waiting time    DSU66        query            0.0209   Sec
+
+Capacity        DSU67        query                 1   Servers
+Throughput      DSU67        query            0.5301   Visits/Sec
+In service      DSU67        query            0.6361   Users
+Utilization     DSU67        query           63.6088   Percent
+Queue length    DSU67        query            1.7449   Users
+Waiting line    DSU67        query            1.1088   Users
+Waiting time    DSU67        query            0.0209   Sec
+Residence time  DSU67        query            0.0329   Sec
+Waiting time    DSU67        query            0.0209   Sec
+
+Capacity        DSU68        query                 1   Servers
+Throughput      DSU68        query            0.5301   Visits/Sec
+In service      DSU68        query            0.6361   Users
+Utilization     DSU68        query           63.6088   Percent
+Queue length    DSU68        query            1.7449   Users
+Waiting line    DSU68        query            1.1088   Users
+Waiting time    DSU68        query            0.0209   Sec
+Residence time  DSU68        query            0.0329   Sec
+Waiting time    DSU68        query            0.0209   Sec
+
+Capacity        DSU69        query                 1   Servers
+Throughput      DSU69        query            0.5301   Visits/Sec
+In service      DSU69        query            0.6361   Users
+Utilization     DSU69        query           63.6088   Percent
+Queue length    DSU69        query            1.7449   Users
+Waiting line    DSU69        query            1.1088   Users
+Waiting time    DSU69        query            0.0209   Sec
+Residence time  DSU69        query            0.0329   Sec
+Waiting time    DSU69        query            0.0209   Sec
+
+Capacity        DSU70        query                 1   Servers
+Throughput      DSU70        query            0.5301   Visits/Sec
+In service      DSU70        query            0.6361   Users
+Utilization     DSU70        query           63.6088   Percent
+Queue length    DSU70        query            1.7449   Users
+Waiting line    DSU70        query            1.1088   Users
+Waiting time    DSU70        query            0.0209   Sec
+Residence time  DSU70        query            0.0329   Sec
+Waiting time    DSU70        query            0.0209   Sec
+
+Capacity        DSU71        query                 1   Servers
+Throughput      DSU71        query            0.5301   Visits/Sec
+In service      DSU71        query            0.6361   Users
+Utilization     DSU71        query           63.6088   Percent
+Queue length    DSU71        query            1.7449   Users
+Waiting line    DSU71        query            1.1088   Users
+Waiting time    DSU71        query            0.0209   Sec
+Residence time  DSU71        query            0.0329   Sec
+Waiting time    DSU71        query            0.0209   Sec
+
+Capacity        DSU72        query                 1   Servers
+Throughput      DSU72        query            0.5301   Visits/Sec
+In service      DSU72        query            0.6361   Users
+Utilization     DSU72        query           63.6088   Percent
+Queue length    DSU72        query            1.7449   Users
+Waiting line    DSU72        query            1.1088   Users
+Waiting time    DSU72        query            0.0209   Sec
+Residence time  DSU72        query            0.0329   Sec
+Waiting time    DSU72        query            0.0209   Sec
+
+Capacity        DSU73        query                 1   Servers
+Throughput      DSU73        query            0.5301   Visits/Sec
+In service      DSU73        query            0.6361   Users
+Utilization     DSU73        query           63.6088   Percent
+Queue length    DSU73        query            1.7449   Users
+Waiting line    DSU73        query            1.1088   Users
+Waiting time    DSU73        query            0.0209   Sec
+Residence time  DSU73        query            0.0329   Sec
+Waiting time    DSU73        query            0.0209   Sec
+
+Capacity        DSU74        query                 1   Servers
+Throughput      DSU74        query            0.5301   Visits/Sec
+In service      DSU74        query            0.6361   Users
+Utilization     DSU74        query           63.6088   Percent
+Queue length    DSU74        query            1.7449   Users
+Waiting line    DSU74        query            1.1088   Users
+Waiting time    DSU74        query            0.0209   Sec
+Residence time  DSU74        query            0.0329   Sec
+Waiting time    DSU74        query            0.0209   Sec
+
+Capacity        DSU75        query                 1   Servers
+Throughput      DSU75        query            0.5301   Visits/Sec
+In service      DSU75        query            0.6361   Users
+Utilization     DSU75        query           63.6088   Percent
+Queue length    DSU75        query            1.7449   Users
+Waiting line    DSU75        query            1.1088   Users
+Waiting time    DSU75        query            0.0209   Sec
+Residence time  DSU75        query            0.0329   Sec
+Waiting time    DSU75        query            0.0209   Sec
+
+Capacity        DSU76        query                 1   Servers
+Throughput      DSU76        query            0.5301   Visits/Sec
+In service      DSU76        query            0.6361   Users
+Utilization     DSU76        query           63.6088   Percent
+Queue length    DSU76        query            1.7449   Users
+Waiting line    DSU76        query            1.1088   Users
+Waiting time    DSU76        query            0.0209   Sec
+Residence time  DSU76        query            0.0329   Sec
+Waiting time    DSU76        query            0.0209   Sec
+
+Capacity        DSU77        query                 1   Servers
+Throughput      DSU77        query            0.5301   Visits/Sec
+In service      DSU77        query            0.6361   Users
+Utilization     DSU77        query           63.6088   Percent
+Queue length    DSU77        query            1.7449   Users
+Waiting line    DSU77        query            1.1088   Users
+Waiting time    DSU77        query            0.0209   Sec
+Residence time  DSU77        query            0.0329   Sec
+Waiting time    DSU77        query            0.0209   Sec
+
+Capacity        DSU78        query                 1   Servers
+Throughput      DSU78        query            0.5301   Visits/Sec
+In service      DSU78        query            0.6361   Users
+Utilization     DSU78        query           63.6088   Percent
+Queue length    DSU78        query            1.7449   Users
+Waiting line    DSU78        query            1.1088   Users
+Waiting time    DSU78        query            0.0209   Sec
+Residence time  DSU78        query            0.0329   Sec
+Waiting time    DSU78        query            0.0209   Sec
+
+Capacity        DSU79        query                 1   Servers
+Throughput      DSU79        query            0.5301   Visits/Sec
+In service      DSU79        query            0.6361   Users
+Utilization     DSU79        query           63.6088   Percent
+Queue length    DSU79        query            1.7449   Users
+Waiting line    DSU79        query            1.1088   Users
+Waiting time    DSU79        query            0.0209   Sec
+Residence time  DSU79        query            0.0329   Sec
+Waiting time    DSU79        query            0.0209   Sec
+
+Capacity        DSU80        query                 1   Servers
+Throughput      DSU80        query            0.5301   Visits/Sec
+In service      DSU80        query            0.6361   Users
+Utilization     DSU80        query           63.6088   Percent
+Queue length    DSU80        query            1.7449   Users
+Waiting line    DSU80        query            1.1088   Users
+Waiting time    DSU80        query            0.0209   Sec
+Residence time  DSU80        query            0.0329   Sec
+Waiting time    DSU80        query            0.0209   Sec
+
+Capacity        DSU81        query                 1   Servers
+Throughput      DSU81        query            0.5301   Visits/Sec
+In service      DSU81        query            0.6361   Users
+Utilization     DSU81        query           63.6088   Percent
+Queue length    DSU81        query            1.7449   Users
+Waiting line    DSU81        query            1.1088   Users
+Waiting time    DSU81        query            0.0209   Sec
+Residence time  DSU81        query            0.0329   Sec
+Waiting time    DSU81        query            0.0209   Sec
+
+Capacity        DSU82        query                 1   Servers
+Throughput      DSU82        query            0.5301   Visits/Sec
+In service      DSU82        query            0.6361   Users
+Utilization     DSU82        query           63.6088   Percent
+Queue length    DSU82        query            1.7449   Users
+Waiting line    DSU82        query            1.1088   Users
+Waiting time    DSU82        query            0.0209   Sec
+Residence time  DSU82        query            0.0329   Sec
+Waiting time    DSU82        query            0.0209   Sec
+
+Capacity        DSU83        query                 1   Servers
+Throughput      DSU83        query            0.5301   Visits/Sec
+In service      DSU83        query            0.6361   Users
+Utilization     DSU83        query           63.6088   Percent
+Queue length    DSU83        query            1.7449   Users
+Waiting line    DSU83        query            1.1088   Users
+Waiting time    DSU83        query            0.0209   Sec
+Residence time  DSU83        query            0.0329   Sec
+Waiting time    DSU83        query            0.0209   Sec
+
+Capacity        DSU84        query                 1   Servers
+Throughput      DSU84        query            0.5301   Visits/Sec
+In service      DSU84        query            0.6361   Users
+Utilization     DSU84        query           63.6088   Percent
+Queue length    DSU84        query            1.7449   Users
+Waiting line    DSU84        query            1.1088   Users
+Waiting time    DSU84        query            0.0209   Sec
+Residence time  DSU84        query            0.0329   Sec
+Waiting time    DSU84        query            0.0209   Sec
+
+Capacity        DSU85        query                 1   Servers
+Throughput      DSU85        query            0.5301   Visits/Sec
+In service      DSU85        query            0.6361   Users
+Utilization     DSU85        query           63.6088   Percent
+Queue length    DSU85        query            1.7449   Users
+Waiting line    DSU85        query            1.1088   Users
+Waiting time    DSU85        query            0.0209   Sec
+Residence time  DSU85        query            0.0329   Sec
+Waiting time    DSU85        query            0.0209   Sec
+
+Capacity        DSU86        query                 1   Servers
+Throughput      DSU86        query            0.5301   Visits/Sec
+In service      DSU86        query            0.6361   Users
+Utilization     DSU86        query           63.6088   Percent
+Queue length    DSU86        query            1.7449   Users
+Waiting line    DSU86        query            1.1088   Users
+Waiting time    DSU86        query            0.0209   Sec
+Residence time  DSU86        query            0.0329   Sec
+Waiting time    DSU86        query            0.0209   Sec
+
+Capacity        DSU87        query                 1   Servers
+Throughput      DSU87        query            0.5301   Visits/Sec
+In service      DSU87        query            0.6361   Users
+Utilization     DSU87        query           63.6088   Percent
+Queue length    DSU87        query            1.7449   Users
+Waiting line    DSU87        query            1.1088   Users
+Waiting time    DSU87        query            0.0209   Sec
+Residence time  DSU87        query            0.0329   Sec
+Waiting time    DSU87        query            0.0209   Sec
+
+Capacity        DSU88        query                 1   Servers
+Throughput      DSU88        query            0.5301   Visits/Sec
+In service      DSU88        query            0.6361   Users
+Utilization     DSU88        query           63.6088   Percent
+Queue length    DSU88        query            1.7449   Users
+Waiting line    DSU88        query            1.1088   Users
+Waiting time    DSU88        query            0.0209   Sec
+Residence time  DSU88        query            0.0329   Sec
+Waiting time    DSU88        query            0.0209   Sec
+
+Capacity        DSU89        query                 1   Servers
+Throughput      DSU89        query            0.5301   Visits/Sec
+In service      DSU89        query            0.6361   Users
+Utilization     DSU89        query           63.6088   Percent
+Queue length    DSU89        query            1.7449   Users
+Waiting line    DSU89        query            1.1088   Users
+Waiting time    DSU89        query            0.0209   Sec
+Residence time  DSU89        query            0.0329   Sec
+Waiting time    DSU89        query            0.0209   Sec
+
+Capacity        DSU90        query                 1   Servers
+Throughput      DSU90        query            0.5301   Visits/Sec
+In service      DSU90        query            0.6361   Users
+Utilization     DSU90        query           63.6088   Percent
+Queue length    DSU90        query            1.7449   Users
+Waiting line    DSU90        query            1.1088   Users
+Waiting time    DSU90        query            0.0209   Sec
+Residence time  DSU90        query            0.0329   Sec
+Waiting time    DSU90        query            0.0209   Sec
+
+Capacity        DSU91        query                 1   Servers
+Throughput      DSU91        query            0.5301   Visits/Sec
+In service      DSU91        query            0.6361   Users
+Utilization     DSU91        query           63.6088   Percent
+Queue length    DSU91        query            1.7449   Users
+Waiting line    DSU91        query            1.1088   Users
+Waiting time    DSU91        query            0.0209   Sec
+Residence time  DSU91        query            0.0329   Sec
+Waiting time    DSU91        query            0.0209   Sec
+
+Capacity        DSU92        query                 1   Servers
+Throughput      DSU92        query            0.5301   Visits/Sec
+In service      DSU92        query            0.6361   Users
+Utilization     DSU92        query           63.6088   Percent
+Queue length    DSU92        query            1.7449   Users
+Waiting line    DSU92        query            1.1088   Users
+Waiting time    DSU92        query            0.0209   Sec
+Residence time  DSU92        query            0.0329   Sec
+Waiting time    DSU92        query            0.0209   Sec
+
+Capacity        DSU93        query                 1   Servers
+Throughput      DSU93        query            0.5301   Visits/Sec
+In service      DSU93        query            0.6361   Users
+Utilization     DSU93        query           63.6088   Percent
+Queue length    DSU93        query            1.7449   Users
+Waiting line    DSU93        query            1.1088   Users
+Waiting time    DSU93        query            0.0209   Sec
+Residence time  DSU93        query            0.0329   Sec
+Waiting time    DSU93        query            0.0209   Sec
+
+Capacity        DSU94        query                 1   Servers
+Throughput      DSU94        query            0.5301   Visits/Sec
+In service      DSU94        query            0.6361   Users
+Utilization     DSU94        query           63.6088   Percent
+Queue length    DSU94        query            1.7449   Users
+Waiting line    DSU94        query            1.1088   Users
+Waiting time    DSU94        query            0.0209   Sec
+Residence time  DSU94        query            0.0329   Sec
+Waiting time    DSU94        query            0.0209   Sec
+
+Capacity        DSU95        query                 1   Servers
+Throughput      DSU95        query            0.5301   Visits/Sec
+In service      DSU95        query            0.6361   Users
+Utilization     DSU95        query           63.6088   Percent
+Queue length    DSU95        query            1.7449   Users
+Waiting line    DSU95        query            1.1088   Users
+Waiting time    DSU95        query            0.0209   Sec
+Residence time  DSU95        query            0.0329   Sec
+Waiting time    DSU95        query            0.0209   Sec
+
+Capacity        DSU96        query                 1   Servers
+Throughput      DSU96        query            0.5301   Visits/Sec
+In service      DSU96        query            0.6361   Users
+Utilization     DSU96        query           63.6088   Percent
+Queue length    DSU96        query            1.7449   Users
+Waiting line    DSU96        query            1.1088   Users
+Waiting time    DSU96        query            0.0209   Sec
+Residence time  DSU96        query            0.0329   Sec
+Waiting time    DSU96        query            0.0209   Sec
+
+Capacity        DSU97        query                 1   Servers
+Throughput      DSU97        query            0.5301   Visits/Sec
+In service      DSU97        query            0.6361   Users
+Utilization     DSU97        query           63.6088   Percent
+Queue length    DSU97        query            1.7449   Users
+Waiting line    DSU97        query            1.1088   Users
+Waiting time    DSU97        query            0.0209   Sec
+Residence time  DSU97        query            0.0329   Sec
+Waiting time    DSU97        query            0.0209   Sec
+
+Capacity        DSU98        query                 1   Servers
+Throughput      DSU98        query            0.5301   Visits/Sec
+In service      DSU98        query            0.6361   Users
+Utilization     DSU98        query           63.6088   Percent
+Queue length    DSU98        query            1.7449   Users
+Waiting line    DSU98        query            1.1088   Users
+Waiting time    DSU98        query            0.0209   Sec
+Residence time  DSU98        query            0.0329   Sec
+Waiting time    DSU98        query            0.0209   Sec
+
+Capacity        DSU99        query                 1   Servers
+Throughput      DSU99        query            0.5301   Visits/Sec
+In service      DSU99        query            0.6361   Users
+Utilization     DSU99        query           63.6088   Percent
+Queue length    DSU99        query            1.7449   Users
+Waiting line    DSU99        query            1.1088   Users
+Waiting time    DSU99        query            0.0209   Sec
+Residence time  DSU99        query            0.0329   Sec
+Waiting time    DSU99        query            0.0209   Sec
+
+Capacity        DSU100       query                 1   Servers
+Throughput      DSU100       query            0.5301   Visits/Sec
+In service      DSU100       query            0.6361   Users
+Utilization     DSU100       query           63.6088   Percent
+Queue length    DSU100       query            1.7449   Users
+Waiting line    DSU100       query            1.1088   Users
+Waiting time    DSU100       query            0.0209   Sec
+Residence time  DSU100       query            0.0329   Sec
+Waiting time    DSU100       query            0.0209   Sec
+
+
