@@ -17,10 +17,10 @@ Another example below is written in Python.
 **Overview:**	[What is PDQ?](http://www.perfdynamics.com/Tools/PDQ.html)
 
 **Languages:**	
-This release supports the [C](https://en.wikibooks.org/wiki/C_Programming)  
-(the native language of the PDQ library)  and 
-[R](http://www.perfdynamics.com/Tools/PDQ-R.html) languages only. 
-Example PDQ models in R can be found in pdq-qnm-pkg/interfaces/R/pdq/demo/
+This release only supports the [C](https://en.wikibooks.org/wiki/C_Programming) language 
+(the native language of the PDQ library)  and the very popular 
+[R](http://www.perfdynamics.com/Tools/PDQ-R.html) statistical language. 
+Example PDQ models in R can be found in the `pdq-qnm-pkg/interfaces/R/pdq/demo/` directory.
 
 The migration of [Python from 2 to 3](https://wiki.python.org/moin/Python2orPython3) 
 has introduced maintenance complications for PDQ. 
