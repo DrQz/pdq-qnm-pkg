@@ -66,12 +66,9 @@ int main(void) {
 	PDQ_SetDemand("Threads", "Requests", stime); 
 	PDQ_SetWUnit("Reqs");
 	PDQ_SetTUnit("Sec");
-	PDQ_Solve(EXACT); // can't be APPROX for FESC
+	PDQ_Solve(EXACT); // can't use APPROX method
 	PDQ_Report();
-
-	//printf("X = %6.4f\n", PDQ_GetThruput(TERM, "Requests"));
-	//printf("U = %6.4f\n", PDQ_GetUtilization("Threads",  "Requests", TERM));
-
+	
 }
 ```
 
