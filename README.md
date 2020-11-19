@@ -42,7 +42,10 @@ PDQ release 6.2.0 in order to remain compatible with the 2nd edition of the
 
 **Example:** 
 
-The following PDQ code, written in C, is a  model of an AWS cloud application that uses the new `CreateMultiserverClosed` function:
+The following PDQ code, written in C, is a  model of an AWS cloud application 
+that uses the new `CreateMultiserverClosed` function. You can read the background 
+behind this work in the paper entitled 
+[Linux-Tomcat Application Performance on Amazon AWS](https://arxiv.org/abs/1811.12341). 
 
 ```C
 #include <string.h> 
@@ -68,7 +71,6 @@ int main(void) {
 	PDQ_SetTUnit("Sec");
 	PDQ_Solve(EXACT); // can't use APPROX method
 	PDQ_Report();
-	
 }
 ```
 
