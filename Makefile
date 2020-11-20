@@ -1,11 +1,10 @@
 #  $Id$
 #
 #---------------------------------------------------------------------
-EXAMPLES := $(wildcard examples/ppa_1998/chap*)
 ECHO := /bin/echo
 ECHO_OPTION := -e
 ECHO_MESSAGE := "\n\nMaking chapter $@ PDQ files ...\n"
-.PHONY: all lib perl5 python R examples $(EXAMPLES)
+.PHONY: all lib perl5 python R 
 
 
 PDQ_VERSION=$(shell tools/getversion)
@@ -16,7 +15,7 @@ DISTRIB_PYTHON := $(DISTRIB_BUILD_TMP)/python
 DISTRIB_PERL5 := $(DISTRIB_BUILD_TMP)/perl5
 
 
-all:	lib perl5 R python examples
+all:	lib perl5 R python 
 
 lib:
 	make --directory=$@
@@ -30,7 +29,6 @@ python:
 R:
 	make --directory=interfaces $@
 
-examples: $(EXAMPLES)
 
 $(EXAMPLES):
 	@$(ECHO) $(ECHO_OPTION) $(ECHO_MESSAGE)
@@ -38,16 +36,11 @@ $(EXAMPLES):
 
 #---------------------------------------------------------------------
 
-test:
-	make --directory=examples test
-
-#---------------------------------------------------------------------
 
 clean:
 	-/bin/rm -f *~ 
 	make --directory=lib clean
 	make --directory=interfaces clean
-	make --directory=examples clean
 
 #---------------------------------------------------------------------
 
