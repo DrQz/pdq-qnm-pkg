@@ -1,5 +1,5 @@
 ###########################################################################
-#  Copyright (C) 1994 - 2018, Performance Dynamics Company
+#  Copyright (C) 1994--2021, Performance Dynamics Company
 #  
 #  This software is licensed as described in the file COPYING, which
 #  you should have received as part of this distribution. The terms
@@ -13,6 +13,7 @@
 # ANY KIND, either express or implied.
 ###########################################################################
 
+# Updated by NJG on Sat Nov 21 14:4i9:16 2020
 # Updated by NJG on Sun Dec 10 10:36:01 2017
 
 library(pdq)
@@ -42,7 +43,8 @@ pdq::SetWUnit("Cust")
 pdq::SetTUnit("Min")
 
 # Solve this queueing model (CANONical method for an open queue)
-pdq::Solve(CANON)
+# Use alternative STREAMING as of PDQ 7.0
+pdq::Solve(STREAMING) # was CANON in 6.2 (NJG on Sat Nov 21, 2020)
 
 # Generate a report
 pdq::Report()

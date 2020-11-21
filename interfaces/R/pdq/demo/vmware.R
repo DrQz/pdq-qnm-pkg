@@ -1,5 +1,5 @@
 ###########################################################################
-#  Copyright (C) 1994 - 2018, Performance Dynamics Company
+#  Copyright (C) 1994--2021, Performance Dynamics Company
 #  
 #  This software is licensed as described in the file COPYING, which
 #  you should have received as part of this distribution. The terms
@@ -13,6 +13,7 @@
 # ANY KIND, either express or implied.
 ###########################################################################
 
+# Updated by NJG on Sat Nov 21 14:42:55 2020
 # Updated by NJG on Sun Dec 10 13:39:56 2017
 # Updated by NJG on Monday, November 12, 2012
 # Ported to R PJP on Wed, Aug 1, 2012
@@ -26,6 +27,8 @@
 #
 # See PPDQ book http://www.perfdynamics.com/books.html
 # Section 5.9.2 Fair-Share Scheduler
+
+library(pdq) # NJG added explicitly on Nov 21, 2020
 
 VMguests    <- 8
 VMguestsHi  <- 3

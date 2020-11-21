@@ -1,5 +1,5 @@
 ###########################################################################
-#  Copyright (C) 1994 - 2018, Performance Dynamics Company
+#  Copyright (c) 1994--2021, Performance Dynamics Company
 #  
 #  This software is licensed as described in the file COPYING, which
 #  you should have received as part of this distribution. The terms
@@ -13,6 +13,7 @@
 # ANY KIND, either express or implied.
 ###########################################################################
 
+# Updated by NJG on Sat Nov 21 14:44:55 2020
 # Updated by NJG on Sun Dec 10 12:55:41 2017
 # Created by NJG on Wed, Apr 18, 2007
 # Ported to R by PJP on Thru, Aug 8, 2012
@@ -44,7 +45,7 @@ pdq::Init("Spam Farm Model")
 pdq::CreateOpen("Email", emailThruput)
 pdq::CreateMultiNode(cpusPerServer, "spamCan",  MSO, FCFS)
 pdq::SetDemand("spamCan", "Email", scannerTime)
-pdq::Solve(CANON)
+pdq::Solve(STREAMING) # NJG converted for PDQ 7.0 on Nov 21, 2020
 pdq::Report()
 
 qs <- pdq::GetQueueLength("spamCan", "Email", TRANS)
