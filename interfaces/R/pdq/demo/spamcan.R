@@ -42,7 +42,7 @@ ut <- NULL
 
 pdq::Init("Spam Farm Model")
 pdq::CreateOpen("Email", emailThruput)
-pdq::CreateMultiNode(cpusPerServer, "spamCan",  CEN, FCFS)
+pdq::CreateMultiNode(cpusPerServer, "spamCan",  MSO, FCFS)
 pdq::SetDemand("spamCan", "Email", scannerTime)
 pdq::Solve(CANON)
 pdq::Report()

@@ -1,3 +1,20 @@
+PDQ-R is an R package that allows R users to run pdq from inside the R statistics environment.
+
+If you do not have R installed, you can download it from:
+
+http://cran.r-project.org/
+
+Windows users can build PDQ-R need for the Windows version of R by downloading 
+and installing Rtools for Windows.  This is also on 
+
+https://cran.r-project.org/
+
+The package includes the following demos which can be accessed via:
+
+demo(demo,package='pdq')
+
+The demos provided are:
+
 bookstore.R
 	This PDQ model uses TWO multiserver nodess in tandem:
 	1. A delay center to represent browsing time without queueing
@@ -72,3 +89,5 @@ vmware.R
 	a single physical CPU with each VM guest defaulted to 1000 shares.
 	See PPDQ book http://www.perfdynamics.com/books.html
 	Section 5.9.2 Fair-Share Scheduler
+
+

@@ -72,7 +72,5 @@ pdq::Solve(APPROX)
 
 # This is a big model with 165 PDQ nodes
 # so we write the Report out to a file
-sink("DBcluster-rpt.txt")
 pdq::Report()
-sink()
 

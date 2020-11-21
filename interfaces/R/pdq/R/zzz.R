@@ -20,13 +20,13 @@ MAXCHARS = 64
 VOID = 0
 OPEN = 1
 CLOSED = 2
-MEM = 3
 
 # Nodes
-CEN = 4
-DLY = 5
+CEN = 3
+DLY = 4
+MSO = 5
+MSC = 6
 # Service disciplines
-MSQ = 6
 ISRV = 7
 FCFS = 8
 PSHR = 9
@@ -39,12 +39,17 @@ BATCH = 13
 EXACT = 14
 APPROX = 15
 CANON = 16
-APPROXMSQ=17
+APPROXMSO=17
+
+#Service Time and Demand Types
 VISITS = 18
 DEMAND = 19
+
+#Solver Methods
 EXACTMVA =  20 
 APPROXMVA =  21 
-STREAMING = 22 
+STREAMING = 22
+#Tolerance
 TOL = 0.0010
 
 loadModule("pdq",TRUE)

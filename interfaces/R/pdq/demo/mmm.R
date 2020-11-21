@@ -31,7 +31,7 @@ pdq::Init("M/M/m model")
 pdq::CreateOpen("work", arrivalRate)
 
 # Create the multi-server queueing center with 3 servers
-pdq::CreateMultiNode(3, "server", CEN, FCFS)
+pdq::CreateMultiNode(3, "server", MSO, FCFS)
 
 # Define the average time at each server
 pdq::SetDemand("server", "work", serviceTime)
