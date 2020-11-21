@@ -1,5 +1,5 @@
 ###########################################################################
-#  Copyright (C) 1994 - 2018, Performance Dynamics Company
+#  Copyright (c) 1994--2021, Performance Dynamics Company
 #  
 #  This software is licensed as described in the file COPYING, which
 #  you should have received as part of this distribution. The terms

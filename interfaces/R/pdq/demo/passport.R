@@ -1,5 +1,5 @@
 ###########################################################################
-#  Copyright (C) 1994 - 2018, Performance Dynamics Company
+#  Copyright (c) 1994--2021, Performance Dynamics Company
 #  
 #  This software is licensed as described in the file COPYING, which
 #  you should have received as part of this distribution. The terms
@@ -13,6 +13,7 @@
 # ANY KIND, either express or implied.
 ###########################################################################
 
+# Updated by NJG on Sat Nov 21 14:45:21 2020
 # Updated by NJG on Sun Dec 10 12:59:10 2017
 # $Id: passport2.R,v 1.2 2012/11/13 07:40:24 earl-lang Exp $
 
@@ -48,7 +49,7 @@ pdq::SetDemand("Window2", "Applicant", 600.0 * v2)
 pdq::SetDemand("Window3", "Applicant", 300.0 * v3)
 pdq::SetDemand("Window4", "Applicant", 60.0)
 
-pdq::Solve(CANON)
+pdq::Solve(STREAMING) # NJG converted for PDQ 7.0 on Nov 21, 2020
 pdq::Report()
 
 
