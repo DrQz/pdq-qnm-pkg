@@ -263,7 +263,7 @@ void PDQ_CreateNode(char *name, int device, int sched)
 	if (device == MSO && device < 0) { 
 		// interpret node as multiserver and
 		// number of servers must be positive integer
-		sprintf(s1, "Must specify as MSO node");
+		sprintf(s1, "Must be specify as MSO node");
 		errmsg(p, s1);
 	} 
 	
@@ -348,7 +348,7 @@ void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched)
 	} 
 	
 	if (device != MSO) { // must be as of PDQ 7.0
-		sprintf(s1, "Multinode \"%s\" must an MSO device", name);
+		sprintf(s1, "Multinode \"%s\" must be an MSO device", name);
 		errmsg(p, s1);
 	} 
 	
