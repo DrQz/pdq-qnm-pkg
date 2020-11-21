@@ -1,0 +1,16 @@
+DBcluster    A parallel DSS database cluster
+bookstore    Multiserver nodes
+diskoptim    PPDQ book Section 9.4.1 List 9.2
+ebiz         3-tier business application
+httpd        HTTP Analysis using PDQ
+mm1          Single server single open queue
+mm1n         Single Server single closed queue
+mmm          Multiserver single open queue (waiting line)
+moreq        Plot throughput curves for closed QNM with fixed Z and more 
+morez        Plot throughput curves for closed QNM with fixed number of
+             fixed number of queues
+passport     This model is a Jackson network with feedback
+spamcan      Simple M/M/4 Model
+vmware       Share allocation performance model based on measurements
+
+
