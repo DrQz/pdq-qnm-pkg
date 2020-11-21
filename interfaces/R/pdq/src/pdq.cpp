@@ -1,24 +1,17 @@
-// -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
-//
-// rcpp_module.cpp: Rcpp R/C++ interface class library -- Rcpp Module examples
-//
-// Copyright (C) 2010 - 2012  Dirk Eddelbuettel and Romain Francois
-//
-// This file is part of Rcpp.
-//
-// Rcpp is free software: you can redistribute it and/or modify it
-// under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-//
-// Rcpp is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Rcpp.  If not, see <http://www.gnu.org/licenses/>.
-
+*******************************************************************************/
+/*  Copyright (C) 1994-2021, Performance Dynamics Company                    */
+/*                                                                             */
+/*  This software is licensed as described in the file COPYING, which          */
+/*  you should have received as part of this distribution. The terms           */
+/*  are also available at http://www.perfdynamics.com/Tools/copyright.html.    */
+/*                                                                             */
+/*  You may opt to use, copy, modify, merge, publish, distribute and/or sell   */
+/*  copies of the Software, and permit persons to whom the Software is         */
+/*  furnished to do so, under the terms of the COPYING file.                   */
+/*                                                                             */
+/*  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY  */
+/*  KIND, either express or implied.                                           */
+/*******************************************************************************/
 #include <Rcpp.h>
 
 extern "C" {
