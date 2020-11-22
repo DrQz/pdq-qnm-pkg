@@ -45,6 +45,7 @@ Where _demo_ can be one of the following:
 	and Listing 12.3 httpd.pl
 
 * *mm1*
+
 	Single server single open queue (waiting line).
 	M/M/1 queue in PDQ. See [PPDQ book](http://www.perfdynamics.com/books.html)
 	Section 4.6.1 Single Cashier Queue
@@ -79,7 +80,7 @@ Where _demo_ can be one of the following:
 * *passport*
 
 	This model is a Jackson network with feedback.
-	See P[PPDQ book](http://www.perfdynamics.com/books.html)
+	See [PPDQ book](http://www.perfdynamics.com/books.html)
 	Section 5.5.4 Parallel Queues in Series
 	and Listing 5.1. Passport renewal model
 
