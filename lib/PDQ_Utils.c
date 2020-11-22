@@ -831,7 +831,7 @@ errmsg(char *pname, char *msg)
     //printf("ERROR in model: \'%s\' at procedure \'%s\': %s\n", model, pname, msg);
     // output to tty always 
 #ifndef __R_PDQ
-    fprintf(stderr, "ERROR in procedure \'%s\': %s\n", pname, msg);
+    fprintf(stderr, "\nERROR in procedure \'%s\': %s\n", pname, msg);
  
 	if (strchr(msg, '\012') && strlen(msg) != 1) {
 		PRINTF("\n");

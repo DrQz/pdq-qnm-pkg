@@ -34,6 +34,7 @@
  *                                               CreateOpenWorkload() and 
  *                                               CreateClosedWorkload()
  * Updated by NJG on Wed Nov 18, 2020        Check CreateMultiserverOpen is MSO devtype
+ * Updated by NJG on Sun Nov 22, 2020        Restored CreateMultiNode as MSO devtype
  *
  */
 
@@ -292,19 +293,97 @@ void PDQ_CreateNode(char *name, int device, int sched)
 //-------------------------------------------------------------------------
 // Function defined in Chapter 6 of the "Perl::PDQ" book
 // PDQ_CreateMultiNode will be deprecated after PDQ 7.0
-// and replaced by PDQ_CreateOpenMultiserver (see next function)
+// and replaced by PDQ_CreateMultiserverOpen (see next function)
 
+// void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
+// {
+// 	void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched);
+// 	
+// 	PDQ_CreateMultiserverOpen(servers, name, device, sched);
+// 
+// }  // PDQ_CreateMultiNode
+
+
+// PDQ_CreateMultiNode revised for PDQ 7.0
+// Updated by NJG on Sun Nov 22 11:30:58 PST 2020
 void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 {
-	void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched);
-	
-	PDQ_CreateMultiserverOpen(servers, name, device, sched);
+	extern NODE_TYPE *node;
+	extern char     s1[], s2[];
+	extern int      nodes;
+	extern int      PDQ_DEBUG;
+	char           *p = "PDQ_CreateMultiNode";
+	FILE*			out_fd;
 
-}  // PDQ_CreateMultiNode
+
+	if (PDQ_DEBUG) {
+		debug(p, "Entering");
+		out_fd = fopen("PDQ.out", "a");
+		fprintf(out_fd, "name : %s  device : %d  sched : %d\n", name, device, sched);
+		//The following should really be fclose
+		//		close(out_fd);
+		fclose(out_fd);
+	}
+	
+	if (streams == 0) {
+		sprintf(s1, "Must CreateOpen or CreateClosed queueing network first");
+		errmsg(p, s1);
+	}
+	
+	if (k > MAXNODES) {
+		sprintf(s1, "Allocating \"%s\" exceeds %d max PDQ queueing nodes",
+			name, MAXNODES);
+		errmsg(p, s1);
+	}
+
+	if (strlen(name) >= MAXCHARS) {
+		sprintf(s1, "Nodename \"%s\" is longer than %d characters",
+			name, MAXCHARS);
+		errmsg(p, s1);
+	}
+
+	strcpy(node[k].devname, name);
+
+	if (servers <= 0) { 
+		// number of servers must be positive integer
+		sprintf(s1, "Must specify a positive number of servers");
+		errmsg(p, s1);
+	} 
+	
+	if (device == CEN) { 
+		// MultiNode must be either MSO or MSC type
+		sprintf(s1, "Must specify either MSO or MSC device");
+		errmsg(p, s1);
+	} 
+	
+	node[k].servers = servers; // added by NJG on Sun Nov 22 13:09:10 PST 2020
+	node[k].devtype = device;
+	node[k].sched = sched;
+
+	if (PDQ_DEBUG) {
+		typetostr(s1, node[k].devtype);
+		typetostr(s2, node[k].sched);
+		PRINTF("\tNode[%d]: %s %s \"%s\"\n",
+		  k, s1, s2, node[k].devname);
+		resets(s1);
+		resets(s2);
+	};
+
+	if (PDQ_DEBUG)
+		debug(p, "Exiting");
+
+	k =  ++nodes;
+
+	//return nodes;
+	//return(0); // silence gcc warnings
+	
+}  /* PDQ_CreateMultiNode */
+
 
 
 
 // New version of PDQ_CreateMultiNode for PDQ 7.0 December 2018
+/* 
 void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched)
 {
 	extern NODE_TYPE *node;
@@ -372,12 +451,12 @@ void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched)
 	k = ++nodes;
 	
 }  // end of PDQ_CreateMultiserverOpen
-
+*/
 
 //-------------------------------------------------------------------------
 // Function for M/M/m/N/N FESC node
 // Added by NJG on Thursday, December 27, 2018
-
+/* 
 void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched) {
 // device type must be MSC = Multi-Server Closed in PDQ 7.0
 	
@@ -449,6 +528,7 @@ void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched)
 	k = ++nodes;
 	
 } // PDQ_CreateMultiserverClosed
+*/
 
 //-------------------------------------------------------------------------
 

@@ -25,16 +25,12 @@
 // Header file for the PDQ (Pretty Damn Quick) performance analyzer.
 // The following string constant is read by the GetVersion and Report()
 
-#define PDQ_VERSION    "Version 7.0.0 Build 111820"
+#define PDQ_VERSION    "Version 7.0.0 Build 112220"
 
 // Updated by NJG on Tuesday, May 24, 2016 from string literal to #define constant
 // thereby suppressing compiler warnings.
 // This string must not contain more than 26 characters in order to satisfy the 
 // predefined width in the PDQ Report() banner.
-// 
-// REVISIONS:
-// Updated by NJG on Tue Nov 17, 2020 - modified SYSTAT_TYPE data structure 
-
 
 
 //---- TYPES --------------------------------------------------------------
@@ -88,7 +84,8 @@
 #define EXACT  14		// for TERM, BATCH & FESC workloads (NJG on Nov 16, 2020)
 #define APPROX 15		// for large TERM and BATCH workloads
 #define CANON  16		// for TRANS workloads (OPEN network) 
-#define APPROXMSO 17	// for multiclass MSO workloads (NJG on May 8, 2016)
+#define APPROXMSO 17	// prep for multiclass MSO workloads (NJG on May 8, 2016)
+                        /// not implemented in PDQ 7
 
 // Service Time and Demand Types
 #define VISITS 18
@@ -189,7 +186,7 @@ typedef struct {
 
 // ************************************
 // Do NOT convert to 'void' or will conflict with SWIG compile
-// Updated for PDQ 7 by NJG on Saturday, May 21, 2016
+// Updated prep for PDQ 7.0 by NJG on Saturday, May 21, 2016
 // Converted all PDQ Create prototypes to void
 // ************************************
 
@@ -215,7 +212,8 @@ void     PDQ_CreateMultiNode(int servers, char *name, int device, int sched);
 
 // Define closed network multiserver FESC queueing device
 // Added by NJG on Thu Nov 12, 2020 for PDQ version 6.3.0
-void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched);
+// Removed by NJG on Sun Nov 22, 2020 in favor of CreateMultiNode() keying of MSC device
+//void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched);
 
 
 
@@ -285,7 +283,8 @@ void    PDQ_SetWUnit(char *unitName);
 void    PDQ_SetTUnit(char *unitName);
 
 void    PDQ_SetComment(char *comment);
-char   *PDQ_GetComment(void); // NJG Friday, June 3, 2016: Returned for python test and possible unit testing
+char   *PDQ_GetComment(void); // NJG Friday, June 3, 2016: 
+                              // Returned for python test and possible unit testing
 
 //----- Some utilities ----------------------------------------------------
 

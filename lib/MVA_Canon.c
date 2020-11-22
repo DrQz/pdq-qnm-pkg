@@ -49,15 +49,17 @@ void canonical(void)
     extern double     sumD;
     extern int        PDQ_DEBUG;
 
+
+	// ErlangR function is in PDQ_MServer.c
     extern double     ErlangR(double arrivrate, double servtime, int servers); 
-    // in PDQ_MServer2.c
+    
 
     int               k;
-    int               m; // servers in MSQ case
+    int               m = 1; // default servers in MSO device
     int               c = 0;
     double            X;
     double            Xsat;
-    double            Dsat = 0.0;
+    double            Dsat;
     double            Ddev;
     double            sumR[MAXSTREAMS];
     double            perServerU = 0.0;
@@ -74,7 +76,8 @@ void canonical(void)
         
         sumD = 0;
         
-        Dsat = 0.0; // Fix submitted by James Newsom, 23 Feb 2011
+        Dsat = 0.0; // default on each pass thru loop
+        // Fix submitted by James Newsom, 23 Feb 2011
         //Otherwise, stream index can be compared to wrong (old) device index
 
         X = job[c].trans->arrival_rate;
@@ -85,20 +88,19 @@ void canonical(void)
             // And today is the day: Sun May  8 18:34:27 PDT 2016
         	if (node[k].devtype == MSO && streams > 1) {
                 if (method == CANON || method == STREAMING) {
-                    //sprintf(s1, "Only single PDQ stream allowed with MSQ nodes.");
-                    sprintf(s1, "Must use APPROXMSQ method with multi-stream MSQ nodes.");
+                    sprintf(s1, "Only single PDQ stream allowed with MSO nodes.");
+                    // APPROXMSQ method not implemented in PDQ 7 --NJG
+                    //sprintf(s1, "Must use APPROXMSQ method with multi-stream MSO nodes.");
                     errmsg(p, s1);
                 }
             }
-            Ddev = node[k].demand[c];
+            Ddev = node[k].demand[c]; // from SetDemand in either CEN or MSO
             if (node[k].devtype == MSO) { // multiserver case
-                m = node[k].servers;	// contains m > 1 servers
-                Ddev /= m;
+                m = node[k].servers;	  // overrides m=1 initialized default
             }
-            if (Ddev > Dsat) {
-                Dsat = Ddev;
-                //Since we're about to fall out this k-loop
-                //keep device name in case of error msg
+            if (Ddev > Dsat) { // Dsat = 0 initially
+                Dsat = Ddev;   // updated value
+                // About to fall out this k-loop so keep devname in case of error msg
                 sprintf(satname, "%s", node[k].devname);
             }
             
@@ -106,13 +108,14 @@ void canonical(void)
             
         } // end of k-loop
         
-        Xsat = 1.0 / Dsat;
-        job[c].trans->saturation_rate = Xsat;
-
+        
         if (Dsat == 0) {
             sprintf(s1, "Dsat = %3.3f", Dsat);
             errmsg(p, s1);
         }
+
+        Xsat = m / Dsat; // includes multi-server case
+        job[c].trans->saturation_rate = Xsat;
 
         if (X > Xsat) {
         	getjob_name(jobname, c);

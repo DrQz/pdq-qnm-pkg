@@ -46,6 +46,7 @@ void PDQ_Solve(int meth)
     
     extern void       exact(void);        // in PDQ_Exact.c
     extern void       approx(void);       // in MVA_Approx.c
+    extern void       canonical(void);    // in MVA_Canon.c
     extern void       MServerFESC(void);  // in PDQ_MServer.c
 
     int               should_be_class;
@@ -126,7 +127,7 @@ void PDQ_Solve(int meth)
             }
             break;
         case APPROX:
-        case APPROXMVA:
+        case APPROXMVA: //alternative name in PDQ 7.0 
             if (job[0].network == OPEN) { // bail 
                 sprintf(s1,
                 "Network type \"%s\" is incompatible with \"%s\" solution method", "OPEN", "APPROX");
@@ -147,7 +148,7 @@ void PDQ_Solve(int meth)
             }
             break;
         case CANON:
-        case STREAMING:
+        case STREAMING:  //alternative name in PDQ 7.0 
             if (job[0].network != OPEN) {   // bail !! 
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
@@ -159,6 +160,13 @@ void PDQ_Solve(int meth)
             canonical(); // in MVA_Canon.c
             break;
         case APPROXMSO: // Added by NJG on May 8, 2016
+        				// Prep for multi-class MSO workloads
+        	// Updated by NJG on Sun Nov 22, 2020
+        	// Not implemented in PDQ 7
+        	sprintf(s1, "\nSolution method APPROXMSO is not implemented in PDQ 7");   // bail
+            errmsg(p, s1);
+            
+        	/* 
             if (job[0].network != OPEN) { 
                 typetostr(s2, job[0].network);
                 typetostr(s3, method);
@@ -168,6 +176,8 @@ void PDQ_Solve(int meth)
                 errmsg(p, s1);
             }
             canonical(); // in MVA_Canon.c
+            */
+            
             break;     
         default:
             typetostr(s3, method);
