@@ -4,7 +4,7 @@
 \docType{package}
 \title{PDQ (Pretty Damn Quick) Queueing Network Analyzer}
 \description{
-The PDQ performance analyzer uses queueing-theory concepts to represent computer systems and analyze their performance characteristics.  It is a queueing model solver, not a simulator. PDQ models consist of workloads or PDQ streams and queueing faciities or PDQ nodes.  Workloads are characterized by whether they are part of an open or closed network (i.e., whether or not new customers enter and leave the system) and by their volume (arrival rate for open networks or number and think time for closed networks).  PDQ nodes are the places in the network where requests are serviced and where queues can form. Nodes are characterized by their queue discipline, e.g., FCFS, the number of servers available, and the average service time or inverse service rate.
+The PDQ performance analyzer uses queueing-theory concepts to represent computer systems and analyze their performance characteristics.  It is a queueing model solver, not a simulator. PDQ models consist of workloads or PDQ streams and queueing faciities or PDQ nodes.  Workloads are characterized by whether they are part of an open or closed network (i.e., whether or not new customers enter and leave the system) and by their volume (arrival rate for open networks or number and think time for closed networks). PDQ nodes are the places in the network where requests are serviced and where queues can form. Nodes are characterized by their scheduling discipline, e.g., FCFS, the number of servers available, and the average service time or inverse service rate. The results of solving a particular queueing network can be displayed n the R console either, as selected performance metrics or, as a complete summary of the entire network.
 }
 \details{
 \tabular{ll}{
@@ -33,19 +33,14 @@ Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PD
 \examples{
 library(pdq)
 
-# Global model parameters
-arrivalRate <- 0.75
-serviceRate <- 1.0
-
-# Define the PDQ model
-Init("Grocery Checkout Lane")        # initialize PDQ
-CreateOpen("Customers", arrivalRate) # an open queueing network
-CreateNode("Cashier", CEN, FCFS)     # single server in FIFO order
-SetDemand("Cashier", "Customers", 1/serviceRate) # assign the service time
-SetWUnit("Bags")
-SetTUnit("Minutes")
-
-# Solve the PDQ model
-Solve(CANON)                         # Solve the model
-Report()                             # show summary in the R console
+# Define and solve a PDQ model
+Init("Grocery Checkout")               # Initialize PDQ and name the model
+CreateOpen("Customers", 0.75)          # Defines an open queueing network
+CreateNode("Cashier", CEN, FCFS)       # Single checkout queue serviced in FIFO order
+SetDemand("Cashier", "Customers", 1.0) # Assign the average service time
+SetWUnit("Bags")                       # Change reported work units
+SetTUnit("Min")                        # Change reported timebase units
+Solve(STREAMING)                       # Solve the open continuous workflow model
+Report()                               # Display performance metrics in the R console
 }
+

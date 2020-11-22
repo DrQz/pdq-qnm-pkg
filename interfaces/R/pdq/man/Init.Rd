@@ -21,25 +21,28 @@ Neil J. Gunther
 }
 
 \examples{
+# Solve successive PDQ model instances of 'users' as the independent variable xc 
+# to plot the dependent throughput variable yc
 library(pdq)
 users <- 100
-think <- 8e-3   # milliseconds as seconds
-stime <- 500e-3 # milliseconds as seconds
-work  <- "SQL query"
-xc <- 0
-yc <- 0
-# Solve sucessive model instances of 'users' to plot a throughput curve
+think <- 8e-3   # milliseconds
+stime <- 500e-3 # milliseconds
+work  <- "DB query"
+xc <- 0 # plot vector
+yc <- 0 # plot vector
+# THe following for-loop solves successive PDQ models
+# Each pass requires that the pdq::Init function be called
 for (i in 1:users) {
-    Init("Multiple Init Example")   # re-initialize PDQ variables
+    Init("Multiple Init Example")   # reinitialize PDQ variables
     CreateClosed(work, TERM, as.double(i), think) 
-    # create a 20-node PDQ queueing network
+    # create a PDQ queueing network with 20 queueing nodes
     for (j in 1:20) {
-        nname <- paste("node", sep="", j)   # add j index onto node name
+        nname <- paste("node", sep="", j)   # add j index to node name
         CreateNode(nname, CEN, FCFS)
         SetDemand(nname, work, stime)
     }
     Solve(EXACT)
-    # set up to plot throughput
+    # store PDQ results in plot vectors
     xc[i] <- as.double(i)
     yc[i] <- GetThruput(TERM, work)
 }

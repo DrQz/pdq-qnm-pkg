@@ -25,8 +25,8 @@ The only valid type of queue discipline is:
 }
 Solution methods:
 \itemize{
-\item{Single PDQ workstream}{ use the CANON solution method with Solve }
-\item{Multiple PDQ workstreams}{ use the APPROXMSQ solution method with Solve}
+\item{Single PDQ workstream}{ use the CANON or STREAMING solution method with Solve }
+\item{Multiple PDQ workstreams}{ use the APPROXMSO solution method with Solve}
 }
 }
 \references{
@@ -40,11 +40,11 @@ Neil J. Gunther
 }
 \examples{
 library(pdq)
-Init("CreateMultiNode Example")
+Init("Banking Example")
 CreateOpen("Customers", 0.75)
-CreateMultiNode(3, "Bank Tellers", CEN, FCFS)
-SetDemand("Bank Tellers", "Customers", 1.0)
-Solve(CANON)
+CreateMultiNode(3, "Tellers", MSO, FCFS)
+SetDemand("Tellers", "Customers", 1.0)
+Solve(STREAMING)
 Report()
 }
 \keyword{ Open }
