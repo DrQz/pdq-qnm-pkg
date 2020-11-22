@@ -2,3 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+*.o
+*.so
+*.a
+interfaces/R/pdq/src/*.c
+interfaces/R/pdq/src/*.h
