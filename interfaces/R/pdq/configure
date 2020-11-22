@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+if [ -f ../Makefile ]; then
+	(cd .. ; make set_up_package)
+fi

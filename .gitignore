@@ -6,3 +6,5 @@
 *.o
 *.so
 *.a
+interfaces/R/pdq/src/*.c
+interfaces/R/pdq/src/*.h
