@@ -13,22 +13,27 @@
 # ANY KIND, either express or implied.
 ###########################################################################
 #
-# mclass-open.pl 
+# cloud.r
 #
-# Test multiple open workloads in PDQ 7.0
-# Created by NJG on Sun Nov 22, 2020
+# PQD model of an AWS cloud application running on a Linux/Tomcat server.
+# This example exercises the new MSC solver in the PDQ 7 release.
+# Background for the development of this model can be found in the paper entitled,  
+# "Linux-Tomcat Application Performance on Amazon AWS" (2016)
+# PDF available online at https://arxiv.org/abs/1811.12341
+# Created by NJG on Sun Nov 23, 2020
 
 library(pdq)
 
-pdq::Init("Test Mclass Open")
+requests <- 400
+threads  <- 300
+stime    <- 0.444
 
-pdq::CreateOpen("Wflow1", 0.5)
-pdq::CreateOpen("Wflow2", 0.4)
+Init("Tomcat Cloud Model")  
+CreateClosed("Requests", BATCH, requests, 0.0)
+CreateMultiNode(threads, "TCthreads", MSC, FCFS) 
+SetDemand("TCthreads", "Requests", stime) 
+SetWUnit("Reqs")
+SetTUnit("Sec")
+Solve(EXACT)
+Report()
 
-pdq::CreateNode("Queue", CEN, FCFS)
-
-pdq::SetDemand("Queue", "Wflow1", 1.0)
-pdq::SetDemand("Queue", "Wflow2", 0.5)
-
-pdq::Solve(STREAMING)
-pdq::Report()
