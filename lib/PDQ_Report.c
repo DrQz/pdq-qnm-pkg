@@ -169,7 +169,7 @@ void PDQ_Report(void)
 
 	/* Show INPUT Parameters */
 	banner_dash();
-	banner_chars("    PDQ Model INPUTS");
+	banner_chars("      PDQ Model INPUTS");
 	banner_dash();
 	PRINTF("\n");
 	print_nodes();
@@ -301,7 +301,7 @@ void print_node_head(void)
 	extern JOB_TYPE *job;
 
 	char           *dmdfmt = "%-4s %-5s %-10s %-10s %-5s    %12s\n";
-	char           *visfmt = "%-4s %-5s %-10s %-10s %-5s %10s %10s %12s\n";
+	char           *visfmt = "%-4s %-5s %-10s %-10s %-5s %10s %10s %10s\n";
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, job[0].network);
@@ -414,7 +414,7 @@ void print_nodes(void)
 					);
 					break;
 				case VISITS:
-					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %8.4lf\n",
+					PRINTF("%-4s %-4s %-10s %-10s %-5s %10.4f %10.4lf %10.4lf\n",
 					  s1,
 					  s3,
 					  node[k].devname,
@@ -473,9 +473,9 @@ void print_job(int c, int should_be_class)
 		case TRANS:
 			print_job_head(TRANS);
 			PRINTF("%-10s     %10.4f    %10.4lf\n",
-		  	job[c].trans->name,
-		  	job[c].trans->arrival_rate,
-		  	job[c].trans->sys->minRT
+		  	job[c].trans->name,          // "Arrivals" 
+		  	job[c].trans->arrival_rate,  // "Rate"
+		  	job[c].trans->sys->minRT     // "Min R" 
 				);
 			break;
 		default:
@@ -507,7 +507,7 @@ void print_sys_head(void)
 
 	PRINTF("\n\n");
 	banner_dash();
-	banner_chars("   PDQ Model OUTPUTS");
+	banner_chars("     PDQ Model OUTPUTS");
 	banner_dash();
 	PRINTF("\n");
 	typetostr(s1, method);
@@ -548,8 +548,8 @@ void print_job_head(int should_be_class)
 		case TERM:
 			if (!trmhdr) {
 				PRINTF("\n");
-				PRINTF("Workload      Users        Demand      Thinktime\n");
-				PRINTF("--------      -----        ------      ---------\n");
+				PRINTF("Workload      Users        R minimum      Thinktime\n");
+				PRINTF("--------      -----        ---------      ---------\n");
 				trmhdr = TRUE;
 				bathdr = trxhdr = FALSE;
 			}
@@ -557,16 +557,16 @@ void print_job_head(int should_be_class)
 		case BATCH:
 			if (!bathdr) {
 				PRINTF("\n");
-				PRINTF("Workload       Jobs        Demand\n");
-				PRINTF("--------       ----        ------\n");
+				PRINTF("Workload       Jobs        R minimum\n");
+				PRINTF("--------       ----        ----------\n");
 				bathdr = TRUE;
 				trmhdr = trxhdr = FALSE;
 			}
 			break;
 		case TRANS:
 			if (!trxhdr) {
-				PRINTF("Arrivals          Rate           Demand\n");
-				PRINTF("--------       ----------       -------\n");
+				PRINTF("Arrivals          Rate          R minimum\n");
+				PRINTF("--------       ----------       ---------\n");
 				trxhdr = TRUE;
 				trmhdr = bathdr = FALSE;
 			}
@@ -600,22 +600,26 @@ void print_system_stats(int c, int should_be_class)
 	extern char      tUnit[];
 	extern char      wUnit[];
 	extern int       PDQ_DEBUG;
-	extern char      s1[];
+	extern char      s1[], s2[];
 	extern JOB_TYPE *job;
-	char            *p = "print_system_stats()";
+	char            *ps = "SYSTEM section: print_system_stats()";
+	char            *pw = "Workload section: print_system_stats()";
+	char            *pb = "Bounds section: print_system_stats()";
 
 	if (PDQ_DEBUG)
-		debug(p, "Entering");
+		debug(ps, "Entering");
 
 	if (!syshdr)
 		print_sys_head();
 
+    // This is the Workload section of SYSTEM Performance
+
 	switch (should_be_class) {
 		case TERM:
 			if (job[c].term->sys->thruput == 0) {
-				sprintf(s1, "\nX = %10.4f for stream = %d",
-		 	job[c].term->sys->thruput, c);
-				errmsg(p, s1);
+				getjob_name(s2, c);
+				sprintf(s1, "\nX = %6.4f TERM workname = %s", job[c].term->sys->thruput, s2);
+				errmsg(pw, s1);
 			}
 			PRINTF("Workload: \"%s\"\n", job[c].term->name);
 			PRINTF("Mean concurrency      %10.4lf    %s\n",
@@ -631,9 +635,9 @@ void print_system_stats(int c, int should_be_class)
 			break;
 		case BATCH:
 			if (job[c].batch->sys->thruput == 0) {
-				sprintf(s1, "X = %10.4f at N = %d",
-		 	job[c].batch->sys->thruput, c);
-				errmsg(p, s1);
+				getjob_name(s2, c);
+				sprintf(s1, "\nX = %6.4f for BATCH workname = %s", job[c].batch->sys->thruput, s2);
+				errmsg(pw, s1);
 			}
 			PRINTF("Workload: \"%s\"\n", job[c].batch->name);
 			PRINTF("Mean concurrency      %10.4lf    %s\n",
@@ -647,8 +651,9 @@ void print_system_stats(int c, int should_be_class)
 			break;
 		case TRANS:
 			if (job[c].trans->sys->thruput == 0) {
-				sprintf(s1, "X = %10.4f for N = %d", job[c].trans->sys->thruput, c);
-				errmsg(p, s1);
+				getjob_name(s2, c);
+				sprintf(s1, "\nX = %6.4f for workname = %s", job[c].trans->sys->thruput, s2);
+				errmsg(pw, s1);
 			}
 			PRINTF("Workload: \"%s\"\n", job[c].trans->name);
 			PRINTF("Number in system      %10.4lf    %s\n",
@@ -669,8 +674,9 @@ void print_system_stats(int c, int should_be_class)
 	switch (should_be_class) {
 		case TERM:
 			if (job[c].term->sys->thruput == 0) {
-				sprintf(s1, "X = %10.4f at N = %d", job[c].term->sys->thruput, c);
-				errmsg(p, s1);
+				getjob_name(s2, c);
+				sprintf(s1, "\nX = %6.4f for workname = %s", job[c].term->sys->thruput, s2);
+				errmsg(pb, s1);
 			}
 			// wUnit and tUnit defined in PDQ_Global.c
 			PRINTF("Max throughput        %10.4lf    %s/%s\n",
@@ -691,9 +697,9 @@ void print_system_stats(int c, int should_be_class)
 			break;
 		case BATCH:
 			if (job[c].batch->sys->thruput == 0) {
-				sprintf(s1, "X = %10.4f at N = %d",
-		 			job[c].batch->sys->thruput, c);
-				errmsg(p, s1);
+				getjob_name(s2, c);
+				sprintf(s1, "X = %6.4f for workname = %s", job[c].batch->sys->thruput, s2);
+				errmsg(pb, s1);
 			}
 			PRINTF("Max throughput        %10.4lf    %s/%s\n",
 		  		job[c].batch->sys->maxTP, wUnit, tUnit);
@@ -708,7 +714,7 @@ void print_system_stats(int c, int should_be_class)
 			break;
 		case TRANS:
 			PRINTF("Max throughput        %10.4lf    %s/%s\n",
-		  		job[c].trans->sys->maxTP, wUnit, tUnit);
+		  		job[c].trans->saturation_rate, wUnit, tUnit);
 			PRINTF("Min response          %10.4lf    %s\n",
 		  		job[c].trans->sys->minRT, tUnit);
 		  	break;
@@ -719,7 +725,7 @@ void print_system_stats(int c, int should_be_class)
 	PRINTF("\n");
 
 	if (PDQ_DEBUG)
-		debug(p, "Exiting");
+		debug(ps, "Exiting");
 }  /* print_system_stats */
 
 //-------------------------------------------------------------------------
@@ -738,8 +744,7 @@ void print_node_stats(int c, int should_be_class)
 	extern int        PDQ_DEBUG, demand_ext, nodes;
 	extern JOB_TYPE  *job;
 	extern NODE_TYPE *node;
-	extern char       s3[];
-	extern char       s4[];
+	extern char       s3[], s4[];
 
 	double            	X;
 	double            	devR;

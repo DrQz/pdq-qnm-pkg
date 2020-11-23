@@ -90,15 +90,14 @@ void MServerFESC(void) {
 	extern double     getjob_pop(int c);
 
 	int i, j;
-	int c, k;
-	//int c_fesc;
-	//int k_fesc;
+	int c; 
+	int k;
     int n;
     int m = 0;
     int N = 0;
     
-    double D = 0;      // service demand
-    double Z = 0;      // think time 
+    double D = 0;  // service demand
+    double Z = 0;  // think time 
     double R = 0;  // residence time 
 	double Q = 0;  // no. customers 
 	double X = 0;  // mean thruput
@@ -111,11 +110,11 @@ void MServerFESC(void) {
 	char            *p = "MServerFESC()";
     
 	
-	//Added by NJG on Saturday, December 29, 2018
+	// Added by NJG on Saturday, December 29, 2018
 	// HARDCORE: we only allow a single stream and node in PDQ 7.0
 	c = streams - 1;
 	if (c > 0) {
-		sprintf(s1, "Streams=%d but only single workload allowed with FESC network", c);
+		sprintf(s1, "Workload class = %d but only single workload allowed with FESC network", c);
 		errmsg(p, s1);
 	}
 	
@@ -127,8 +126,15 @@ void MServerFESC(void) {
 
     m = node[k].servers;  //Added by NJG on Saturday, December 29, 2018
     D = node[k].demand[c];
-    N = job[c].term->pop;
-    Z = job[c].term->think;
+    
+    // Updated by NJG on Sun, Nov 22, 2020 to catch BATCH workloads
+    if (job[c].should_be_class == TERM) {
+   		N = job[c].term->pop;
+    	Z = job[c].term->think;
+    } else {
+       	N = job[c].batch->pop;
+    	Z = 0;
+    }
         
 	if (N > MAX_USERS) {
         sprintf(s1, "N=%d cannot exceed %d\n", N, MAX_USERS);
@@ -150,7 +156,7 @@ void MServerFESC(void) {
 	// Solve the composite model
     for (n = 1; n <= N; n++) {
     
-        R = 0.0;                // reset
+        R = 0.0;  // reset
 
         // response time at the FESC
         for (j = 1; j <= n; j++) {
@@ -177,7 +183,7 @@ void MServerFESC(void) {
 	// This is the total utilization across all servers
     U = X * D;
     
-    // collect queueing results
+    // collect workload results
 	switch (job[c].should_be_class) {
 		case TERM:
 			job[c].term->sys->thruput = X;
@@ -201,7 +207,7 @@ void MServerFESC(void) {
 	node[k].servers  = m;
 	node[k].qsize[c] = Q;
 	node[k].resit[c] = R;
-	node[k].utiliz[c] = U / m;  // PDQ_Report is expecting per-server utilization
+	node[k].utiliz[c] = U / m;  // PDQ_Report expects per-server utilization
 	sumR[c] += node[k].resit[c];
 		
 } // end of MServerFESC 

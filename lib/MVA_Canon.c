@@ -149,10 +149,10 @@ void canonical(void)
                 errmsg(p, s1);
             }
 
-            switch (node[k].sched) {
-                case FCFS:
-                case PSHR:
-                case LCFS: // All these denote M/M/1 type nodes
+            switch (node[k].devtype) {
+                //case FCFS:
+                //case PSHR:
+                case CEN: // Queue service schedules
                     node[k].resit[c] = node[k].demand[c] / (1.0 - perServerU);
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
@@ -161,14 +161,14 @@ void canonical(void)
                         // Added by NJG on Monday, Apr 2, 2007
                         // Use exact solution
                         node[k].resit[c] = ErlangR(X, node[k].demand[c], m);
-                    } else { // multiple workload classes
+                    } else { // multiple workload streams
                         // Added by NJG on Saturday, May 7, 2016
                         // Use approximate solution
                         node[k].resit[c] = node[k].demand[c] / (1 - pow(perServerU,m));
                     }
                     node[k].qsize[c] = X * node[k].resit[c];
                     break;
-                case ISRV:
+                case DLY:
                     node[k].resit[c] = node[k].demand[c];
                     node[k].qsize[c] = node[k].utiliz[c];
                     break;
@@ -202,7 +202,7 @@ void canonical(void)
 
 }  // canonical
 
-//-------------------------------------------------------------------------
+
 
 double sumU(int k)
 {
@@ -223,12 +223,12 @@ double sumU(int k)
         // and multi-servers are currently incompatible.
          if (node[k].devtype == MSO) {
          	sum += node[k].utiliz[c];
-         } else {
+         } else {  // CEN device
          	sum += (job[c].trans->arrival_rate * node[k].demand[c]);
          }
     }
 
     return (sum);
+    
 }   // sumU 
 
-//-------------------------------------------------------------------------

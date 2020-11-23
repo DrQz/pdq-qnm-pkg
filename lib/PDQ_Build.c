@@ -51,8 +51,8 @@
 
 //-------------------------------------------------------------------------
 // Global loop counters used to index all procedures in this module.
-static int      k = 0;
 static int      c = 0;
+static int      k = 0;
 
 //----- Prototypes of internal functions ----------------------------------
 
@@ -382,154 +382,6 @@ void PDQ_CreateMultiNode(int servers, char *name, int device, int sched)
 
 
 
-// New version of PDQ_CreateMultiNode for PDQ 7.0 December 2018
-/* 
-void PDQ_CreateMultiserverOpen(int servers, char *name, int device, int sched)
-{
-	extern NODE_TYPE *node;
-	extern char     s1[], s2[];
-	extern int      nodes;
-	extern int      PDQ_DEBUG;
-    
-	char           *p = "PDQ_CreateMultiserverOpen";
-
-	FILE*			out_fd;
-
-	if (PDQ_DEBUG)
-	{
-		debug(p, "Entering");
-		out_fd = fopen("PDQ.out", "a");
-		fprintf(out_fd, "name : %s  device : %d  sched : %d\n", name, device, sched);
-		//The following should really be fclose
-		//		close(out_fd);
-		fclose(out_fd);
-	}
-
-	if (k > MAXNODES) {
-		sprintf(s1, "Allocating \"%s\" exceeds %d max nodes",
-			name, MAXNODES);
-		errmsg(p, s1);
-	}
-
-	if (strlen(name) >= MAXCHARS) {
-		sprintf(s1, "Nodename \"%s\" is longer than %d characters",
-			name, MAXCHARS);
-		errmsg(p, s1);
-	}
-
-	strcpy(node[k].devname, name);
-
-	
-	if (servers <= 0) { 
-		// number of servers must be positive integer
-		sprintf(s1, "Must specify a positive number of servers");
-		errmsg(p, s1);
-	} 
-	
-	if (device != MSO) { // must be as of PDQ 7.0
-		sprintf(s1, "Multinode \"%s\" must be an MSO device", name);
-		errmsg(p, s1);
-	} 
-	
-	node[k].devtype = device;
-	node[k].sched   = sched;
-	node[k].servers = servers; // Added by NJG on Dec 29, 2018
-
-	if (PDQ_DEBUG) {
-		typetostr(s1, node[k].devtype);
-		typetostr(s2, node[k].sched);
-		PRINTF("\tNode[%d]: %s %s \"%s\"\n",
-		  k, s1, s2, node[k].devname);
-		resets(s1);
-		resets(s2);
-	};
-
-	if (PDQ_DEBUG)
-		debug(p, "Exiting");
-
-    // update global node count
-	k = ++nodes;
-	
-}  // end of PDQ_CreateMultiserverOpen
-*/
-
-//-------------------------------------------------------------------------
-// Function for M/M/m/N/N FESC node
-// Added by NJG on Thursday, December 27, 2018
-/* 
-void PDQ_CreateMultiserverClosed(int servers, char *name, int device, int sched) {
-// device type must be MSC = Multi-Server Closed in PDQ 7.0
-	
-	extern NODE_TYPE *node;
-	extern char     s1[], s2[];
-	extern int      nodes;
-	extern int      PDQ_DEBUG;
-	
-	FILE*			out_fd;
-    
-	char           *p = "PDQ_CreateMultiserverClosed";
-    
-
-	if (PDQ_DEBUG)
-	{
-		debug(p, "Entering");
-		out_fd = fopen("PDQ.out", "a");
-		fprintf(out_fd, "name : %s  device : %d  sched : %d\n", name, device, sched);
-		//The following should really be fclose
-		//		close(out_fd);
-		fclose(out_fd);
-	}
-	
-	if (streams > 1) {
-		sprintf(s1, "Only single workload allowed with CreateMultiserverClosed()\n");
-		errmsg(p, s1);
-	} 
-
-	if (k > 1) {
-		sprintf(s1, "Allocating \"%s\" exceeds %d max nodes", name, MAXNODES);
-		errmsg(p, s1);
-	}
-
-	if (strlen(name) >= MAXCHARS) {
-		sprintf(s1, "Nodename \"%s\" is longer than %d characters",
-			name, MAXCHARS);
-		errmsg(p, s1);
-	}
-
-	strcpy(node[k].devname, name);
-
-	if (servers <= 0) { 
-		// number of servers must be positive integer
-		sprintf(s1, "Must specify a positive number of servers");
-		errmsg(p, s1);
-	} 
-	
-	// Added by NJG on Dec 29, 2018
-	// MSC node type is the token that invokes the FESC solver 
-	// MServerFESC() function internally from PDQ_MServer.c
-	// No explicit FESC type is needed
-	node[k].devtype = device;  // must be MSC as of PDQ 7.0
-	node[k].sched   = sched;   // usual default FCFS 
-	node[k].servers = servers;
-
-	if (PDQ_DEBUG) {
-		typetostr(s1, node[k].devtype);
-		typetostr(s2, node[k].sched);
-		PRINTF("\tNode[%d]: %s %s \"%s\"\n",
-		  k, s1, s2, node[k].devname);
-		resets(s1);
-		resets(s2);
-	};
-
-	if (PDQ_DEBUG)
-		debug(p, "Exiting");
-
-    // update global node count
-	k = ++nodes;
-	
-} // PDQ_CreateMultiserverClosed
-*/
-
 //-------------------------------------------------------------------------
 
 // New for PDQ 7.0 - placeholder for now
@@ -635,11 +487,21 @@ void PDQ_CreateWorkloadOpen(char *name, double lambdak)
 }
 
 
+
+
 // This original function will be deprecated beyond PDQ 7.0 
 void PDQ_CreateOpen(char *name, double lambda)
 {
+	
+	// debugging stuff ...
+	//extern char     s1[];
+	//char           *p = "PDQ_CreateOpen()";
+	//sprintf(s1, "\nlambda = %6.4f\n", lambda);
+	//errmsg(p, s1);
+
     int dump; //no longer return integer stream count this way
     dump = PDQ_CreateOpen_p(name, &lambda);
+    
 }
 
 //-------------------------------------------------------------------------
@@ -652,6 +514,8 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 	extern char     wUnit[];
 	extern int	    PDQ_DEBUG;
 	FILE           *out_fd;
+	char           *p = "PDQ_CreateOpen_p()";
+
 
 	if (PDQ_DEBUG)
 	{
@@ -665,9 +529,9 @@ int PDQ_CreateOpen_p(char *name, double *lambda)
 	if (strlen(name) > MAXCHARS) {
 		sprintf(s1, "Nodename \"%s\" is longer than %d characters",
 			name, MAXCHARS);
-		errmsg("PDQ_CreateOpen()", s1);
+		errmsg(p, s1);
 	}
-
+	
 	create_transaction(OPEN, name, *lambda);
 	
 	// Set default units 
@@ -841,8 +705,7 @@ void PDQ_SetTUnit(char* unitName)
 //  Internal Functions 
 //*************************************
 
-
-void create_term_stream(int circuit, char *label, double pop, double think)
+void create_term_stream(int net, char *label, double pop, double think)
 {
 	extern JOB_TYPE *job;
 	extern char     s1[];
@@ -852,10 +715,10 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
-    // 'c' is a global variable 
+    // 'c' is global to this module 
 	strcpy(job[c].term->name, label);
 	job[c].should_be_class = TERM;
-	job[c].network = circuit;
+	job[c].network = net;
 	job[c].term->think = think;
 	job[c].term->pop = pop;
 
@@ -877,8 +740,7 @@ void create_term_stream(int circuit, char *label, double pop, double think)
 
 //-------------------------------------------------------------------------
 
-
-void create_batch_stream(int net, char* label, double number)
+void create_batch_stream(int net, char* label, double jobs)
 {
 	extern JOB_TYPE *job;
 	extern char     s1[];
@@ -888,13 +750,15 @@ void create_batch_stream(int net, char* label, double number)
 	if (PDQ_DEBUG)
 		debug(p, "Entering");
 
-	/***** using global value of n *****/
+	if (net != CLOSED) {
+		errmsg(p, "Must use CreateClosed to create workload stream\n");
+	}
 
+	// 'c' is global to this module 
 	strcpy(job[c].batch->name, label);
-
 	job[c].should_be_class = BATCH;
-	job[c].network = net;
-	job[c].batch->pop = number;
+	job[c].network = net;  
+	job[c].batch->pop = jobs;
 
 	if (PDQ_DEBUG) {
 		typetostr(s1, job[c].should_be_class);
@@ -908,9 +772,9 @@ void create_batch_stream(int net, char* label, double number)
 
 }  // create_batch_stream
 
+
 //-------------------------------------------------------------------------
-// Subroutines
-//-------------------------------------------------------------------------
+
 void create_transaction(int net, char* label, double lambda)
 {
 	extern JOB_TYPE *job;
@@ -940,5 +804,4 @@ void writetmp(FILE* fp, char* s)
 	PRINTF("%s", s);
 }
 
-//-------------------------------------------------------------------------
 

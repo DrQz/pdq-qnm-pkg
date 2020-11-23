@@ -25,7 +25,7 @@
 // Header file for the PDQ (Pretty Damn Quick) performance analyzer.
 // The following string constant is read by the GetVersion and Report()
 
-#define PDQ_VERSION    "Version 7.0.0 Build 112220"
+#define PDQ_VERSION    "Version 7.0.0 Build 112320"
 
 // Updated by NJG on Tuesday, May 24, 2016 from string literal to #define constant
 // thereby suppressing compiler warnings.
@@ -68,7 +68,7 @@
 #define MSC     6                /* Multi-Server Closed M/M/m/N/N uses FESC algorithm */
 
 
-// Queueing Disciplines
+// Service Schedule Types
 #define ISRV    7                /* infinite server */
 #define FCFS    8                /* first-come first-serve */
 #define PSHR    9                /* processor sharing */
