@@ -12,6 +12,6 @@ morez           Plot throughput curves for closed QNM with fixed number of
 passport        This model is a Jackson network with feedback
 spamcan         Simple M/M/4 Model
 vmware          Share allocation performance model based on measurements
-mclass_closed   Example of multiple workloads in CLOSED network
-mclass_open     Example of multiple open workloads
+allen           Example of multiple workloads in CLOSED network
+multiwo         Example of multiple open workloads in PDQ 7.0
 
