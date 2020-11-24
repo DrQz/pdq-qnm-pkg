@@ -42,8 +42,9 @@ PDQ release 6.2.0 in order to remain compatible with the 2nd edition of the
 
 **Example:** 
 
-The following PDQ code, written in R, is a  model of an AWS cloud application 
-that uses the new `CreateMultiserverClosed` function. You can read the background 
+The following PDQ code, written in R, is a model of an AWS cloud application 
+implemented using the `CreateMultiNode` function along with the new `MSC` option for solving a 
+multiserver queue that services a finite number of user requests. You can read the background 
 to this PDQ model in the paper entitled:  
 [Linux-Tomcat Application Performance on Amazon AWS](https://arxiv.org/abs/1811.12341). 
 
