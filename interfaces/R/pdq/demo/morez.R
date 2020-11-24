@@ -12,8 +12,14 @@
 #  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF 
 # ANY KIND, either express or implied.
 ###########################################################################
-
-# Updated by NJG on Sun Dec 10 10:55:10 2017
+#
+# morez.R
+#
+# Uses the base plot package to show graphically how the PDQ throughput 
+# varies with increasing thinktime (Z).
+#
+# Updated by NJG on Sun Nov 22, 2020
+# Updated by NJG on Sun Dec 10, 2017
 # Created by NJG on Fri Feb 27, 2009
 
 library(pdq)

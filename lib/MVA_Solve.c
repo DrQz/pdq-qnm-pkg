@@ -89,14 +89,14 @@ void PDQ_Solve(int meth)
     switch (method) {
         case EXACT:
         case EXACTMVA:
-            if (job[0].network == OPEN) {
+            if (job[0].network == OPEN) { // shouldn't be here!
                 sprintf(s1,
                    "Network class \"%s\" is incompatible with \"%s\" solution method",
                     "OPEN", "EXACT");
                 errmsg(p, s1);
             }
             
-			// Call the relevant solver function
+			// Call the relevant solver function based on workload class
 			// Updated by NJG on Mon Nov 16, 2020 to include MServerFESC call
             switch (job[0].should_be_class) {
                 case TERM:
@@ -112,15 +112,15 @@ void PDQ_Solve(int meth)
                    		"Queueing node type \"%s\" is incompatible with \"%s\" solution method",
                     	"DLY", "EXACT");
                 		errmsg(p, s1);
-                	}
+                	}	
+                	
 					// Added by NJG on Sun Nov 15, 2020
 					if (node[0].devtype == MSC) {
-						// MSC queue devtype invokes 'MServerFESC' MVA   
-						MServerFESC(); // in PDQ_MServer.c 
-					} else {
-						// CEN queue devtype invokes 'exact' MVA  
-						exact(); // in PDQ_Exact.c
-					}
+						// MSC devtype invokes FESC MVA in PDQ_MServer.c 
+						MServerFESC();
+					} else { // CEN devtype invokes standard MVA in PDQ_Exact.c
+						exact();
+					} 
                     break;
                 default:
                     break;
@@ -166,17 +166,7 @@ void PDQ_Solve(int meth)
         	sprintf(s1, "\nSolution method APPROXMSO is not implemented in PDQ 7");   // bail
             errmsg(p, s1);
             
-        	/* 
-            if (job[0].network != OPEN) { 
-                typetostr(s2, job[0].network);
-                typetostr(s3, method);
-                sprintf(s1,
-                        "Network should_be_class \"%s\" is incompatible with \"%s\" method",
-                        s2, s3);   // bail
-                errmsg(p, s1);
-            }
-            canonical(); // in MVA_Canon.c
-            */
+            // Future code will go here
             
             break;     
         default:
@@ -184,7 +174,8 @@ void PDQ_Solve(int meth)
             sprintf(s1, "Unknown  method \"%s\"", s3);
             errmsg(p, s1);
             break;
-    };
+            
+    }; // end of method switch
 
 
     /***********************************/
@@ -200,8 +191,9 @@ void PDQ_Solve(int meth)
 
             demand = node[k].demand[c];
 
-            if (node[k].sched == ISRV && job[c].network == CLOSED)
+            if (node[k].sched == ISRV && job[c].network == CLOSED) {
                 demand /= (should_be_class == TERM) ? job[c].term->pop : job[c].batch->pop;
+            }
 
 			// Find largest demand across all nodes
             if (demand > maxD) {
@@ -213,7 +205,7 @@ void PDQ_Solve(int meth)
 			// Added by NJG on Mon, Apr 2, 2007
 			// Find largest thruput across all nodes and multinodes
 			if (node[k].devtype == MSO) {
-				mservers = node[k].servers; // contains number of servers
+				mservers = node[k].servers; // number of servers
 				maxXX = mservers / demand;
             } else {
                 maxXX = 1 / demand;
@@ -224,7 +216,7 @@ void PDQ_Solve(int meth)
                 maxTP = maxXX;
 			}
             
-        }   // loop over k
+        }   // end k-loop
         
         
         if(job[c].network == CLOSED && node[k].devtype == MSO) { //bail !!

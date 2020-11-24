@@ -12,7 +12,13 @@
 #  This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF 
 # ANY KIND, either express or implied.
 ###########################################################################
-
+#
+# moreq.R
+#
+# Uses the base plot package to show graphically how the PDQ throughput 
+# varies with increasing number of queues.
+#
+# Updated by NJG on Sun Nov 22, 2020
 # Updated by NJG on Sun Dec 10 12:19:58 2017
 # Created by NJG on Fri Feb 27, 2009
 
@@ -26,7 +32,7 @@ library(pdq)
 clients  <- 200
 think    <- 8   * 1e-3 # ms as seconds
 stime    <- 500 * 1e-3 # ms as seconds
-work     <- "w"
+work     <- "tasks"
 
 for(k in c(1, 20, 50)) {
   xc <- 0 # prudent to reset these
