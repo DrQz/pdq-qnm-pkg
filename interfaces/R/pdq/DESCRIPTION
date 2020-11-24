@@ -2,7 +2,7 @@ Package: pdq
 Type: Package
 Title: PDQ
 Version: 7.0-0
-Date: 2016-05-21
+Date: 2020-11-21
 Author: Neil Gunther <njgunther@perfdynamics.com>, with
  contributions from Paul Puglia <pjpuglia@sourceforge.net>
 Maintainer: Neil Gunther <njgunther@perfdynamics.com>, with
@@ -14,4 +14,4 @@ URL: http://www.perfdynamics.com/Tools/PDQ.html,
 Depends: methods, Rcpp (>= 0.10.2)
 LinkingTo: Rcpp
 NeedsCompilation: yes
-Packaged: 2016-05-21 23:32:05 UTC; puglia
+Packaged: 2020-11-21 23:32:05 UTC; puglia

@@ -13,7 +13,7 @@
 # ANY KIND, either express or implied.
 ###########################################################################
 #
-# mclass-open.pl 
+# mclass_open.R 
 #
 # Test multiple open workloads in PDQ 7.0
 # Created by NJG on Sun Nov 22, 2020

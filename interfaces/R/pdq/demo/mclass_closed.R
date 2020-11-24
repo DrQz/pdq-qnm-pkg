@@ -13,7 +13,7 @@
 # ANY KIND, either express or implied.
 ###########################################################################
 #
-# mclass-closed.r
+# mclass_closed.R
 #
 # Test multiple workloads in CLOSED network.
 # Based on Arnold Allen's book Example 6.3.4, p.413

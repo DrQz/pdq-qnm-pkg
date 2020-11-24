@@ -146,16 +146,7 @@ double GetThruMax(int should_be_class, std::string pdq_wname) {
 
 }
 
-/* double GetTotalDemand(int should_be_class, string pdq_wname) {
-    char *wname = new char[ pdq_wname.size() +1 ];
-    double result;
-    std::copy(pdq_wname.begin(), pdq_wname.end(),wname);
-    wname[pdq_wname.size()] = '\0';
-    result = PDQ_GetTotalDemand(should_be_class,wname);
-    delete[] wname;                          
-    return(result);
 
-    } */
 
 void Init( std::string pdq_name ) {
     char *name = new char[ pdq_name.size() +1 ];
@@ -275,7 +266,6 @@ RCPP_MODULE(pdq){
     function( "GetThruMax", &GetThruMax, 
               List::create(_["class"],_["wname"]),
               "documentation for GetThruMax ");
-    //    function( "GetTotalDemand", &GetTotalDemand, "documentation for GetTotalDemand ");
     function( "Init", &Init,
               List::create(_["name"]),
               "documentation for Init ");
