@@ -103,11 +103,12 @@ Where _demo_ can be one of the following:
 * *allen*  
 
    Example of multiple workloads in CLOSED network.
-   Based on Arnold Allen's book Example 6.3.4, p.413
+   Based on [Arnold Allen's book](https://www.amazon.com/Probability-Statistics-Queueing-Scientific-Computing/dp/0120510510) 
+   Example 6.3.4, p.413
    
 * *multiwo*
 
   Example of multiple open workloads in PDQ 7.0
-  Taken from Example 7.2 in QSP book p.138
+  Taken from Example 7.2 in [QSP book](https://homes.cs.washington.edu/~lazowska/qsp/) p.138
    
 
