@@ -24,16 +24,32 @@
 
 library(pdq)
 
-requests <- 400
-threads  <- 300
-stime    <- 0.444
+requests <- seq(10, 500, 20) # from the Internet
+threads  <- 300   # max threads under auto-scale policy
+stime    <- 0.444 # measured service time in seconds
+xx       <- NULL  # modeled load point for plot
+yx       <- NULL  # corresponding throughput 
 
-Init("Tomcat Cloud Model")  
-CreateClosed("Requests", BATCH, requests, 0.0)
-CreateMultiNode(threads, "TCthreads", MSC, FCFS) 
-SetDemand("TCthreads", "Requests", stime) 
-SetWUnit("Reqs")
-SetTUnit("Sec")
-Solve(EXACT)
-Report()
+for (i in 1:length(requests)) {
+  pdq::Init("")  
+  pdq::CreateClosed("Requests", BATCH, requests[i], 0.0)
+  pdq::CreateMultiNode(threads, "Threads", MSC, FCFS) 
+  pdq::SetDemand("Threads", "Requests", stime) 
+  pdq::SetWUnit("Reqs")
+  pdq::Solve(EXACT)
+  
+  xx[i] <- requests[i]
+  yx[i] <- pdq::GetThruput(BATCH, "Requests")
+}
+
+plot(xx, yx, type="b", col="blue",
+     ylim=c(0,800), 
+     main="AWS-Tomcat Cloud Model",
+     xlab="Tomcat threads", ylab="Throughput (RPS"
+)
+abline(v=max(threads), h=max(yx), col="red")
+text(150, max(yx)+25, 
+     paste(format(max(yx), digits=5), "RPS at AWS Auto Scaling"), 
+     cex=0.85
+     )
 
