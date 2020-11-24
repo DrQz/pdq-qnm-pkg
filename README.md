@@ -42,36 +42,25 @@ PDQ release 6.2.0 in order to remain compatible with the 2nd edition of the
 
 **Example:** 
 
-The following PDQ code, written in C, is a  model of an AWS cloud application 
+The following PDQ code, written in R, is a  model of an AWS cloud application 
 that uses the new `CreateMultiserverClosed` function. You can read the background 
-behind this work in the paper entitled 
+to this PDQ model in the paper entitled:  
 [Linux-Tomcat Application Performance on Amazon AWS](https://arxiv.org/abs/1811.12341). 
 
-```C
-#include <string.h> 
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <math.h>
-#include "PDQ_Lib.h"  
+```R
+library(pdq)
 
-int main(void) {
+requests <- 400;   # user load
+threads  <- 300;   # tomcat threads
+stime    <- 0.444; # measured service time
 
-	int      requests = 400;
-	int      threads  = 300;
-	float    stime    = 0.444;
-	float    think    = 0.0;
-
-	PDQ_Init("AWS-Tomcat Cloud Model");  
-	PDQ_CreateClosed("Requests", TERM, requests, think);
-
-	PDQ_CreateMultiserverClosed(threads, "Threads", MSC, FCFS); 
-
-	PDQ_SetDemand("Threads", "Requests", stime); 
-	PDQ_SetWUnit("Reqs");
-	PDQ_SetTUnit("Sec");
-	PDQ_Solve(EXACT); // can't use APPROX method
-	PDQ_Report();
-}
+Init("AWS Tomcat Model")  
+CreateClosed("Requests", BATCH, requests, 0.0)
+CreateMultiNode(threads, "Threads", MSC, FCFS) 
+SetDemand("Threads", "Requests", stime) 
+SetWUnit("Reqs")
+Solve(EXACT)
+Report()
 ```
 
 In this model, the Tomcat threads on AWS play the role of queueing servers.
@@ -79,33 +68,33 @@ In this model, the Tomcat threads on AWS play the role of queueing servers.
 ```
                         PRETTY DAMN QUICK REPORT         
                ==========================================
-               ***  on   Wed Nov 18 11:43:29 2020     ***
-               ***  for  AWS-Tomcat Cloud Model       ***
-               ***  PDQ  Version 7.0.0 Build 111820   ***
+               ***  on   Tue Nov 24 08:10:59 2020     ***
+               ***  for  AWS Tomcat Model             ***
+               ***  PDQ  Version 7.0.0 Build 112420   ***
                ==========================================
 
                ==========================================
-               ********    PDQ Model INPUTS      ********
+               ********      PDQ Model INPUTS    ********
                ==========================================
 
 Queueing Network Parameters
 
 Node Sched Resource   Workload   Class    Service time
 ---- ----- --------   --------   -----    ------------
-MSC  FCFS  Threads    Requests   TERM         0.444000
+MSC  FCFS  Threads    Requests   BATCH        0.444000
 
 Network type:   CLOSED
 Workload streams:    1
 Queueing nodes:      1
 
 
-Workload      Users        Demand      Thinktime
---------      -----        ------      ---------
-Requests     400.00        0.4440           0.00
+Workload       Jobs        R minimum
+--------       ----        ----------
+Requests     400.00        0.4440
 
 
                ==========================================
-               ********   PDQ Model OUTPUTS      ********
+               ********     PDQ Model OUTPUTS    ********
                ==========================================
 
 Solution method: EXACT
@@ -118,7 +107,6 @@ Workload: "Requests"
 Mean concurrency        400.0000    Reqs
 Mean throughput         675.6757    Reqs/Sec
 Response time             0.5920    Sec
-Round trip time           0.5920    Sec
 Stretch factor            1.3333
 
 Bounds Analysis:
@@ -126,8 +114,7 @@ Max throughput          675.6757    Reqs/Sec
 Min response              0.4440    Sec
 Max demand                0.0015    Sec
 Total demand              0.4440    Sec
-Think time                0.0000    Sec
-Optimal load            300.0000    Reqs
+Optimal jobs            300.0000    Jobs
 
 
                ********   RESOURCE Performance   ********
