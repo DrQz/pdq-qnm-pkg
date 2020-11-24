@@ -8,3 +8,4 @@
 *.so
 interfaces/R/pdq/src/*.c
 interfaces/R/pdq/src/*.h
+interfaces/R/*.html

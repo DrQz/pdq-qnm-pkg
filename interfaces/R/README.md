@@ -100,4 +100,14 @@ Where _demo_ can be one of the following:
 	See [PPDQ book](http://www.perfdynamics.com/books.html)
 	Section 5.9.2 Fair-Share Scheduler
 
+* *allen*  
+
+   Example of multiple workloads in CLOSED network.
+   Based on Arnold Allen's book Example 6.3.4, p.413
+   
+* *multiwo*
+
+  Example of multiple open workloads in PDQ 7.0
+  Taken from Example 7.2 in QSP book p.138
+   
 
