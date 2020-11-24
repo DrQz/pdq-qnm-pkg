@@ -225,48 +225,7 @@ void PDQ_Solve(int meth)
             sprintf(s1, "Network class \"%s\" is incompatible with \"CreateMultiNode\" function", s2);
             errmsg(p, s1);
         } 
-
-
-		// ***************************************************************************
-		// Updated by NJG on Tue Nov 17, 2020
-		// Due to the introduction of MServerFESC in MServerFESC.c 
-		// these metric computations are moved to their respective calculational function. 
-		/*
-        switch (should_be_class) {
-            case TERM:
-                job[c].term->sys->maxN = (sumD + job[c].term->think) / maxD;
-                job[c].term->sys->maxTP = 1 / maxD;
-                job[c].term->sys->minRT = sumD;
-                if (sumD == 0) {
-                    getjob_name(s1, c);
-                    sprintf(s2, "Sum of demands is zero for workload \"%s\"", s1);
-                    errmsg(p, s2);
-                }
-                break;
-            case BATCH:
-                job[c].batch->sys->maxN = sumD / maxD;
-                job[c].batch->sys->maxTP = 1 / maxD;
-                job[c].batch->sys->minRT = sumD;
-                if (sumD == 0) {
-                    getjob_name(s1, c);
-                    sprintf(s2, "Sum of demands is zero for workload \"%s\"", s1);
-                    errmsg(p, s2);
-                }
-                break;
-            case TRANS:
-				job[c].trans->sys->maxTP = maxTP;                          
-                job[c].trans->sys->minRT = sumD;
-                if (sumD == 0) {
-                    getjob_name(s1, c);
-                    sprintf(s2, "Sum of demands is zero for workload \"%s\"", s1);
-                    errmsg(p, s2);
-                }
-                break;
-            default:
-                break;
-        }
-        */
-        
+       
     }   // loop over c
 
     if (PDQ_DEBUG)

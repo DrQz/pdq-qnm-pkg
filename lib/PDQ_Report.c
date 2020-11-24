@@ -39,7 +39,7 @@
       o Changed Demand field in WORKLOAD Parameters section to display small 
         service times, e.g., micro-seconds
  * Updated by NJG on Sat Dec 29, 2018  - Format changes for new MSO, MSC multi-server devtypes
- * Updated by NJG on Tue Nov 17, 2020  - Formatting mods for PDQ release 7.0
+ * Updated by NJG on Tue Nov 23, 2020  - Formatting mods for PDQ release 7.0
  *
  */
 

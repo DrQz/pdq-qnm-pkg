@@ -13,10 +13,11 @@
  * Updated by NJG on Mon, Dec 18, 2017 - Failed implementation of MServerFESC
  * Updated by NJG on Sat, Dec 19, 2018 - Working implementation of MServerFESC
  * Updated by NJG on Mon, Nov 16, 2020 - Tweaked MServerFESC for PDQ 7.0 release
+ * Updated by NJG on Sun, Nov 22, 2020 - Fixed MServerFESC to catch BATCH workloads
  *
  *******************************************************************************/
 
- 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -127,7 +128,7 @@ void MServerFESC(void) {
     m = node[k].servers;  //Added by NJG on Saturday, December 29, 2018
     D = node[k].demand[c];
     
-    // Updated by NJG on Sun, Nov 22, 2020 to catch BATCH workloads
+    // catch BATCH workloads
     if (job[c].should_be_class == TERM) {
    		N = job[c].term->pop;
     	Z = job[c].term->think;
@@ -199,6 +200,7 @@ void MServerFESC(void) {
 			job[c].batch->sys->residency = N;
 			job[c].batch->sys->maxTP = m / D;
 			job[c].batch->sys->minRT = D;
+			job[c].batch->sys->Nopt = m;
 			break;
 		default:
 			break;

@@ -493,12 +493,6 @@ void PDQ_CreateWorkloadOpen(char *name, double lambdak)
 void PDQ_CreateOpen(char *name, double lambda)
 {
 	
-	// debugging stuff ...
-	//extern char     s1[];
-	//char           *p = "PDQ_CreateOpen()";
-	//sprintf(s1, "\nlambda = %6.4f\n", lambda);
-	//errmsg(p, s1);
-
     int dump; //no longer return integer stream count this way
     dump = PDQ_CreateOpen_p(name, &lambda);
     

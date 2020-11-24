@@ -1,5 +1,5 @@
 /*******************************************************************************/
-/*  Copyright (C) 1994 - 2021, Performance Dynamics Company                    */
+/*  Copyright (C) 1994--2021, Performance Dynamics Company                    */
 /*                                                                             */
 /*  This software is licensed as described in the file COPYING, which          */
 /*  you should have received as part of this distribution. The terms           */
@@ -92,7 +92,7 @@ TYPE_TABLE
 		{"EXACTMVA", EXACTMVA},
 		{"APPROXMVA", APPROXMVA},
 		{"STREAMING", STREAMING}
-	};  /* typetable */
+	};  // typetable 
 
 char            prevproc[MAXBUF];
 
@@ -173,7 +173,8 @@ PDQ_GetResponse(int should_be_class, char *wname)
 	}
 	
 	return (r);
-}  /* PDQ_GetResponse */
+	
+}  // PDQ_GetResponse
 
 //-------------------------------------------------------------------------
 
@@ -215,7 +216,8 @@ PDQ_GetThruput(int should_be_class, char *wname)
 	}
 	
 	return (x);
-}  /* PDQ_GetThruput */
+	
+}  // PDQ_GetThruput
 
 //-------------------------------------------------------------------------
 
@@ -257,7 +259,8 @@ PDQ_GetThruMax(int should_be_class, char *wname)
 	}
 
 	return (x);
-}  /* PDQ_GetThruMax */
+	
+}  // PDQ_GetThruMax
 
 //-------------------------------------------------------------------------
 
@@ -316,7 +319,7 @@ PDQ_GetLoadOpt(int should_be_class, char *wname)
 		
 	return (Nopt);
 	
-}  /* PDQ_GetLoadOpt */
+}  // PDQ_GetLoadOpt
 
 //-------------------------------------------------------------------------
 
@@ -355,7 +358,8 @@ PDQ_GetResidenceTime(char *device, char *work, int should_be_class)
 	g_debug("PDQ_GetResidenceTime:  Returning bad double\n");
 
 	return -1.0;
-}  /* PDQ_GetResidenceTime */
+	
+}  // PDQ_GetResidenceTime
 
 //-------------------------------------------------------------------------
 
@@ -418,7 +422,8 @@ PDQ_GetUtilization(char *device, char *work, int should_be_class)
 	/* # b. why is there no return value? */
 
 	return 0.0;
-}  /* PDQ_GetUtilization */
+	
+}  // PDQ_GetUtilization
 
 //-------------------------------------------------------------------------
 
@@ -462,7 +467,8 @@ PDQ_GetQueueLength(char *device, char *work, int should_be_class)
 	g_debug("PDQ_GetQueueLength - Bad double return");
 
 	return -1.0;
-}  /* PDQ_GetQueueLength */
+	
+}  // PDQ_GetQueueLength
 
 //-------------------------------------------------------------------------
 
@@ -477,7 +483,8 @@ PDQ_SetDebug(int flag)
 	else {
 		PRINTF("debug off\n");
 	}
-}  /* PDQ_SetDebug */
+	
+}  // PDQ_SetDebug
 
 //-------------------------------------------------------------------------
 // Local subroutines
@@ -503,7 +510,7 @@ typetostr(char *str, int type)
 
 	strcpy(str, "NONE");
 	
-}  /* typetostr */
+}  // typetostr
 
 //-------------------------------------------------------------------------
 
@@ -524,7 +531,8 @@ strtotype(char *str)
 	errmsg("strtotype()", buf);
 
 	return -2;
-}  /* strtotype */
+	
+}  // strtotype
 
 //-------------------------------------------------------------------------
 
@@ -539,7 +547,8 @@ allocate_nodes(int n)
 	  if ((node =  (NODE_TYPE *) Calloc( (size_t) n ,  NODE_TYPE )) == NULL)
 #endif
 		errmsg(p, "Node allocation failed!\n");
-}  /* allocate_nodes */
+
+}  // allocate_nodes
 
 //-------------------------------------------------------------------------
 
@@ -604,7 +613,8 @@ allocate_jobs(int jobs)
 		job[c].should_be_class = VOID;
 		job[c].network         = VOID;
 	}
-}  /* allocate_jobs */
+	
+}  // allocate_jobs
 
 //-------------------------------------------------------------------------
 
@@ -659,7 +669,8 @@ getjob_index(char *wname)
 	// g_debug("*** CRITICAL *** function needs to return something!\n");
 
    return -1;
-}  /* getjob_index */
+   
+}  // getjob_index
 
 //-------------------------------------------------------------------------
 
@@ -697,7 +708,8 @@ getnode_index(char *name)
 	g_debug("[getnode_index]  Bad return value");
 
 	return -1;
-}  /* getnode_index */
+	
+}  // getnode_index
 
 //-------------------------------------------------------------------------
 
@@ -707,7 +719,8 @@ NODE_TYPE *getnode(int idx)
 		return &node[idx];
 	} else
 		return  (NODE_TYPE*)0;
-}  /* getnode */
+		
+}  // getnode
 
 //-------------------------------------------------------------------------
 
@@ -735,7 +748,8 @@ getjob_name(char *str, int c)
 
 	if (PDQ_DEBUG)
 		debug(p, "Exiting");
-}  /* getjob_name */
+		
+}  // getjob_name
 
 //-------------------------------------------------------------------------
 
@@ -768,7 +782,8 @@ getjob_pop(int c)
 	}
 
 	return -1.0;
-}  /* getjob_pop */
+	
+}  // getjob_pop
 
 //-------------------------------------------------------------------------
 
@@ -778,7 +793,8 @@ JOB_TYPE* getjob(int c)
 		return &job[c];
 	} else
 		return  (JOB_TYPE*)0;
-}  /* getjob */
+		
+}  // getjob
 
 //-------------------------------------------------------------------------
 
@@ -793,7 +809,7 @@ roundup(double f)
 	int             i = (int) ceil((double) f);
 
 	return (i);
-}  /* roundup */
+}  // roundup
 
 //-------------------------------------------------------------------------
 // Reset a string buffer
@@ -802,7 +818,7 @@ void
 resets(char *s)
 {
 	*s = '\0';
-}  /* resets */
+}  // resets
 
 //-------------------------------------------------------------------------
 
@@ -816,9 +832,7 @@ debug(char *proc, char *info)
 		PRINTF("DEBUG: %s\n        %s\n", proc, info);
 		strcpy(prevproc, proc);
 	}
-	
-	//resets(info); NJG: Unnecessary and can cause seg fault.
-}  /* debug */
+}  // debug
 
 //-------------------------------------------------------------------------
 
@@ -849,7 +863,8 @@ errmsg(char *pname, char *msg)
     error("ERROR in procedure \'%s\': %s\n", pname, msg);
 
 #endif
-}  /* errmsg */
+
+}  // errmsg
 
 //-------------------------------------------------------------------------
 
@@ -865,7 +880,8 @@ PDQ_SetNodes(int ns)
 	if (PDQ_DEBUG) {
 		PRINTF("nodes global = %d\n",nodes);
 	}
-}  /* PDQ_SetNodes */
+}  // PDQ_SetNodes
+
 
 void
 PDQ_SetStreams(int ss)
@@ -876,6 +892,6 @@ PDQ_SetStreams(int ss)
 	if (PDQ_DEBUG) {
 		PRINTF("Streams global = %d\n",streams);
 	}
-}  /* PDQ_SetStreams */
+}  // PDQ_SetStreams
 
 #endif

@@ -25,7 +25,7 @@
 // Header file for the PDQ (Pretty Damn Quick) performance analyzer.
 // The following string constant is read by the GetVersion and Report()
 
-#define PDQ_VERSION    "Version 7.0.0 Build 112320"
+#define PDQ_VERSION    "Version 7.0.0 Build 112420"
 
 // Updated by NJG on Tuesday, May 24, 2016 from string literal to #define constant
 // thereby suppressing compiler warnings.
