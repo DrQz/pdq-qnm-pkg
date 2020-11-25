@@ -2,7 +2,8 @@
 \alias{GetResponse}
 \title{ Get the system response time  }
 \description{
-Determine the system response time for the specified workload.
+Determine the system response time for the specified workload. 
+The response time is the sum of all the residence times spent each of the queueing nodes defined in the network.
 }
 \usage{
 GetResponse(class, wname)

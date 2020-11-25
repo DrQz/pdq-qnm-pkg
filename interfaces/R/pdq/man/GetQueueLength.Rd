@@ -8,16 +8,16 @@ Determine the queue length (number of requests waiting plus the number in servic
 GetQueueLength(device, work, class)
 }
 \arguments{
-  \item{device}{ String containing the name of the service node. }
+  \item{device}{ String containing the name of the queueing node. }
   \item{work}{ String containing the name of the workload. }
   \item{class}{ Type of workload: TRANS, TERM, or BATCH}
 }
 \details{
 The classes of workloads are:
 \itemize{
-\item{ TRANS }{ a workload that is defined by arrival rate, not think time; only valid for an open circuit }
-\item{ TERM }{ a workload with non-zero think time: there will be \code{think} delay before requests re-enter the system; only valid for a closed circuit }
-\item{ BATCH }{ a workload with no think time: requests immediately re-enter the system; only valid for a closed circuit }
+\item{ TRANS }{ a workload that is defined by an arrival rate, not a think time and is only valid for an OPEN network }
+\item{ TERM }{ a workload with non-zero think time: there will be \code{think} delay before requests re-enter the system; only valid for a CLOSED network }
+\item{ BATCH }{ a workload with no think time: requests immediately re-enter the system; only valid for a CLOSED network }
 }
 GetQueueLength should only be called after the PDQ model has been solved.
 }
@@ -40,5 +40,5 @@ SetDemand("DB Server", "DB Users", 1.0)
 Solve(EXACT)
 
 qsize <- GetQueueLength("DB Server", "DB Users", TERM)
-qsize
+print(qsize)
 }

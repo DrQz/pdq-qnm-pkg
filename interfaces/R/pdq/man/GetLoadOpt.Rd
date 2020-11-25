@@ -36,5 +36,5 @@ CreateNode("DB Server", CEN, FCFS)
 SetDemand("DB Server", "DB Users", 1.0)
 Solve(EXACT)
 nopt <- GetLoadOpt(TERM, "DB Users")
-nopt
+print(nopt)
 }

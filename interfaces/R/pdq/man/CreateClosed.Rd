@@ -14,6 +14,8 @@ CreateClosed(name, class, pop, think)
   \item{think}{ The user or generator delay known as the "think time" that occurs between the completion of the previous request and the start of the next request in a TERM workload. Set to zero for a BATCH workload. Numeric type. }
 }
 \details{
+CreateClosed should be invoked before defining any queueing nodes. 
+
 There are two types of closed-circuit workloads:
 \describe{
 \item{ TERM }{ A workload with non-zero think time that causes a \code{think} delay to occur before a new request enters the closed system }
@@ -27,7 +29,7 @@ Neil J. Gunther
 Gunther, N. J. (2011) \emph{Analyzing computer systems performance with PERL::PDQ}, 2nd edn., Heidelberg, Germany, Springer-Verlag. \url{http://www.perfdynamics.com/iBook/ppa_new.html}
 }
 \seealso{ 
-  \code{\link{CreateOpen}}
+  \code{\link{CreateOpen}}, \code{\link{CreateMultiNode}}
 }
 \examples{
 library(pdq)

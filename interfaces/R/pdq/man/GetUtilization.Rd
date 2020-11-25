@@ -8,7 +8,7 @@ Determine the utilization of the designated service node by the specified worklo
 GetUtilization(device, work, class)
 }
 \arguments{
-  \item{device}{ String containing the name of the queueing service node. }
+  \item{device}{ String containing the name of the service node. }
   \item{work}{ String containing the name of the workload. }
   \item{class}{ TRANS, TERM, or BATCH type. }
 }

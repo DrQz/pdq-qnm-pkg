@@ -29,10 +29,10 @@ Init("Solve Example")
 CreateOpen("Customers", 0.75)
 CreateMultiNode(3, "Bank Tellers", CEN, FCFS)
 SetDemand("Bank Tellers", "Customers", 1.0)
-Solve(CANON)
+Solve(STREAMING)
 Report()
 }
 \keyword{ EXACT }
 \keyword{ APPROX }
-\keyword{ APPROXMSQ }
+\keyword{ STREAMING }
 \keyword{ CANON } % __ONLY ONE__ keyword per line

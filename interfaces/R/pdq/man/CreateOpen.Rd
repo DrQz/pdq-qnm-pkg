@@ -11,6 +11,9 @@ CreateOpen(name, lambda)
   \item{name}{ The string used to identify the workload in reports and as an argument to other functions }
   \item{lambda}{ The arrival rate per unit time into the queueing circuit. }
 }
+\details{
+CreateOpen should be invoked before defining any queueing nodes. 
+}
 \seealso{ 
   \code{\link{CreateClosed}}
 }
@@ -26,6 +29,6 @@ Init("CreateOpen Example")
 CreateOpen("Customers", 0.75)
 CreateMultiNode(3, "Bank Tellers", CEN, FCFS)
 SetDemand("Bank Tellers", "Customers", 1.0)
-Solve(CANON)
+Solve(STREAMING)
 Report()
 }

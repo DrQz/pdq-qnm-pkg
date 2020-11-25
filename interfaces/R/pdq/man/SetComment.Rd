@@ -25,6 +25,6 @@ SetComment("This is just an toy example.")
 CreateNode("server", CEN, FCFS)
 CreateOpen("work", arate)
 SetDemand("server", "work", 1/srate)
-Solve(CANON)
+Solve(STREAMING)
 Report()
 }

@@ -18,6 +18,8 @@ A PDQ report is comprised of several sections.
 }
 \item{Model OUTPUTS}{
 \itemize{
+\item{Itemized summary of each queueing node and its workload.}
+\item{Summary of the queeuing network parameters.}
 \item{Solution method used.}
 \item{System-level performance metrics. }
 \item{Node-level performance metrics such as: Capacity, Utilization, and Waiting time. }
