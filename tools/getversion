@@ -1,3 +1,2 @@
 #!/bin/sh
-# $Id: getversion,v 1.4 2015/08/23 01:07:43 pjpuglia Exp $
-grep version lib/PDQ_Lib.h | sed -n 's/^.*static char \*version.*=.*\([0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*\) .*$/\1/p'
+grep VERSION lib/PDQ_Lib.h | sed -n 's/^.*PDQ_VERSION *"Version *\([0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*\) .*$/\1/p'
