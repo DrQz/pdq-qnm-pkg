@@ -9,3 +9,6 @@
 interfaces/R/pdq/src/*.c
 interfaces/R/pdq/src/*.h
 interfaces/R/*.html
+interfaces/perl5
+interfaces/python
+interfaces/pdq.i

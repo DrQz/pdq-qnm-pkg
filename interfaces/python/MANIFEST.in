@@ -1,5 +1,0 @@
-include PDQ_Global.h
-include PDQ_Lib.h
-include debug.h
-include README.setup
-include test.py

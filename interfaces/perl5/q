@@ -1,1 +1,0 @@
-        fprintf(stderr,"[_wrap_getnode]  arg1 >>> %d\n", arg1);
