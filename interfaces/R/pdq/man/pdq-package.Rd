@@ -22,7 +22,7 @@ Built: \tab \Sexpr[stage=render]{utils:::packageDescription("pdq")$Built}\cr
 \author{
 Neil Gunther with contributions from Paul Puglia and Phil Feller for R versions.
 
-Maintainer: Paul Puglia <pjpuglia@earthlink.net>
+Maintainer: Neil Gunther <info@perfdynamics.com>
 }
 \references{
 Gunther, N. J. (2000) \emph{The Practical Performance Analyst }. Lincoln, Nebraska: iUniverse Press. \url{http://www.perfdynamics.com/iBook/ppa.html}
