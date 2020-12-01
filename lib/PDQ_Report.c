@@ -59,6 +59,11 @@ int            jobhdr;
 int            nodhdr;
 int            devhdr;
 
+int             trmhdr;
+int             bathdr;
+int             trxhdr;
+
+
 
 //----- Prototypes of internal print layout routins -----------------------
 
@@ -66,7 +71,7 @@ void print_node_head(void);
 void print_nodes(void);
 void print_job(int c, int should_be_class);
 void print_sys_head(void);
-void print_job_head(int should_be_class);
+void print_work_head(int should_be_class);
 void print_dev_head(void);
 void print_system_stats(int c, int should_be_class);
 void print_node_stats(int c, int should_be_class);
@@ -115,6 +120,14 @@ void PDQ_Report(void)
 	jobhdr = FALSE;
 	nodhdr = FALSE;
 	devhdr = FALSE;
+	
+	// Moved here to correct reinitialization bug
+	// by NJG on Tue Dec  1, 2020
+	trmhdr = FALSE;
+	bathdr = FALSE;
+	trxhdr = FALSE;
+
+	//-------------------------------------------------------------------------
 
 	if ((clock = time(0)) == -1) {
 		errmsg(p, "Failed to get date");
@@ -454,7 +467,7 @@ void print_job(int c, int should_be_class)
 
 	switch (should_be_class) {
 		case TERM:
-			print_job_head(TERM);
+			print_work_head(TERM);
 			PRINTF("%-10s   %6.2f    %10.4lf         %6.2f\n",
 		  	job[c].term->name,
 		  	job[c].term->pop,
@@ -463,7 +476,7 @@ void print_job(int c, int should_be_class)
 				);
 			break;
 		case BATCH:
-			print_job_head(BATCH);
+			print_work_head(BATCH);
 			PRINTF("%-10s   %6.2f    %10.4lf\n",
 		  	job[c].batch->name,
 		  	job[c].batch->pop,
@@ -471,7 +484,7 @@ void print_job(int c, int should_be_class)
 				);
 			break;
 		case TRANS:
-			print_job_head(TRANS);
+			print_work_head(TRANS);
 			PRINTF("%-10s     %10.4f    %10.4lf\n",
 		  	job[c].trans->name,          // "Arrivals" 
 		  	job[c].trans->arrival_rate,  // "Rate"
@@ -532,15 +545,11 @@ void print_sys_head(void)
 		debug(p, "Exiting");
 }  /* print_sys_head */
 
-//-------------------------------------------------------------------------
 
-int             trmhdr = FALSE;
-int             bathdr = FALSE;
-int             trxhdr = FALSE;
 
 //-------------------------------------------------------------------------
 
-void print_job_head(int should_be_class)
+void print_work_head(int should_be_class)
 {
 	extern char      tUnit[];
 
@@ -572,10 +581,10 @@ void print_job_head(int should_be_class)
 			}
 			break;
 		default:
-			errmsg("print_job_head()", "Unknown workload type");
+			errmsg("print_work_head()", "Unknown workload type");
 			break;
 	}
-}  /* print_job_head */
+}  /* print_work_head */
 
 //-------------------------------------------------------------------------
 
