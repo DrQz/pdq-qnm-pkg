@@ -51,9 +51,9 @@ to this PDQ model in the paper entitled:
 ```R
 library(pdq)
 
-requests <- 400;   # user load
-threads  <- 300;   # tomcat threads
-stime    <- 0.444; # measured service time
+requests <- 400;   # load due to mobile users 
+threads  <- 300;   # active tomcat server threads 
+stime    <- 0.444; # measured service time (seconds) 
 
 Init("AWS Tomcat Model")  
 CreateClosed("Requests", BATCH, requests, 0.0)
